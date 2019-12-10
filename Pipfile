@@ -1,22 +1,21 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
-
 [packages]
-
 django = "*"
 gunicorn = "*"
-"psycopg2" = "*"
+psycopg2 = "==2.7.7"
+psycopg2-binary = "==2.7.7"
 django-environ = "*"
 gevent = "*"
 whitenoise = "*"
 raven = "*"
-
+djangorestframework = "*"
+django-mptt = "*"
+drf-yasg = "*"
 
 [dev-packages]
-
 werkzeug = "*"
 django-debug-toolbar = "*"
 ipdb = "*"

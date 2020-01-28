@@ -28,3 +28,7 @@ coverage = "*"
 django-coverage-plugin = "*"
 pytest-cov = "*"
 codecov = "*"
+black = "*"
+
+[pipenv]
+allow_prereleases = true

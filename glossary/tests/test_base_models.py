@@ -3,7 +3,6 @@ from django.db import models
 
 
 class TestGlossaryEntryModelExists:
-
     def test_model_existence(self):
         """
         This Test tests if an Object GlossaryEntry can be imported.
@@ -18,6 +17,7 @@ class TestGlossaryEntryModelExists:
         :return:
         """
         from glossary.models import GlossaryEntry
+
         assert issubclass(GlossaryEntry, models.Model)
 
 
@@ -43,24 +43,27 @@ class TestGlossaryEntry:
     def test_model_has_links_field(self, glossary_entry_model_class):
         assert hasattr(glossary_entry_model_class, "links")
 
-    def test_field_type_term(self,glossary_entry_model_class):
-        assert isinstance(glossary_entry_model_class._meta.get_field("term"), models.CharField)
+    def test_field_type_term(self, glossary_entry_model_class):
+        assert isinstance(
+            glossary_entry_model_class._meta.get_field("term"), models.CharField
+        )
 
-    def test_field_type_text(self,glossary_entry_model_class):
-        assert isinstance(glossary_entry_model_class._meta.get_field("text"), models.TextField)
+    def test_field_type_text(self, glossary_entry_model_class):
+        assert isinstance(
+            glossary_entry_model_class._meta.get_field("text"), models.TextField
+        )
 
-    def test_field_type_img(self,glossary_entry_model_class):
-        assert isinstance(glossary_entry_model_class._meta.get_field("img"), models.ImageField)
+    def test_field_type_img(self, glossary_entry_model_class):
+        assert isinstance(
+            glossary_entry_model_class._meta.get_field("img"), models.ImageField
+        )
 
     def test_field_type_img_alt(self, glossary_entry_model_class):
-        assert isinstance(glossary_entry_model_class._meta.get_field("img_alt"), models.CharField)
+        assert isinstance(
+            glossary_entry_model_class._meta.get_field("img_alt"), models.CharField
+        )
 
     def test_field_type_links(self, glossary_entry_model_class):
-        assert isinstance(glossary_entry_model_class._meta.get_field("links"), models.ManyToManyField)
-
-
-
-
-
-
-
+        assert isinstance(
+            glossary_entry_model_class._meta.get_field("links"), models.ManyToManyField
+        )

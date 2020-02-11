@@ -7,19 +7,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='GlossaryEntry',
+            name="GlossaryEntry",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('term', models.CharField(max_length=100)),
-                ('text', models.TextField()),
-                ('img', models.ImageField(blank=True, null=True, upload_to='glossary/images/')),
-                ('img_alt', models.CharField(blank=True, default='', max_length=200)),
-                ('links', models.ManyToManyField(blank=True, to='glossary.GlossaryEntry')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("term", models.CharField(max_length=100)),
+                ("text", models.TextField()),
+                (
+                    "img",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="glossary/images/"
+                    ),
+                ),
+                ("img_alt", models.CharField(blank=True, default="", max_length=200)),
+                (
+                    "links",
+                    models.ManyToManyField(blank=True, to="glossary.GlossaryEntry"),
+                ),
             ],
         ),
     ]

@@ -15,6 +15,7 @@ raven = "*"
 djangorestframework = "*"
 django-mptt = "*"
 drf-yasg = "*"
+pillow = "*"
 
 [dev-packages]
 werkzeug = "*"

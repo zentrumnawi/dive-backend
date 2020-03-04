@@ -1,1 +1,1 @@
-from .conftest_files.generalt_conftest import *
+from .conftest_files.general_conftest import *

@@ -1,1 +1,1 @@
-from quiz.tests.conftest_files.general_conftest import *
+from .conftest_files.general_conftest import *

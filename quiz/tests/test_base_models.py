@@ -1,18 +1,19 @@
 import pytest
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 
 class TestQuizQuestionModelExists:
     def test_model_exists(self):
         """
-        This function tests whether an object QuizQuestion can be imported.
+        Test whether an object QuizQuestion can be imported.
         """
         
         from quiz.models import QuizQuestion
         
     def test_model_is_django_model(self):
         """
-        This function tests if the QuizQuestion object is a Django model.
+        Test if the QuizQuestion object is a Django model.
         """
         
         from quiz.models import QuizQuestion
@@ -22,8 +23,8 @@ class TestQuizQuestionModelExists:
 
 class TestQuizQuestionModelFields:
     """
-    This class provides a test suite with basic field tests wheater all fields
-    of the QuizQuestion object exist and have the correct class instance.
+    Test suite with basic field tests wheater all fields of the QuizQuestion
+    object exist and have the correct class instance.
     """
     
     def test_model_has_field_type(self, quiz_question_model_class):
@@ -71,5 +72,5 @@ class TestQuizQuestionModelFields:
         
     def test_field_type_tags(self, quiz_question_model_class):
         assert isinstance(
-            quiz_question_model_class._meta.get_field("tags"), models.ArrayField
+            quiz_question_model_class._meta.get_field("tags"), ArrayField
         )

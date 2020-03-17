@@ -1,9 +1,10 @@
 import pytest
+from quiz.models import QuizQuestion
 
 
 @pytest.fixture
-def quizquestinon_model_class():
-    pass
+def quiz_question_model_class():
+    return QuizQuestion
 
 
 @pytest.fixture

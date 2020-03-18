@@ -7,7 +7,7 @@ class QuizQuestion(models.Model):
     Model for a quesiton in the quiz of the app.
     """
     
-    QTYPE_CHOICES=[
+    QTYPE_CHOICES = [
          ("SC", "Single Choice"),
          ("MC", "Multiple Choice"),
          ("DD", "Drag and Drop"),

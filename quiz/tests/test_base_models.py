@@ -23,7 +23,7 @@ class TestQuizQuestionModelExists:
 
 class TestQuizQuestionModelFields:
     """
-    Test suite with basic field tests wheater all fields of the QuizQuestion
+    Test suite with basic field tests whether all fields of the QuizQuestion
     object exist and have the correct class instance.
     """
     

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import QuizQuestion
+from .models import QuizQuestion, QuizAnswer
 
 
 class HasImgAltForm(forms.ModelForm):
@@ -20,3 +20,10 @@ class QuizQuestionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(QuizQuestion, QuizQuestionAdmin)
+
+
+class QuizAnswerAdmin(admin.ModelAdmin):
+    list_display = ("id", "question", "text", "correct")
+
+
+admin.site.register(QuizAnswer, QuizAnswerAdmin)

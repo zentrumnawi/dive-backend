@@ -21,6 +21,24 @@ class TestQuizQuestionModelExists:
         assert issubclass(QuizQuestion, models.Model)
 
 
+class TestQuizAnswerModelExists:
+    def test_model_exists(self):
+        """
+        Test whether an object QuizAnswer can be imported.
+        """
+        
+        from quiz.models import QuizAnswer
+        
+    def test_model_is_django_model(self):
+        """
+        Test if the QuizAnswer object is a Django model.
+        """
+        
+        from quiz.models import QuizAnswer
+        
+        assert issubclass(QuizAnswer, models.Model)
+
+
 class TestQuizQuestionModelFields:
     """
     Test suite with basic field tests whether all fields of the QuizQuestion

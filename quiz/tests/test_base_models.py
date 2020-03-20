@@ -92,3 +92,50 @@ class TestQuizQuestionModelFields:
         assert isinstance(
             quiz_question_model_class._meta.get_field("tags"), ArrayField
         )
+
+
+class TestQuizAnswerModelFields:
+    """
+    Test suite with basic field tests whether all fields of the QuizAnswer
+    object exist and have the correct class instance.
+    """
+    
+    def test_model_has_field_question(self, quiz_answer_model_class):
+        assert hasattr(quiz_answer_model_class, "question")
+        
+    def test_model_has_field_text(self, quiz_answer_model_class):
+        assert hasattr(quiz_answer_model_class, "text")
+        
+    def test_model_has_field_correct(self, quiz_answer_model_class):
+        assert hasattr(quiz_answer_model_class, "correct")
+        
+    def test_model_has_field_feedback_correct(self, quiz_answer_model_class):
+        assert hasattr(quiz_answer_model_class, "feedback_correct")
+        
+    def test_model_has_field_feedback_incorrect(self, quiz_answer_model_class):
+        assert hasattr(quiz_answer_model_class, "feedback_incorrect")
+        
+    def test_field_type_question(self, quiz_answer_model_class):
+        assert isinstance(
+            quiz_answer_model_class._meta.get_field("question"), models.ForeignKey
+        )
+        
+    def test_field_type_text(self, quiz_answer_model_class):
+        assert isinstance(
+            quiz_answer_model_class._meta.get_field("text"), models.CharField
+        )
+        
+    def test_field_type_correct(self, quiz_answer_model_class):
+        assert isinstance(
+            quiz_answer_model_class._meta.get_field("correct"), models.BooleanField
+        )
+        
+    def test_field_type_feedback_correct(self, quiz_answer_model_class):
+        assert isinstance(
+            quiz_answer_model_class._meta.get_field("feedback_correct"), models.CharField
+        )
+        
+    def test_field_type_feedback_incorrect(self, quiz_answer_model_class):
+        assert isinstance(
+            quiz_answer_model_class._meta.get_field("feedback_incorrect"), models.CharField
+        )

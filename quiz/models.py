@@ -36,3 +36,17 @@ class QuizQuestion(models.Model):
         
     def __str__(self):
         return self.text
+
+
+class QuizAnswer(models.Model):
+    """
+    Model for an answer to a question of the QuizQuestion model.
+    """
+    
+    question = models.ForeignKey(
+        to=QuizQuestion,on_delete=models.CASCADE, related_name="answers", related_query_name="answer"
+    )
+    text = models.CharField(max_length=200)
+    correct = models.BooleanField()
+    feedback_correct = models.CharField(max_length=400, default="", blank=True)
+    feedback_incorrect = models.CharField(max_length=400, default="", blank=True)

@@ -18,5 +18,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r"^api/", include("api-docs.api_docs"), name="api_docs"),
     url(r"^admin/", admin.site.urls),
 ]

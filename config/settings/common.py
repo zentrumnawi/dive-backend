@@ -117,3 +117,8 @@ STATICFILES_FINDERS = (
 )
 
 PROFILES_SERIALIZER = env("PROFILES_SERIALIZER", default="")
+
+# Configure this dictionary to have a mapping from database fieldnames to
+# human readable names. You might want to consider internationalizing
+# the human readable names.
+DATABASE_FIELD_MAPPING = {}

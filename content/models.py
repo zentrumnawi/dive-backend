@@ -114,6 +114,21 @@ class Sprout(models.Model):
 
     plant = models.OneToOneField(Plant, on_delete=models.CASCADE, related_name="sprout", verbose_name=_("Pflanze"))
 
+
+class Fruit(models.Model):
+
+    spread = models.CharField(max_length=2, choices=SPREAD_CHOICES, verbose_name=_("Ausbreitungsform"))
+    pos = models.CharField(max_length=2, choices=FRUIT_POS_CHOICES, verbose_name=_("Lage der Samenanlage"))
+    type = models.CharField(max_length=3, choices=TYPE_CHOICES, verbose_name=_("Fruchttyp"))
+
+    cnt = models.CharField(max_length=200, default="", verbose_name=_("Samenzahl"))
+    form = models.CharField(max_length=200, default="", verbose_name=_("Form"))
+    wings = models.CharField(max_length=200, default="", verbose_name=_("Beflügelung"))
+    wings_spec = models.CharField(max_length=200, default="", verbose_name=_("Beflügelung Besonderheit"))
+
+    plant = models.OneToOneField(Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze"))
+
+
 # Model for the tree representation of the profiles
 class TreeNode(MPTTModel):
     node_name = models.CharField(

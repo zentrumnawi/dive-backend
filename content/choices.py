@@ -1,3 +1,6 @@
+from django.utils.translation import ugettext_lazy as _
+
+
 NERV_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
@@ -233,4 +236,37 @@ SP_DIAM_CHOICES = (
     ("gri", _("gerippt")),
     ("gfl", _("geflügelt")),
     ("kno", _("knotig"))
+)
+SPREAD_CHOICES = (
+    ("sa", _("Samen")),
+    ("sp", _("Sporen"))
+)
+FRUIT_POS_CHOICES = (
+    ("fr", _("Fruchtknoten")),
+    ("za", _("Zapfenschuppe")),
+    ("sp", _("Sprossachse"))
+)
+TYPE_CHOICES = (
+    ("nus", _("Nuss")),
+    ("kar", _("Karyopse")),
+    ("ach", _("Achäne")),
+    ("bee", _("Beere")),
+    ("ste", _("Steinfrucht")),
+    ("bal", _("Balgfrucht")),
+    ("hue", _("Hülse")),
+    ("kap", _("Kapsel")),
+    ("sos", _("Schote ohne Scheidewand")),
+    ("smf", _("Schote mit falscher Scheidewand")),
+    ("soe", _("Schötchen")),
+    ("spa", _("Spaltfrucht")),
+    ("kok", _("Kokke")),
+    ("dop", _("Doppelachäne")),
+    ("bru", _("Bruchfrucht")),
+    ("glh", _("Gliederhülse")),
+    ("gls", _("Gliederschote")),
+    ("kla", _("Klausenfrucht")),
+    ("sam", _("Sammelbalgfrucht")),
+    ("nue", _("Nüsschen")),
+    ("stc", _("Steinfrüchtchen")),
+    ("bac", _("Balgfrüchtchen")),
 )

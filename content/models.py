@@ -297,6 +297,88 @@ class Leaf(models.Model):
     plant = models.OneToOneField(Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze"))
 
 
+class Sprout(models.Model):
+    POSITION_CHOICES = (
+        ("auf", _("aufrecht")),
+        ("aua", _("aufrecht-abstehend")),
+        ("abs", _("abstehend")),
+        ("spa", _("sparrig")),
+        ("zur", _("zurückgeschlagen")),
+        ("lie", _("liegend")),
+        ("kri", _("kriechend")),
+        ("aus", _("aufsteigend/aufstrebend")),
+        ("gek", _("gekniet")),
+        ("ueb", _("übergebogen")),
+        ("nic", _("nickend")),
+        ("hae", _("hängend")),
+        ("flu", _("flutend")),
+        ("Ran", _("Rankenpflanze")),
+        ("Win", _("Windepflanze")),
+        ("Spr", _("Spreizklimmer")),
+        ("Wur", _("Wurzelkletterer")),
+        ("hor", _("horstig")),
+        ("loc", _("lockerrasig"))
+    )
+    SP_DIAM_CHOICES = (
+        ("sti", _("stielrund")),
+        ("hal", _("halbstielrund")),
+        ("zus", _("zusammengedrückt")),
+        ("zwe", _("zweischneidig")),
+        ("kan", _("kantig")),
+        ("stu", _("stumpfkantig")),
+        ("ger", _("gerieft /gerillt")),
+        ("gef", _("gefurcht")),
+        ("kan", _("kantig gefurcht /scharfkantig")),
+        ("gri", _("gerippt")),
+        ("gfl", _("geflügelt")),
+        ("kno", _("knotig"))
+    )
+    SUR_TEXTURE_CHOICES = (
+        ("gla", _("glatt")),
+        ("run", _("runzelig")),
+        ("rau", _("rauh")),
+        ("vra", _("vorwärts rauh")),
+        ("ber", _("bereift")),
+        ("bes", _("bestäubt/bemehlt")),
+        ("pap", _("papillös")),
+        ("pun", _("punktiert")),
+        ("swi", _("schwielig")),
+        ("kah", _("kahl")),
+        ("ver", _("verkahlend")),
+        ("fla", _("flaumhaarig/weichhaarig")),
+        ("sei", _("seidenhaarig")),
+        ("spi", _("spinnwebig")),
+        ("flo", _("flockig")),
+        ("sam", _("samthaarig")),
+        ("fil", _("filzig")),
+        ("wol", _("wollig")),
+        ("zot", _("zottig")),
+        ("rah", _("rauhaarig")),
+        ("ste", _("steifhaarig")),
+        ("gew", _("gewimpert")),
+        ("dru", _("drüsenhaarig")),
+        ("ste", _("sternhaarig")),
+        ("sdh", _("schildhaarig")),
+        ("sup", _("schuppenhaarig/schuppig")),
+        ("sue", _("schülferig")),
+        ("bae", _("bärtig")),
+        ("ach", _("achselbärtig")),
+        ("nac", _("nackt"))
+    )
+    appear = models.CharField(max_length=1, choices=(("k", _("krautig")),("h", _("holzig"))), default="",verbose_name=_("Erscheinung"))
+    pos = models.CharField(max_length=3, choices=POSITION_CHOICES, verbose_name=_("Stellung"))
+    thick_flesh = models.BooleanField(default=False, verbose_name=_("Dickfleischig"))
+    milk = models.BooleanField(default=False, verbose_name=_("Milchsaft"))
+    rose = models.BooleanField(default=False, verbose_name=_("Grundblattrose"))
+    leafly = models.CharField(max_length=3, choices=(("nur", _("Nur am Grund")),("auc", _("Auch über Grund"))), verbose_name=_("Beblätterung"))
+    diam = models.CharField(max_length=3, choices=SP_DIAM_CHOICES, verbose_name=_("Stellung"))
+    sur_texture = models.CharField(max_length=3, choices=SUR_TEXTURE_CHOICES, verbose_name=_("Oberflächenbeschaffenheit"))
+
+    blade = models.CharField(max_length=200, default="", verbose_name=_("Halm"))
+    cluster = models.CharField(max_length=200, default="", verbose_name=_("Horst"))
+
+    plant = models.OneToOneField(Plant, on_delete=models.CASCADE, related_name="sprout", verbose_name=_("Pflanze"))
+
 # Model for the tree representation of the profiles
 class TreeNode(MPTTModel):
     node_name = models.CharField(

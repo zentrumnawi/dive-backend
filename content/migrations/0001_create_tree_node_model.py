@@ -9,26 +9,44 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='TreeNode',
+            name="TreeNode",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('node_name', models.CharField(max_length=200, unique=True, verbose_name='node name')),
-                ('info_text', models.TextField(blank=True, max_length=500)),
-                ('is_top_level', models.BooleanField(default=False)),
-                ('lft', models.PositiveIntegerField(editable=False)),
-                ('rght', models.PositiveIntegerField(editable=False)),
-                ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(editable=False)),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='leaf_nodes', to='content.TreeNode')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "node_name",
+                    models.CharField(
+                        max_length=200, unique=True, verbose_name="node name"
+                    ),
+                ),
+                ("info_text", models.TextField(blank=True, max_length=500)),
+                ("is_top_level", models.BooleanField(default=False)),
+                ("lft", models.PositiveIntegerField(editable=False)),
+                ("rght", models.PositiveIntegerField(editable=False)),
+                ("tree_id", models.PositiveIntegerField(db_index=True, editable=False)),
+                ("level", models.PositiveIntegerField(editable=False)),
+                (
+                    "parent",
+                    mptt.fields.TreeForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="leaf_nodes",
+                        to="content.TreeNode",
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'Tree Node',
-                'verbose_name_plural': 'Tree Nodes',
-            },
+            options={"verbose_name": "Tree Node", "verbose_name_plural": "Tree Nodes",},
         ),
     ]

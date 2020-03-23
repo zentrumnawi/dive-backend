@@ -14,11 +14,15 @@ class TreeNode(MPTTModel):
     node_name = models.CharField(
         max_length=200, verbose_name=_("node name"), unique=True
     )
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='leaf_nodes')
-
-    info_text = models.TextField(
-        max_length=500, blank=True
+    parent = TreeForeignKey(
+        "self",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="leaf_nodes",
     )
+
+    info_text = models.TextField(max_length=500, blank=True)
     is_top_level = models.BooleanField(default=False)
 
     class Meta:

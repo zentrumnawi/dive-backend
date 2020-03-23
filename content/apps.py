@@ -13,4 +13,6 @@ class ContentConfig(AppConfig):
         module_ser_class = settings.PROFILES_SERIALIZER.rsplit(".", 1) or None
         # raise Exception(module_ser_class)
         if any(module_ser_class):
-            self.profiles_serializer = getattr(import_module(module_ser_class[0]), module_ser_class[1])(many=True)
+            self.profiles_serializer = getattr(
+                import_module(module_ser_class[0]), module_ser_class[1]
+            )(many=True)

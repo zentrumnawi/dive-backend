@@ -11,5 +11,5 @@ class ProfilesEndpoint(ReadOnlyModelViewSet):
     model = TreeNode
     queryset = model.objects.root_nodes()
     serializer_class = TreeNodeSerializer
-    name = 'profiles'
+    name = "profiles"
     app = "api"

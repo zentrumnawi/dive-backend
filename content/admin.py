@@ -1,3 +1,6 @@
 from django.contrib import admin
+from mptt.admin import DraggableMPTTAdmin
 
-# Register your models here.
+from .models import TreeNode
+
+admin.site.register(TreeNode, DraggableMPTTAdmin)

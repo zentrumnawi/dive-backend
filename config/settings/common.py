@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 import environ
+import importlib
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +30,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "drf_yasg",
+    "content.apps.ContentConfig",
     "quiz.apps.QuizConfig",
     "glossary.apps.GlossaryConfig",
 ]
@@ -112,3 +115,10 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
+
+PROFILES_SERIALIZER = env("PROFILES_SERIALIZER", default="")
+
+# Configure this dictionary to have a mapping from database fieldnames to
+# human readable names. You might want to consider internationalizing
+# the human readable names.
+DATABASE_FIELD_MAPPING = {}

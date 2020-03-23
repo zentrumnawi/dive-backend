@@ -3,7 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from mptt.models import MPTTModel, TreeForeignKey
 
+# Custom Models, representing the actual data of a profile, implement here.
+# At least one model needs to have a ForeignKey field to the TreeNode model
+# with related_name="profiles". If not, the profiles endpoint will throw an
+# error.
 
+
+# Model for the tree representation of the profiles
 class TreeNode(MPTTModel):
     node_name = models.CharField(
         max_length=200, verbose_name=_("node name"), unique=True
@@ -21,4 +27,3 @@ class TreeNode(MPTTModel):
 
     def __str__(self):
         return self.node_name
-

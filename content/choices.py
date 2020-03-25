@@ -268,5 +268,163 @@ TYPE_CHOICES = (
     ("sam", _("Sammelbalgfrucht")),
     ("nue", _("Nüsschen")),
     ("stc", _("Steinfrüchtchen")),
-    ("bac", _("Balgfrüchtchen")),
+    ("bac", _("Balgfrüchtchen"))
+)
+BL_TYPE_CHOICES = (
+    ("tra", _("Traube")),
+    ("ris", _("Rispe")),
+    ("ebe", _("Ebenstrauß/Corymbus")),
+    ("sct", _("Schirmtraube")),
+    ("scr", _("Schirmrispe")),
+    ("spi", _("Spirre/Trichterrispe")),
+    ("aer", _("Ähre")),
+    ("kol", _("Kolben")),
+    ("kae", _("Kätzchen")),
+    ("zap", _("Zapfen")),
+    ("dol", _("Dolde")),
+    ("dod", _("Doppeldolde")),
+    ("kop", _("Kopf")),
+    ("koc", _("Köpfchen")),
+    ("kor", _("Korb")),
+    ("krc", _("Körbchen")),
+    ("zym", _("Zyme")),
+    ("ple", _("Pleiochasium")),
+    ("dic", _("Dichasium")),
+    ("mon", _("Monochasium")),
+    ("wic", _("Wickel")),
+    ("dow", _("Doppelwickel")),
+    ("scq", _("Scheinquirl")),
+    ("bue", _("Büschel")),
+    ("kna", _("Knäuel")),
+    ("thy", _("Thyrse")),
+    ("scd", _("Scheindolde/Trugdolde")),
+    ("scb", _("Scheinblüte/Pseudanthium"))
+)
+SYM_CHOICES = (
+    ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
+    ("d", _("disymmetrisch/bilateral")),
+    ("z", _("zygomorph/dorsiventral")),
+    ("a", _("asymmetrisch/unregelmäßig"))
+)
+PART_CHOICES = (
+    ("gan", _("ganz/ungeteilt")),
+    ("gel", _("gelappt")),
+    ("gsp", _("gespalten")),
+    ("get", _("geteilt")),
+    ("ges", _("geschnitten")),
+    ("han", _("handförmig/fingerförmig")),
+    ("hgl", _("handförmig gelappt")),
+    ("hgt", _("handförmig geteilt")),
+    ("hgs", _("handförmig geschnitten")),
+    ("gef", _("gefingert")),
+    ("fie", _("fiederförmig/fiederig")),
+    ("fil", _("fiederlappig")),
+    ("fsp", _("fiederspaltig")),
+    ("fit", _("fiederteilig")),
+    ("fis", _("fiederschnittig")),
+    ("paf", _("paarig gefiedert")),
+    ("upf", _("unpaarig gefiedert")),
+    ("unf", _("unterbrochen fiederschnittig")),
+    ("ung", _("unterbrochen gefiedert")),
+    ("dop", _("doppelt gefiedert")),
+    ("meh", _("mehrfach gefiedert")),
+    ("dre", _("dreizählig")),
+    ("dod", _("doppelt dreizählig")),
+    ("lei", _("leierförmig")),
+    ("sch", _("schrotsägeförmig")),
+    ("kam", _("kammförmig")),
+    ("fug", _("fußförmig geschnitten")),
+    ("fuz", _("fußförmig zusammengesetzt"))
+)
+HULL_CHOICES = (
+    ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
+    ("ein", _("einfache Blütenhülle (Perigon)")),
+    ("feh", _("fehlende Blütenhülle")),
+    ("lip", _("Lippenblüte")),
+    ("sch", _("Schmetterlingsblüte")),
+    ("zun", _("Zungenblüte")),
+    ("str", _("strahlende Randblüten"))
+)
+CH_TYPE_CHOICES = (
+    ("fre", _("freiblättrig")),
+    ("ver", _("verwachsenblättrig")),
+    ("2-z", _("2-zähnig")),
+    ("3-z", _("3-zähnig")),
+    ("4-z", _("4-zähnig")),
+    ("5-z", _("5-zähnig")),
+    ("2-l", _("2-lappig")),
+    ("3-l", _("3-lappig")),
+    ("4-l", _("4-lappig")),
+    ("5-l", _("5-lappig")),
+    ("2-s", _("2-spaltig")),
+    ("3-s", _("3-spaltig")),
+    ("4-s", _("4-spaltig")),
+    ("5-s", _("5-spaltig")),
+    ("2-t", _("2-teilig")),
+    ("3-t", _("3-teilig")),
+    ("4-t", _("4-teilig")),
+    ("5-t", _("5-teilig")),
+    ("zwe", _("zweilippig")),
+)
+CROWN_VER_CHOICES = (
+    ("v", _("verwachsen")),
+    ("u", _("unverwachsen")),
+    ("a", _("am Grund verwachsen"))
+)
+STAND_TYPE_CHOICES= (
+    ("hy", _("hypogyn/oberständig")),
+    ("eh", _("epihypogyn/halboberständig")),
+    ("pe", _("perigyn/mittelständig")),
+    ("he", _("hemiepigyn/halbunterständig")),
+    ("ep", _("epigyn/unterständig"))
+)
+BUILD_CHOICES = (
+    ("mo", _("monokarp")),
+    ("ap", _("apokarp/chorikarp")),
+    ("cs", _("coeno-synkarp")),
+    ("cp", _("coeno-parakarp"))
+)
+GRIFFEL_CHOICES = (
+    ("en", _("endständig")),
+    ("se", _("seitenständig")),
+    ("gr", _("grundständig")),
+    ("gy", _("gynobasisch"))
+)
+SPEC_SPORN_CHOICES = (
+    ("ro", _("röhrig")),
+    ("ke", _("keulig")),
+    ("gl", _("glockig")),
+    ("tr", _("trichterförmig")),
+    ("be", _("becherförmig")),
+    ("na", _("napfförmig")),
+    ("ku", _("kugelig")),
+    ("au", _("aufgeblasen")),
+    ("kr", _("krugförmig")),
+    ("ra", _("radförmig")),
+    ("st", _("stielförmig")),
+    ("zu", _("zungenförmig")),
+    ("ba", _("bauchig")),
+    ("as", _("ausgesackt")),
+    ("gr", _("gespornt"))
+)
+GRANN_TOP_CHOICES = (
+    ("sp", _("Spitzengranne")),
+    ("un", _("unbegrannt"))
+)
+GRANN_FORM_CHOICES = (
+    ("gr", _("gerade")),
+    ("gk", _("gekniet")),
+    ("gd", _("gedreht"))
+)
+GROUND_CHOICES = (
+    ("ge", _("gestielt")),
+    ("si", _("sitzend / ungestielt")),
+    ("st", _("stengelumfassend")),
+    ("ha", _("halbstengelumfassend")),
+    ("du", _("durchwachsen")),
+    ("ve", _("verwachsen")),
+    ("sc", _("scheidig verwachsen")),
+    ("he", _("herablaufend")),
+    ("re", _("reitend")),
+    ("hi", _("hinfällig"))
 )

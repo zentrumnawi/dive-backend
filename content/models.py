@@ -129,6 +129,55 @@ class Fruit(models.Model):
     plant = models.OneToOneField(Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze"))
 
 
+class Blossom(models.Model):
+
+    type = models.CharField(max_length=3, choices=BL_TYPE_CHOICES, verbose_name=_("Blütenstandtyp"))
+    bl_cnt = models.CharField(max_length=100, default="", verbose_name=_("Blüten pro Blütenstand"))
+    sym = models.CharField(max_length=1, choices=SYM_CHOICES, verbose_name=_("Symmetrie"))
+    parting = models.CharField(max_length=3, choices=PART_CHOICES, verbose_name=_("Blütenstandtyp"))
+    cnt = models.IntegerField(choices=((3, 3), (4, 4), (5, 5)), verbose_name=_("Zähligkeit"))
+    hull = models.CharField(max_length=3, choices=HULL_CHOICES, verbose_name=_("Blütenstandtyp"))
+
+    chalice = models.CharField(max_length=1, choices=(("v", _("verwachsen")), ("u", _("unverwachsen"))), verbose_name=_("Kelchblätter"))
+    ch_type = models.CharField(max_length=3, choices=CH_TYPE_CHOICES, verbose_name=_("Verwachsungstyp"))
+
+    crown_color = models.CharField(max_length=100, default="", verbose_name=_("Farbe"))
+    crown_ver = models.CharField(max_length=1, choices=CROWN_VER_CHOICES, verbose_name=_("Verwachsung der Kronblätter"))
+    crown_plate = models.CharField(max_length=100, default="", verbose_name=_("Kronblatt Platte"))
+    crown_lower = models.CharField(max_length=3, choices=CH_TYPE_CHOICES, verbose_name=_("Kronblatt Unterlippe"))
+    crown_out = models.CharField(max_length=100, default="", verbose_name=_("Ausstülpung der Unterlippe"))
+
+    dust_cnt = models.CharField(max_length=100, default="", verbose_name=_("Staubblatt Anzahl"))
+    dust_len = models.CharField(max_length=100, default="", verbose_name=_("Staubblatt Länge"))
+    dust_color = models.CharField(max_length=100, default="", verbose_name=_("Staubbeutel Farbe"))
+    dust_pipe = models.CharField(max_length=100, default="", verbose_name=_("Staubfadenröhre"))
+
+    fruit_cnt = models.CharField(max_length=100, default="", verbose_name=_("Fruchtknoten Anzahl"))
+    fruit_stand = models.CharField(max_length=2, choices=STAND_TYPE_CHOICES, verbose_name=_("Frucht Ständigkeit"))
+    fruit_build = models.CharField(max_length=2, choices=BUILD_CHOICES, verbose_name=_("Bau des Gynoeceums"))
+    fruit_scar = models.CharField(max_length=100, default="", verbose_name=_("Narben pro Griffel"))
+    griffel_stand = models.CharField(max_length=2, choices=GRIFFEL_CHOICES, verbose_name=_("Ständigkeit des Griffels"))
+    griffel_sub = models.BooleanField(default=False, verbose_name=_("Ständigkeit des Griffels ist sub-"))
+
+    spec_sporn = models.CharField(max_length=2, choices=SPEC_SPORN_CHOICES, verbose_name=_("Sporn"))
+    spec_hon = models.CharField(max_length=100, default="", verbose_name=_("Honigdrüsen / Nektarien"))
+    sec_out = models.CharField(max_length=100, default="", verbose_name=_("Außenkelch"))
+    spec_pol = models.CharField(max_length=100, default="", verbose_name=_("Griffelpolster"))
+    spec_pipe = models.CharField(max_length=100, default="", verbose_name=_("Schlauch"))
+
+    grann_top = models.CharField(max_length=2, choices=GRANN_TOP_CHOICES, verbose_name=_("Granne der Deckspelze"))
+    grann_form = models.CharField(max_length=2, choices=GRANN_FORM_CHOICES, verbose_name=_("Form der Granne"))
+    cons_top = models.CharField(max_length=100, default="", verbose_name=_("Konsistenz der Deckspelze"))
+    gull_spel = models.CharField(max_length=100, default="", verbose_name=_("Hüllspelzen"))
+    blos = models.CharField(max_length=100, default="", verbose_name=_("Blütig"))
+    straw_ground = models.CharField(max_length=2, choices=GROUND_CHOICES, verbose_name=_("Ansatz an Halm"))
+    order = models.CharField(max_length=100, default="", verbose_name=_("Ähren pro Ährchen "))
+    aer_per_aer = models.CharField(max_length=100, default="", verbose_name=_("Anordnung "))
+    aer_per_ab = models.CharField(max_length=100, default="", verbose_name=_("Ährchen pro Absatz"))
+
+    plant = models.OneToOneField(Plant, on_delete=models.CASCADE, related_name="blossom", verbose_name=_("Pflanze"))
+
+
 # Model for the tree representation of the profiles
 class TreeNode(MPTTModel):
     node_name = models.CharField(

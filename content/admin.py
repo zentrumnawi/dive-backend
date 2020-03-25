@@ -2,6 +2,7 @@ from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
 from .models import TreeNode, Plant, Leaf, Sprout, Fruit, Blossom
+from .forms import PlantModelForm
 
 admin.site.register(TreeNode, DraggableMPTTAdmin)
 
@@ -26,7 +27,7 @@ class BlossomInline(admin.StackedInline):
 
 class PlantModelAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "trivial_name")
-
+    form = PlantModelForm
     inlines = [
         LeafInline,
         SproutInline,

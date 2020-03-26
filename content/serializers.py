@@ -1,4 +1,6 @@
-from django.apps import apps as django_apps
+from importlib import import_module
+
+from django.conf import settings
 from rest_framework import serializers
 
 from .models import TreeNode
@@ -6,7 +8,9 @@ from .models import TreeNode
 
 class TreeNodeSerializer(serializers.ModelSerializer):
 
-    profiles = django_apps.get_app_config("content").profiles_serializer
+    profiles = getattr(
+                import_module(settings.PROFILES_SERIALIZER_MODULE), settings.PROFILES_SERIALIZER
+            )(many=True)
     leaf_nodes = serializers.SerializerMethodField()
 
     class Meta:

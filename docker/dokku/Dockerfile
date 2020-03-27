@@ -24,6 +24,7 @@ RUN apk update \
        postgresql \
        postgresql-dev \
        jpeg \
+       gettext \
        tzdata
 
 # Set the correct timezone

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import environ
 import importlib
 
+from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -102,6 +103,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = [("de", _("German")), ("en", _("English"))]
+
+LOCALE_PATHS = [str(ROOT_DIR("locale"))]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

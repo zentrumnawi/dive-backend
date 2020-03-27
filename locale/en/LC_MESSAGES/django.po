@@ -1,0 +1,1713 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-27 17:23+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: config/settings/common.py:107
+msgid "German"
+msgstr ""
+
+#: config/settings/common.py:107
+msgid "English"
+msgstr ""
+
+#: content/choices.py:5
+msgid "streifennervig"
+msgstr ""
+
+#: content/choices.py:6
+msgid "netznervig"
+msgstr ""
+
+#: content/choices.py:7
+msgid "fiedernervig"
+msgstr ""
+
+#: content/choices.py:8
+msgid "fingernervig"
+msgstr ""
+
+#: content/choices.py:9
+msgid "fußnervig"
+msgstr ""
+
+#: content/choices.py:10
+msgid "gabelnervig"
+msgstr ""
+
+#: content/choices.py:13 content/choices.py:407
+msgid "gestielt"
+msgstr ""
+
+#: content/choices.py:14
+msgid "sitzend/ungestielt"
+msgstr ""
+
+#: content/choices.py:15 content/choices.py:409
+msgid "stengelumfassend"
+msgstr ""
+
+#: content/choices.py:16 content/choices.py:410
+msgid "halbstengelumfassend"
+msgstr ""
+
+#: content/choices.py:17 content/choices.py:411
+msgid "durchwachsen"
+msgstr ""
+
+#: content/choices.py:18 content/choices.py:364 content/choices.py:412
+#: content/models.py:253
+msgid "verwachsen"
+msgstr ""
+
+#: content/choices.py:19 content/choices.py:413
+msgid "scheidig verwachsen"
+msgstr ""
+
+#: content/choices.py:20 content/choices.py:414
+msgid "herablaufend"
+msgstr ""
+
+#: content/choices.py:21 content/choices.py:415
+msgid "reitend"
+msgstr ""
+
+#: content/choices.py:22 content/choices.py:416
+msgid "hinfällig"
+msgstr ""
+
+#: content/choices.py:25 content/choices.py:384
+msgid "grundständig"
+msgstr ""
+
+#: content/choices.py:26
+msgid "wechselständig/spiralig"
+msgstr ""
+
+#: content/choices.py:27
+msgid "zweizeilig/distich"
+msgstr ""
+
+#: content/choices.py:28
+msgid "dreizeilig/tristich"
+msgstr ""
+
+#: content/choices.py:29
+msgid "gegenständig"
+msgstr ""
+
+#: content/choices.py:30
+msgid "kreuzgegenständig/dekussiert"
+msgstr ""
+
+#: content/choices.py:31
+msgid "gepaart"
+msgstr ""
+
+#: content/choices.py:32
+msgid "quirlig/wirtelig"
+msgstr ""
+
+#: content/choices.py:33
+msgid "scheinquirlig"
+msgstr ""
+
+#: content/choices.py:34
+msgid "dachziegelig"
+msgstr ""
+
+#: content/choices.py:35
+msgid "einseitig"
+msgstr ""
+
+#: content/choices.py:36
+msgid "gescheitelt"
+msgstr ""
+
+#: content/choices.py:38
+msgid "einfach"
+msgstr ""
+
+#: content/choices.py:38
+msgid "zusammengesetzt"
+msgstr ""
+
+#: content/choices.py:40 content/choices.py:304
+msgid "ganz/ungeteilt"
+msgstr ""
+
+#: content/choices.py:41 content/choices.py:305
+msgid "gelappt"
+msgstr ""
+
+#: content/choices.py:42 content/choices.py:306
+msgid "gespalten"
+msgstr ""
+
+#: content/choices.py:43 content/choices.py:307
+msgid "geteilt"
+msgstr ""
+
+#: content/choices.py:44 content/choices.py:308
+msgid "geschnitten"
+msgstr ""
+
+#: content/choices.py:47 content/choices.py:309
+msgid "handförmig/fingerförmig"
+msgstr ""
+
+#: content/choices.py:48 content/choices.py:310
+msgid "handförmig gelappt"
+msgstr ""
+
+#: content/choices.py:49 content/choices.py:311
+msgid "handförmig geteilt"
+msgstr ""
+
+#: content/choices.py:50 content/choices.py:312
+msgid "handförmig geschnitten"
+msgstr ""
+
+#: content/choices.py:51 content/choices.py:313
+msgid "gefingert"
+msgstr ""
+
+#: content/choices.py:52 content/choices.py:314
+msgid "fiederförmig/fiederig"
+msgstr ""
+
+#: content/choices.py:53 content/choices.py:315
+msgid "fiederlappig"
+msgstr ""
+
+#: content/choices.py:54 content/choices.py:316
+msgid "fiederspaltig"
+msgstr ""
+
+#: content/choices.py:55 content/choices.py:317
+msgid "fiederteilig"
+msgstr ""
+
+#: content/choices.py:56 content/choices.py:318
+msgid "fiederschnittig"
+msgstr ""
+
+#: content/choices.py:57 content/choices.py:319
+msgid "paarig gefiedert"
+msgstr ""
+
+#: content/choices.py:58 content/choices.py:320
+msgid "unpaarig gefiedert"
+msgstr ""
+
+#: content/choices.py:59 content/choices.py:321
+msgid "unterbrochen fiederschnittig"
+msgstr ""
+
+#: content/choices.py:60 content/choices.py:322
+msgid "unterbrochen gefiedert"
+msgstr ""
+
+#: content/choices.py:61 content/choices.py:323
+msgid "doppelt gefiedert"
+msgstr ""
+
+#: content/choices.py:62 content/choices.py:324
+msgid "mehrfach gefiedert"
+msgstr ""
+
+#: content/choices.py:63 content/choices.py:325
+msgid "dreizählig"
+msgstr ""
+
+#: content/choices.py:64 content/choices.py:326
+msgid "doppelt dreizählig"
+msgstr ""
+
+#: content/choices.py:65 content/choices.py:327
+msgid "leierförmig"
+msgstr ""
+
+#: content/choices.py:66 content/choices.py:328
+msgid "schrotsägeförmig"
+msgstr ""
+
+#: content/choices.py:67 content/choices.py:329
+msgid "kammförmig"
+msgstr ""
+
+#: content/choices.py:68 content/choices.py:330
+msgid "fußförmig geschnitten"
+msgstr ""
+
+#: content/choices.py:69 content/choices.py:331
+msgid "fußförmig zusammengesetzt"
+msgstr ""
+
+#: content/choices.py:72
+msgid "kreisrund"
+msgstr ""
+
+#: content/choices.py:73
+msgid "rundlich"
+msgstr ""
+
+#: content/choices.py:74
+msgid "elliptisch"
+msgstr ""
+
+#: content/choices.py:75
+msgid "eiförmig"
+msgstr ""
+
+#: content/choices.py:76
+msgid "verkehrteiförmig"
+msgstr ""
+
+#: content/choices.py:77
+msgid "spatelförmig/spatelig"
+msgstr ""
+
+#: content/choices.py:78
+msgid "lanzettlich"
+msgstr ""
+
+#: content/choices.py:79
+msgid "eilanzettlich"
+msgstr ""
+
+#: content/choices.py:80
+msgid "länglich"
+msgstr ""
+
+#: content/choices.py:81
+msgid "linealisch/lineal"
+msgstr ""
+
+#: content/choices.py:82
+msgid "nadelförmig"
+msgstr ""
+
+#: content/choices.py:83
+msgid "pfriemlich"
+msgstr ""
+
+#: content/choices.py:84
+msgid "borstenförmig/borstlich"
+msgstr ""
+
+#: content/choices.py:85
+msgid "fadenförmig/fädlich"
+msgstr ""
+
+#: content/choices.py:86
+msgid "binsenartig"
+msgstr ""
+
+#: content/choices.py:87 content/choices.py:388
+msgid "röhrig"
+msgstr ""
+
+#: content/choices.py:88
+msgid "schwertförmig"
+msgstr ""
+
+#: content/choices.py:89
+msgid "dreieckig"
+msgstr ""
+
+#: content/choices.py:90
+msgid "keilförmig"
+msgstr ""
+
+#: content/choices.py:91
+msgid "rautenförmig/rhombisch"
+msgstr ""
+
+#: content/choices.py:92 content/choices.py:185
+msgid "herzförmig"
+msgstr ""
+
+#: content/choices.py:93
+msgid "verkehrtherzförmig"
+msgstr ""
+
+#: content/choices.py:94 content/choices.py:186
+msgid "nierenförmig"
+msgstr ""
+
+#: content/choices.py:95 content/choices.py:187
+msgid "pfeilförmig"
+msgstr ""
+
+#: content/choices.py:96 content/choices.py:188
+msgid "spießförmig"
+msgstr ""
+
+#: content/choices.py:97
+msgid "geigenförmig"
+msgstr ""
+
+#: content/choices.py:98
+msgid "schuppenförmig"
+msgstr ""
+
+#: content/choices.py:99
+msgid "schildförmig"
+msgstr ""
+
+#: content/choices.py:102 content/choices.py:157
+msgid "ganzrandig"
+msgstr ""
+
+#: content/choices.py:103 content/choices.py:158
+msgid "gesägt"
+msgstr ""
+
+#: content/choices.py:104 content/choices.py:159
+msgid "doppelt gesägt"
+msgstr ""
+
+#: content/choices.py:105 content/choices.py:160
+msgid "rückwärts gesägt"
+msgstr ""
+
+#: content/choices.py:106 content/choices.py:161
+msgid "gezähnt"
+msgstr ""
+
+#: content/choices.py:107 content/choices.py:162
+msgid "gezähnelt"
+msgstr ""
+
+#: content/choices.py:108 content/choices.py:163
+msgid "gefranst"
+msgstr ""
+
+#: content/choices.py:109 content/choices.py:164
+msgid "gekerbt"
+msgstr ""
+
+#: content/choices.py:110 content/choices.py:165
+msgid "gebuchtet"
+msgstr ""
+
+#: content/choices.py:111 content/choices.py:166
+msgid "geschweift"
+msgstr ""
+
+#: content/choices.py:112 content/choices.py:167
+msgid "bewimpert"
+msgstr ""
+
+#: content/choices.py:113 content/choices.py:128 content/choices.py:168
+msgid "vorwärts rauh"
+msgstr ""
+
+#: content/choices.py:114 content/choices.py:169
+msgid "rückwärts rauh"
+msgstr ""
+
+#: content/choices.py:117 content/models.py:171
+msgid "krautig"
+msgstr ""
+
+#: content/choices.py:118
+msgid "fleischig"
+msgstr ""
+
+#: content/choices.py:119
+msgid "lederig"
+msgstr ""
+
+#: content/choices.py:120
+msgid "häutig/trockenhäutig"
+msgstr ""
+
+#: content/choices.py:121
+msgid "immergrün"
+msgstr ""
+
+#: content/choices.py:122
+msgid "starr/steif"
+msgstr ""
+
+#: content/choices.py:125
+msgid "glatt"
+msgstr ""
+
+#: content/choices.py:126
+msgid "runzelig"
+msgstr ""
+
+#: content/choices.py:127
+msgid "rauh"
+msgstr ""
+
+#: content/choices.py:129
+msgid "bereift"
+msgstr ""
+
+#: content/choices.py:130
+msgid "bestäubt/bemehlt"
+msgstr ""
+
+#: content/choices.py:131
+msgid "papillös"
+msgstr ""
+
+#: content/choices.py:132
+msgid "punktiert"
+msgstr ""
+
+#: content/choices.py:133
+msgid "schwielig"
+msgstr ""
+
+#: content/choices.py:134
+msgid "kahl"
+msgstr ""
+
+#: content/choices.py:135
+msgid "verkahlend"
+msgstr ""
+
+#: content/choices.py:136
+msgid "flaumhaarig/weichhaarig"
+msgstr ""
+
+#: content/choices.py:137
+msgid "seidenhaarig"
+msgstr ""
+
+#: content/choices.py:138
+msgid "spinnwebig"
+msgstr ""
+
+#: content/choices.py:139
+msgid "flockig"
+msgstr ""
+
+#: content/choices.py:140
+msgid "samthaarig"
+msgstr ""
+
+#: content/choices.py:141
+msgid "filzig"
+msgstr ""
+
+#: content/choices.py:142
+msgid "wollig"
+msgstr ""
+
+#: content/choices.py:143
+msgid "zottig"
+msgstr ""
+
+#: content/choices.py:144
+msgid "rauhaarig"
+msgstr ""
+
+#: content/choices.py:145
+msgid "steifhaarig"
+msgstr ""
+
+#: content/choices.py:146
+msgid "gewimpert"
+msgstr ""
+
+#: content/choices.py:147
+msgid "drüsenhaarig"
+msgstr ""
+
+#: content/choices.py:148
+msgid "sternhaarig"
+msgstr ""
+
+#: content/choices.py:149
+msgid "schildhaarig"
+msgstr ""
+
+#: content/choices.py:150
+msgid "schuppenhaarig/schuppig"
+msgstr ""
+
+#: content/choices.py:151
+msgid "schülferig"
+msgstr ""
+
+#: content/choices.py:152
+msgid "bärtig"
+msgstr ""
+
+#: content/choices.py:153
+msgid "achselbärtig"
+msgstr ""
+
+#: content/choices.py:154
+msgid "nackt"
+msgstr ""
+
+#: content/choices.py:172
+msgid "zurückgerollt/umgerollt"
+msgstr ""
+
+#: content/choices.py:173
+msgid "eingerollt"
+msgstr ""
+
+#: content/choices.py:174
+msgid "zusammengerollt"
+msgstr ""
+
+#: content/choices.py:175
+msgid "gefalzt/gefaltet"
+msgstr ""
+
+#: content/choices.py:176
+msgid "rinnig"
+msgstr ""
+
+#: content/choices.py:177
+msgid "gekielt"
+msgstr ""
+
+#: content/choices.py:178
+msgid "doppelrillig"
+msgstr ""
+
+#: content/choices.py:181
+msgid "keilig/keilförmig"
+msgstr ""
+
+#: content/choices.py:182
+msgid "verschmälert"
+msgstr ""
+
+#: content/choices.py:183 content/choices.py:191
+msgid "abgerundet"
+msgstr ""
+
+#: content/choices.py:184
+msgid "gestutzt"
+msgstr ""
+
+#: content/choices.py:192
+msgid "gestzutzt"
+msgstr ""
+
+#: content/choices.py:193
+msgid "stumpf"
+msgstr ""
+
+#: content/choices.py:194
+msgid "spitz"
+msgstr ""
+
+#: content/choices.py:195
+msgid "zugespitzt"
+msgstr ""
+
+#: content/choices.py:196
+msgid "begrannt"
+msgstr ""
+
+#: content/choices.py:197
+msgid "stachelspitze"
+msgstr ""
+
+#: content/choices.py:198
+msgid "haarspitzig"
+msgstr ""
+
+#: content/choices.py:199
+msgid "bespitzt"
+msgstr ""
+
+#: content/choices.py:200
+msgid "ausgerandet"
+msgstr ""
+
+#: content/choices.py:203
+msgid "aufrecht"
+msgstr ""
+
+#: content/choices.py:204
+msgid "aufrecht-abstehend"
+msgstr ""
+
+#: content/choices.py:205
+msgid "abstehend"
+msgstr ""
+
+#: content/choices.py:206
+msgid "sparrig"
+msgstr ""
+
+#: content/choices.py:207
+msgid "zurückgeschlagen"
+msgstr ""
+
+#: content/choices.py:208
+msgid "liegend"
+msgstr ""
+
+#: content/choices.py:209
+msgid "kriechend"
+msgstr ""
+
+#: content/choices.py:210
+msgid "aufsteigend/aufstrebend"
+msgstr ""
+
+#: content/choices.py:211 content/choices.py:405
+msgid "gekniet"
+msgstr ""
+
+#: content/choices.py:212
+msgid "übergebogen"
+msgstr ""
+
+#: content/choices.py:213
+msgid "nickend"
+msgstr ""
+
+#: content/choices.py:214
+msgid "hängend"
+msgstr ""
+
+#: content/choices.py:215
+msgid "flutend"
+msgstr ""
+
+#: content/choices.py:216
+msgid "Rankenpflanze"
+msgstr ""
+
+#: content/choices.py:217
+msgid "Windepflanze"
+msgstr ""
+
+#: content/choices.py:218
+msgid "Spreizklimmer"
+msgstr ""
+
+#: content/choices.py:219
+msgid "Wurzelkletterer"
+msgstr ""
+
+#: content/choices.py:220
+msgid "horstig"
+msgstr ""
+
+#: content/choices.py:221
+msgid "lockerrasig"
+msgstr ""
+
+#: content/choices.py:224
+msgid "stielrund"
+msgstr ""
+
+#: content/choices.py:225
+msgid "halbstielrund"
+msgstr ""
+
+#: content/choices.py:226
+msgid "zusammengedrückt"
+msgstr ""
+
+#: content/choices.py:227
+msgid "zweischneidig"
+msgstr ""
+
+#: content/choices.py:228
+msgid "kantig"
+msgstr ""
+
+#: content/choices.py:229
+msgid "stumpfkantig"
+msgstr ""
+
+#: content/choices.py:230
+msgid "gerieft /gerillt"
+msgstr ""
+
+#: content/choices.py:231
+msgid "gefurcht"
+msgstr ""
+
+#: content/choices.py:232
+msgid "kantig gefurcht /scharfkantig"
+msgstr ""
+
+#: content/choices.py:233
+msgid "gerippt"
+msgstr ""
+
+#: content/choices.py:234
+msgid "geflügelt"
+msgstr ""
+
+#: content/choices.py:235
+msgid "knotig"
+msgstr ""
+
+#: content/choices.py:237
+msgid "Samen"
+msgstr ""
+
+#: content/choices.py:237
+msgid "Sporen"
+msgstr ""
+
+#: content/choices.py:239
+msgid "Fruchtknoten"
+msgstr ""
+
+#: content/choices.py:240
+msgid "Zapfenschuppe"
+msgstr ""
+
+#: content/choices.py:241
+msgid "Sprossachse"
+msgstr ""
+
+#: content/choices.py:244
+msgid "Nuss"
+msgstr ""
+
+#: content/choices.py:245
+msgid "Karyopse"
+msgstr ""
+
+#: content/choices.py:246
+msgid "Achäne"
+msgstr ""
+
+#: content/choices.py:247
+msgid "Beere"
+msgstr ""
+
+#: content/choices.py:248
+msgid "Steinfrucht"
+msgstr ""
+
+#: content/choices.py:249
+msgid "Balgfrucht"
+msgstr ""
+
+#: content/choices.py:250
+msgid "Hülse"
+msgstr ""
+
+#: content/choices.py:251
+msgid "Kapsel"
+msgstr ""
+
+#: content/choices.py:252
+msgid "Schote ohne Scheidewand"
+msgstr ""
+
+#: content/choices.py:253
+msgid "Schote mit falscher Scheidewand"
+msgstr ""
+
+#: content/choices.py:254
+msgid "Schötchen"
+msgstr ""
+
+#: content/choices.py:255
+msgid "Spaltfrucht"
+msgstr ""
+
+#: content/choices.py:256
+msgid "Kokke"
+msgstr ""
+
+#: content/choices.py:257
+msgid "Doppelachäne"
+msgstr ""
+
+#: content/choices.py:258
+msgid "Bruchfrucht"
+msgstr ""
+
+#: content/choices.py:259
+msgid "Gliederhülse"
+msgstr ""
+
+#: content/choices.py:260
+msgid "Gliederschote"
+msgstr ""
+
+#: content/choices.py:261
+msgid "Klausenfrucht"
+msgstr ""
+
+#: content/choices.py:262
+msgid "Sammelbalgfrucht"
+msgstr ""
+
+#: content/choices.py:263
+msgid "Nüsschen"
+msgstr ""
+
+#: content/choices.py:264
+msgid "Steinfrüchtchen"
+msgstr ""
+
+#: content/choices.py:265
+msgid "Balgfrüchtchen"
+msgstr ""
+
+#: content/choices.py:268
+msgid "Traube"
+msgstr ""
+
+#: content/choices.py:269
+msgid "Rispe"
+msgstr ""
+
+#: content/choices.py:270
+msgid "Ebenstrauß/Corymbus"
+msgstr ""
+
+#: content/choices.py:271
+msgid "Schirmtraube"
+msgstr ""
+
+#: content/choices.py:272
+msgid "Schirmrispe"
+msgstr ""
+
+#: content/choices.py:273
+msgid "Spirre/Trichterrispe"
+msgstr ""
+
+#: content/choices.py:274
+msgid "Ähre"
+msgstr ""
+
+#: content/choices.py:275
+msgid "Kolben"
+msgstr ""
+
+#: content/choices.py:276
+msgid "Kätzchen"
+msgstr ""
+
+#: content/choices.py:277
+msgid "Zapfen"
+msgstr ""
+
+#: content/choices.py:278
+msgid "Dolde"
+msgstr ""
+
+#: content/choices.py:279
+msgid "Doppeldolde"
+msgstr ""
+
+#: content/choices.py:280
+msgid "Kopf"
+msgstr ""
+
+#: content/choices.py:281
+msgid "Köpfchen"
+msgstr ""
+
+#: content/choices.py:282
+msgid "Korb"
+msgstr ""
+
+#: content/choices.py:283
+msgid "Körbchen"
+msgstr ""
+
+#: content/choices.py:284
+msgid "Zyme"
+msgstr ""
+
+#: content/choices.py:285
+msgid "Pleiochasium"
+msgstr ""
+
+#: content/choices.py:286
+msgid "Dichasium"
+msgstr ""
+
+#: content/choices.py:287
+msgid "Monochasium"
+msgstr ""
+
+#: content/choices.py:288
+msgid "Wickel"
+msgstr ""
+
+#: content/choices.py:289
+msgid "Doppelwickel"
+msgstr ""
+
+#: content/choices.py:290
+msgid "Scheinquirl"
+msgstr ""
+
+#: content/choices.py:291
+msgid "Büschel"
+msgstr ""
+
+#: content/choices.py:292
+msgid "Knäuel"
+msgstr ""
+
+#: content/choices.py:293
+msgid "Thyrse"
+msgstr ""
+
+#: content/choices.py:294
+msgid "Scheindolde/Trugdolde"
+msgstr ""
+
+#: content/choices.py:295
+msgid "Scheinblüte/Pseudanthium"
+msgstr ""
+
+#: content/choices.py:298
+msgid "radiärsymmetrisch/aktinomorph/strahlig"
+msgstr ""
+
+#: content/choices.py:299
+msgid "disymmetrisch/bilateral"
+msgstr ""
+
+#: content/choices.py:300
+msgid "zygomorph/dorsiventral"
+msgstr ""
+
+#: content/choices.py:301
+msgid "asymmetrisch/unregelmäßig"
+msgstr ""
+
+#: content/choices.py:334
+msgid "doppelte Blütenhülle (Kalyx + Corolla)"
+msgstr ""
+
+#: content/choices.py:335
+msgid "einfache Blütenhülle (Perigon)"
+msgstr ""
+
+#: content/choices.py:336
+msgid "fehlende Blütenhülle"
+msgstr ""
+
+#: content/choices.py:337
+msgid "Lippenblüte"
+msgstr ""
+
+#: content/choices.py:338
+msgid "Schmetterlingsblüte"
+msgstr ""
+
+#: content/choices.py:339
+msgid "Zungenblüte"
+msgstr ""
+
+#: content/choices.py:340
+msgid "strahlende Randblüten"
+msgstr ""
+
+#: content/choices.py:343
+msgid "freiblättrig"
+msgstr ""
+
+#: content/choices.py:344
+msgid "verwachsenblättrig"
+msgstr ""
+
+#: content/choices.py:345
+msgid "2-zähnig"
+msgstr ""
+
+#: content/choices.py:346
+msgid "3-zähnig"
+msgstr ""
+
+#: content/choices.py:347
+msgid "4-zähnig"
+msgstr ""
+
+#: content/choices.py:348
+msgid "5-zähnig"
+msgstr ""
+
+#: content/choices.py:349
+msgid "2-lappig"
+msgstr ""
+
+#: content/choices.py:350
+msgid "3-lappig"
+msgstr ""
+
+#: content/choices.py:351
+msgid "4-lappig"
+msgstr ""
+
+#: content/choices.py:352
+msgid "5-lappig"
+msgstr ""
+
+#: content/choices.py:353
+msgid "2-spaltig"
+msgstr ""
+
+#: content/choices.py:354
+msgid "3-spaltig"
+msgstr ""
+
+#: content/choices.py:355
+msgid "4-spaltig"
+msgstr ""
+
+#: content/choices.py:356
+msgid "5-spaltig"
+msgstr ""
+
+#: content/choices.py:357
+msgid "2-teilig"
+msgstr ""
+
+#: content/choices.py:358
+msgid "3-teilig"
+msgstr ""
+
+#: content/choices.py:359
+msgid "4-teilig"
+msgstr ""
+
+#: content/choices.py:360
+msgid "5-teilig"
+msgstr ""
+
+#: content/choices.py:361
+msgid "zweilippig"
+msgstr ""
+
+#: content/choices.py:365 content/models.py:253
+msgid "unverwachsen"
+msgstr ""
+
+#: content/choices.py:366
+msgid "am Grund verwachsen"
+msgstr ""
+
+#: content/choices.py:369
+msgid "hypogyn/oberständig"
+msgstr ""
+
+#: content/choices.py:370
+msgid "epihypogyn/halboberständig"
+msgstr ""
+
+#: content/choices.py:371
+msgid "perigyn/mittelständig"
+msgstr ""
+
+#: content/choices.py:372
+msgid "hemiepigyn/halbunterständig"
+msgstr ""
+
+#: content/choices.py:373
+msgid "epigyn/unterständig"
+msgstr ""
+
+#: content/choices.py:376
+msgid "monokarp"
+msgstr ""
+
+#: content/choices.py:377
+msgid "apokarp/chorikarp"
+msgstr ""
+
+#: content/choices.py:378
+msgid "coeno-synkarp"
+msgstr ""
+
+#: content/choices.py:379
+msgid "coeno-parakarp"
+msgstr ""
+
+#: content/choices.py:382
+msgid "endständig"
+msgstr ""
+
+#: content/choices.py:383
+msgid "seitenständig"
+msgstr ""
+
+#: content/choices.py:385
+msgid "gynobasisch"
+msgstr ""
+
+#: content/choices.py:389
+msgid "keulig"
+msgstr ""
+
+#: content/choices.py:390
+msgid "glockig"
+msgstr ""
+
+#: content/choices.py:391
+msgid "trichterförmig"
+msgstr ""
+
+#: content/choices.py:392
+msgid "becherförmig"
+msgstr ""
+
+#: content/choices.py:393
+msgid "napfförmig"
+msgstr ""
+
+#: content/choices.py:394
+msgid "kugelig"
+msgstr ""
+
+#: content/choices.py:395
+msgid "aufgeblasen"
+msgstr ""
+
+#: content/choices.py:396
+msgid "krugförmig"
+msgstr ""
+
+#: content/choices.py:397
+msgid "radförmig"
+msgstr ""
+
+#: content/choices.py:398
+msgid "stielförmig"
+msgstr ""
+
+#: content/choices.py:399
+msgid "zungenförmig"
+msgstr ""
+
+#: content/choices.py:400
+msgid "bauchig"
+msgstr ""
+
+#: content/choices.py:401
+msgid "ausgesackt"
+msgstr ""
+
+#: content/choices.py:402
+msgid "gespornt"
+msgstr ""
+
+#: content/choices.py:404
+msgid "Spitzengranne"
+msgstr ""
+
+#: content/choices.py:404
+msgid "unbegrannt"
+msgstr ""
+
+#: content/choices.py:405
+msgid "gerade"
+msgstr ""
+
+#: content/choices.py:405
+msgid "gedreht"
+msgstr ""
+
+#: content/choices.py:408
+msgid "sitzend / ungestielt"
+msgstr ""
+
+#: content/models.py:18
+msgid "Schlammfluren"
+msgstr ""
+
+#: content/models.py:19
+msgid "Röhrichte"
+msgstr ""
+
+#: content/models.py:20
+msgid "Säume"
+msgstr ""
+
+#: content/models.py:21
+msgid "Stauden"
+msgstr ""
+
+#: content/models.py:22
+msgid "Grünland und Zwergstrauchheiden"
+msgstr ""
+
+#: content/models.py:23
+msgid "Ruderalvegetation"
+msgstr ""
+
+#: content/models.py:24
+msgid "Äcker"
+msgstr ""
+
+#: content/models.py:25
+msgid "Weinberge"
+msgstr ""
+
+#: content/models.py:26
+msgid "Intensivgrünland"
+msgstr ""
+
+#: content/models.py:27
+msgid "Parks"
+msgstr ""
+
+#: content/models.py:28
+msgid "Gärten"
+msgstr ""
+
+#: content/models.py:29
+msgid "Trittpflanzengesellschaften"
+msgstr ""
+
+#: content/models.py:30
+msgid "Felsbiotope"
+msgstr ""
+
+#: content/models.py:31
+msgid "Auenwälder"
+msgstr ""
+
+#: content/models.py:32
+msgid "Gebüsche"
+msgstr ""
+
+#: content/models.py:33
+msgid "Extensivgrünland oder natürlicher Rasen"
+msgstr ""
+
+#: content/models.py:34
+msgid "Wälder"
+msgstr ""
+
+#: content/models.py:35
+msgid "Ufer"
+msgstr ""
+
+#: content/models.py:38
+msgid "einheimisch"
+msgstr ""
+
+#: content/models.py:39
+msgid "Archaeophyt"
+msgstr ""
+
+#: content/models.py:40
+msgid "Neophyt"
+msgstr ""
+
+#: content/models.py:43
+msgid "parasitisch"
+msgstr ""
+
+#: content/models.py:44
+msgid "nicht parasitisch"
+msgstr ""
+
+#: content/models.py:45
+msgid "obligate Mykorrhiza"
+msgstr ""
+
+#: content/models.py:46
+msgid "fakultative Mykorrhiza"
+msgstr ""
+
+#: content/models.py:49
+msgid "nährstoffreich"
+msgstr ""
+
+#: content/models.py:50
+msgid "nährstoffarm"
+msgstr ""
+
+#: content/models.py:51
+msgid "lehmig"
+msgstr ""
+
+#: content/models.py:52
+msgid "torfig"
+msgstr ""
+
+#: content/models.py:53
+msgid "sandig"
+msgstr ""
+
+#: content/models.py:54
+msgid "steinig/felsig"
+msgstr ""
+
+#: content/models.py:57
+msgid "erhalten"
+msgstr ""
+
+#: content/models.py:58
+msgid "ersetzt durch sprossbürtige Wurzeln"
+msgstr ""
+
+#: content/models.py:61
+msgid "Art"
+msgstr ""
+
+#: content/models.py:62
+msgid "Trivialname"
+msgstr ""
+
+#: content/models.py:66
+msgid "Lebensraum"
+msgstr ""
+
+#: content/models.py:69
+msgid "Status"
+msgstr ""
+
+#: content/models.py:72
+msgid "Interaktionen"
+msgstr ""
+
+#: content/models.py:77
+msgid "Untergrund"
+msgstr ""
+
+#: content/models.py:79
+msgid "Blütezeit"
+msgstr ""
+
+#: content/models.py:82
+msgid "Primärwurzel"
+msgstr ""
+
+#: content/models.py:84
+msgid "Wurzelknollen"
+msgstr ""
+
+#: content/models.py:91
+msgid "Steckbrief-Ebene"
+msgstr ""
+
+#: content/models.py:98
+msgid "Blattnerven"
+msgstr ""
+
+#: content/models.py:101
+msgid "Anzahl der Keimblätter"
+msgstr ""
+
+#: content/models.py:104
+msgid "Anheftung an Sprossachse"
+msgstr ""
+
+#: content/models.py:107
+msgid "Blattscheide"
+msgstr ""
+
+#: content/models.py:110
+msgid "Stellung an Sprossachse"
+msgstr ""
+
+#: content/models.py:114
+msgid "Blattspreite gesamt"
+msgstr ""
+
+#: content/models.py:117
+msgid "Tiefe von Einschnitten"
+msgstr ""
+
+#: content/models.py:122
+msgid "Anordnung von Einschnitten/Blättchen"
+msgstr ""
+
+#: content/models.py:125
+msgid "Anordnung ist buchtig."
+msgstr ""
+
+#: content/models.py:130
+msgid "Gestalt des Blattes/der Blättchen"
+msgstr ""
+
+#: content/models.py:133
+msgid "Anzahl Blättchen"
+msgstr ""
+
+#: content/models.py:136
+msgid "Spreiten/Blättchen"
+msgstr ""
+
+#: content/models.py:139
+msgid "Beschaffenheit"
+msgstr ""
+
+#: content/models.py:144 content/models.py:192
+msgid "Oberflächenbeschaffenheit"
+msgstr ""
+
+#: content/models.py:147
+msgid "Nebenblattrand"
+msgstr ""
+
+#: content/models.py:150
+msgid "Querschnitt"
+msgstr ""
+
+#: content/models.py:153 content/models.py:156
+msgid "Spreitengrund"
+msgstr ""
+
+#: content/models.py:159
+msgid "Besondere Merkmale"
+msgstr ""
+
+#: content/models.py:163 content/models.py:202 content/models.py:226
+#: content/models.py:352
+msgid "Pflanze"
+msgstr ""
+
+#: content/models.py:171
+msgid "holzig"
+msgstr ""
+
+#: content/models.py:173
+msgid "Erscheinung"
+msgstr ""
+
+#: content/models.py:176 content/models.py:187
+msgid "Stellung"
+msgstr ""
+
+#: content/models.py:178
+msgid "Dickfleischig"
+msgstr ""
+
+#: content/models.py:179
+msgid "Milchsaft"
+msgstr ""
+
+#: content/models.py:180
+msgid "Grundblattrose"
+msgstr ""
+
+#: content/models.py:183
+msgid "Nur am Grund"
+msgstr ""
+
+#: content/models.py:183
+msgid "Auch über Grund"
+msgstr ""
+
+#: content/models.py:184
+msgid "Beblätterung"
+msgstr ""
+
+#: content/models.py:195
+msgid "Halm"
+msgstr ""
+
+#: content/models.py:196
+msgid "Horst"
+msgstr ""
+
+#: content/models.py:209
+msgid "Ausbreitungsform"
+msgstr ""
+
+#: content/models.py:212
+msgid "Lage der Samenanlage"
+msgstr ""
+
+#: content/models.py:215
+msgid "Fruchttyp"
+msgstr ""
+
+#: content/models.py:218
+msgid "Samenzahl"
+msgstr ""
+
+#: content/models.py:219
+msgid "Form"
+msgstr ""
+
+#: content/models.py:220
+msgid "Beflügelung"
+msgstr ""
+
+#: content/models.py:222
+msgid "Beflügelung Besonderheit"
+msgstr ""
+
+#: content/models.py:233 content/models.py:242 content/models.py:248
+msgid "Blütenstandtyp"
+msgstr ""
+
+#: content/models.py:236
+msgid "Blüten pro Blütenstand"
+msgstr ""
+
+#: content/models.py:239
+msgid "Symmetrie"
+msgstr ""
+
+#: content/models.py:245
+msgid "Zähligkeit"
+msgstr ""
+
+#: content/models.py:254
+msgid "Kelchblätter"
+msgstr ""
+
+#: content/models.py:257
+msgid "Verwachsungstyp"
+msgstr ""
+
+#: content/models.py:260
+msgid "Farbe"
+msgstr ""
+
+#: content/models.py:264
+msgid "Verwachsung der Kronblätter"
+msgstr ""
+
+#: content/models.py:267
+msgid "Kronblatt Platte"
+msgstr ""
+
+#: content/models.py:270
+msgid "Kronblatt Unterlippe"
+msgstr ""
+
+#: content/models.py:273
+msgid "Ausstülpung der Unterlippe"
+msgstr ""
+
+#: content/models.py:277
+msgid "Staubblatt Anzahl"
+msgstr ""
+
+#: content/models.py:280
+msgid "Staubblatt Länge"
+msgstr ""
+
+#: content/models.py:283
+msgid "Staubbeutel Farbe"
+msgstr ""
+
+#: content/models.py:286
+msgid "Staubfadenröhre"
+msgstr ""
+
+#: content/models.py:290
+msgid "Fruchtknoten Anzahl"
+msgstr ""
+
+#: content/models.py:293
+msgid "Frucht Ständigkeit"
+msgstr ""
+
+#: content/models.py:296
+msgid "Bau des Gynoeceums"
+msgstr ""
+
+#: content/models.py:299
+msgid "Narben pro Griffel"
+msgstr ""
+
+#: content/models.py:304
+msgid "Ständigkeit des Griffels"
+msgstr ""
+
+#: content/models.py:307
+msgid "Ständigkeit des Griffels ist sub-"
+msgstr ""
+
+#: content/models.py:311
+msgid "Sporn"
+msgstr ""
+
+#: content/models.py:314
+msgid "Honigdrüsen / Nektarien"
+msgstr ""
+
+#: content/models.py:316
+msgid "Außenkelch"
+msgstr ""
+
+#: content/models.py:318
+msgid "Griffelpolster"
+msgstr ""
+
+#: content/models.py:320
+msgid "Schlauch"
+msgstr ""
+
+#: content/models.py:323
+msgid "Granne der Deckspelze"
+msgstr ""
+
+#: content/models.py:326
+msgid "Form der Granne"
+msgstr ""
+
+#: content/models.py:329
+msgid "Konsistenz der Deckspelze"
+msgstr ""
+
+#: content/models.py:332
+msgid "Hüllspelzen"
+msgstr ""
+
+#: content/models.py:334
+msgid "Blütig"
+msgstr ""
+
+#: content/models.py:336
+msgid "Ansatz an Halm"
+msgstr ""
+
+#: content/models.py:339
+msgid "Ähren pro Ährchen "
+msgstr ""
+
+#: content/models.py:342
+msgid "Anordnung "
+msgstr ""
+
+#: content/models.py:345
+msgid "Ährchen pro Absatz"
+msgstr ""
+
+#: content/models.py:359
+msgid "node name"
+msgstr ""
+
+#: content/models.py:373
+msgid "Tree Node"
+msgstr ""
+
+#: content/models.py:374
+msgid "Tree Nodes"
+msgstr ""

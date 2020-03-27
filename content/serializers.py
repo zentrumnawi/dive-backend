@@ -1,41 +1,51 @@
 from importlib import import_module
 
 from django.conf import settings
+from django.db import models
 from rest_framework import serializers
 
 from .models import TreeNode, Plant, Leaf, Sprout, Fruit, Blossom
 
 
-class LeafSerializer(serializers.ModelSerializer):
+class HumanReadableChoiceField(serializers.ChoiceField):
+    def to_representation(self, value):
+        return str(self.grouped_choices[value])
+
+
+class DisplayNameModelSerializer(serializers.ModelSerializer):
+
+    serializer_choice_field = HumanReadableChoiceField
+
+
+class LeafSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Leaf
         exclude = ["plant"]
 
 
-class SproutSerializer(serializers.ModelSerializer):
+class SproutSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Sprout
         exclude = ["plant"]
 
 
-class FruitSerializer(serializers.ModelSerializer):
+class FruitSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Fruit
         exclude = ["plant"]
 
 
-class BlossomSerializer(serializers.ModelSerializer):
+class BlossomSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Blossom
         exclude = ["plant"]
 
 
-class PlantSerializer(serializers.ModelSerializer):
-
+class PlantSerializer(DisplayNameModelSerializer):
     leaf = LeafSerializer()
     sprout = SproutSerializer()
     fruit = FruitSerializer()

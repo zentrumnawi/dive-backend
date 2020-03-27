@@ -7,7 +7,7 @@ NERV_CHOICES = (
     ("fie", _("fiedernervig")),
     ("fin", _("fingernervig")),
     ("fus", _("fußnervig")),
-    ("gab", _("gabelnervig"))
+    ("gab", _("gabelnervig")),
 )
 AXIS_CHOICES = (
     ("ges", _("gestielt")),
@@ -19,7 +19,7 @@ AXIS_CHOICES = (
     ("sch", _("scheidig verwachsen")),
     ("her", _("herablaufend")),
     ("rei", _("reitend")),
-    ("hin", _("hinfällig"))
+    ("hin", _("hinfällig")),
 )
 POS_CHOICES = (
     ("gru", _("grundständig")),
@@ -33,18 +33,15 @@ POS_CHOICES = (
     ("sch", _("scheinquirlig")),
     ("dac", _("dachziegelig")),
     ("ein", _("einseitig")),
-    ("ges", _("gescheitelt"))
+    ("ges", _("gescheitelt")),
 )
-SPR_WHOLE_CHOICES = (
-    ("ein", _("einfach")),
-    ("zus", _("zusammengesetzt"))
-)
+SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
 CUT_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
     ("gep", _("gespalten")),
     ("get", _("geteilt")),
-    ("ges", _("geschnitten"))
+    ("ges", _("geschnitten")),
 )
 ARR_CHOICES = (
     ("han", _("handförmig/fingerförmig")),
@@ -69,7 +66,7 @@ ARR_CHOICES = (
     ("sch", _("schrotsägeförmig")),
     ("kam", _("kammförmig")),
     ("fug", _("fußförmig geschnitten")),
-    ("fuz", _("fußförmig zusammengesetzt"))
+    ("fuz", _("fußförmig zusammengesetzt")),
 )
 FORM_CHOICES = (
     ("kre", _("kreisrund")),
@@ -99,7 +96,7 @@ FORM_CHOICES = (
     ("spi", _("spießförmig")),
     ("gei", _("geigenförmig")),
     ("sup", _("schuppenförmig")),
-    ("sil", _("schildförmig"))
+    ("sil", _("schildförmig")),
 )
 LEAFLET_CHOICES = (
     ("gan", _("ganzrandig")),
@@ -114,7 +111,7 @@ LEAFLET_CHOICES = (
     ("ges", _("geschweift")),
     ("bew", _("bewimpert")),
     ("vor", _("vorwärts rauh")),
-    ("rra", _("rückwärts rauh"))
+    ("rra", _("rückwärts rauh")),
 )
 TEXTURE_CHOICES = (
     ("kra", _("krautig")),
@@ -122,7 +119,7 @@ TEXTURE_CHOICES = (
     ("led", _("lederig")),
     ("hae", _("häutig/trockenhäutig")),
     ("imm", _("immergrün")),
-    ("sta", _("starr/steif"))
+    ("sta", _("starr/steif")),
 )
 SUR_TEXTURE_CHOICES = (
     ("gla", _("glatt")),
@@ -154,7 +151,7 @@ SUR_TEXTURE_CHOICES = (
     ("sue", _("schülferig")),
     ("bae", _("bärtig")),
     ("ach", _("achselbärtig")),
-    ("nac", _("nackt"))
+    ("nac", _("nackt")),
 )
 SIDE_CHOICES = (
     ("gan", _("ganzrandig")),
@@ -169,7 +166,7 @@ SIDE_CHOICES = (
     ("gew", _("geschweift")),
     ("bew", _("bewimpert")),
     ("vor", _("vorwärts rauh")),
-    ("rur", _("rückwärts rauh"))
+    ("rur", _("rückwärts rauh")),
 )
 DIAM_CHOICES = (
     ("zur", _("zurückgerollt/umgerollt")),
@@ -178,7 +175,7 @@ DIAM_CHOICES = (
     ("gef", _("gefalzt/gefaltet")),
     ("rin", _("rinnig")),
     ("gek", _("gekielt")),
-    ("dop", _("doppelrillig"))
+    ("dop", _("doppelrillig")),
 )
 SP_CHOICES = (
     ("kei", _("keilig/keilförmig")),
@@ -188,7 +185,7 @@ SP_CHOICES = (
     ("her", _("herzförmig")),
     ("nie", _("nierenförmig")),
     ("pfe", _("pfeilförmig")),
-    ("spi", _("spießförmig"))
+    ("spi", _("spießförmig")),
 )
 SP_TOP_CHOICES = (
     ("abg", _("abgerundet")),
@@ -221,7 +218,7 @@ POSITION_CHOICES = (
     ("Spr", _("Spreizklimmer")),
     ("Wur", _("Wurzelkletterer")),
     ("hor", _("horstig")),
-    ("loc", _("lockerrasig"))
+    ("loc", _("lockerrasig")),
 )
 SP_DIAM_CHOICES = (
     ("sti", _("stielrund")),
@@ -235,16 +232,13 @@ SP_DIAM_CHOICES = (
     ("kan", _("kantig gefurcht /scharfkantig")),
     ("gri", _("gerippt")),
     ("gfl", _("geflügelt")),
-    ("kno", _("knotig"))
+    ("kno", _("knotig")),
 )
-SPREAD_CHOICES = (
-    ("sa", _("Samen")),
-    ("sp", _("Sporen"))
-)
+SPREAD_CHOICES = (("sa", _("Samen")), ("sp", _("Sporen")))
 FRUIT_POS_CHOICES = (
     ("fr", _("Fruchtknoten")),
     ("za", _("Zapfenschuppe")),
-    ("sp", _("Sprossachse"))
+    ("sp", _("Sprossachse")),
 )
 TYPE_CHOICES = (
     ("nus", _("Nuss")),
@@ -268,7 +262,7 @@ TYPE_CHOICES = (
     ("sam", _("Sammelbalgfrucht")),
     ("nue", _("Nüsschen")),
     ("stc", _("Steinfrüchtchen")),
-    ("bac", _("Balgfrüchtchen"))
+    ("bac", _("Balgfrüchtchen")),
 )
 BL_TYPE_CHOICES = (
     ("tra", _("Traube")),
@@ -298,13 +292,13 @@ BL_TYPE_CHOICES = (
     ("kna", _("Knäuel")),
     ("thy", _("Thyrse")),
     ("scd", _("Scheindolde/Trugdolde")),
-    ("scb", _("Scheinblüte/Pseudanthium"))
+    ("scb", _("Scheinblüte/Pseudanthium")),
 )
 SYM_CHOICES = (
     ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
     ("d", _("disymmetrisch/bilateral")),
     ("z", _("zygomorph/dorsiventral")),
-    ("a", _("asymmetrisch/unregelmäßig"))
+    ("a", _("asymmetrisch/unregelmäßig")),
 )
 PART_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
@@ -334,7 +328,7 @@ PART_CHOICES = (
     ("sch", _("schrotsägeförmig")),
     ("kam", _("kammförmig")),
     ("fug", _("fußförmig geschnitten")),
-    ("fuz", _("fußförmig zusammengesetzt"))
+    ("fuz", _("fußförmig zusammengesetzt")),
 )
 HULL_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
@@ -343,7 +337,7 @@ HULL_CHOICES = (
     ("lip", _("Lippenblüte")),
     ("sch", _("Schmetterlingsblüte")),
     ("zun", _("Zungenblüte")),
-    ("str", _("strahlende Randblüten"))
+    ("str", _("strahlende Randblüten")),
 )
 CH_TYPE_CHOICES = (
     ("fre", _("freiblättrig")),
@@ -369,26 +363,26 @@ CH_TYPE_CHOICES = (
 CROWN_VER_CHOICES = (
     ("v", _("verwachsen")),
     ("u", _("unverwachsen")),
-    ("a", _("am Grund verwachsen"))
+    ("a", _("am Grund verwachsen")),
 )
-STAND_TYPE_CHOICES= (
+STAND_TYPE_CHOICES = (
     ("hy", _("hypogyn/oberständig")),
     ("eh", _("epihypogyn/halboberständig")),
     ("pe", _("perigyn/mittelständig")),
     ("he", _("hemiepigyn/halbunterständig")),
-    ("ep", _("epigyn/unterständig"))
+    ("ep", _("epigyn/unterständig")),
 )
 BUILD_CHOICES = (
     ("mo", _("monokarp")),
     ("ap", _("apokarp/chorikarp")),
     ("cs", _("coeno-synkarp")),
-    ("cp", _("coeno-parakarp"))
+    ("cp", _("coeno-parakarp")),
 )
 GRIFFEL_CHOICES = (
     ("en", _("endständig")),
     ("se", _("seitenständig")),
     ("gr", _("grundständig")),
-    ("gy", _("gynobasisch"))
+    ("gy", _("gynobasisch")),
 )
 SPEC_SPORN_CHOICES = (
     ("ro", _("röhrig")),
@@ -405,17 +399,10 @@ SPEC_SPORN_CHOICES = (
     ("zu", _("zungenförmig")),
     ("ba", _("bauchig")),
     ("as", _("ausgesackt")),
-    ("gr", _("gespornt"))
+    ("gr", _("gespornt")),
 )
-GRANN_TOP_CHOICES = (
-    ("sp", _("Spitzengranne")),
-    ("un", _("unbegrannt"))
-)
-GRANN_FORM_CHOICES = (
-    ("gr", _("gerade")),
-    ("gk", _("gekniet")),
-    ("gd", _("gedreht"))
-)
+GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
+GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
 GROUND_CHOICES = (
     ("ge", _("gestielt")),
     ("si", _("sitzend / ungestielt")),
@@ -426,5 +413,5 @@ GROUND_CHOICES = (
     ("sc", _("scheidig verwachsen")),
     ("he", _("herablaufend")),
     ("re", _("reitend")),
-    ("hi", _("hinfällig"))
+    ("hi", _("hinfällig")),
 )

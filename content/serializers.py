@@ -18,28 +18,24 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
-
     class Meta:
         model = Leaf
         exclude = ["plant"]
 
 
 class SproutSerializer(DisplayNameModelSerializer):
-
     class Meta:
         model = Sprout
         exclude = ["plant"]
 
 
 class FruitSerializer(DisplayNameModelSerializer):
-
     class Meta:
         model = Fruit
         exclude = ["plant"]
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
-
     class Meta:
         model = Blossom
         exclude = ["plant"]
@@ -60,8 +56,8 @@ class PlantSerializer(DisplayNameModelSerializer):
 class TreeNodeSerializer(serializers.ModelSerializer):
 
     profiles = getattr(
-                import_module(settings.PROFILES_SERIALIZER_MODULE), settings.PROFILES_SERIALIZER
-            )(many=True)
+        import_module(settings.PROFILES_SERIALIZER_MODULE), settings.PROFILES_SERIALIZER
+    )(many=True)
     leaf_nodes = serializers.SerializerMethodField()
 
     class Meta:

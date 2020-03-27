@@ -28,15 +28,10 @@ class BlossomInline(admin.StackedInline):
 class PlantModelAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "trivial_name")
     form = PlantModelForm
-    inlines = [
-        LeafInline,
-        SproutInline,
-        FruitInline,
-        BlossomInline
-    ]
+    inlines = [LeafInline, SproutInline, FruitInline, BlossomInline]
 
 
-admin.site.register(Leaf , admin.ModelAdmin)
+admin.site.register(Leaf, admin.ModelAdmin)
 admin.site.register(Sprout, admin.ModelAdmin)
 admin.site.register(Fruit, admin.ModelAdmin)
 admin.site.register(Blossom, admin.ModelAdmin)

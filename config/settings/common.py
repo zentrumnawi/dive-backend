@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
+    "mptt",
     "content.apps.ContentConfig",
     "quiz.apps.QuizConfig",
     "glossary.apps.GlossaryConfig",

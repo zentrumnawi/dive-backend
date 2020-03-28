@@ -18,7 +18,7 @@ from django.utils.translation import gettext_lazy as _
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path("")
+APPS_DIR = ROOT_DIR.path("content")
 
 env = environ.Env()
 
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
+    "mptt",
     "content.apps.ContentConfig",
     "quiz.apps.QuizConfig",
     "glossary.apps.GlossaryConfig",

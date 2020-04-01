@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django import forms
 from .models import QuizQuestion, QuizAnswer
+from utility.forms import HasImgAltForm
 
 
 class QuizQuestionAdmin(admin.ModelAdmin):

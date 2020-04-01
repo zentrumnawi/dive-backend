@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import GlossaryEntry
-from django import forms
+from utility.forms import HasImgAltForm
 
 
 class GlossaryEntryAdmin(admin.ModelAdmin):

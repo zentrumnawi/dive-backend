@@ -17,7 +17,7 @@ class QuizQuestionLessSerializer(serializers.ModelSerializer):
 class QuizAnswerLessSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuizAnswer
-        fields = ["id", "text", "correct", "feedback_correct", "feedback_incorrect"]
+        fields = "__all__"
 
 
 class QuizQuestionSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class QuizQuestionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = QuizQuestion
-        fields = ["id", "type", "difficulty", "text", "img", "img_alt", "tags", "answers"]
+        fields = "__all__"
         
     def get_type(self, obj):
         choice_dict = dict(obj.QTYPE_CHOICES)

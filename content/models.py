@@ -98,7 +98,7 @@ class Leaf(models.Model):
         max_length=3, choices=NERV_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
     cnt_germ = models.IntegerField(
-        choices=((1, 1), (2, 2)), verbose_name=_("Anzahl der Keimblätter")
+        choices=((1, 1), (2, 2)), blank=True, null=True, verbose_name=_("Anzahl der Keimblätter")
     )
     att_axis = models.CharField(
         max_length=3, choices=AXIS_CHOICES, blank=True, verbose_name=_("Anheftung an Sprossachse")
@@ -252,7 +252,7 @@ class Blossom(models.Model):
         max_length=3, choices=PART_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
     )
     cnt = models.IntegerField(
-        choices=((3, 3), (4, 4), (5, 5)), verbose_name=_("Zähligkeit")
+        choices=((3, 3), (4, 4), (5, 5)), blank=True, null=True, verbose_name=_("Zähligkeit")
     )
     hull = models.CharField(
         max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")

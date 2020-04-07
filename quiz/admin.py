@@ -8,6 +8,7 @@ class QuizAnswerInline(admin.TabularInline):
 
 
 class QuizQuestionAdmin(admin.ModelAdmin):
+
     form = HasImgForm
     list_display = ["id", "text"]
     inlines = [

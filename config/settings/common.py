@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "glossary.apps.GlossaryConfig",
     "quiz.apps.QuizConfig",
     "message.apps.MessageConfig",
+    "slideshow.apps.SlideshowConfig",
+
 ]
 
 MIDDLEWARE = [

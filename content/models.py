@@ -66,10 +66,10 @@ class Plant(models.Model):
         verbose_name=_("Lebensraum"),
     )
     status = models.CharField(
-        max_length=1, choices=STATUS_CHOICES, verbose_name=_("Status")
+        max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
     )
     interaction = models.CharField(
-        max_length=3, choices=INTERACTION_CHOICES, verbose_name=_("Interaktionen")
+        max_length=3, choices=INTERACTION_CHOICES, blank=True, verbose_name=_("Interaktionen")
     )
     ground = ArrayField(
         base_field=models.CharField(max_length=3, choices=GROUND_CHOICES),
@@ -79,7 +79,7 @@ class Plant(models.Model):
     bloom = models.CharField(max_length=200, verbose_name=_("Blütezeit"))
 
     prime_root = models.CharField(
-        max_length=3, choices=ROOT_CHOICES, verbose_name=_("Primärwurzel")
+        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
     nodule = models.BooleanField(verbose_name=_("Wurzelknollen"))
 
@@ -95,31 +95,32 @@ class Plant(models.Model):
 class Leaf(models.Model):
 
     nerves = models.CharField(
-        max_length=3, choices=NERV_CHOICES, verbose_name=_("Blattnerven")
+        max_length=3, choices=NERV_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
     cnt_germ = models.IntegerField(
         choices=((1, 1), (2, 2)), verbose_name=_("Anzahl der Keimblätter")
     )
     att_axis = models.CharField(
-        max_length=3, choices=AXIS_CHOICES, verbose_name=_("Anheftung an Sprossachse")
+        max_length=3, choices=AXIS_CHOICES, blank=True, verbose_name=_("Anheftung an Sprossachse")
     )
     sheath = models.CharField(
         max_length=100, default="", verbose_name=_("Blattscheide"),
         help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.'
     )
     pos_axis = models.CharField(
-        max_length=3, choices=POS_CHOICES, verbose_name=_("Stellung an Sprossachse")
+        max_length=3, choices=POS_CHOICES, blank=True, verbose_name=_("Stellung an Sprossachse")
     )
 
     spr_whole = models.CharField(
-        max_length=3, choices=SPR_WHOLE_CHOICES, verbose_name=_("Blattspreite gesamt")
+        max_length=3, choices=SPR_WHOLE_CHOICES, blank=True, verbose_name=_("Blattspreite gesamt")
     )
     dep_cuts = models.CharField(
-        max_length=3, choices=CUT_CHOICES, verbose_name=_("Tiefe von Einschnitten")
+        max_length=3, choices=CUT_CHOICES, blank=True, verbose_name=_("Tiefe von Einschnitten")
     )
     arr_cuts = models.CharField(
         max_length=3,
         choices=ARR_CHOICES,
+        blank=True,
         verbose_name=_("Anordnung von Einschnitten/Blättchen"),
     )
     arr_special = models.BooleanField(
@@ -128,33 +129,35 @@ class Leaf(models.Model):
     form = models.CharField(
         max_length=3,
         choices=FORM_CHOICES,
+        blank=True,
         verbose_name=_("Gestalt des Blattes/der Blättchen"),
     )
     count = models.CharField(
         max_length=200, default="", verbose_name=_("Anzahl Blättchen")
     )
     leaflets = models.CharField(
-        max_length=3, choices=LEAFLET_CHOICES, verbose_name=_("Spreiten/Blättchen")
+        max_length=3, choices=LEAFLET_CHOICES, blank=True,  verbose_name=_("Spreiten/Blättchen")
     )
     texture = models.CharField(
-        max_length=3, choices=TEXTURE_CHOICES, verbose_name=_("Beschaffenheit")
+        max_length=3, choices=TEXTURE_CHOICES, blank=True, verbose_name=_("Beschaffenheit")
     )
     sur_texture = models.CharField(
         max_length=3,
         choices=SUR_TEXTURE_CHOICES,
+        blank=True,
         verbose_name=_("Oberflächenbeschaffenheit"),
     )
     side_leaf = models.CharField(
-        max_length=3, choices=SIDE_CHOICES, verbose_name=_("Nebenblattrand")
+        max_length=3, choices=SIDE_CHOICES, blank=True, verbose_name=_("Nebenblattrand")
     )
     diam = models.CharField(
-        max_length=3, choices=DIAM_CHOICES, verbose_name=_("Querschnitt")
+        max_length=3, choices=DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
     )
     sp_ground = models.CharField(
-        max_length=3, choices=SP_CHOICES, verbose_name=_("Spreitengrund")
+        max_length=3, choices=SP_CHOICES, blank=True, verbose_name=_("Spreitengrund")
     )
     sp_top = models.CharField(
-        max_length=3, choices=SP_TOP_CHOICES, verbose_name=_("Spreitengrund")
+        max_length=3, choices=SP_TOP_CHOICES, blank=True, verbose_name=_("Spreitengrund")
     )
     specialty = models.CharField(
         max_length=200, default="", verbose_name=_("Besondere Merkmale"),
@@ -171,11 +174,11 @@ class Sprout(models.Model):
     appear = models.CharField(
         max_length=1,
         choices=(("k", _("krautig")), ("h", _("holzig"))),
-        default="",
+        blank=True,
         verbose_name=_("Erscheinung"),
     )
     pos = models.CharField(
-        max_length=3, choices=POSITION_CHOICES, verbose_name=_("Stellung")
+        max_length=3, choices=POSITION_CHOICES, blank=True, verbose_name=_("Stellung")
     )
     thick_flesh = models.BooleanField(default=False, verbose_name=_("Dickfleischig"))
     milk = models.BooleanField(default=False, verbose_name=_("Milchsaft"))
@@ -183,14 +186,16 @@ class Sprout(models.Model):
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
+        blank=True,
         verbose_name=_("Beblätterung"),
     )
     diam = models.CharField(
-        max_length=3, choices=SP_DIAM_CHOICES, verbose_name=_("Stellung")
+        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Stellung")
     )
     sur_texture = models.CharField(
         max_length=3,
         choices=SUR_TEXTURE_CHOICES,
+        blank=True,
         verbose_name=_("Oberflächenbeschaffenheit"),
     )
 
@@ -208,13 +213,13 @@ class Sprout(models.Model):
 class Fruit(models.Model):
 
     spread = models.CharField(
-        max_length=2, choices=SPREAD_CHOICES, verbose_name=_("Ausbreitungsform")
+        max_length=2, choices=SPREAD_CHOICES, blank=True, verbose_name=_("Ausbreitungsform")
     )
     pos = models.CharField(
-        max_length=2, choices=FRUIT_POS_CHOICES, verbose_name=_("Lage der Samenanlage")
+        max_length=2, choices=FRUIT_POS_CHOICES, blank=True, verbose_name=_("Lage der Samenanlage")
     )
     type = models.CharField(
-        max_length=3, choices=TYPE_CHOICES, verbose_name=_("Fruchttyp")
+        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
     )
 
     cnt = models.CharField(max_length=200, default="", verbose_name=_("Samenzahl"))
@@ -235,44 +240,46 @@ class Fruit(models.Model):
 class Blossom(models.Model):
 
     type = models.CharField(
-        max_length=3, choices=BL_TYPE_CHOICES, verbose_name=_("Blütenstandtyp")
+        max_length=3, choices=BL_TYPE_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
     )
     bl_cnt = models.CharField(
         max_length=100, default="", verbose_name=_("Blüten pro Blütenstand")
     )
     sym = models.CharField(
-        max_length=1, choices=SYM_CHOICES, verbose_name=_("Symmetrie")
+        max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")
     )
     parting = models.CharField(
-        max_length=3, choices=PART_CHOICES, verbose_name=_("Blütenstandtyp")
+        max_length=3, choices=PART_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
     )
     cnt = models.IntegerField(
         choices=((3, 3), (4, 4), (5, 5)), verbose_name=_("Zähligkeit")
     )
     hull = models.CharField(
-        max_length=3, choices=HULL_CHOICES, verbose_name=_("Blütenstandtyp")
+        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
     )
 
     chalice = models.CharField(
         max_length=1,
         choices=(("v", _("verwachsen")), ("u", _("unverwachsen"))),
+        blank=True,
         verbose_name=_("Kelchblätter"),
     )
     ch_type = models.CharField(
-        max_length=3, choices=CH_TYPE_CHOICES, verbose_name=_("Verwachsungstyp")
+        max_length=3, choices=CH_TYPE_CHOICES, blank=True, verbose_name=_("Verwachsungstyp")
     )
 
     crown_color = models.CharField(max_length=100, default="", verbose_name=_("Farbe"))
     crown_ver = models.CharField(
         max_length=1,
         choices=CROWN_VER_CHOICES,
+        blank=True,
         verbose_name=_("Verwachsung der Kronblätter"),
     )
     crown_plate = models.CharField(
         max_length=100, default="", verbose_name=_("Kronblatt Platte")
     )
     crown_lower = models.CharField(
-        max_length=3, choices=CH_TYPE_CHOICES, verbose_name=_("Kronblatt Unterlippe")
+        max_length=3, choices=CH_TYPE_CHOICES, blank=True, verbose_name=_("Kronblatt Unterlippe")
     )
     crown_out = models.CharField(
         max_length=100, default="", verbose_name=_("Ausstülpung der Unterlippe")
@@ -295,10 +302,10 @@ class Blossom(models.Model):
         max_length=100, default="", verbose_name=_("Fruchtknoten Anzahl")
     )
     fruit_stand = models.CharField(
-        max_length=2, choices=STAND_TYPE_CHOICES, verbose_name=_("Frucht Ständigkeit")
+        max_length=2, choices=STAND_TYPE_CHOICES, blank=True, verbose_name=_("Frucht Ständigkeit")
     )
     fruit_build = models.CharField(
-        max_length=2, choices=BUILD_CHOICES, verbose_name=_("Bau des Gynoeceums")
+        max_length=2, choices=BUILD_CHOICES, blank=True, verbose_name=_("Bau des Gynoeceums")
     )
     fruit_scar = models.CharField(
         max_length=100, default="", verbose_name=_("Narben pro Griffel")
@@ -306,6 +313,7 @@ class Blossom(models.Model):
     griffel_stand = models.CharField(
         max_length=2,
         choices=GRIFFEL_CHOICES,
+        blank=True,
         verbose_name=_("Ständigkeit des Griffels"),
     )
     griffel_sub = models.BooleanField(
@@ -313,7 +321,7 @@ class Blossom(models.Model):
     )
 
     spec_sporn = models.CharField(
-        max_length=2, choices=SPEC_SPORN_CHOICES, verbose_name=_("Sporn")
+        max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")
     )
     spec_hon = models.CharField(
         max_length=100, default="", verbose_name=_("Honigdrüsen / Nektarien")
@@ -325,10 +333,10 @@ class Blossom(models.Model):
     spec_pipe = models.CharField(max_length=100, default="", verbose_name=_("Schlauch"))
 
     grann_top = models.CharField(
-        max_length=2, choices=GRANN_TOP_CHOICES, verbose_name=_("Granne der Deckspelze")
+        max_length=2, choices=GRANN_TOP_CHOICES, blank=True, verbose_name=_("Granne der Deckspelze")
     )
     grann_form = models.CharField(
-        max_length=2, choices=GRANN_FORM_CHOICES, verbose_name=_("Form der Granne")
+        max_length=2, choices=GRANN_FORM_CHOICES, blank=True, verbose_name=_("Form der Granne")
     )
     cons_top = models.CharField(
         max_length=100, default="", verbose_name=_("Konsistenz der Deckspelze")
@@ -338,7 +346,7 @@ class Blossom(models.Model):
     )
     blos = models.CharField(max_length=100, default="", verbose_name=_("Blütig"))
     straw_ground = models.CharField(
-        max_length=2, choices=GROUND_CHOICES, verbose_name=_("Ansatz an Halm")
+        max_length=2, choices=GROUND_CHOICES, blank=True, verbose_name=_("Ansatz an Halm")
     )
     order = models.CharField(
         max_length=100, default="", verbose_name=_("Ähren pro Ährchen ")

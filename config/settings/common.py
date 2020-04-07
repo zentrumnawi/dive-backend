@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     "drf_yasg",
     "mptt",
     "content.apps.ContentConfig",
-    "quiz.apps.QuizConfig",
     "glossary.apps.GlossaryConfig",
+    "quiz.apps.QuizConfig",
 ]
 
 MIDDLEWARE = [

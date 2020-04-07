@@ -104,7 +104,8 @@ class Leaf(models.Model):
         max_length=3, choices=AXIS_CHOICES, verbose_name=_("Anheftung an Sprossachse")
     )
     sheath = models.CharField(
-        max_length=100, default="-", verbose_name=_("Blattscheide")
+        max_length=100, default="", verbose_name=_("Blattscheide"),
+        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.'
     )
     pos_axis = models.CharField(
         max_length=3, choices=POS_CHOICES, verbose_name=_("Stellung an Sprossachse")
@@ -156,7 +157,8 @@ class Leaf(models.Model):
         max_length=3, choices=SP_TOP_CHOICES, verbose_name=_("Spreitengrund")
     )
     specialty = models.CharField(
-        max_length=200, default="", verbose_name=_("Besondere Merkmale")
+        max_length=200, default="", verbose_name=_("Besondere Merkmale"),
+        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.'
     )
 
     plant = models.OneToOneField(
@@ -217,7 +219,10 @@ class Fruit(models.Model):
 
     cnt = models.CharField(max_length=200, default="", verbose_name=_("Samenzahl"))
     form = models.CharField(max_length=200, default="", verbose_name=_("Form"))
-    wings = models.CharField(max_length=200, default="", verbose_name=_("Beflügelung"))
+    wings = models.CharField(
+        max_length=200, default="", verbose_name=_("Beflügelung"),
+        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.'
+    )
     wings_spec = models.CharField(
         max_length=200, default="", verbose_name=_("Beflügelung Besonderheit")
     )

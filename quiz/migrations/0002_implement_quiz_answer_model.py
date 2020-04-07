@@ -7,19 +7,41 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0001_implement_quiz_question_model'),
+        ("quiz", "0001_implement_quiz_question_model"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='QuizAnswer',
+            name="QuizAnswer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=200)),
-                ('correct', models.BooleanField()),
-                ('feedback_correct', models.CharField(blank=True, default='', max_length=400)),
-                ('feedback_incorrect', models.CharField(blank=True, default='', max_length=400)),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='answers', related_query_name='answer', to='quiz.QuizQuestion')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.CharField(max_length=200)),
+                ("correct", models.BooleanField()),
+                (
+                    "feedback_correct",
+                    models.CharField(blank=True, default="", max_length=400),
+                ),
+                (
+                    "feedback_incorrect",
+                    models.CharField(blank=True, default="", max_length=400),
+                ),
+                (
+                    "question",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="answers",
+                        related_query_name="answer",
+                        to="quiz.QuizQuestion",
+                    ),
+                ),
             ],
         ),
     ]

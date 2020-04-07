@@ -6,22 +6,22 @@ class QuizQuestion(models.Model):
     """
     Model for a quesiton in the quiz of the app.
     """
-    
+
     QTYPE_CHOICES = [
-         ("SC", "Single Choice"),
-         ("MC", "Multiple Choice"),
-         ("DD", "Drag and Drop"),
-         ("RG", "Ranking"),
-         ("HS", "Hotspot")
+        ("SC", "Single Choice"),
+        ("MC", "Multiple Choice"),
+        ("DD", "Drag and Drop"),
+        ("RG", "Ranking"),
+        ("HS", "Hotspot"),
     ]
     QDIFFICULTY_CHOICES = [
         (1, "Neuling"),
         (2, "Einsteiger"),
         (3, "Fortgeschrittener"),
         (4, "Erfahrener"),
-        (5, "Experte")
+        (5, "Experte"),
     ]
-    
+
     type = models.CharField(max_length=2, choices=QTYPE_CHOICES)
     difficulty = models.PositiveSmallIntegerField(choices=QDIFFICULTY_CHOICES)
     text = models.TextField()
@@ -31,9 +31,9 @@ class QuizQuestion(models.Model):
         base_field=models.CharField(max_length=100),
         default=list,
         blank=True,
-        help_text="If you want to add more than one tag, seperate them with commas."
+        help_text="If you want to add more than one tag, seperate them with commas.",
     )
-        
+
     def __str__(self):
         return self.text
 
@@ -42,9 +42,12 @@ class QuizAnswer(models.Model):
     """
     Model for an answer to a question of the QuizQuestion model.
     """
-    
+
     question = models.ForeignKey(
-        to=QuizQuestion,on_delete=models.CASCADE, related_name="answers", related_query_name="answer"
+        to=QuizQuestion,
+        on_delete=models.CASCADE,
+        related_name="answers",
+        related_query_name="answer",
     )
     text = models.CharField(max_length=200)
     correct = models.BooleanField()

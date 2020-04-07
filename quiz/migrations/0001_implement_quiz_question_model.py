@@ -8,20 +8,59 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='QuizQuestion',
+            name="QuizQuestion",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.CharField(choices=[('SC', 'Single Choice'), ('MC', 'Multiple Choice'), ('DD', 'Drag and Drop'), ('RG', 'Ranking'), ('HS', 'Hotspot')], max_length=2)),
-                ('difficulty', models.PositiveSmallIntegerField(choices=[(1, 'Neuling'), (2, 'Einsteiger'), (3, 'Fortgeschrittener'), (4, 'Erfahrener'), (5, 'Experte')])),
-                ('text', models.TextField()),
-                ('img', models.ImageField(blank=True, null=True, upload_to='quiz/')),
-                ('img_alt', models.CharField(blank=True, default='', max_length=200)),
-                ('tags', django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=100), blank=True, default=list, help_text='If you want to add more than one tag, seperate them with commas.', size=None)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("SC", "Single Choice"),
+                            ("MC", "Multiple Choice"),
+                            ("DD", "Drag and Drop"),
+                            ("RG", "Ranking"),
+                            ("HS", "Hotspot"),
+                        ],
+                        max_length=2,
+                    ),
+                ),
+                (
+                    "difficulty",
+                    models.PositiveSmallIntegerField(
+                        choices=[
+                            (1, "Neuling"),
+                            (2, "Einsteiger"),
+                            (3, "Fortgeschrittener"),
+                            (4, "Erfahrener"),
+                            (5, "Experte"),
+                        ]
+                    ),
+                ),
+                ("text", models.TextField()),
+                ("img", models.ImageField(blank=True, null=True, upload_to="quiz/")),
+                ("img_alt", models.CharField(blank=True, default="", max_length=200)),
+                (
+                    "tags",
+                    django.contrib.postgres.fields.ArrayField(
+                        base_field=models.CharField(max_length=100),
+                        blank=True,
+                        default=list,
+                        help_text="If you want to add more than one tag, seperate them with commas.",
+                        size=None,
+                    ),
+                ),
             ],
         ),
     ]

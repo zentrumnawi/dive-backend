@@ -10,7 +10,9 @@ class QuizAnswerInline(admin.TabularInline):
 class QuizQuestionAdmin(admin.ModelAdmin):
     form = HasImgAltForm
     list_display = ("id", "text")
-    inlines = [QuizAnswerInline, ]
+    inlines = [
+        QuizAnswerInline,
+    ]
 
 
 admin.site.register(QuizQuestion, QuizQuestionAdmin)

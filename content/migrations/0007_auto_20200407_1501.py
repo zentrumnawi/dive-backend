@@ -6,23 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0006_create_blossom_model'),
+        ("content", "0006_create_blossom_model"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='fruit',
-            name='wings',
-            field=models.CharField(default='', help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.', max_length=200, verbose_name='Beflügelung'),
+            model_name="fruit",
+            name="wings",
+            field=models.CharField(
+                default="",
+                help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+                max_length=200,
+                verbose_name="Beflügelung",
+            ),
         ),
         migrations.AlterField(
-            model_name='leaf',
-            name='sheath',
-            field=models.CharField(default='', help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.', max_length=100, verbose_name='Blattscheide'),
+            model_name="leaf",
+            name="sheath",
+            field=models.CharField(
+                default="",
+                help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+                max_length=100,
+                verbose_name="Blattscheide",
+            ),
         ),
         migrations.AlterField(
-            model_name='leaf',
-            name='specialty',
-            field=models.CharField(default='', help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.', max_length=200, verbose_name='Besondere Merkmale'),
+            model_name="leaf",
+            name="specialty",
+            field=models.CharField(
+                default="",
+                help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+                max_length=200,
+                verbose_name="Besondere Merkmale",
+            ),
         ),
     ]

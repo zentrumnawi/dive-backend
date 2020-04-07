@@ -6,18 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0008_add_blanks_to_choice_fields'),
+        ("content", "0008_add_blanks_to_choice_fields"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blossom',
-            name='cnt',
-            field=models.IntegerField(blank=True, choices=[(3, 3), (4, 4), (5, 5)], null=True, verbose_name='Zähligkeit'),
+            model_name="blossom",
+            name="cnt",
+            field=models.IntegerField(
+                blank=True,
+                choices=[(3, 3), (4, 4), (5, 5)],
+                null=True,
+                verbose_name="Zähligkeit",
+            ),
         ),
         migrations.AlterField(
-            model_name='leaf',
-            name='cnt_germ',
-            field=models.IntegerField(blank=True, choices=[(1, 1), (2, 2)], null=True, verbose_name='Anzahl der Keimblätter'),
+            model_name="leaf",
+            name="cnt_germ",
+            field=models.IntegerField(
+                blank=True,
+                choices=[(1, 1), (2, 2)],
+                null=True,
+                verbose_name="Anzahl der Keimblätter",
+            ),
         ),
     ]

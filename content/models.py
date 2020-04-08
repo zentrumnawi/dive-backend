@@ -18,7 +18,7 @@ class Plant(models.Model):
         ("sch", _("Schlammfluren")),
         ("roe", _("Röhrichte")),
         ("sae", _("Säume")),
-        ("sta", _("Stauden")),
+        ("sta", _("Staudenfluren")),
         ("gru", _("Grünland und Zwergstrauchheiden")),
         ("rud", _("Ruderalvegetation")),
         ("aec", _("Äcker")),

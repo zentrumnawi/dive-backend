@@ -30,6 +30,20 @@ class TestSlideshowPageModelExists:
         assert issubclass(SlideshowPage, models.Model)
 
 
+class TestSlideshowImageModelExists:
+    """
+    Test whether an object SlideshowImage can be imported and is a Django model.
+    """
+    
+    def test_model_exists(self):
+        from slideshow.models import SlideshowImage
+        
+    def test_model_is_django_model(self):
+        from slideshow.models import SlideshowImage
+        
+        assert issubclass(SlideshowImage, models.Model)
+
+
 class TestSlideshowModelFields:
     """
     Test suite with basic field tests whether all fields of the Slideshow

@@ -43,3 +43,42 @@ class TestSlideshowModelFields:
         assert isinstance(
             slideshow_model_class._meta.get_field("title"), models.CharField
         )
+
+
+class TestSlideshowPageModelFields:
+    """
+    Test suite with basic field tests whether all fields of the SlideshowPage
+    object exist and have the correct class instance.
+    """
+    
+    def test_model_has_field_show(self, slideshow_page_model_class):
+        assert hasattr(slideshow_page_model_class, "show")
+        
+    def test_model_has_field_position(self, slideshow_page_model_class):
+        assert hasattr(slideshow_page_model_class, "position")
+        
+    def test_model_has_field_title(self, slideshow_page_model_class):
+        assert hasattr(slideshow_page_model_class, "title")
+        
+    def test_model_has_field_text(self, slideshow_page_model_class):
+        assert hasattr(slideshow_page_model_class, "text")
+        
+    def test_field_type_show(self, slideshow_page_model_class):
+        assert isinstance(
+            slideshow_page_model_class._meta.get_field("show"), models.ForeignKey
+        )
+        
+    def test_field_type_position(self, slideshow_page_model_class):
+        assert isinstance(
+            slideshow_page_model_class._meta.get_field("position"), models.PositiveSmallIntegerField
+        )
+        
+    def test_field_type_title(self, slideshow_page_model_class):
+        assert isinstance(
+            slideshow_page_model_class._meta.get_field("title"), models.CharField
+        )
+        
+    def test_field_type_text(self, slideshow_page_model_class):
+        assert isinstance(
+            slideshow_page_model_class._meta.get_field("text"), models.TextField
+        )

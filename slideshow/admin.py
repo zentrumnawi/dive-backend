@@ -4,7 +4,12 @@ from utility.forms import HasImgAltForm
 
 
 admin.site.register(Slideshow, admin.ModelAdmin)
-admin.site.register(SlideshowPage, admin.ModelAdmin)
+
+
+class SlideshowPageAdmin(admin.ModelAdmin):
+    list_display = ["id", "show", "position", "title", "text"]
+
+admin.site.register(SlideshowPage, SlideshowPageAdmin)
 
 
 class SlideshowImageAdmin(admin.ModelAdmin):

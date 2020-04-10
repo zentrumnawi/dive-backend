@@ -147,7 +147,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=ARR_CHOICES,
         blank=True,
-        verbose_name=_("Anordnung von Einschnitten/Blättchen"),
+        verbose_name=_("Anordnung der Spreite"),
     )
     arr_special = models.BooleanField(
         default=False, verbose_name=_("Anordnung ist buchtig.")
@@ -156,7 +156,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=FORM_CHOICES,
         blank=True,
-        verbose_name=_("Gestalt des Blattes/der Blättchen"),
+        verbose_name=_("Gestalt der Spreite"),
     )
     count = models.CharField(
         max_length=200, blank=True, verbose_name=_("Anzahl Blättchen")

@@ -266,6 +266,7 @@ TYPE_CHOICES = (
     ("bac", _("Balgfrüchtchen")),
 )
 BL_TYPE_CHOICES = (
+    ("ein", _("einzeln")),
     ("tra", _("Traube")),
     ("ris", _("Rispe")),
     ("ebe", _("Ebenstrauß/Corymbus")),

@@ -100,6 +100,7 @@ FORM_CHOICES = (
     ("sil", _("schildförmig")),
 )
 LEAFLET_CHOICES = (
+    (("dor"), _("dornig")),
     ("gan", _("ganzrandig")),
     ("ges", _("gesägt")),
     ("dop", _("doppelt gesägt")),

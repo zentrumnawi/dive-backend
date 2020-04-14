@@ -30,6 +30,7 @@ class Plant(models.Model):
         ("fel", _("Felsbiotope")),
         ("aue", _("Auenwälder")),
         ("geb", _("Gebüsche")),
+        ("ger", _("Geröll")),
         ("ext", _("Extensivgrünland oder natürlicher Rasen")),
         ("wae", _("Wälder")),
         ("ufe", _("Ufer")),

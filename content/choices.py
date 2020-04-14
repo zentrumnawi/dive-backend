@@ -36,6 +36,7 @@ POS_CHOICES = (
     ("ges", _("gescheitelt")),
 )
 SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
+SPR_STRUCTURE_CHOICES = (("ei", _("Einschnitte")), ("bl", _("Blättchen")))
 CUT_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
@@ -99,6 +100,7 @@ FORM_CHOICES = (
     ("sil", _("schildförmig")),
 )
 LEAFLET_CHOICES = (
+    (("dor"), _("dornig")),
     ("gan", _("ganzrandig")),
     ("ges", _("gesägt")),
     ("dop", _("doppelt gesägt")),
@@ -265,6 +267,7 @@ TYPE_CHOICES = (
     ("bac", _("Balgfrüchtchen")),
 )
 BL_TYPE_CHOICES = (
+    ("ein", _("einzeln")),
     ("tra", _("Traube")),
     ("ris", _("Rispe")),
     ("ebe", _("Ebenstrauß/Corymbus")),

@@ -9,6 +9,8 @@ from .models import TreeNode, Plant, Leaf, Sprout, Fruit, Blossom
 
 class HumanReadableChoiceField(serializers.ChoiceField):
     def to_representation(self, value):
+        if not value:
+            return value
         return str(self.grouped_choices[value])
 
 

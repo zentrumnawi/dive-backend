@@ -136,7 +136,7 @@ class Leaf(models.Model):
         max_length=2,
         choices=SPR_STRUCTURE_CHOICES,
         blank=True,
-        verbose_name=_("Struktur der Blattspreite")
+        verbose_name=_("Struktur der Blattspreite"),
     )
     dep_cuts = models.CharField(
         max_length=3,

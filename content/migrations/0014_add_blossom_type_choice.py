@@ -6,13 +6,48 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0013_change_display_names'),
+        ("content", "0013_change_display_names"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blossom',
-            name='type',
-            field=models.CharField(blank=True, choices=[('ein', 'einzeln'), ('tra', 'Traube'), ('ris', 'Rispe'), ('ebe', 'Ebenstrauß/Corymbus'), ('sct', 'Schirmtraube'), ('scr', 'Schirmrispe'), ('spi', 'Spirre/Trichterrispe'), ('aer', 'Ähre'), ('kol', 'Kolben'), ('kae', 'Kätzchen'), ('zap', 'Zapfen'), ('dol', 'Dolde'), ('dod', 'Doppeldolde'), ('kop', 'Kopf'), ('koc', 'Köpfchen'), ('kor', 'Korb'), ('krc', 'Körbchen'), ('zym', 'Zyme'), ('ple', 'Pleiochasium'), ('dic', 'Dichasium'), ('mon', 'Monochasium'), ('wic', 'Wickel'), ('dow', 'Doppelwickel'), ('scq', 'Scheinquirl'), ('bue', 'Büschel'), ('kna', 'Knäuel'), ('thy', 'Thyrse'), ('scd', 'Scheindolde/Trugdolde'), ('scb', 'Scheinblüte/Pseudanthium')], max_length=3, verbose_name='Blütenstandtyp'),
+            model_name="blossom",
+            name="type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("ein", "einzeln"),
+                    ("tra", "Traube"),
+                    ("ris", "Rispe"),
+                    ("ebe", "Ebenstrauß/Corymbus"),
+                    ("sct", "Schirmtraube"),
+                    ("scr", "Schirmrispe"),
+                    ("spi", "Spirre/Trichterrispe"),
+                    ("aer", "Ähre"),
+                    ("kol", "Kolben"),
+                    ("kae", "Kätzchen"),
+                    ("zap", "Zapfen"),
+                    ("dol", "Dolde"),
+                    ("dod", "Doppeldolde"),
+                    ("kop", "Kopf"),
+                    ("koc", "Köpfchen"),
+                    ("kor", "Korb"),
+                    ("krc", "Körbchen"),
+                    ("zym", "Zyme"),
+                    ("ple", "Pleiochasium"),
+                    ("dic", "Dichasium"),
+                    ("mon", "Monochasium"),
+                    ("wic", "Wickel"),
+                    ("dow", "Doppelwickel"),
+                    ("scq", "Scheinquirl"),
+                    ("bue", "Büschel"),
+                    ("kna", "Knäuel"),
+                    ("thy", "Thyrse"),
+                    ("scd", "Scheindolde/Trugdolde"),
+                    ("scb", "Scheinblüte/Pseudanthium"),
+                ],
+                max_length=3,
+                verbose_name="Blütenstandtyp",
+            ),
         ),
     ]

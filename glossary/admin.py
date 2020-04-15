@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import GlossaryEntry
-from utility.forms import HasImgAltForm
+from utility.forms import HasImgForm
 
 
 class GlossaryEntryAdmin(admin.ModelAdmin):
-    form = HasImgAltForm
+    form = HasImgForm
     list_display = ("id", "term")
 
 

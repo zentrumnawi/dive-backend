@@ -22,3 +22,21 @@ class HasImgForm(forms.ModelForm):
         )
         
         super(HasImgForm, self).clean()
+
+
+class DateOrderForm(forms.ModelForm):
+    """
+    Validation whether a validity start date and end date are in the correct
+    order.
+    """
+
+    def clean(self):
+        valid_from = self.cleaned_data.get("valid_from")
+        valid_to = self.cleaned_data.get("valid_to")
+        
+        if valid_to < valid_from:
+            raise forms.ValidationError(
+                "The validity end date must be equel with or after the start date."
+            )
+            
+        super(DateOrderForm, self).clean()

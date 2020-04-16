@@ -6,7 +6,6 @@ class HasImgForm(forms.ModelForm):
     Validation if an image and an alternate text for the image are provided
     together.
     """
-
     def clean(self):
         img = self.cleaned_data.get("img")
         img_alt = self.cleaned_data.get("img_alt")

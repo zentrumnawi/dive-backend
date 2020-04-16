@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Slideshow, SlideshowPage, SlideshowImage
-from utility.forms import HasImgAltForm
+from utility.forms import HasImgForm
 
 
 admin.site.register(Slideshow, admin.ModelAdmin)
@@ -13,7 +13,7 @@ admin.site.register(SlideshowPage, SlideshowPageAdmin)
 
 
 class SlideshowImageAdmin(admin.ModelAdmin):
-    form = HasImgAltForm
+    form = HasImgForm
     list_display = ["id", "page", "position", "title", "img", "img_alt"]
 
 admin.site.register(SlideshowImage, SlideshowImageAdmin)

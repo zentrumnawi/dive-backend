@@ -55,4 +55,4 @@ class SlideshowImage(models.Model):
     caption = models.TextField(default="", blank=True)
     
     def __str__(self):
-        return self.img_alt
+        return str(self.img)

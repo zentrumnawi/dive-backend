@@ -2,14 +2,14 @@ from rest_framework import serializers
 from .models import Slideshow, SlideshowPage, SlideshowImage
 
 
-class SlideshowImageSerializer(serializers.ModelSerializer):
+class SlideshowImageLessSerializer(serializers.ModelSerializer):
     class Meta:
         model = SlideshowImage
         fields = ["id", "position", "title", "img", "img_alt", "caption"]
 
 
 class SlideshowPageLessSerializer(serializers.ModelSerializer):
-    images = SlideshowImageSerializer(many=True)
+    images = SlideshowImageLessSerializer(many=True)
     
     class Meta:
         model = SlideshowPage
@@ -25,7 +25,7 @@ class SlideshowSerializer(serializers.ModelSerializer):
 
 
 class SlideshowPageSerializer(serializers.ModelSerializer):
-    images = SlideshowImageSerializer(many=True)
+    images = SlideshowImageLessSerializer(many=True)
 
     class Meta:
         model = SlideshowPage

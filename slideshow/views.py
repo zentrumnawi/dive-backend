@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from .models import Slideshow, SlideshowPage
-from .serializers import SlideshowSerializer, SlideshowPageSerializer
+from .models import Slideshow, SlideshowPage, SlideshowImage
+from .serializers import SlideshowSerializer, SlideshowPageSerializer, SlideshowImageSerializer
 
 
 class SlideshowEndpoint(ReadOnlyModelViewSet):
@@ -24,3 +24,12 @@ class SlideshowPageEndpoint(ReadOnlyModelViewSet):
     serializer_class = SlideshowPageSerializer
     name = "slideshowpage"
 
+
+class SlideshowImageEndpoint(ReadOnlyModelViewSet):
+    """
+    Endpoint that provides the database table of all SlideshowImages.
+    """
+    
+    queryset = SlideshowImage.objects.all()
+    serializer_class = SlideshowImageSerializer
+    name = "slideshowimage"

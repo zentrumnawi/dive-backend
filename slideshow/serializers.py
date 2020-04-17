@@ -30,3 +30,9 @@ class SlideshowPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = SlideshowPage
         fields = "__all__"
+
+
+class SlideshowImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SlideshowImage
+        fields = "__all__"

@@ -4,6 +4,6 @@ from .views import MessageEndpoint
 
 app_name = "message"
 router = SimpleRouter()
-router.register(r"message", MessageEndpoint)
+router.register(r"messages", MessageEndpoint)
 urlpatterns = []
 urlpatterns += router.urls

@@ -4,8 +4,8 @@ from .views import SlideshowEndpoint, SlideshowPageEndpoint, SlideshowImageEndpo
 
 app_name = "slideshow"
 router = SimpleRouter()
-router.register(r"slideshow", SlideshowEndpoint)
-router.register(r"slideshowpage", SlideshowPageEndpoint)
-router.register(r"slideshowimage", SlideshowImageEndpoint)
+router.register(r"slideshows", SlideshowEndpoint)
+router.register(r"slideshowpages", SlideshowPageEndpoint)
+router.register(r"slideshowimages", SlideshowImageEndpoint)
 urlpatterns = []
 urlpatterns += router.urls

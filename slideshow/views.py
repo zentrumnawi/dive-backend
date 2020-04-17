@@ -5,8 +5,7 @@ from .serializers import SlideshowSerializer, SlideshowPageSerializer, Slideshow
 
 class SlideshowEndpoint(ReadOnlyModelViewSet):
     """
-    Endpoint that provides the database table of all Slideshows including their
-    pages and images.
+    Endpoint that provides the database table of all Slideshows including their pages and images.
     """
     
     queryset = Slideshow.objects.all()
@@ -16,8 +15,7 @@ class SlideshowEndpoint(ReadOnlyModelViewSet):
 
 class SlideshowPageEndpoint(ReadOnlyModelViewSet):
     """
-    Endpoint that provides the database table of all SlideshowPages including
-    their images.
+    Endpoint that provides the database table of all SlideshowPages including their images.
     """
 
     queryset = SlideshowPage.objects.all()

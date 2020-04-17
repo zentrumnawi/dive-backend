@@ -22,3 +22,11 @@ class SlideshowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Slideshow
         fields = "__all__"
+
+
+class SlideshowPageSerializer(serializers.ModelSerializer):
+    images = SlideshowImageSerializer(many=True)
+
+    class Meta:
+        model = SlideshowPage
+        fields = "__all__"

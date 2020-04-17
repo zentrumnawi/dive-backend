@@ -3,7 +3,15 @@ from .models import Slideshow, SlideshowPage, SlideshowImage
 from utility.forms import HasImgForm
 
 
-admin.site.register(Slideshow, admin.ModelAdmin)
+class SlideshowPageInline(admin.TabularInline):
+    model = SlideshowPage
+
+
+class SlideshowAdmin(admin.ModelAdmin):
+    list_display = ["title"]
+    inlines = [SlideshowPageInline]
+
+admin.site.register(Slideshow, SlideshowAdmin)
 
 
 class SlideshowPageAdmin(admin.ModelAdmin):

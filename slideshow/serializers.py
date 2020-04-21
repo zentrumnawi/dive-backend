@@ -10,7 +10,7 @@ class SlideshowImageLessSerializer(serializers.ModelSerializer):
 
 class SlideshowPageLessSerializer(serializers.ModelSerializer):
     images = SlideshowImageLessSerializer(many=True)
-    
+
     class Meta:
         model = SlideshowPage
         fields = ["id", "position", "title", "text", "images"]

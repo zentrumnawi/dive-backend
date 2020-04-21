@@ -7,14 +7,16 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Slideshow',
+            name="Slideshow",
             fields=[
-                ('title', models.CharField(max_length=100, primary_key=True, serialize=False)),
+                (
+                    "title",
+                    models.CharField(max_length=100, primary_key=True, serialize=False),
+                ),
             ],
         ),
     ]

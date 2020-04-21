@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class SlideshowConfig(AppConfig):
-    name = 'slideshow'
+    name = "slideshow"

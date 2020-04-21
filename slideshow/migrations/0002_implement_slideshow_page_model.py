@@ -7,18 +7,35 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slideshow', '0001_implement_slideshow_model'),
+        ("slideshow", "0001_implement_slideshow_model"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SlideshowPage',
+            name="SlideshowPage",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.PositiveSmallIntegerField(default=1)),
-                ('title', models.CharField(max_length=100)),
-                ('text', models.TextField()),
-                ('show', models.ForeignKey(db_index=False, on_delete=django.db.models.deletion.PROTECT, related_name='pages', related_query_name='page', to='slideshow.Slideshow')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.PositiveSmallIntegerField(default=1)),
+                ("title", models.CharField(max_length=100)),
+                ("text", models.TextField()),
+                (
+                    "show",
+                    models.ForeignKey(
+                        db_index=False,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="pages",
+                        related_query_name="page",
+                        to="slideshow.Slideshow",
+                    ),
+                ),
             ],
         ),
     ]

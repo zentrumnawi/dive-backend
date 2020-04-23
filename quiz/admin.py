@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import QuizQuestion, QuizAnswer
-from utility.forms import HasImgAltForm
+from utility.forms import HasImgForm
 
 
 class QuizAnswerInline(admin.TabularInline):
@@ -8,7 +8,7 @@ class QuizAnswerInline(admin.TabularInline):
 
 
 class QuizQuestionAdmin(admin.ModelAdmin):
-    form = HasImgAltForm
+    form = HasImgForm
     list_display = ("id", "text")
     inlines = [
         QuizAnswerInline,

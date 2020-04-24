@@ -52,7 +52,9 @@ class SlideshowImage(models.Model):
     title = models.CharField(max_length=100)
     img = models.ImageField(upload_to="slideshow/")
     img_alt = models.CharField(max_length=200)
-    caption = models.TextField(default="", blank=True, verbose_name="caption (Markdown)")
+    caption = models.TextField(
+        default="", blank=True, verbose_name="caption (Markdown)"
+    )
 
     def __str__(self):
         return str(self.img)

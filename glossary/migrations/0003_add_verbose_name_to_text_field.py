@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('glossary', '0002_update_image_upload_path'),
+        ("glossary", "0002_update_image_upload_path"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='glossaryentry',
-            name='text',
-            field=models.TextField(verbose_name='text (Markdown)'),
+            model_name="glossaryentry",
+            name="text",
+            field=models.TextField(verbose_name="text (Markdown)"),
         ),
     ]

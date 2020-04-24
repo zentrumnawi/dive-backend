@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0002_implement_quiz_answer_model'),
+        ("quiz", "0002_implement_quiz_answer_model"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='quizanswer',
-            name='text',
-            field=models.CharField(max_length=200, verbose_name='text (Markdown)'),
+            model_name="quizanswer",
+            name="text",
+            field=models.CharField(max_length=200, verbose_name="text (Markdown)"),
         ),
         migrations.AlterField(
-            model_name='quizquestion',
-            name='text',
-            field=models.TextField(verbose_name='text (Markdown)'),
+            model_name="quizquestion",
+            name="text",
+            field=models.TextField(verbose_name="text (Markdown)"),
         ),
     ]

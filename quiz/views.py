@@ -5,7 +5,7 @@ from .serializers import QuizQuestionSerializer, QuizAnswerSerializer
 
 class QuizQuestionEndpoint(ReadOnlyModelViewSet):
     """
-    Endpoint that provides the database table of all QuizQuestions.
+    Endpoint that provides the database table of all quiz questions including their answers.
     """
 
     queryset = QuizQuestion.objects.all()
@@ -15,7 +15,7 @@ class QuizQuestionEndpoint(ReadOnlyModelViewSet):
 
 class QuizAnswerEndpoint(ReadOnlyModelViewSet):
     """
-    Endpoint that provides the database table of all QuizAnswers.
+    Endpoint that provides the database table of all quiz answers including their related questions.
     """
 
     queryset = QuizAnswer.objects.all()

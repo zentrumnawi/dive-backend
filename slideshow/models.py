@@ -28,7 +28,7 @@ class SlideshowPage(models.Model):
         default=1,  # validators=[validate_position_occupied]
     )
     title = models.CharField(max_length=100)
-    text = models.TextField()
+    text = models.TextField(verbose_name="text (Markdown)")
 
     def __str__(self):
         return self.title
@@ -52,7 +52,7 @@ class SlideshowImage(models.Model):
     title = models.CharField(max_length=100)
     img = models.ImageField(upload_to="slideshow/")
     img_alt = models.CharField(max_length=200)
-    caption = models.TextField(default="", blank=True)
+    caption = models.TextField(default="", blank=True, verbose_name="caption (Markdown)")
 
     def __str__(self):
         return str(self.img)

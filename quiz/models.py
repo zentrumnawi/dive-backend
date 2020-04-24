@@ -24,7 +24,7 @@ class QuizQuestion(models.Model):
 
     type = models.CharField(max_length=2, choices=QTYPE_CHOICES)
     difficulty = models.PositiveSmallIntegerField(choices=QDIFFICULTY_CHOICES)
-    text = models.TextField()
+    text = models.TextField(verbose_name="text (Markdown)")
     img = models.ImageField(upload_to="quiz/", null=True, blank=True)
     img_alt = models.CharField(max_length=200, default="", blank=True)
     tags = ArrayField(
@@ -49,7 +49,7 @@ class QuizAnswer(models.Model):
         related_name="answers",
         related_query_name="answer",
     )
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=200, verbose_name="text (Markdown)")
     correct = models.BooleanField()
     feedback_correct = models.CharField(max_length=400, default="", blank=True)
     feedback_incorrect = models.CharField(max_length=400, default="", blank=True)

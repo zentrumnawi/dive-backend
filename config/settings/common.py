@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "mptt",
+    "corsheaders",
     "content.apps.ContentConfig",
+    "contact.apps.ContactConfig",
     "glossary.apps.GlossaryConfig",
     "quiz.apps.QuizConfig",
     "message.apps.MessageConfig",
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -133,3 +136,6 @@ PROFILES_SERIALIZER_MODULE, PROFILES_SERIALIZER = env(
 # human readable names. You might want to consider internationalizing
 # the human readable names.
 DATABASE_FIELD_MAPPING = {}
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True

@@ -17,6 +17,7 @@ django-mptt = "*"
 drf-yasg = "*"
 pillow = "*"
 markupsafe = "==1.1.1"
+django-cors-headers = "*"
 
 [dev-packages]
 werkzeug = "*"

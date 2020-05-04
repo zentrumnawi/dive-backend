@@ -6,7 +6,7 @@ from .serializers import MessageSerializer
 
 class MessageEndpoint(ReadOnlyModelViewSet):
     """
-    Endpoint that provides the database table of currently valid Messages.
+    Endpoint that provides the database table of currently valid messages.
     """
 
     queryset = Message.objects.filter(

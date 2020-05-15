@@ -95,6 +95,10 @@ class Plant(models.Model):
         verbose_name=_("Steckbrief-Ebene"),
     )
 
+    class Meta:
+        verbose_name = _("Pflanze")
+        verbose_name_plural = _("Pflanzen")
+
 
 class Leaf(models.Model):
 
@@ -206,6 +210,10 @@ class Leaf(models.Model):
         Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
     )
 
+    class Meta:
+        verbose_name = _("Blatt")
+        verbose_name_plural = _("Blätter")
+
 
 class Sprout(models.Model):
 
@@ -247,6 +255,10 @@ class Sprout(models.Model):
         verbose_name=_("Pflanze"),
     )
 
+    class Meta:
+        verbose_name = _("Keim")
+        verbose_name_plural = _("Keime")
+
 
 class Fruit(models.Model):
 
@@ -281,6 +293,10 @@ class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
+
+    class Meta:
+        verbose_name = _("Frucht")
+        verbose_name_plural = _("Früchte")
 
 
 class Blossom(models.Model):
@@ -437,6 +453,10 @@ class Blossom(models.Model):
         related_name="blossom",
         verbose_name=_("Pflanze"),
     )
+
+    class Meta:
+        verbose_name = _("Blüte")
+        verbose_name_plural = _("Blüten")
 
 
 # Model for the tree representation of the profiles

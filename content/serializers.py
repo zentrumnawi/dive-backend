@@ -23,24 +23,28 @@ class LeafSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Leaf
         exclude = ["plant"]
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class SproutSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Sprout
         exclude = ["plant"]
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class FruitSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Fruit
         exclude = ["plant"]
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Blossom
         exclude = ["plant"]
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class PlantSerializer(DisplayNameModelSerializer):
@@ -53,6 +57,7 @@ class PlantSerializer(DisplayNameModelSerializer):
         model = Plant
         fields = "__all__"
         depth = 1
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class TreeNodeSerializer(serializers.ModelSerializer):

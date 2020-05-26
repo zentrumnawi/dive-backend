@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slideshow', '0004_add_verbose_name_to_text_fields'),
+        ("slideshow", "0004_add_verbose_name_to_text_fields"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='slideshow',
-            name='img',
-            field=models.ImageField(blank=True, null=True, upload_to='slideshow/'),
+            model_name="slideshow",
+            name="img",
+            field=models.ImageField(blank=True, null=True, upload_to="slideshow/"),
         ),
         migrations.AddField(
-            model_name='slideshow',
-            name='img_alt',
-            field=models.CharField(blank=True, default='', max_length=200),
+            model_name="slideshow",
+            name="img_alt",
+            field=models.CharField(blank=True, default="", max_length=200),
         ),
     ]

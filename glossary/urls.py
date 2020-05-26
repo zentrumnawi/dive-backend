@@ -4,6 +4,6 @@ from .views import GlossaryEntryEndpoint
 
 app_name = "glossary"
 router = SimpleRouter()
-router.register(r"glossaries", GlossaryEntryEndpoint)
+router.register(r"glossaryentries", GlossaryEntryEndpoint)
 urlpatterns = []
 urlpatterns += router.urls

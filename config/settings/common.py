@@ -111,7 +111,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 LANGUAGES = [("de", _("German")), ("en", _("English"))]
 
 LOCALE_PATHS = [str(ROOT_DIR("locale"))]

@@ -111,9 +111,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 LANGUAGES = [("de", _("German")), ("en", _("English"))]
 
 LOCALE_PATHS = [str(ROOT_DIR("locale"))]
+
+# MEDIA CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = str(APPS_DIR("media"))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = "/media/"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

@@ -34,6 +34,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ALLOWED HOSTS
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
+# Uploaded Media Files
+# ------------------------
+DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
 MEDIA_URL = env("DJANGO_CDN_URL")

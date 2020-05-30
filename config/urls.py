@@ -26,5 +26,4 @@ urlpatterns = [
     url(r"^api/", include("message.urls"), name="message"),
     url(r"^api/", include("quiz.urls"), name="quiz"),
     url(r"^api/", include("slideshow.urls"), name="slideshow"),
-
 ]

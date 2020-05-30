@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Slideshow, SlideshowPage, SlideshowImage
+from utility.forms import HasImgForm
 
 
 class SlideshowPageInline(admin.TabularInline):
@@ -11,7 +12,8 @@ class SlideshowImageInline(admin.TabularInline):
 
 
 class SlideshowAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+    form = HasImgForm
+    list_display = ["id", "title", "img"]
     inlines = [SlideshowPageInline]
 
 

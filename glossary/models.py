@@ -8,8 +8,6 @@ class GlossaryEntry(models.Model):
 
     term = models.CharField(max_length=100)
     text = models.TextField(verbose_name="text (Markdown)")
-    img = models.ImageField(upload_to="glossary/", null=True, blank=True)
-    img_alt = models.CharField(max_length=200, blank=True, default="")
     links = models.ManyToManyField("self", symmetrical=False, blank=True)
 
     def __str__(self):

@@ -33,7 +33,7 @@ RUN cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
 
 # Copy Pipfile and install python dependencies
 COPY --chown=app:app Pipfile Pipfile.lock /
-RUN pip install pipenv
+RUN pip install pipenv==2018.11.26
 RUN LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "pipenv install --system --deploy"
 
 # Copy dokku specific files to the project root

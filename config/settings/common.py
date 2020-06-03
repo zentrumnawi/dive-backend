@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "quiz.apps.QuizConfig",
     "message.apps.MessageConfig",
     "slideshow.apps.SlideshowConfig",
+    "django_cleanup.apps.CleanupConfig", # Should be placed last!
 ]
 
 MIDDLEWARE = [

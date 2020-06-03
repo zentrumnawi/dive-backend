@@ -18,6 +18,7 @@ drf-yasg = "*"
 pillow = "*"
 markupsafe = "==1.1.1"
 django-cors-headers = "*"
+django-cleanup = "*"
 
 [dev-packages]
 werkzeug = "*"

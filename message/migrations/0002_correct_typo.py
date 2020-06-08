@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('message', '0001_implement_message_model'),
+        ("message", "0001_implement_message_model"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='message',
-            name='type',
-            field=models.CharField(choices=[('CL', 'Changelog'), ('SE', 'Series'), ('NO', 'Notice')], max_length=2),
+            model_name="message",
+            name="type",
+            field=models.CharField(
+                choices=[("CL", "Changelog"), ("SE", "Series"), ("NO", "Notice")],
+                max_length=2,
+            ),
         ),
     ]

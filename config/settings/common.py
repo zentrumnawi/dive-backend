@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "quiz.apps.QuizConfig",
     "message.apps.MessageConfig",
     "slideshow.apps.SlideshowConfig",
+    "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 
 MIDDLEWARE = [
@@ -103,14 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Berlin"
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 LANGUAGES = [("de", _("German")), ("en", _("English"))]
 

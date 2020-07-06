@@ -1,14 +1,11 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import TreeNode, Plant, Leaf, Sprout, Fruit, Blossom
+from .models import Plant, Leaf, Sprout, Fruit, Blossom
 from .forms import PlantModelForm
 
-admin.site.register(TreeNode, DraggableMPTTAdmin)
 
 # Inlines
-
-
 class LeafInline(admin.StackedInline):
     model = Leaf
 

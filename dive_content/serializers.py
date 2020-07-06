@@ -1,10 +1,6 @@
-from importlib import import_module
-
-from django.conf import settings
-from django.db import models
 from rest_framework import serializers
 
-from .models import TreeNode, Plant, Leaf, Sprout, Fruit, Blossom
+from .models import Plant, Leaf, Sprout, Fruit, Blossom
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -58,19 +54,3 @@ class PlantSerializer(DisplayNameModelSerializer):
         fields = "__all__"
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
-
-
-class TreeNodeSerializer(serializers.ModelSerializer):
-
-    profiles = getattr(
-        import_module(settings.PROFILES_SERIALIZER_MODULE), settings.PROFILES_SERIALIZER
-    )(many=True)
-    leaf_nodes = serializers.SerializerMethodField()
-
-    class Meta:
-        depth = 1
-        model = TreeNode
-        fields = ("node_name", "profiles", "leaf_nodes", "info_text")
-
-    def get_leaf_nodes(self, obj):
-        return TreeNodeSerializer(obj.get_children(), many=True).data

@@ -459,27 +459,3 @@ class Blossom(models.Model):
     class Meta:
         verbose_name = _("Blüte")
         verbose_name_plural = _("Blüten")
-
-
-# Model for the tree representation of the profiles
-class TreeNode(MPTTModel):
-    node_name = models.CharField(
-        max_length=200, verbose_name=_("node name"), unique=True
-    )
-    parent = TreeForeignKey(
-        "self",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name="leaf_nodes",
-    )
-
-    info_text = models.TextField(max_length=500, blank=True)
-    is_top_level = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name = _("Tree Node")
-        verbose_name_plural = _("Tree Nodes")
-
-    def __str__(self):
-        return self.node_name

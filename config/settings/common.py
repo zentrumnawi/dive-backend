@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     "mptt",
     "corsheaders",
     "content.apps.ContentConfig",
-    "contact.apps.ContactConfig",
-    "glossary.apps.GlossaryConfig",
-    "quiz.apps.QuizConfig",
-    "message.apps.MessageConfig",
-    "slideshow.apps.SlideshowConfig",
+    "solid_backend.contact",
+    "solid_backend.glossary",
+    "solid_backend.message",
+    "solid_backend.slideshow",
+    "solid_backend.quiz",
     "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 

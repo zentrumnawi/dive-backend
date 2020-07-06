@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0016_add_leaflet_choice"),
+        ("dive_content", "0015_add_leaflet_choice"),
     ]
 
     operations = [

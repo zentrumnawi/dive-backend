@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0006_create_blossom_model"),
+        ("dive_content", "0005_create_blossom_model"),
     ]
 
     operations = [

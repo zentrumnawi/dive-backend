@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0009_add_blank_and_null_to_integer_fields"),
+        ("dive_content", "0008_add_blank_and_null_to_integer_fields"),
     ]
 
     operations = [

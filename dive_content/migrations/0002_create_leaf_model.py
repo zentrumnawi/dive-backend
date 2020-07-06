@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0002_create_plant_model"),
+        ("dive_content", "0001_create_plant_model"),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0011_change_plant_habitat_choices"),
+        ("dive_content", "0010_change_plant_habitat_choices"),
     ]
 
     operations = [

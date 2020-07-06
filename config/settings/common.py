@@ -19,7 +19,7 @@ from django.utils.translation import gettext_lazy as _
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path("content")
+APPS_DIR = ROOT_DIR.path("dive_content")
 
 env = environ.Env()
 
@@ -36,12 +36,13 @@ INSTALLED_APPS = [
     "drf_yasg",
     "mptt",
     "corsheaders",
-    "content.apps.ContentConfig",
-    "contact.apps.ContactConfig",
-    "glossary.apps.GlossaryConfig",
-    "quiz.apps.QuizConfig",
-    "message.apps.MessageConfig",
-    "slideshow.apps.SlideshowConfig",
+    "dive_content.apps.DiveContentConfig",
+    "solid_backend.content",
+    "solid_backend.contact",
+    "solid_backend.glossary",
+    "solid_backend.message",
+    "solid_backend.slideshow",
+    "solid_backend.quiz",
     "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 

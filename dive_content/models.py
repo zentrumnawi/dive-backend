@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils.translation import ugettext_lazy as _
 
+from solid_backend.content.models import TreeNode
+
 from mptt.models import MPTTModel, TreeForeignKey
 
 from .choices import *
@@ -88,7 +90,7 @@ class Plant(models.Model):
     nodule = models.BooleanField(verbose_name=_("Wurzelknollen"))
 
     systematics = models.ForeignKey(
-        "TreeNode",
+        TreeNode,
         related_name="profiles",
         on_delete=models.DO_NOTHING,
         null=True,

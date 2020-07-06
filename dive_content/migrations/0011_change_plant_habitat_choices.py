@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0010_blank_instead_of_default_empty_string"),
+        ("dive_content", "0010_blank_instead_of_default_empty_string"),
     ]
 
     operations = [

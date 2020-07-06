@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0005_create_fruit_model"),
+        ("dive_content", "0005_create_fruit_model"),
     ]
 
     operations = [
@@ -446,7 +446,7 @@ class Migration(migrations.Migration):
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="blossom",
-                        to="content.Plant",
+                        to="dive_content.Plant",
                         verbose_name="Pflanze",
                     ),
                 ),

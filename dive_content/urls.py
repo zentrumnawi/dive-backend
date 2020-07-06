@@ -3,7 +3,7 @@ from rest_framework.routers import SimpleRouter
 
 from .views import ProfilesEndpoint, FieldMappingEndpoint
 
-app_name = "content"
+app_name = "dive_content"
 
 router = SimpleRouter()
 router.register(r"profiles", ProfilesEndpoint, basename="profiles")

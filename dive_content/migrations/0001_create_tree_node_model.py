@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="leaf_nodes",
-                        to="content.TreeNode",
+                        to="dive_content.TreeNode",
                     ),
                 ),
             ],

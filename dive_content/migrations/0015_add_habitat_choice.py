@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0014_add_blossom_type_choice"),
+        ("dive_content", "0014_add_blossom_type_choice"),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0013_change_display_names"),
+        ("dive_content", "0013_change_display_names"),
     ]
 
     operations = [

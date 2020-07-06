@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ContentConfig(AppConfig):
-    name = "content"
+class DiveContentConfig(AppConfig):
+    name = "dive_content"
     profiles_serializer = None

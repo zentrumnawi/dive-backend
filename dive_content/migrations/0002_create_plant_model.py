@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0001_create_tree_node_model"),
+        ("dive_content", "0001_create_tree_node_model"),
     ]
 
     operations = [
@@ -123,7 +123,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="profiles",
-                        to="content.TreeNode",
+                        to="dive_content.TreeNode",
                         verbose_name="Steckbrief-Ebene",
                     ),
                 ),

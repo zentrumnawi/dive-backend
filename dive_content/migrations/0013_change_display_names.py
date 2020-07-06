@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0012_create_spr_structure_field"),
+        ("dive_content", "0012_create_spr_structure_field"),
     ]
 
     operations = [

@@ -19,7 +19,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r"^api/", include("api-docs.api_docs"), name="api_docs"),
-    url(r"^api/", include("content.urls"), name="content"),
+    url(r"^api/", include("dive_content.urls"), name="content"),
     url(r"^admin/", admin.site.urls),
     url(r"^api/", include("solid_backend.contact.urls"), name="contact"),
     url(r"^api/", include("solid_backend.glossary.urls"), name="glossary"),

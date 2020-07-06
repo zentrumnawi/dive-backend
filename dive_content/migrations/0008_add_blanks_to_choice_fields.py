@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0007_auto_20200407_1501"),
+        ("dive_content", "0007_auto_20200407_1501"),
     ]
 
     operations = [

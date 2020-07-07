@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from solid_backend.photograph.serializers import PhotographSerializer
 
 from .models import Plant, Leaf, Sprout, Fruit, Blossom
 
@@ -48,6 +49,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     sprout = SproutSerializer()
     fruit = FruitSerializer()
     blossom = BlossomSerializer()
+    photographs = PhotographSerializer(many=True)
 
     class Meta:
         model = Plant

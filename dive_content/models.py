@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils.translation import ugettext_lazy as _
 
-from solid_backend.content.models import TreeNode
+from solid_backend.content.models import TreeNode, BaseProfile
 
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -14,7 +14,7 @@ from .choices import *
 # error.
 
 
-class Plant(models.Model):
+class Plant(BaseProfile):
 
     HABITAT_CHOICES = (
         ("sch", _("Schlammfluren")),

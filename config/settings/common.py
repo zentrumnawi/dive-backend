@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "mptt",
+    "stdimage",
     "corsheaders",
     "dive_content.apps.DiveContentConfig",
     "solid_backend.content",
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     "solid_backend.message",
     "solid_backend.slideshow",
     "solid_backend.quiz",
+    "solid_backend.photograph",
     "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 

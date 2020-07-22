@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Plant
 
+
 class PlantModelForm(forms.ModelForm):
 
     habitat = forms.MultipleChoiceField(choices=Plant.HABITAT_CHOICES)

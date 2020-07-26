@@ -332,6 +332,7 @@ PART_CHOICES = (
     ("kam", _("kammförmig")),
     ("fug", _("fußförmig geschnitten")),
     ("fuz", _("fußförmig zusammengesetzt")),
+    ("non", _("nicht vorhanden"))
 )
 HULL_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),

@@ -63,6 +63,7 @@ class Plant(BaseProfile):
 
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
+    alt_trivial_name = models.CharField(default="", max_length=500, verbose_name=_("Liste alternativer Trivialnamen"))
     habitat = ArrayField(
         base_field=models.CharField(max_length=3, choices=HABITAT_CHOICES),
         blank=True,
@@ -78,7 +79,7 @@ class Plant(BaseProfile):
         verbose_name=_("Interaktionen"),
     )
     ground = ArrayField(
-        base_field=models.CharField(max_length=3, choices=GROUND_CHOICES),
+        base_field=models.CharField(max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")),
         blank=True,
         verbose_name=_("Untergrund"),
     )
@@ -138,7 +139,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=SPR_WHOLE_CHOICES,
         blank=True,
-        verbose_name=_("Blattspreite gesamt"),
+        verbose_name=_("Aufteilung der Blattspreite"),
     )
     spr_structure = models.CharField(
         max_length=2,
@@ -174,7 +175,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=LEAFLET_CHOICES,
         blank=True,
-        verbose_name=_("Spreiten/Blättchen"),
+        verbose_name=_("Spreiten-/Blättchenrand"),
     )
     texture = models.CharField(
         max_length=3,
@@ -186,7 +187,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=SUR_TEXTURE_CHOICES,
         blank=True,
-        verbose_name=_("Oberflächenbeschaffenheit"),
+        verbose_name=_("Blattoberfläche"),
     )
     side_leaf = models.CharField(
         max_length=3, choices=SIDE_CHOICES, blank=True, verbose_name=_("Nebenblattrand")
@@ -201,7 +202,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=SP_TOP_CHOICES,
         blank=True,
-        verbose_name=_("Spreitengrund"),
+        verbose_name=_("Spreitenspitze"),
     )
     specialty = models.CharField(
         max_length=200,
@@ -231,7 +232,7 @@ class Sprout(models.Model):
         verbose_name=_("Erscheinung"),
     )
     pos = models.CharField(
-        max_length=3, choices=POSITION_CHOICES, blank=True, verbose_name=_("Stellung")
+        max_length=3, choices=POSITION_CHOICES, blank=True, verbose_name=_("Wuchsorientierung")
     )
     thick_flesh = models.CharField(
         null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Dickfleischig")
@@ -245,13 +246,13 @@ class Sprout(models.Model):
         verbose_name=_("Beblätterung"),
     )
     diam = models.CharField(
-        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Stellung")
+        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
     )
     sur_texture = models.CharField(
         max_length=3,
         choices=SUR_TEXTURE_CHOICES,
         blank=True,
-        verbose_name=_("Oberflächenbeschaffenheit"),
+        verbose_name=_("Sprossoberfläche"),
     )
 
     blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
@@ -265,8 +266,8 @@ class Sprout(models.Model):
     )
 
     class Meta:
-        verbose_name = _("Keim")
-        verbose_name_plural = _("Keime")
+        verbose_name = _("Spross")
+        verbose_name_plural = _("Spross")
 
 
 class Fruit(models.Model):
@@ -314,7 +315,7 @@ class Blossom(models.Model):
         max_length=3,
         choices=BL_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Blütenstandtyp"),
+        verbose_name=_("Blütenstandsform"),
     )
     bl_cnt = models.CharField(
         max_length=100, blank=True, verbose_name=_("Blüten pro Blütenstand")
@@ -323,7 +324,7 @@ class Blossom(models.Model):
         max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")
     )
     parting = models.CharField(
-        max_length=3, choices=PART_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
+        max_length=3, choices=PART_CHOICES, blank=True, verbose_name=_("Tragblattspreite")
     )
     cnt = models.IntegerField(
         choices=((3, 3), (4, 4), (5, 5)),
@@ -332,7 +333,7 @@ class Blossom(models.Model):
         verbose_name=_("Zähligkeit"),
     )
     hull = models.CharField(
-        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenstandtyp")
+        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenhülle")
     )
 
     chalice = models.CharField(
@@ -348,7 +349,7 @@ class Blossom(models.Model):
         verbose_name=_("Verwachsungstyp"),
     )
 
-    crown_color = models.CharField(max_length=100, blank=True, verbose_name=_("Farbe"))
+    crown_color = models.CharField(max_length=100, blank=True, verbose_name=_("Kronblattfarbe"))
     crown_ver = models.CharField(
         max_length=1,
         choices=CROWN_VER_CHOICES,
@@ -388,7 +389,7 @@ class Blossom(models.Model):
         max_length=2,
         choices=STAND_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Frucht Ständigkeit"),
+        verbose_name=_("Ständigkeit des Fruchtknotens"),
     )
     fruit_build = models.CharField(
         max_length=2,
@@ -439,7 +440,7 @@ class Blossom(models.Model):
     gull_spel = models.CharField(
         max_length=100, blank=True, verbose_name=_("Hüllspelzen")
     )
-    blos = models.CharField(max_length=100, blank=True, verbose_name=_("Blütig"))
+    blos = models.CharField(max_length=100, blank=True, verbose_name=_("Blütigkeit des Ährchens"))
     straw_ground = models.CharField(
         max_length=2,
         choices=GROUND_CHOICES,
@@ -447,13 +448,13 @@ class Blossom(models.Model):
         verbose_name=_("Ansatz an Halm"),
     )
     order = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Ähren pro Ährchen ")
+        max_length=100, blank=True, verbose_name=_("Ährchen pro Ähre")
     )
     aer_per_aer = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Anordnung ")
+        max_length=100, blank=True, verbose_name=_("Anordnung der Ährchen")
     )
     aer_per_ab = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Ährchen pro Absatz")
+        max_length=100, blank=True, verbose_name=_("Ährchen pro Absatz der Ährenachse")
     )
 
     plant = models.OneToOneField(

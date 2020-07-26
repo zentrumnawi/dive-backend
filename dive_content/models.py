@@ -87,7 +87,9 @@ class Plant(BaseProfile):
     prime_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
-    nodule = models.BooleanField(verbose_name=_("Wurzelknollen"))
+    nodule = models.CharField(
+        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Wurzelknollen")
+    )
 
     systematics = models.ForeignKey(
         TreeNode,
@@ -211,6 +213,9 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
     )
+    thick_flesh = models.CharField(
+        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Dickfleischig")
+    )
 
     class Meta:
         verbose_name = _("Blatt")
@@ -228,9 +233,11 @@ class Sprout(models.Model):
     pos = models.CharField(
         max_length=3, choices=POSITION_CHOICES, blank=True, verbose_name=_("Stellung")
     )
-    thick_flesh = models.BooleanField(default=False, verbose_name=_("Dickfleischig"))
-    milk = models.BooleanField(default=False, verbose_name=_("Milchsaft"))
-    rose = models.BooleanField(default=False, verbose_name=_("Grundblattrose"))
+    thick_flesh = models.CharField(
+        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Dickfleischig")
+    )
+    milk = models.CharField(max_length=3, null=True, blank=True, verbose_name=_("Milchsaft"))
+    rose = models.CharField(max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose"))
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
@@ -398,8 +405,8 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Ständigkeit des Griffels"),
     )
-    griffel_sub = models.BooleanField(
-        default=False, verbose_name=_("Ständigkeit des Griffels ist sub-")
+    griffel_sub = models.CharField(
+        max_length=3, choices=GRIFFEL_SUB_CHOICES, verbose_name=_("Ständigkeit des Griffels ist sub-")
     )
 
     spec_sporn = models.CharField(

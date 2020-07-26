@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from operator import itemgetter
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .models import Plant, Leaf, Sprout, Fruit, Blossom
@@ -14,6 +15,11 @@ class HumanReadableChoiceField(serializers.ChoiceField):
 class DisplayNameModelSerializer(serializers.ModelSerializer):
 
     serializer_choice_field = HumanReadableChoiceField
+
+    def to_representation(self, instance):
+        ret = super(DisplayNameModelSerializer, self).to_representation(instance)
+
+        return serializers.OrderedDict(filter(itemgetter(1), ret.items()))
 
 
 class LeafSerializer(DisplayNameModelSerializer):
@@ -56,3 +62,4 @@ class PlantSerializer(DisplayNameModelSerializer):
         fields = "__all__"
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+        extra_kwargs = {"nodule": {"required": False}}

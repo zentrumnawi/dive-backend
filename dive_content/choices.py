@@ -418,3 +418,13 @@ GROUND_CHOICES = (
     ("re", _("reitend")),
     ("hi", _("hinfällig")),
 )
+YES_NO_CHOICES = (
+    ("yes", _("ja")),
+    ("no", _("nein"))
+)
+GRIFFEL_SUB_CHOICES = (
+    ("end", _("subendständig")),
+    ("sei", _("subseitenständig")),
+    ("gru", _("subgrundständig")),
+    ("gyn", _("subgynobasisch"))
+)

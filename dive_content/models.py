@@ -60,7 +60,7 @@ class Plant(BaseProfile):
         ("erh", _("erhalten")),
         ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
     )
-
+    facts_to_know = models.TextField(default="", max_length=600, verbose_name=_("Wissenswertes"))
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     alt_trivial_name = models.CharField(default="", max_length=500, verbose_name=_("Liste alternativer Trivialnamen"))

@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dive_content', '0018_auto_20200726_1941'),
+        ("dive_content", "0018_auto_20200726_1941"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='plant',
-            name='facts_to_know',
-            field=models.TextField(default="", max_length=600, verbose_name='Wissenswertes'),
+            model_name="plant",
+            name="facts_to_know",
+            field=models.TextField(
+                default="", max_length=600, verbose_name="Wissenswertes"
+            ),
             preserve_default=False,
         ),
     ]

@@ -60,10 +60,14 @@ class Plant(BaseProfile):
         ("erh", _("erhalten")),
         ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
     )
-    facts_to_know = models.TextField(default="", max_length=600, verbose_name=_("Wissenswertes"))
+    facts_to_know = models.TextField(
+        default="", max_length=600, verbose_name=_("Wissenswertes")
+    )
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
-    alt_trivial_name = models.CharField(default="", max_length=500, verbose_name=_("Liste alternativer Trivialnamen"))
+    alt_trivial_name = models.CharField(
+        default="", max_length=500, verbose_name=_("Liste alternativer Trivialnamen")
+    )
     habitat = ArrayField(
         base_field=models.CharField(max_length=3, choices=HABITAT_CHOICES),
         blank=True,
@@ -79,7 +83,9 @@ class Plant(BaseProfile):
         verbose_name=_("Interaktionen"),
     )
     ground = ArrayField(
-        base_field=models.CharField(max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")),
+        base_field=models.CharField(
+            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
+        ),
         blank=True,
         verbose_name=_("Untergrund"),
     )
@@ -89,7 +95,11 @@ class Plant(BaseProfile):
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
     nodule = models.CharField(
-        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Wurzelknollen")
+        null=True,
+        blank=True,
+        max_length=3,
+        choices=YES_NO_CHOICES,
+        verbose_name=_("Wurzelknollen"),
     )
 
     systematics = models.ForeignKey(
@@ -215,7 +225,11 @@ class Leaf(models.Model):
         Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
     )
     thick_flesh = models.CharField(
-        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Dickfleischig")
+        null=True,
+        blank=True,
+        max_length=3,
+        choices=YES_NO_CHOICES,
+        verbose_name=_("Dickfleischig"),
     )
 
     class Meta:
@@ -232,13 +246,24 @@ class Sprout(models.Model):
         verbose_name=_("Erscheinung"),
     )
     pos = models.CharField(
-        max_length=3, choices=POSITION_CHOICES, blank=True, verbose_name=_("Wuchsorientierung")
+        max_length=3,
+        choices=POSITION_CHOICES,
+        blank=True,
+        verbose_name=_("Wuchsorientierung"),
     )
     thick_flesh = models.CharField(
-        null=True, blank=True, max_length=3, choices=YES_NO_CHOICES, verbose_name=_("Dickfleischig")
+        null=True,
+        blank=True,
+        max_length=3,
+        choices=YES_NO_CHOICES,
+        verbose_name=_("Dickfleischig"),
     )
-    milk = models.CharField(max_length=3, null=True, blank=True, verbose_name=_("Milchsaft"))
-    rose = models.CharField(max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose"))
+    milk = models.CharField(
+        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
+    )
+    rose = models.CharField(
+        max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose")
+    )
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
@@ -324,7 +349,10 @@ class Blossom(models.Model):
         max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")
     )
     parting = models.CharField(
-        max_length=3, choices=PART_CHOICES, blank=True, verbose_name=_("Tragblattspreite")
+        max_length=3,
+        choices=PART_CHOICES,
+        blank=True,
+        verbose_name=_("Tragblattspreite"),
     )
     cnt = models.IntegerField(
         choices=((3, 3), (4, 4), (5, 5)),
@@ -349,7 +377,9 @@ class Blossom(models.Model):
         verbose_name=_("Verwachsungstyp"),
     )
 
-    crown_color = models.CharField(max_length=100, blank=True, verbose_name=_("Kronblattfarbe"))
+    crown_color = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Kronblattfarbe")
+    )
     crown_ver = models.CharField(
         max_length=1,
         choices=CROWN_VER_CHOICES,
@@ -407,7 +437,9 @@ class Blossom(models.Model):
         verbose_name=_("Ständigkeit des Griffels"),
     )
     griffel_sub = models.CharField(
-        max_length=3, choices=GRIFFEL_SUB_CHOICES, verbose_name=_("Ständigkeit des Griffels ist sub-")
+        max_length=3,
+        choices=GRIFFEL_SUB_CHOICES,
+        verbose_name=_("Ständigkeit des Griffels ist sub-"),
     )
 
     spec_sporn = models.CharField(
@@ -440,7 +472,9 @@ class Blossom(models.Model):
     gull_spel = models.CharField(
         max_length=100, blank=True, verbose_name=_("Hüllspelzen")
     )
-    blos = models.CharField(max_length=100, blank=True, verbose_name=_("Blütigkeit des Ährchens"))
+    blos = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Blütigkeit des Ährchens")
+    )
     straw_ground = models.CharField(
         max_length=2,
         choices=GROUND_CHOICES,

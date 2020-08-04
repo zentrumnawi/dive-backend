@@ -332,7 +332,7 @@ PART_CHOICES = (
     ("kam", _("kammförmig")),
     ("fug", _("fußförmig geschnitten")),
     ("fuz", _("fußförmig zusammengesetzt")),
-    ("non", _("nicht vorhanden"))
+    ("non", _("nicht vorhanden")),
 )
 HULL_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
@@ -419,13 +419,10 @@ GROUND_CHOICES = (
     ("re", _("reitend")),
     ("hi", _("hinfällig")),
 )
-YES_NO_CHOICES = (
-    ("yes", _("ja")),
-    ("no", _("nein"))
-)
+YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 GRIFFEL_SUB_CHOICES = (
     ("end", _("subendständig")),
     ("sei", _("subseitenständig")),
     ("gru", _("subgrundständig")),
-    ("gyn", _("subgynobasisch"))
+    ("gyn", _("subgynobasisch")),
 )

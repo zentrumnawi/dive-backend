@@ -19,7 +19,7 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         ret = super(DisplayNameModelSerializer, self).to_representation(instance)
 
-        return serializers.OrderedDict(filter(itemgetter(1), ret.items()))
+        return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
 class LeafSerializer(DisplayNameModelSerializer):

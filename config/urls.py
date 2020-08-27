@@ -24,6 +24,7 @@ urlpatterns = [
     url(r"^api/", include("solid_backend.contact.urls"), name="contact"),
     url(r"^api/", include("solid_backend.glossary.urls"), name="glossary"),
     url(r"^api/", include("solid_backend.message.urls"), name="message"),
+    url(r"^api/", include("solid_backend.photograph.urls"), name="photograph"),
     url(r"^api/", include("solid_backend.quiz.urls"), name="quiz"),
     url(r"^api/", include("solid_backend.slideshow.urls"), name="slideshow"),
 ]

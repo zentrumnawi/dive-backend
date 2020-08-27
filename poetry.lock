@@ -869,10 +869,10 @@ description = "Clean Django App for E-Learning apllication with "
 name = "solid-backend"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "0.1.6"
+version = "0.1.8"
 
 [package.dependencies]
-django = ">=3.0.7,<4.0.0"
+django = ">=3.0.7,<3.1.0"
 django-cleanup = "4.0.0"
 django-mptt = "0.11.0"
 django-stdimage = ">=5.1.1,<6.0.0"
@@ -1498,8 +1498,8 @@ six = [
     {file = "six-1.15.0.tar.gz", hash = "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"},
 ]
 solid-backend = [
-    {file = "solid-backend-0.1.6.tar.gz", hash = "sha256:1b61b4e27297353d0643e45fc4302bfd2ee05e0b881bfc8fe34a163aa00dc8ed"},
-    {file = "solid_backend-0.1.6-py3-none-any.whl", hash = "sha256:dae28d3f3041ca8e065cc5b17b3cdc3ce27f99bc568cc2dedc86ebf28ad9f3b7"},
+    {file = "solid-backend-0.1.8.tar.gz", hash = "sha256:ff42aa76c3c99f418f1ec545a9d635f4b1ac25d92e416c44510bc6c26b744d31"},
+    {file = "solid_backend-0.1.8-py3-none-any.whl", hash = "sha256:07ae3f8a7e52e5e7979e6ebd8e92f1ee3b6cab07dcd1d6d0ecd80dbe89406a75"},
 ]
 sqlparse = [
     {file = "sqlparse-0.3.1-py2.py3-none-any.whl", hash = "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e"},

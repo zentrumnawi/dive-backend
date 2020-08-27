@@ -61,4 +61,7 @@ class PlantSerializer(DisplayNameModelSerializer):
         model = Plant
         fields = "__all__"
         depth = 1
-        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+        swagger_schema_fields = {
+            "title": str(model._meta.verbose_name),
+            "required": ["name", "trivial_name", "bloom"],
+        }

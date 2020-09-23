@@ -865,11 +865,11 @@ version = "1.15.0"
 
 [[package]]
 category = "main"
-description = "Clean Django App for E-Learning apllication with "
+description = "Clean Django app for e-learning application with..."
 name = "solid-backend"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "0.1.10"
+version = "0.1.11"
 
 [package.dependencies]
 django = ">=3.0.7,<3.1.0"
@@ -997,6 +997,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
 content-hash = "abb5604c4d0a0f78cdf2aecca0bc20a8c5c188ae84e8c950a6195e9f6171942f"
+lock-version = "1.0"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1498,8 +1499,8 @@ six = [
     {file = "six-1.15.0.tar.gz", hash = "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"},
 ]
 solid-backend = [
-    {file = "solid-backend-0.1.10.tar.gz", hash = "sha256:cdfb0725b355dcfbba32d646c7447da9659e84e925fc9bf31bdaa64f4721610a"},
-    {file = "solid_backend-0.1.10-py3-none-any.whl", hash = "sha256:5038139d1a39704394625400a5f3d1691327d96cca71303b87eb86a0e351744c"},
+    {file = "solid-backend-0.1.11.tar.gz", hash = "sha256:ee55df68a3370ca7307c8f44aae8a7a1ceef2756b65513a49d5488c57b0f3734"},
+    {file = "solid_backend-0.1.11-py3-none-any.whl", hash = "sha256:86c1cbbb2b2f6ad52fbc92dcfd6a0a67e23af4a911b2170f86045620584fd25b"},
 ]
 sqlparse = [
     {file = "sqlparse-0.3.1-py2.py3-none-any.whl", hash = "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e"},

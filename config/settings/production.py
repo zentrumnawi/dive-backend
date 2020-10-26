@@ -106,3 +106,7 @@ RAVEN_CONFIG = {
 
 # ADMIN URL
 ADMIN_URL = env("DJANGO_ADMIN_URL")
+
+# Static
+
+STATIC_URL = "https://{}/{}static/".format(ALLOWED_HOSTS[0], URI_PREFIX)

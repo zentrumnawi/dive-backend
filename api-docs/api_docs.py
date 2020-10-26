@@ -8,8 +8,7 @@ from rest_framework import permissions
 # This is the documentation for the API, generated for swagger and Redoc standart
 env = environ.Env()
 base_url = "https://{}/{}".format(
-    env("DJANGO_ALLOWED_HOSTS", default="localhost:8000"),
-    settings.URI_PREFIX
+    env("DJANGO_ALLOWED_HOSTS", default="localhost:8000"), settings.URI_PREFIX
 )
 contact_mail = env("CONTACT_MAIL", default="")
 project_name = env("PROJECT_NAME", default="")

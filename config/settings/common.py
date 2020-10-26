@@ -128,12 +128,14 @@ MEDIA_ROOT = str(ROOT_DIR("media"))
 MEDIA_URL = "/media/"
 
 
+URI_PREFIX = env("URI_PREFIX", default="")
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 # STATICFILES
 STATIC_ROOT = str(ROOT_DIR("staticfiles"))
-STATIC_URL = "/static/"
+STATIC_URL = "{}static/".format(URI_PREFIX)
 
 STATICFILES_DIRS = (str(APPS_DIR.path("static")),)
 STATICFILES_FINDERS = (
@@ -152,5 +154,3 @@ DATABASE_FIELD_MAPPING = {}
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
-
-URI_PREFIX = env("URI_PREFIX", default="")

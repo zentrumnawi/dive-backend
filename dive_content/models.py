@@ -506,31 +506,51 @@ class Blossom(models.Model):
 class ZeigerNumber(models.Model):
 
     light_number = models.CharField(
-        max_length=100, choices=LIGHT_CHOICES, blank=True, null=True, verbose_name=_("Lichtzahl")
+        max_length=100,
+        choices=LIGHT_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Lichtzahl"),
     )
     light_extra = models.CharField(
         max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
     )
     temp_number = models.CharField(
-        max_length=100, choices=TEMP_CHOICES, blank=True, null=True, verbose_name=_("Temperaturzahl")
+        max_length=100,
+        choices=TEMP_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Temperaturzahl"),
     )
     temp_extra = models.CharField(
         max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
     )
     humid_number = models.CharField(
-        max_length=100, choices=HUMID_CHOICES, blank=True, null=True, verbose_name=_("Feuchtezahl")
+        max_length=100,
+        choices=HUMID_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Feuchtezahl"),
     )
     humid_extra = models.CharField(
         max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
     )
     react_number = models.CharField(
-        max_length=100, choices=REACT_CHOICES, blank=True, null=True, verbose_name=_("Reaktionszahl")
+        max_length=100,
+        choices=REACT_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Reaktionszahl"),
     )
     react_extra = models.CharField(
         max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
     )
     nutri_number = models.CharField(
-        max_length=100, choices=NUTRIENT_CHOICES, blank=True, null=True, verbose_name=_("Stickstoff/Nährstoffzahl")
+        max_length=100,
+        choices=NUTRIENT_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Stickstoff/Nährstoffzahl"),
     )
     nutri_extra = models.CharField(
         max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True

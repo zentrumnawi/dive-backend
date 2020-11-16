@@ -17,6 +17,7 @@ class ZeigerNumberField(serializers.Field):
     In this Serializer we have pairs of Fields <name>_number and <name>_extra where both fields
     have choices but are meant to be combined. Combination of the field values happens in 'to_representation'.
     """
+
     def __init__(self, choices, **kwargs):
         """
         Do neccessary init for a choice field
@@ -97,7 +98,14 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = ZeigerNumber
-        exclude = ["plant", "light_extra", "temp_extra", "humid_extra", "react_extra", "nutri_extra"]
+        exclude = [
+            "plant",
+            "light_extra",
+            "temp_extra",
+            "humid_extra",
+            "react_extra",
+            "nutri_extra",
+        ]
         swagger_schema_fields = {
             "title": str(model._meta.verbose_name),
         }

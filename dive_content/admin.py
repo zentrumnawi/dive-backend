@@ -29,7 +29,14 @@ class ZeigerNumberInline(admin.StackedInline):
 class PlantModelAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "trivial_name")
     form = PlantModelForm
-    inlines = [LeafInline, SproutInline, FruitInline, BlossomInline, ZeigerNumberInline, PhotographInline]
+    inlines = [
+        LeafInline,
+        SproutInline,
+        FruitInline,
+        BlossomInline,
+        ZeigerNumberInline,
+        PhotographInline,
+    ]
 
 
 admin.site.register(Leaf, admin.ModelAdmin)

@@ -135,7 +135,7 @@ URI_PREFIX = env("URI_PREFIX", default="")
 
 # STATICFILES
 STATIC_ROOT = str(ROOT_DIR("staticfiles"))
-STATIC_URL = "{}static/".format(URI_PREFIX)
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (str(APPS_DIR.path("static")),)
 STATICFILES_FINDERS = (
@@ -154,5 +154,3 @@ DATABASE_FIELD_MAPPING = {}
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
-
-URI_PREFIX = env("URI_PREFIX", default="")

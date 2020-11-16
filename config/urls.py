@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     url(
         r"^{}".format(settings.URI_PREFIX),
-        include("api-docs.api_docs"),
+        include("api_docs.api_docs"),
         name="api_docs",
     ),
     url(r"^{}".format(settings.URI_PREFIX), include("solid_backend.urls")),

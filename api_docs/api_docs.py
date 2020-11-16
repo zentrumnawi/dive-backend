@@ -2,8 +2,11 @@ import environ
 from django.conf.urls import url
 from django.conf import settings
 from drf_yasg import openapi
+from drf_yasg.inspectors import SwaggerAutoSchema
+
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+
 
 # This is the documentation for the API, generated for swagger and Redoc standart
 env = environ.Env()

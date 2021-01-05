@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dive_content', '0020_add_ZeigerNumber_model'),
+        ("dive_content", "0020_add_ZeigerNumber_model"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='plant',
-            name='alt_trivial_name',
-            field=models.CharField(blank=True, default='', max_length=500, verbose_name='Liste alternativer Trivialnamen'),
+            model_name="plant",
+            name="alt_trivial_name",
+            field=models.CharField(
+                blank=True,
+                default="",
+                max_length=500,
+                verbose_name="Liste alternativer Trivialnamen",
+            ),
         ),
     ]

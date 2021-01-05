@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dive_content', '0021_add_blank_to_alt_trivial_name_field'),
+        ("dive_content", "0021_add_blank_to_alt_trivial_name_field"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='plant',
-            name='facts_to_know',
-            field=models.TextField(blank=True, default='', max_length=600, verbose_name='Wissenswertes'),
+            model_name="plant",
+            name="facts_to_know",
+            field=models.TextField(
+                blank=True, default="", max_length=600, verbose_name="Wissenswertes"
+            ),
         ),
     ]

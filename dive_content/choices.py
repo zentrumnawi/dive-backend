@@ -191,7 +191,7 @@ SP_CHOICES = (
 )
 SP_TOP_CHOICES = (
     ("abg", _("abgerundet")),
-    ("ges", _("gestzutzt")),
+    ("ges", _("gestutzt")),
     ("stu", _("stumpf")),
     ("spi", _("spitz")),
     ("zug", _("zugespitzt")),

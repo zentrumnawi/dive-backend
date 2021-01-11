@@ -65,10 +65,22 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
+    arr_cuts = serializers.SerializerMethodField("get_arr_combined")
+
     class Meta:
         model = Leaf
-        exclude = ["plant"]
+        exclude = ["plant", "arr_special"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_arr_combined(self, instance):
+        if instance.arr_special:
+            return (
+                "{} und buchtig".format(instance.get_arr_cuts_display())
+                if instance.arr_cuts
+                else "buchtig"
+            )
+        else:
+            return instance.get_arr_cuts_display()
 
 
 class SproutSerializer(DisplayNameModelSerializer):

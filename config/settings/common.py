@@ -143,7 +143,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-PROFILES_SERIALIZER_MODULE, PROFILES_SERIALIZER = env(
+PROFILES_SERIALIZER_MODULE, PROFILES_SERIALIZER_NAME = env(
     "PROFILES_SERIALIZER", default=""
 ).rsplit(".", 1)
 

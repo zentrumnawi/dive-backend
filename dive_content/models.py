@@ -2,16 +2,14 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils.translation import ugettext_lazy as _
 
-from solid_backend.content.models import TreeNode, BaseProfile
-
-from mptt.models import MPTTModel, TreeForeignKey
+from solid_backend.content.models import BaseProfile
 
 from .choices import *
 
-# Custom Models, representing the actual data of a profile, implement here.
-# At least one model needs to have a ForeignKey field to the TreeNode model
-# with related_name="profiles". If not, the profiles endpoint will throw an
-# error.
+# Custom models, representing the actual data of a profile, implement here.
+# One model and only one needs to inherit form the BaseProfil model to get a relation
+# to the TreeNode model that provides a tree structure to repesent the systematics of
+# the profiles.
 
 
 class Plant(BaseProfile):
@@ -105,17 +103,12 @@ class Plant(BaseProfile):
         verbose_name=_("Wurzelknollen"),
     )
 
-    systematics = models.ForeignKey(
-        TreeNode,
-        related_name="systematics",
-        on_delete=models.DO_NOTHING,
-        null=True,
-        verbose_name=_("Steckbrief-Ebene"),
-    )
-
     class Meta:
         verbose_name = _("Pflanze")
         verbose_name_plural = _("Pflanzen")
+
+
+Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
 
 
 class Leaf(models.Model):

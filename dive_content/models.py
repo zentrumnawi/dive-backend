@@ -107,7 +107,7 @@ class Plant(BaseProfile):
 
     systematics = models.ForeignKey(
         TreeNode,
-        related_name="profiles",
+        related_name="systematics",
         on_delete=models.DO_NOTHING,
         null=True,
         verbose_name=_("Steckbrief-Ebene"),

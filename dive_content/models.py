@@ -108,6 +108,9 @@ class Plant(BaseProfile):
         verbose_name_plural = _("Pflanzen")
 
 
+Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
+
+
 class Leaf(models.Model):
 
     nerves = models.CharField(

@@ -1,8 +1,8 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .models import Plant, Leaf, Sprout, Fruit, Blossom, ZeigerNumber
 from .forms import PlantModelForm
+from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
 # Inlines

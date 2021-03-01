@@ -58,6 +58,7 @@ class Plant(BaseProfile):
         ("erh", _("erhalten")),
         ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
     )
+
     facts_to_know = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Wissenswertes")
     )
@@ -90,7 +91,7 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Untergrund"),
     )
-    bloom = models.CharField(max_length=200, verbose_name=_("Blütezeit"))
+    bloom = models.CharField(max_length=200, blank=True, verbose_name=_("Blütezeit"))
 
     prime_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")

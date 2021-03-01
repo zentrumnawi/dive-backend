@@ -1,7 +1,7 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import PlantModelForm
+from .forms import PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
@@ -32,7 +32,7 @@ class ZeigerNumberInline(admin.StackedInline):
 
 
 class PlantAdmin(admin.ModelAdmin):
-    form = PlantModelForm
+    form = PlantAdminForm
     list_display = ("id", "name", "trivial_name")
     list_display_links = ("name",)
     inlines = [

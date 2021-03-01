@@ -27,8 +27,9 @@ class ZeigerNumberInline(admin.StackedInline):
 
 
 class PlantAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "trivial_name")
     form = PlantModelForm
+    list_display = ("id", "name", "trivial_name")
+    list_display_links = ("name",)
     inlines = [
         LeafInline,
         SproutInline,

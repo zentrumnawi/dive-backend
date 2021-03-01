@@ -8,22 +8,27 @@ from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
+    classes = ("collapse",)
 
 
 class SproutInline(admin.StackedInline):
     model = Sprout
+    classes = ("collapse",)
 
 
 class FruitInline(admin.StackedInline):
     model = Fruit
+    classes = ("collapse",)
 
 
 class BlossomInline(admin.StackedInline):
     model = Blossom
+    classes = ("collapse",)
 
 
 class ZeigerNumberInline(admin.StackedInline):
     model = ZeigerNumber
+    classes = ("collapse",)
 
 
 class PlantAdmin(admin.ModelAdmin):

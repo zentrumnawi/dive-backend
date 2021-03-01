@@ -59,7 +59,7 @@ class Plant(BaseProfile):
         ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
     )
 
-    facts_to_know = models.TextField(
+    short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Wissenswertes")
     )
     name = models.CharField(max_length=100, verbose_name=_("Art"))

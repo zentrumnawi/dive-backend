@@ -60,7 +60,7 @@ class Plant(BaseProfile):
     )
 
     short_description = models.TextField(
-        default="", max_length=600, blank=True, verbose_name=_("Wissenswertes")
+        default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
     )
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))

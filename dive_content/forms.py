@@ -14,7 +14,3 @@ class PlantAdminForm(forms.ModelForm):
         required=False,
         label=Plant._meta.get_field("ground").base_field.verbose_name,
     )
-
-    class Meta:
-        model = Plant
-        fields = "__all__"

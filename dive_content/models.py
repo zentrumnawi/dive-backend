@@ -332,7 +332,12 @@ class Fruit(models.Model):
 
 
 class Blossom(models.Model):
-
+    season = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Blütezeit"),
+        help_text="Bsp. (Januar) Februar bis März",
+    )
     type = models.CharField(
         max_length=3,
         choices=BL_TYPE_CHOICES,

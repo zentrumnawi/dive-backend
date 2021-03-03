@@ -54,10 +54,6 @@ class Plant(BaseProfile):
         ("san", _("sandig")),
         ("ste", _("steinig/felsig")),
     )
-    ROOT_CHOICES = (
-        ("erh", _("erhalten")),
-        ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
-    )
 
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
@@ -90,9 +86,6 @@ class Plant(BaseProfile):
         ),
         blank=True,
         verbose_name=_("Untergrund"),
-    )
-    prime_root = models.CharField(
-        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
     nodule = models.CharField(
         null=True,

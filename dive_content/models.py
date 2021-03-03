@@ -274,7 +274,9 @@ class Sprout(models.Model):
         blank=True,
         verbose_name=_("Sprossoberfläche"),
     )
-
+    primary_root = models.CharField(
+        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
+    )
     blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
     cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
 

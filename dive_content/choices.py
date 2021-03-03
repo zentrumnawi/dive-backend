@@ -155,6 +155,10 @@ SUR_TEXTURE_CHOICES = (
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
 )
+ROOT_CHOICES = (
+    ("erh", _("erhalten")),
+    ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
+)
 SIDE_CHOICES = (
     ("gan", _("ganzrandig")),
     ("ges", _("gesägt")),

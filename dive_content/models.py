@@ -87,13 +87,6 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Untergrund"),
     )
-    nodule = models.CharField(
-        null=True,
-        blank=True,
-        max_length=3,
-        choices=YES_NO_CHOICES,
-        verbose_name=_("Wurzelknollen"),
-    )
 
     class Meta:
         verbose_name = _("Pflanze")

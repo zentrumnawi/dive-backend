@@ -441,6 +441,7 @@ class Blossom(models.Model):
     griffel_sub = models.CharField(
         max_length=3,
         choices=GRIFFEL_SUB_CHOICES,
+        blank=True,
         verbose_name=_("Ständigkeit des Griffels ist sub-"),
     )
 

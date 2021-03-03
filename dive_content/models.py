@@ -91,8 +91,6 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Untergrund"),
     )
-    bloom = models.CharField(max_length=200, blank=True, verbose_name=_("Blütezeit"))
-
     prime_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )

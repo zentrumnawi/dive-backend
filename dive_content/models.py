@@ -47,8 +47,6 @@ class Plant(BaseProfile):
         ("fak", _("fakultative Mykorrhiza")),
     )
     GROUND_CHOICES = (
-        ("rei", _("nährstoffreich")),
-        ("arm", _("nährstoffarm")),
         ("leh", _("lehmig")),
         ("tor", _("torfig")),
         ("san", _("sandig")),
@@ -86,7 +84,6 @@ class Plant(BaseProfile):
             max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
         ),
         blank=True,
-        verbose_name=_("Untergrund"),
     )
 
     class Meta:

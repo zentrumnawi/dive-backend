@@ -67,9 +67,10 @@ class Plant(BaseProfile):
         verbose_name=_("Liste alternativer Trivialnamen"),
     )
     habitat = ArrayField(
-        base_field=models.CharField(max_length=3, choices=HABITAT_CHOICES),
+        base_field=models.CharField(
+            max_length=3, choices=HABITAT_CHOICES, verbose_name=_("Habitat")
+        ),
         blank=True,
-        verbose_name=_("Lebensraum"),
     )
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")

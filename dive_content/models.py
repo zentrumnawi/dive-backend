@@ -59,6 +59,22 @@ class Plant(BaseProfile):
         ("kry", _("Kryptophyt")),
         ("the", _("Therophyt")),
     )
+    GROWTHFORM_CHOICES = (
+        ("bau", _("Baum")),
+        ("str", _("Strauch")),
+        ("stb", _("Strauchbaum")),
+        ("zwe", _("Zwergstrauch")),
+        ("lia", _("Liane")),
+        ("kle", _("Kletterpflanze")),
+        ("hal", _("Halbstrauch")),
+        ("spa", _("Spalierstrauch")),
+        ("krc", _("krautiger Chemaephyt")),
+        ("geo", _("Geophyt")),
+        ("hel", _("Helophyt (Sumpfpflanze)")),
+        ("hyd", _("Hydrophyt (Wasserpflanze)")),
+        ("tau", _("Tauchpflanze")),
+        ("sch", _("Schwimmpflanze")),
+    )
 
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
@@ -97,6 +113,12 @@ class Plant(BaseProfile):
         choices=LIFEFORM_CHOICES,
         blank=True,
         verbose_name=_("Lebensform"),
+    )
+    growth_form = models.CharField(
+        max_length=3,
+        choices=GROWTHFORM_CHOICES,
+        blank=True,
+        verbose_name=_("Wuchsform"),
     )
 
     class Meta:

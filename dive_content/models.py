@@ -52,6 +52,13 @@ class Plant(BaseProfile):
         ("san", _("sandig")),
         ("ste", _("steinig/felsig")),
     )
+    LIFEFORM_CHOICES = (
+        ("pha", _("Phanerophyt")),
+        ("cha", _("Chamaephyt")),
+        ("hem", _("Hemikryptophyt")),
+        ("kry", _("Kryptophyt")),
+        ("the", _("Therophyt")),
+    )
 
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
@@ -84,6 +91,12 @@ class Plant(BaseProfile):
             max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
         ),
         blank=True,
+    )
+    life_form = models.CharField(
+        max_length=3,
+        choices=LIFEFORM_CHOICES,
+        blank=True,
+        verbose_name=_("Lebensform"),
     )
 
     class Meta:

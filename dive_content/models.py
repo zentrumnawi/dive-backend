@@ -328,13 +328,6 @@ class Sprout(models.Model):
 
 
 class Fruit(models.Model):
-
-    spread = models.CharField(
-        max_length=2,
-        choices=SPREAD_CHOICES,
-        blank=True,
-        verbose_name=_("Ausbreitungsform"),
-    )
     pos = models.CharField(
         max_length=2,
         choices=FRUIT_POS_CHOICES,

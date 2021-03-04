@@ -240,7 +240,6 @@ SP_DIAM_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
-SPREAD_CHOICES = (("sa", _("Samen")), ("sp", _("Sporen")))
 FRUIT_POS_CHOICES = (
     ("fr", _("Fruchtknoten")),
     ("za", _("Zapfenschuppe")),

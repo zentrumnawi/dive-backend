@@ -75,6 +75,10 @@ class Plant(BaseProfile):
         ("tau", _("Tauchpflanze")),
         ("sch", _("Schwimmpflanze")),
     )
+    DISPERSAL_CHOICES = (
+        ("sa", _("Samenpflanze")),
+        ("sp", _("Sporenpflanze")),
+    )
 
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
@@ -125,6 +129,12 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Wuchshöhe"),
         help_text="Bsp. 10-15 cm",
+    )
+    dispersal = models.CharField(
+        max_length=2,
+        choices=DISPERSAL_CHOICES,
+        blank=True,
+        verbose_name=_("Ausbreitungsform"),
     )
 
     class Meta:

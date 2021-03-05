@@ -14,7 +14,6 @@ from .choices import *
 
 
 class Plant(BaseProfile):
-
     HABITAT_CHOICES = (
         ("sch", _("Schlammfluren")),
         ("roe", _("Röhrichte")),
@@ -175,7 +174,6 @@ class Plant(BaseProfile):
 
 
 class Leaf(models.Model):
-
     nerves = models.CharField(
         max_length=3, choices=NERV_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
@@ -294,98 +292,6 @@ class Leaf(models.Model):
     class Meta:
         verbose_name = _("Blatt")
         verbose_name_plural = _("Blätter")
-
-
-class Sprout(models.Model):
-
-    appear = models.CharField(
-        max_length=1,
-        choices=(("k", _("krautig")), ("h", _("holzig"))),
-        blank=True,
-        verbose_name=_("Erscheinung"),
-    )
-    pos = models.CharField(
-        max_length=3,
-        choices=POSITION_CHOICES,
-        blank=True,
-        verbose_name=_("Wuchsorientierung"),
-    )
-    thick_flesh = models.CharField(
-        null=True,
-        blank=True,
-        max_length=3,
-        choices=YES_NO_CHOICES,
-        verbose_name=_("Dickfleischig"),
-    )
-    milk = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
-    )
-    rose = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose")
-    )
-    leafly = models.CharField(
-        max_length=3,
-        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
-        blank=True,
-        verbose_name=_("Beblätterung"),
-    )
-    diam = models.CharField(
-        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
-    )
-    sur_texture = models.CharField(
-        max_length=3,
-        choices=SUR_TEXTURE_CHOICES,
-        blank=True,
-        verbose_name=_("Sprossoberfläche"),
-    )
-    primary_root = models.CharField(
-        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
-    )
-    blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
-    cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
-
-    plant = models.OneToOneField(
-        Plant,
-        on_delete=models.CASCADE,
-        related_name="sprout",
-        verbose_name=_("Pflanze"),
-    )
-
-    class Meta:
-        verbose_name = _("Spross")
-        verbose_name_plural = _("Spross")
-
-
-class Fruit(models.Model):
-    pos = models.CharField(
-        max_length=2,
-        choices=FRUIT_POS_CHOICES,
-        blank=True,
-        verbose_name=_("Lage der Samenanlage"),
-    )
-    type = models.CharField(
-        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
-    )
-
-    cnt = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
-    form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
-    wings = models.CharField(
-        max_length=200,
-        blank=True,
-        verbose_name=_("Beflügelung"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
-    )
-    wings_spec = models.CharField(
-        max_length=200, blank=True, verbose_name=_("Beflügelung Besonderheit")
-    )
-
-    plant = models.OneToOneField(
-        Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
-    )
-
-    class Meta:
-        verbose_name = _("Frucht")
-        verbose_name_plural = _("Früchte")
 
 
 class Blossom(models.Model):
@@ -563,8 +469,98 @@ class Blossom(models.Model):
         verbose_name_plural = _("Blüten")
 
 
-class ZeigerNumber(models.Model):
+class Fruit(models.Model):
+    pos = models.CharField(
+        max_length=2,
+        choices=FRUIT_POS_CHOICES,
+        blank=True,
+        verbose_name=_("Lage der Samenanlage"),
+    )
+    type = models.CharField(
+        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
+    )
 
+    cnt = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
+    form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
+    wings = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Beflügelung"),
+        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+    )
+    wings_spec = models.CharField(
+        max_length=200, blank=True, verbose_name=_("Beflügelung Besonderheit")
+    )
+
+    plant = models.OneToOneField(
+        Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
+    )
+
+    class Meta:
+        verbose_name = _("Frucht")
+        verbose_name_plural = _("Früchte")
+
+
+class Sprout(models.Model):
+    appear = models.CharField(
+        max_length=1,
+        choices=(("k", _("krautig")), ("h", _("holzig"))),
+        blank=True,
+        verbose_name=_("Erscheinung"),
+    )
+    pos = models.CharField(
+        max_length=3,
+        choices=POSITION_CHOICES,
+        blank=True,
+        verbose_name=_("Wuchsorientierung"),
+    )
+    thick_flesh = models.CharField(
+        null=True,
+        blank=True,
+        max_length=3,
+        choices=YES_NO_CHOICES,
+        verbose_name=_("Dickfleischig"),
+    )
+    milk = models.CharField(
+        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
+    )
+    rose = models.CharField(
+        max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose")
+    )
+    leafly = models.CharField(
+        max_length=3,
+        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
+        blank=True,
+        verbose_name=_("Beblätterung"),
+    )
+    diam = models.CharField(
+        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
+    )
+    sur_texture = models.CharField(
+        max_length=3,
+        choices=SUR_TEXTURE_CHOICES,
+        blank=True,
+        verbose_name=_("Sprossoberfläche"),
+    )
+    primary_root = models.CharField(
+        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
+    )
+    blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
+    cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
+
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="sprout",
+        verbose_name=_("Pflanze"),
+    )
+
+    class Meta:
+        verbose_name = _("Spross")
+        verbose_name_plural = _("Spross")
+
+
+class ZeigerNumber(models.Model):
     light_number = models.CharField(
         max_length=100,
         choices=LIGHT_CHOICES,

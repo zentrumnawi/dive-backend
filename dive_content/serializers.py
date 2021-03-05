@@ -83,9 +83,9 @@ class LeafSerializer(DisplayNameModelSerializer):
             return instance.get_arr_cuts_display()
 
 
-class SproutSerializer(DisplayNameModelSerializer):
+class BlossomSerializer(DisplayNameModelSerializer):
     class Meta:
-        model = Sprout
+        model = Blossom
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
@@ -97,9 +97,9 @@ class FruitSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
-class BlossomSerializer(DisplayNameModelSerializer):
+class SproutSerializer(DisplayNameModelSerializer):
     class Meta:
-        model = Blossom
+        model = Sprout
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
@@ -125,11 +125,11 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
 
 class PlantSerializer(DisplayNameModelSerializer):
     leaf = LeafSerializer()
-    sprout = SproutSerializer()
-    fruit = FruitSerializer()
     blossom = BlossomSerializer()
-    photographs = PhotographSerializer(many=True)
+    fruit = FruitSerializer()
+    sprout = SproutSerializer()
     zeigernumber = ZeigerNumberSerializer()
+    photographs = PhotographSerializer(many=True)
 
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True

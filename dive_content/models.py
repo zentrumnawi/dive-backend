@@ -169,6 +169,9 @@ class Plant(BaseProfile):
 
     get_ground_output.short_description = _("Untergrund (Ausgabe)")
 
+    def __str__(self):
+        return self.name
+
 
 Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
 

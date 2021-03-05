@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from solid_backend.content.models import BaseProfile
@@ -140,6 +141,20 @@ class Plant(BaseProfile):
     class Meta:
         verbose_name = _("Pflanze")
         verbose_name_plural = _("Pflanzen")
+
+    def taxonomy(self):
+        tree_node = getattr(self, "tree_node")
+        leaf = "<i>{}</i> / <i>{}</i>".format(tree_node.name, self.name)
+
+        if tree_node.is_root_node():
+            output = leaf
+        else:
+            ancestors = " / ".join(obj.name for obj in tree_node.get_ancestors())
+            output = ancestors + " / " + leaf
+
+        return format_html(output)
+
+    taxonomy.short_description = _("Taxonomie")
 
 
 Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")

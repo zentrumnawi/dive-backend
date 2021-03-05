@@ -134,6 +134,11 @@ class PlantSerializer(DisplayNameModelSerializer):
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True
     )
+    ground = serializers.CharField(
+        source="get_ground_output",
+        label=Plant._meta.get_field("ground").base_field.verbose_name,
+        read_only=True,
+    )
 
     class Meta:
         model = Plant

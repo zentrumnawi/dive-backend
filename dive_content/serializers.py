@@ -131,6 +131,10 @@ class PlantSerializer(DisplayNameModelSerializer):
     photographs = PhotographSerializer(many=True)
     zeigernumber = ZeigerNumberSerializer()
 
+    taxonomy = serializers.CharField(
+        label=Plant.taxonomy.short_description, read_only=True
+    )
+
     class Meta:
         model = Plant
         fields = "__all__"

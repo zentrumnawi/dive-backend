@@ -81,6 +81,7 @@ class Plant(BaseProfile):
         ("sp", _("Sporenpflanze")),
     )
 
+    BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
     )
@@ -171,9 +172,6 @@ class Plant(BaseProfile):
 
     def __str__(self):
         return self.name
-
-
-Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
 
 
 class Leaf(models.Model):

@@ -118,18 +118,16 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
             "react_extra",
             "nutri_extra",
         ]
-        swagger_schema_fields = {
-            "title": str(model._meta.verbose_name),
-        }
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class PlantSerializer(DisplayNameModelSerializer):
-    leaf = LeafSerializer()
-    blossom = BlossomSerializer()
-    fruit = FruitSerializer()
-    sprout = SproutSerializer()
-    zeigernumber = ZeigerNumberSerializer()
-    photographs = PhotographSerializer(many=True)
+    leaf = LeafSerializer(required=False)
+    blossom = BlossomSerializer(required=False)
+    fruit = FruitSerializer(required=False)
+    sprout = SproutSerializer(required=False)
+    zeigernumber = ZeigerNumberSerializer(required=False)
+    photographs = PhotographSerializer(many=True, required=False)
 
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True
@@ -144,7 +142,4 @@ class PlantSerializer(DisplayNameModelSerializer):
         model = Plant
         fields = "__all__"
         depth = 1
-        swagger_schema_fields = {
-            "title": str(model._meta.verbose_name),
-            "required": ["name", "trivial_name"],
-        }
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}

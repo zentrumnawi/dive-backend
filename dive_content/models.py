@@ -59,7 +59,7 @@ class Plant(BaseProfile):
         ("kry", _("Kryptophyt")),
         ("the", _("Therophyt")),
     )
-    GROWTHFORM_CHOICES = (
+    GROWTH_FORM_CHOICES = (
         ("bau", _("Baum")),
         ("str", _("Strauch")),
         ("stb", _("Strauchbaum")),
@@ -122,7 +122,7 @@ class Plant(BaseProfile):
     )
     growth_form = models.CharField(
         max_length=3,
-        choices=GROWTHFORM_CHOICES,
+        choices=GROWTH_FORM_CHOICES,
         blank=True,
         verbose_name=_("Wuchsform"),
     )

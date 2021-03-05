@@ -33,6 +33,7 @@ class ZeigerNumberInline(admin.StackedInline):
 
 class PlantAdmin(admin.ModelAdmin):
     form = PlantAdminForm
+    readonly_fields = ("taxonomy",)
     list_display = ("id", "name", "trivial_name")
     list_display_links = ("name",)
     inlines = [

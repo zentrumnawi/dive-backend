@@ -52,7 +52,7 @@ class Plant(BaseProfile):
         ("san", _("sandig")),
         ("ste", _("steinig/felsig")),
     )
-    LIFEFORM_CHOICES = (
+    LIFE_FORM_CHOICES = (
         ("pha", _("Phanerophyt")),
         ("cha", _("Chamaephyt")),
         ("hem", _("Hemikryptophyt")),
@@ -116,7 +116,7 @@ class Plant(BaseProfile):
     )
     life_form = models.CharField(
         max_length=3,
-        choices=LIFEFORM_CHOICES,
+        choices=LIFE_FORM_CHOICES,
         blank=True,
         verbose_name=_("Lebensform"),
     )

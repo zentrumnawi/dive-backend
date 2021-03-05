@@ -157,6 +157,18 @@ class Plant(BaseProfile):
 
     taxonomy.short_description = _("Taxonomie")
 
+    def get_ground_output(self):
+        if self.ground:
+            output = " bis ".join(
+                str(dict(self.GROUND_CHOICES).get(item)) for item in self.ground
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_ground_output.short_description = _("Untergrund (Ausgabe)")
+
 
 Plant._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
 

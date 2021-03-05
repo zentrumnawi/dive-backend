@@ -11,8 +11,8 @@ class LeafInline(admin.StackedInline):
     classes = ("collapse",)
 
 
-class SproutInline(admin.StackedInline):
-    model = Sprout
+class BlossomInline(admin.StackedInline):
+    model = Blossom
     classes = ("collapse",)
 
 
@@ -21,8 +21,8 @@ class FruitInline(admin.StackedInline):
     classes = ("collapse",)
 
 
-class BlossomInline(admin.StackedInline):
-    model = Blossom
+class SproutInline(admin.StackedInline):
+    model = Sprout
     classes = ("collapse",)
 
 
@@ -38,17 +38,17 @@ class PlantAdmin(admin.ModelAdmin):
     list_display_links = ("name",)
     inlines = [
         LeafInline,
-        SproutInline,
-        FruitInline,
         BlossomInline,
+        FruitInline,
+        SproutInline,
         ZeigerNumberInline,
         PhotographInline,
     ]
 
 
-admin.site.register(Leaf, admin.ModelAdmin)
-admin.site.register(Sprout, admin.ModelAdmin)
-admin.site.register(Fruit, admin.ModelAdmin)
-admin.site.register(Blossom, admin.ModelAdmin)
 admin.site.register(Plant, PlantAdmin)
+admin.site.register(Leaf, admin.ModelAdmin)
+admin.site.register(Blossom, admin.ModelAdmin)
+admin.site.register(Fruit, admin.ModelAdmin)
+admin.site.register(Sprout, admin.ModelAdmin)
 admin.site.register(ZeigerNumber, admin.ModelAdmin)

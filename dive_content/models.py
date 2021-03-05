@@ -111,6 +111,7 @@ class Plant(BaseProfile):
         base_field=models.CharField(
             max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
         ),
+        size=2,
         blank=True,
     )
     life_form = models.CharField(

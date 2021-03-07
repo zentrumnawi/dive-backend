@@ -44,6 +44,10 @@ CUT_CHOICES = (
     ("gep", _("gespalten")),
     ("get", _("geteilt")),
     ("ges", _("geschnitten")),
+    ("gef", _("gefingert")),
+    ("zus", _("zusammengesetzt")),
+    ("fis", _("fiederschnittig")),
+    ("fie", _("gefiedert")),
 )
 ARR_CHOICES = (
     ("han", _("handförmig/fingerförmig")),

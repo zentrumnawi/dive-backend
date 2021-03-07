@@ -218,6 +218,14 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Tiefe von Einschnitten"),
     )
+    dep_cuts_array = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=CUT_CHOICES, verbose_name=_("Tiefe von Einschnitten"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     arr_cuts = models.CharField(
         max_length=3,
         choices=ARR_CHOICES,

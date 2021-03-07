@@ -38,7 +38,6 @@ POS_CHOICES = (
     ("ges", _("gescheitelt")),
 )
 SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
-SPR_STRUCTURE_CHOICES = (("ei", _("Einschnitte")), ("bl", _("Blättchen")))
 CUT_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),

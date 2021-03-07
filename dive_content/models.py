@@ -189,6 +189,16 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Anheftung an Sprossachse"),
     )
+    att_axis_array = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=AXIS_CHOICES,
+            verbose_name=_("Anheftung an Sprossachse"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     sheath = models.CharField(
         max_length=100,
         blank=True,

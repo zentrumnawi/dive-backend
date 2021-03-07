@@ -65,7 +65,6 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
-    arr_cuts = serializers.SerializerMethodField("get_arr_combined")
     att_axis = serializers.CharField(
         source="get_att_axis_output",
         label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
@@ -79,18 +78,8 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Leaf
-        exclude = ["plant", "arr_special"]
+        exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
-
-    def get_arr_combined(self, instance):
-        if instance.arr_special:
-            return (
-                "{} und buchtig".format(instance.get_arr_cuts_display())
-                if instance.arr_cuts
-                else "buchtig"
-            )
-        else:
-            return instance.get_arr_cuts_display()
 
 
 class BlossomSerializer(DisplayNameModelSerializer):

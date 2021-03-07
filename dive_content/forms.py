@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import Plant
+from .choices import *
+from .models import Leaf, Plant
 
 
 class PlantAdminForm(forms.ModelForm):
@@ -13,4 +14,12 @@ class PlantAdminForm(forms.ModelForm):
         choices=Plant.GROUND_CHOICES,
         required=False,
         label=Plant._meta.get_field("ground").base_field.verbose_name,
+    )
+
+
+class LeafAdminForm(forms.ModelForm):
+    att_axis = forms.MultipleChoiceField(
+        choices=AXIS_CHOICES,
+        required=False,
+        label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
     )

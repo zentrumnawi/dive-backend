@@ -288,6 +288,18 @@ class Leaf(models.Model):
         verbose_name = _("Blatt")
         verbose_name_plural = _("Blätter")
 
+    def get_att_axis_output(self):
+        if self.att_axis:
+            output = " bis ".join(
+                str(dict(AXIS_CHOICES).get(item)) for item in self.att_axis
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_att_axis_output.short_description = _("Anheftung an Sprossachse (Ausgabe)")
+
 
 class Blossom(models.Model):
     season = models.CharField(

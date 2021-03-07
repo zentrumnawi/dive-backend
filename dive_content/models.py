@@ -183,12 +183,6 @@ class Leaf(models.Model):
         null=True,
         verbose_name=_("Anzahl der Keimblätter"),
     )
-    att_axis = models.CharField(
-        max_length=3,
-        choices=AXIS_CHOICES,
-        blank=True,
-        verbose_name=_("Anheftung an Sprossachse"),
-    )
     att_axis_array = ArrayField(
         base_field=models.CharField(
             max_length=3,

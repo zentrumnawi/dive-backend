@@ -226,9 +226,6 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Anordnung der Spreite"),
     )
-    arr_special = models.BooleanField(
-        default=False, verbose_name=_("Anordnung ist buchtig.")
-    )
     form = models.CharField(
         max_length=3,
         choices=FORM_CHOICES,

@@ -302,6 +302,18 @@ class Leaf(models.Model):
 
     get_att_axis_output.short_description = _("Anheftung an Sprossachse (Ausgabe)")
 
+    def get_dep_cuts_output(self):
+        if self.dep_cuts:
+            output = " bis ".join(
+                str(dict(CUT_CHOICES).get(item)) for item in self.dep_cuts
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_dep_cuts_output.short_description = _("Tiefe von Einschnitten (Ausgabe)")
+
 
 class Blossom(models.Model):
     season = models.CharField(

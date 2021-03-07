@@ -66,6 +66,11 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
 
 class LeafSerializer(DisplayNameModelSerializer):
     arr_cuts = serializers.SerializerMethodField("get_arr_combined")
+    att_axis = serializers.CharField(
+        source="get_att_axis_output",
+        label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
+        read_only=True,
+    )
 
     class Meta:
         model = Leaf

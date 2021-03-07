@@ -1,13 +1,14 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import PlantAdminForm
+from .forms import LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
+    form = LeafAdminForm
     classes = ("collapse",)
 
 

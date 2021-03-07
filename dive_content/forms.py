@@ -23,3 +23,8 @@ class LeafAdminForm(forms.ModelForm):
         required=False,
         label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
     )
+    dep_cuts = forms.MultipleChoiceField(
+        choices=CUT_CHOICES,
+        required=False,
+        label=Leaf._meta.get_field("dep_cuts").base_field.verbose_name,
+    )

@@ -229,9 +229,6 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Gestalt der Spreite"),
     )
-    count = models.CharField(
-        max_length=200, blank=True, verbose_name=_("Anzahl Blättchen")
-    )
     leaflets = models.CharField(
         max_length=3,
         choices=LEAFLET_CHOICES,

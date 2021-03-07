@@ -48,7 +48,14 @@ class PlantAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Plant, PlantAdmin)
-admin.site.register(Leaf, admin.ModelAdmin)
+
+
+class LeafAdmin(admin.ModelAdmin):
+    model = Leaf
+    form = LeafAdminForm
+
+
+admin.site.register(Leaf, LeafAdmin)
 admin.site.register(Blossom, admin.ModelAdmin)
 admin.site.register(Fruit, admin.ModelAdmin)
 admin.site.register(Sprout, admin.ModelAdmin)

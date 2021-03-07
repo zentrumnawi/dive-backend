@@ -71,6 +71,11 @@ class LeafSerializer(DisplayNameModelSerializer):
         label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
         read_only=True,
     )
+    dep_cuts = serializers.CharField(
+        source="get_dep_cuts_output",
+        label=Leaf._meta.get_field("dep_cuts").base_field.verbose_name,
+        read_only=True,
+    )
 
     class Meta:
         model = Leaf

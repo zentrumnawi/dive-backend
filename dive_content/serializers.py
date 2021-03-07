@@ -83,9 +83,9 @@ class LeafSerializer(DisplayNameModelSerializer):
             return instance.get_arr_cuts_display()
 
 
-class SproutSerializer(DisplayNameModelSerializer):
+class BlossomSerializer(DisplayNameModelSerializer):
     class Meta:
-        model = Sprout
+        model = Blossom
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
@@ -97,9 +97,9 @@ class FruitSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
-class BlossomSerializer(DisplayNameModelSerializer):
+class SproutSerializer(DisplayNameModelSerializer):
     class Meta:
-        model = Blossom
+        model = Sprout
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
@@ -118,24 +118,28 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
             "react_extra",
             "nutri_extra",
         ]
-        swagger_schema_fields = {
-            "title": str(model._meta.verbose_name),
-        }
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
 
 class PlantSerializer(DisplayNameModelSerializer):
-    leaf = LeafSerializer()
-    sprout = SproutSerializer()
-    fruit = FruitSerializer()
-    blossom = BlossomSerializer()
-    photographs = PhotographSerializer(many=True)
-    zeigernumber = ZeigerNumberSerializer()
+    leaf = LeafSerializer(required=False)
+    blossom = BlossomSerializer(required=False)
+    fruit = FruitSerializer(required=False)
+    sprout = SproutSerializer(required=False)
+    zeigernumber = ZeigerNumberSerializer(required=False)
+    photographs = PhotographSerializer(many=True, required=False)
+
+    taxonomy = serializers.CharField(
+        label=Plant.taxonomy.short_description, read_only=True
+    )
+    ground = serializers.CharField(
+        source="get_ground_output",
+        label=Plant._meta.get_field("ground").base_field.verbose_name,
+        read_only=True,
+    )
 
     class Meta:
         model = Plant
         fields = "__all__"
         depth = 1
-        swagger_schema_fields = {
-            "title": str(model._meta.verbose_name),
-            "required": ["name", "trivial_name", "bloom"],
-        }
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}

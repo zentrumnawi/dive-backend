@@ -1,6 +1,8 @@
 from django.utils.translation import ugettext_lazy as _
 
 
+# Leaf choices
+
 NERV_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
@@ -201,71 +203,11 @@ SP_TOP_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
-POSITION_CHOICES = (
-    ("auf", _("aufrecht")),
-    ("aua", _("aufrecht-abstehend")),
-    ("abs", _("abstehend")),
-    ("spa", _("sparrig")),
-    ("zur", _("zurückgeschlagen")),
-    ("lie", _("liegend")),
-    ("kri", _("kriechend")),
-    ("aus", _("aufsteigend/aufstrebend")),
-    ("gek", _("gekniet")),
-    ("ueb", _("übergebogen")),
-    ("nic", _("nickend")),
-    ("hae", _("hängend")),
-    ("flu", _("flutend")),
-    ("Ran", _("Rankenpflanze")),
-    ("Win", _("Windepflanze")),
-    ("Spr", _("Spreizklimmer")),
-    ("Wur", _("Wurzelkletterer")),
-    ("hor", _("horstig")),
-    ("loc", _("lockerrasig")),
-)
-SP_DIAM_CHOICES = (
-    ("sti", _("stielrund")),
-    ("hal", _("halbstielrund")),
-    ("zus", _("zusammengedrückt")),
-    ("zwe", _("zweischneidig")),
-    ("kan", _("kantig")),
-    ("stu", _("stumpfkantig")),
-    ("ger", _("gerieft /gerillt")),
-    ("gef", _("gefurcht")),
-    ("kan", _("kantig gefurcht /scharfkantig")),
-    ("gri", _("gerippt")),
-    ("gfl", _("geflügelt")),
-    ("kno", _("knotig")),
-)
-SPREAD_CHOICES = (("sa", _("Samen")), ("sp", _("Sporen")))
-FRUIT_POS_CHOICES = (
-    ("fr", _("Fruchtknoten")),
-    ("za", _("Zapfenschuppe")),
-    ("sp", _("Sprossachse")),
-)
-TYPE_CHOICES = (
-    ("nus", _("Nuss")),
-    ("kar", _("Karyopse")),
-    ("ach", _("Achäne")),
-    ("bee", _("Beere")),
-    ("ste", _("Steinfrucht")),
-    ("bal", _("Balgfrucht")),
-    ("hue", _("Hülse")),
-    ("kap", _("Kapsel")),
-    ("sos", _("Schote ohne Scheidewand")),
-    ("smf", _("Schote mit falscher Scheidewand")),
-    ("soe", _("Schötchen")),
-    ("spa", _("Spaltfrucht")),
-    ("kok", _("Kokke")),
-    ("dop", _("Doppelachäne")),
-    ("bru", _("Bruchfrucht")),
-    ("glh", _("Gliederhülse")),
-    ("gls", _("Gliederschote")),
-    ("kla", _("Klausenfrucht")),
-    ("sam", _("Sammelbalgfrucht")),
-    ("nue", _("Nüsschen")),
-    ("stc", _("Steinfrüchtchen")),
-    ("bac", _("Balgfrüchtchen")),
-)
+YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
+
+
+# Blossom choices
+
 BL_TYPE_CHOICES = (
     ("ein", _("einzeln")),
     ("tra", _("Traube")),
@@ -388,6 +330,12 @@ GRIFFEL_CHOICES = (
     ("gr", _("grundständig")),
     ("gy", _("gynobasisch")),
 )
+GRIFFEL_SUB_CHOICES = (
+    ("end", _("subendständig")),
+    ("sei", _("subseitenständig")),
+    ("gru", _("subgrundständig")),
+    ("gyn", _("subgynobasisch")),
+)
 SPEC_SPORN_CHOICES = (
     ("ro", _("röhrig")),
     ("ke", _("keulig")),
@@ -419,13 +367,83 @@ GROUND_CHOICES = (
     ("re", _("reitend")),
     ("hi", _("hinfällig")),
 )
-YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
-GRIFFEL_SUB_CHOICES = (
-    ("end", _("subendständig")),
-    ("sei", _("subseitenständig")),
-    ("gru", _("subgrundständig")),
-    ("gyn", _("subgynobasisch")),
+
+
+# Fruit choices
+
+FRUIT_POS_CHOICES = (
+    ("fr", _("Fruchtknoten")),
+    ("za", _("Zapfenschuppe")),
+    ("sp", _("Sprossachse")),
 )
+TYPE_CHOICES = (
+    ("nus", _("Nuss")),
+    ("kar", _("Karyopse")),
+    ("ach", _("Achäne")),
+    ("bee", _("Beere")),
+    ("ste", _("Steinfrucht")),
+    ("bal", _("Balgfrucht")),
+    ("hue", _("Hülse")),
+    ("kap", _("Kapsel")),
+    ("sos", _("Schote ohne Scheidewand")),
+    ("smf", _("Schote mit falscher Scheidewand")),
+    ("soe", _("Schötchen")),
+    ("spa", _("Spaltfrucht")),
+    ("kok", _("Kokke")),
+    ("dop", _("Doppelachäne")),
+    ("bru", _("Bruchfrucht")),
+    ("glh", _("Gliederhülse")),
+    ("gls", _("Gliederschote")),
+    ("kla", _("Klausenfrucht")),
+    ("sam", _("Sammelbalgfrucht")),
+    ("nue", _("Nüsschen")),
+    ("stc", _("Steinfrüchtchen")),
+    ("bac", _("Balgfrüchtchen")),
+)
+
+
+# Sprout choices
+
+POSITION_CHOICES = (
+    ("auf", _("aufrecht")),
+    ("aua", _("aufrecht-abstehend")),
+    ("abs", _("abstehend")),
+    ("spa", _("sparrig")),
+    ("zur", _("zurückgeschlagen")),
+    ("lie", _("liegend")),
+    ("kri", _("kriechend")),
+    ("aus", _("aufsteigend/aufstrebend")),
+    ("gek", _("gekniet")),
+    ("ueb", _("übergebogen")),
+    ("nic", _("nickend")),
+    ("hae", _("hängend")),
+    ("flu", _("flutend")),
+    ("Ran", _("Rankenpflanze")),
+    ("Win", _("Windepflanze")),
+    ("Spr", _("Spreizklimmer")),
+    ("Wur", _("Wurzelkletterer")),
+    ("hor", _("horstig")),
+    ("loc", _("lockerrasig")),
+)
+SP_DIAM_CHOICES = (
+    ("sti", _("stielrund")),
+    ("hal", _("halbstielrund")),
+    ("zus", _("zusammengedrückt")),
+    ("zwe", _("zweischneidig")),
+    ("kan", _("kantig")),
+    ("stu", _("stumpfkantig")),
+    ("ger", _("gerieft /gerillt")),
+    ("gef", _("gefurcht")),
+    ("kan", _("kantig gefurcht /scharfkantig")),
+    ("gri", _("gerippt")),
+    ("gfl", _("geflügelt")),
+    ("kno", _("knotig")),
+)
+ROOT_CHOICES = (
+    ("erh", _("erhalten")),
+    ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
+)
+
 
 # ZeigerNumber Choices
 
@@ -452,7 +470,6 @@ LIGHT_CHOICES = (
     ("L? - ungeklärtes Verhalten", "L? - ungeklärtes Verhalten"),
     ("nicht angegeben", "nicht angegeben"),
 )
-
 TEMP_CHOICES = (
     ("T1 - Kältezeiger", "T1 - Kältezeiger"),
     ("T2 - zwischen Kälte- und Kühlezeiger", "T2 - zwischen Kälte- und Kühlezeiger"),
@@ -476,7 +493,6 @@ TEMP_CHOICES = (
     ("T? - ungeklärtes Verhalten", "T? - ungeklärtes Verhalten"),
     ("nicht angegeben", "nicht angegeben"),
 )
-
 HUMID_CHOICES = (
     ("F1 - Starktrockniszeiger", "F1 - Starktrockniszeiger"),
     (
@@ -507,7 +523,6 @@ HUMID_CHOICES = (
     ("F= - Überschwemmungszeiger", "F= - Überschwemmungszeiger"),
     ("nicht angegeben", "nicht angegeben"),
 )
-
 REACT_CHOICES = (
     ("R1 - Starksäurezeiger", "R1 - Starksäurezeiger"),
     (
@@ -575,5 +590,4 @@ NUTRIENT_CHOICES = (
     ("N? - ungeklärtes Verhalten", "N? - ungeklärtes Verhalten"),
     ("nicht angegeben", "nicht angegeben"),
 )
-
 ZEIGER_EXTRA = (("~", "~"), ("(?)", "(?)"))

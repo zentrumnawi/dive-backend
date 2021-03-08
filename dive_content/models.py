@@ -236,6 +236,16 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Gestalt der Spreite"),
     )
+    blade_undiv = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=FORM_CHOICES,
+            verbose_name=_("Gestalt der Spreite (ungeteiltes Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     leaflets = models.CharField(
         max_length=3,
         choices=LEAFLET_CHOICES,

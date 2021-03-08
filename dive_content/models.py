@@ -220,12 +220,6 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
-    arr_cuts = models.CharField(
-        max_length=3,
-        choices=ARR_CHOICES,
-        blank=True,
-        verbose_name=_("Anordnung der Spreite"),
-    )
     blade_div = ArrayField(
         base_field=models.CharField(
             max_length=3,

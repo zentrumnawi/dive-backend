@@ -230,12 +230,6 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
-    form = models.CharField(
-        max_length=3,
-        choices=FORM_CHOICES,
-        blank=True,
-        verbose_name=_("Gestalt der Spreite"),
-    )
     blade_undiv = ArrayField(
         base_field=models.CharField(
             max_length=3,

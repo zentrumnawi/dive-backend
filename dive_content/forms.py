@@ -29,12 +29,12 @@ class LeafAdminForm(forms.ModelForm):
         label=Leaf._meta.get_field("dep_cuts").base_field.verbose_name,
     )
     blade_div = forms.MultipleChoiceField(
-        choices=ARR_CHOICES,
+        choices=BLADE_DIV_CHOICES,
         required=False,
         label=Leaf._meta.get_field("blade_div").base_field.verbose_name,
     )
     blade_undiv = forms.MultipleChoiceField(
-        choices=FORM_CHOICES,
+        choices=BLADE_UNDIV_CHOICES,
         required=False,
         label=Leaf._meta.get_field("blade_undiv").base_field.verbose_name,
     )

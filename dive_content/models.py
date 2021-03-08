@@ -223,7 +223,7 @@ class Leaf(models.Model):
     blade_div = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=ARR_CHOICES,
+            choices=BLADE_DIV_CHOICES,
             verbose_name=_("Gestalt der Spreite (geteiltes Blatt)"),
         ),
         size=2,
@@ -233,7 +233,7 @@ class Leaf(models.Model):
     blade_undiv = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=FORM_CHOICES,
+            choices=BLADE_UNDIV_CHOICES,
             verbose_name=_("Gestalt der Spreite (ungeteiltes Blatt)"),
         ),
         size=2,
@@ -322,7 +322,7 @@ class Leaf(models.Model):
     def get_blade_div_output(self):
         if self.blade_div:
             output = " bis ".join(
-                str(dict(ARR_CHOICES).get(item)) for item in self.blade_div
+                str(dict(BLADE_DIV_CHOICES).get(item)) for item in self.blade_div
             )
         else:
             output = ""
@@ -336,7 +336,7 @@ class Leaf(models.Model):
     def get_blade_undiv_output(self):
         if self.blade_undiv:
             output = " bis ".join(
-                str(dict(FORM_CHOICES).get(item)) for item in self.blade_undiv
+                str(dict(BLADE_UNDIV_CHOICES).get(item)) for item in self.blade_undiv
             )
         else:
             output = ""

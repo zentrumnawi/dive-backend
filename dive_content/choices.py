@@ -49,7 +49,7 @@ CUT_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("fie", _("gefiedert")),
 )
-ARR_CHOICES = (
+BLADE_DIV_CHOICES = (
     ("han", _("handförmig")),
     ("gef", _("gefingert")),
     ("fif", _("fiederförmig")),
@@ -69,7 +69,7 @@ ARR_CHOICES = (
     ("kam", _("kammförmig")),
     ("fus", _("fußförmig")),
 )
-FORM_CHOICES = (
+BLADE_UNDIV_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
     ("ell", _("elliptisch")),

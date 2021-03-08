@@ -226,6 +226,16 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Anordnung der Spreite"),
     )
+    blade_div = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=ARR_CHOICES,
+            verbose_name=_("Gestalt der Spreite (geteiltes Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     form = models.CharField(
         max_length=3,
         choices=FORM_CHOICES,

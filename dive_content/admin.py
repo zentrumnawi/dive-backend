@@ -9,7 +9,11 @@ from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 class LeafInline(admin.StackedInline):
     model = Leaf
     form = LeafAdminForm
-    readonly_fields = ("get_att_axis_output", "get_dep_cuts_output")
+    readonly_fields = (
+        "get_att_axis_output",
+        "get_dep_cuts_output",
+        "get_blade_div_output",
+    )
     classes = ("collapse",)
 
 
@@ -54,7 +58,11 @@ admin.site.register(Plant, PlantAdmin)
 class LeafAdmin(admin.ModelAdmin):
     model = Leaf
     form = LeafAdminForm
-    readonly_fields = ("get_att_axis_output", "get_dep_cuts_output")
+    readonly_fields = (
+        "get_att_axis_output",
+        "get_dep_cuts_output",
+        "get_blade_div_output",
+    )
 
 
 admin.site.register(Leaf, LeafAdmin)

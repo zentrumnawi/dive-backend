@@ -315,6 +315,20 @@ class Leaf(models.Model):
 
     get_dep_cuts_output.short_description = _("Tiefe von Einschnitten (Ausgabe)")
 
+    def get_blade_div_output(self):
+        if self.blade_div:
+            output = " bis ".join(
+                str(dict(ARR_CHOICES).get(item)) for item in self.blade_div
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_blade_div_output.short_description = _(
+        "Gestalt der Spreite (geteiltes Blatt) (Ausgabe)"
+    )
+
 
 class Blossom(models.Model):
     season = models.CharField(

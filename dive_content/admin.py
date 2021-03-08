@@ -13,6 +13,7 @@ class LeafInline(admin.StackedInline):
         "get_att_axis_output",
         "get_dep_cuts_output",
         "get_blade_div_output",
+        "get_blade_undiv_output",
     )
     classes = ("collapse",)
 
@@ -62,6 +63,7 @@ class LeafAdmin(admin.ModelAdmin):
         "get_att_axis_output",
         "get_dep_cuts_output",
         "get_blade_div_output",
+        "get_blade_undiv_output",
     )
 
 

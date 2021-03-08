@@ -333,6 +333,20 @@ class Leaf(models.Model):
         "Gestalt der Spreite (geteiltes Blatt) (Ausgabe)"
     )
 
+    def get_blade_undiv_output(self):
+        if self.blade_undiv:
+            output = " bis ".join(
+                str(dict(FORM_CHOICES).get(item)) for item in self.blade_undiv
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_blade_undiv_output.short_description = _(
+        "Gestalt der Spreite (ungeteiltes Blatt) (Ausgabe)"
+    )
+
 
 class Blossom(models.Model):
     season = models.CharField(

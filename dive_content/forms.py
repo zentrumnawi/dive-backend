@@ -48,3 +48,8 @@ class LeafAdminForm(forms.ModelForm):
         required=False,
         label=Leaf._meta.get_field("surface").base_field.verbose_name,
     )
+    stipule_margin = forms.MultipleChoiceField(
+        choices=MARGIN_CHOICES,
+        required=False,
+        label=Leaf._meta.get_field("stipule_margin").base_field.verbose_name,
+    )

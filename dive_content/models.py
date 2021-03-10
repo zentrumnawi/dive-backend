@@ -371,7 +371,7 @@ class Leaf(models.Model):
     get_margin_output.short_description = _("Spreiten-/Blättchenrand (Ausgabe)")
 
     def get_surface_output(self):
-        if self.margin:
+        if self.surface:
             output = " bis ".join(
                 str(dict(SURFACE_CHOICES).get(item)) for item in self.surface
             )

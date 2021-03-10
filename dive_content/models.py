@@ -382,6 +382,18 @@ class Leaf(models.Model):
 
     get_surface_output.short_description = _("Blattoberfläche (Ausgabe)")
 
+    def get_stipule_margin_output(self):
+        if self.stipule_margin:
+            output = " bis ".join(
+                str(dict(MARGIN_CHOICES).get(item)) for item in self.stipule_margin
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_stipule_margin_output.short_description = _("Nebenblattrand (Ausgabe)")
+
 
 class Blossom(models.Model):
     season = models.CharField(

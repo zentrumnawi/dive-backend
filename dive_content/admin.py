@@ -16,6 +16,7 @@ class LeafInline(admin.StackedInline):
         "get_blade_undiv_output",
         "get_margin_output",
         "get_surface_output",
+        "get_stipule_margin_output",
     )
     classes = ("collapse",)
 
@@ -67,6 +68,7 @@ class LeafAdmin(admin.ModelAdmin):
         "get_blade_div_output",
         "get_blade_undiv_output",
         "get_surface_output",
+        "get_stipule_margin_output",
     )
 
 

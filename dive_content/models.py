@@ -267,6 +267,14 @@ class Leaf(models.Model):
     side_leaf = models.CharField(
         max_length=3, choices=SIDE_CHOICES, blank=True, verbose_name=_("Nebenblattrand")
     )
+    stipule_margin = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=SIDE_CHOICES, verbose_name=_("Nebenblattrand"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     diam = models.CharField(
         max_length=3, choices=DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
     )

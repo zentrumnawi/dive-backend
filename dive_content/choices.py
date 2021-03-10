@@ -99,22 +99,6 @@ BLADE_UNDIV_CHOICES = (
     ("sup", _("schuppenförmig")),
     ("sil", _("schildförmig")),
 )
-LEAFLET_CHOICES = (
-    (("dor"), _("dornig")),
-    ("gan", _("ganzrandig")),
-    ("ges", _("gesägt")),
-    ("dop", _("doppelt gesägt")),
-    ("rue", _("rückwärts gesägt")),
-    ("gez", _("gezähnt")),
-    ("gzt", _("gezähnelt")),
-    ("gef", _("gefranst")),
-    ("gek", _("gekerbt")),
-    ("geb", _("gebuchtet")),
-    ("ges", _("geschweift")),
-    ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rauh")),
-    ("rra", _("rückwärts rauh")),
-)
 MARGIN_CHOICES = (
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),

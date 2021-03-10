@@ -240,12 +240,6 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
-    leaflets = models.CharField(
-        max_length=3,
-        choices=LEAFLET_CHOICES,
-        blank=True,
-        verbose_name=_("Spreiten-/Blättchenrand"),
-    )
     margin = ArrayField(
         base_field=models.CharField(
             max_length=3,

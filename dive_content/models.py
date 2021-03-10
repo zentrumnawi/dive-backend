@@ -246,6 +246,16 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Spreiten-/Blättchenrand"),
     )
+    margin = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=MARGIN_CHOICES,
+            verbose_name=_("Spreiten-/Blättchenrand"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     texture = models.CharField(
         max_length=3,
         choices=TEXTURE_CHOICES,

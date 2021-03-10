@@ -4,6 +4,15 @@ from .choices import *
 from .models import Leaf, Plant
 
 
+class ArrayMultipleChoiceField(forms.MultipleChoiceField):
+    def __init__(self, model, array_field_name, *args, **kwargs):
+        required = kwargs.pop("required", False)
+        label = kwargs.pop(
+            "label", model._meta.get_field(array_field_name).base_field.verbose_name,
+        )
+        super().__init__(*args, required=required, label=label, **kwargs)
+
+
 class PlantAdminForm(forms.ModelForm):
     habitat = forms.MultipleChoiceField(
         choices=Plant.HABITAT_CHOICES,
@@ -18,38 +27,14 @@ class PlantAdminForm(forms.ModelForm):
 
 
 class LeafAdminForm(forms.ModelForm):
-    att_axis = forms.MultipleChoiceField(
-        choices=AXIS_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
+    att_axis = ArrayMultipleChoiceField(Leaf, "att_axis", choices=AXIS_CHOICES)
+    dep_cuts = ArrayMultipleChoiceField(Leaf, "dep_cuts", choices=CUT_CHOICES)
+    blade_div = ArrayMultipleChoiceField(Leaf, "blade_div", choices=BLADE_DIV_CHOICES)
+    blade_undiv = ArrayMultipleChoiceField(
+        Leaf, "blade_undiv", choices=BLADE_UNDIV_CHOICES
     )
-    dep_cuts = forms.MultipleChoiceField(
-        choices=CUT_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("dep_cuts").base_field.verbose_name,
-    )
-    blade_div = forms.MultipleChoiceField(
-        choices=BLADE_DIV_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("blade_div").base_field.verbose_name,
-    )
-    blade_undiv = forms.MultipleChoiceField(
-        choices=BLADE_UNDIV_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("blade_undiv").base_field.verbose_name,
-    )
-    margin = forms.MultipleChoiceField(
-        choices=MARGIN_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("margin").base_field.verbose_name,
-    )
-    surface = forms.MultipleChoiceField(
-        choices=SURFACE_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("surface").base_field.verbose_name,
-    )
-    stipule_margin = forms.MultipleChoiceField(
-        choices=MARGIN_CHOICES,
-        required=False,
-        label=Leaf._meta.get_field("stipule_margin").base_field.verbose_name,
+    margin = ArrayMultipleChoiceField(Leaf, "margin", choices=MARGIN_CHOICES)
+    surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
+    stipule_margin = ArrayMultipleChoiceField(
+        Leaf, "stipule_margin", choices=MARGIN_CHOICES
     )

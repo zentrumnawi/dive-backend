@@ -262,6 +262,14 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Blattoberfläche"),
     )
+    surface = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Blattoberfläche"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     side_leaf = models.CharField(
         max_length=3, choices=SIDE_CHOICES, blank=True, verbose_name=_("Nebenblattrand")
     )

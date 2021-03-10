@@ -85,6 +85,11 @@ class LeafSerializer(DisplayNameModelSerializer):
         label=Leaf._meta.get_field("blade_undiv").base_field.verbose_name,
         read_only=True,
     )
+    margin = serializers.CharField(
+        source="get_margin_output",
+        label=Leaf._meta.get_field("margin").base_field.verbose_name,
+        read_only=True,
+    )
 
     class Meta:
         model = Leaf

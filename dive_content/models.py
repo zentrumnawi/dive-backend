@@ -266,7 +266,7 @@ class Leaf(models.Model):
     )
     stipule_margin = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=SIDE_CHOICES, verbose_name=_("Nebenblattrand"),
+            max_length=3, choices=MARGIN_CHOICES, verbose_name=_("Nebenblattrand"),
         ),
         size=2,
         blank=True,

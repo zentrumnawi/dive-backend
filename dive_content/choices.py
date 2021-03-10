@@ -110,10 +110,10 @@ MARGIN_CHOICES = (
     ("gef", _("gefranst")),
     ("gek", _("gekerbt")),
     ("geb", _("gebuchtet")),
-    ("ges", _("geschweift")),
+    ("gew", _("geschweift")),
     ("bew", _("bewimpert")),
     ("vor", _("vorwärts rauh")),
-    ("rra", _("rückwärts rauh")),
+    ("rur", _("rückwärts rauh")),
 )
 TEXTURE_CHOICES = (
     ("kra", _("krautig")),
@@ -154,21 +154,6 @@ SURFACE_CHOICES = (
     ("bae", _("bärtig")),
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
-)
-SIDE_CHOICES = (
-    ("gan", _("ganzrandig")),
-    ("ges", _("gesägt")),
-    ("dop", _("doppelt gesägt")),
-    ("rue", _("rückwärts gesägt")),
-    ("gez", _("gezähnt")),
-    ("gzt", _("gezähnelt")),
-    ("gef", _("gefranst")),
-    ("gek", _("gekerbt")),
-    ("geb", _("gebuchtet")),
-    ("gew", _("geschweift")),
-    ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rauh")),
-    ("rur", _("rückwärts rauh")),
 )
 DIAM_CHOICES = (
     ("zur", _("zurückgerollt/umgerollt")),

@@ -38,3 +38,8 @@ class LeafAdminForm(forms.ModelForm):
         required=False,
         label=Leaf._meta.get_field("blade_undiv").base_field.verbose_name,
     )
+    margin = forms.MultipleChoiceField(
+        choices=MARGIN_CHOICES,
+        required=False,
+        label=Leaf._meta.get_field("margin").base_field.verbose_name,
+    )

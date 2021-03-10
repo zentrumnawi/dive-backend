@@ -351,6 +351,18 @@ class Leaf(models.Model):
         "Gestalt der Spreite (ungeteiltes Blatt) (Ausgabe)"
     )
 
+    def get_margin_output(self):
+        if self.margin:
+            output = " bis ".join(
+                str(dict(MARGIN_CHOICES).get(item)) for item in self.margin
+            )
+        else:
+            output = ""
+
+        return output
+
+    get_margin_output.short_description = _("Spreiten-/Blättchenrand (Ausgabe)")
+
 
 class Blossom(models.Model):
     season = models.CharField(

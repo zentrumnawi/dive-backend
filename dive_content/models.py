@@ -256,12 +256,6 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Beschaffenheit"),
     )
-    sur_texture = models.CharField(
-        max_length=3,
-        choices=SUR_TEXTURE_CHOICES,
-        blank=True,
-        verbose_name=_("Blattoberfläche"),
-    )
     surface = ArrayField(
         base_field=models.CharField(
             max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Blattoberfläche"),

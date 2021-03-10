@@ -123,38 +123,6 @@ TEXTURE_CHOICES = (
     ("imm", _("immergrün")),
     ("sta", _("starr/steif")),
 )
-SUR_TEXTURE_CHOICES = (
-    ("gla", _("glatt")),
-    ("run", _("runzelig")),
-    ("rau", _("rauh")),
-    ("vra", _("vorwärts rauh")),
-    ("ber", _("bereift")),
-    ("bes", _("bestäubt/bemehlt")),
-    ("pap", _("papillös")),
-    ("pun", _("punktiert")),
-    ("swi", _("schwielig")),
-    ("kah", _("kahl")),
-    ("ver", _("verkahlend")),
-    ("fla", _("flaumhaarig/weichhaarig")),
-    ("sei", _("seidenhaarig")),
-    ("spi", _("spinnwebig")),
-    ("flo", _("flockig")),
-    ("sam", _("samthaarig")),
-    ("fil", _("filzig")),
-    ("wol", _("wollig")),
-    ("zot", _("zottig")),
-    ("rah", _("rauhaarig")),
-    ("ste", _("steifhaarig")),
-    ("gew", _("gewimpert")),
-    ("dru", _("drüsenhaarig")),
-    ("ste", _("sternhaarig")),
-    ("sdh", _("schildhaarig")),
-    ("sup", _("schuppenhaarig/schuppig")),
-    ("sue", _("schülferig")),
-    ("bae", _("bärtig")),
-    ("ach", _("achselbärtig")),
-    ("nac", _("nackt")),
-)
 SURFACE_CHOICES = (
     ("gla", _("glatt")),
     ("run", _("runzelig")),
@@ -469,6 +437,7 @@ SP_DIAM_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
+SUR_TEXTURE_CHOICES = SURFACE_CHOICES
 ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("ersetzt durch sprossbürtige Wurzeln")),

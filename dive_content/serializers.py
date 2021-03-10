@@ -64,42 +64,26 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
+class ArrayCharField(serializers.CharField):
+    def __init__(self, model, array_field_name, *args, **kwargs):
+        source = kwargs.pop("source", "get_{}_output".format(array_field_name))
+        label = kwargs.pop(
+            "label", model._meta.get_field(array_field_name).base_field.verbose_name,
+        )
+        read_only = kwargs.pop("read_only", True)
+        super().__init__(
+            *args, source=source, label=label, read_only=read_only, **kwargs
+        )
+
+
 class LeafSerializer(DisplayNameModelSerializer):
-    att_axis = serializers.CharField(
-        source="get_att_axis_output",
-        label=Leaf._meta.get_field("att_axis").base_field.verbose_name,
-        read_only=True,
-    )
-    dep_cuts = serializers.CharField(
-        source="get_dep_cuts_output",
-        label=Leaf._meta.get_field("dep_cuts").base_field.verbose_name,
-        read_only=True,
-    )
-    blade_div = serializers.CharField(
-        source="get_blade_div_output",
-        label=Leaf._meta.get_field("blade_div").base_field.verbose_name,
-        read_only=True,
-    )
-    blade_undiv = serializers.CharField(
-        source="get_blade_undiv_output",
-        label=Leaf._meta.get_field("blade_undiv").base_field.verbose_name,
-        read_only=True,
-    )
-    margin = serializers.CharField(
-        source="get_margin_output",
-        label=Leaf._meta.get_field("margin").base_field.verbose_name,
-        read_only=True,
-    )
-    surface = serializers.CharField(
-        source="get_surface_output",
-        label=Leaf._meta.get_field("surface").base_field.verbose_name,
-        read_only=True,
-    )
-    stipule_margin = serializers.CharField(
-        source="get_stipule_margin_output",
-        label=Leaf._meta.get_field("stipule_margin").base_field.verbose_name,
-        read_only=True,
-    )
+    att_axis = ArrayCharField(Leaf, "att_axis")
+    dep_cuts = ArrayCharField(Leaf, "dep_cuts")
+    blade_div = ArrayCharField(Leaf, "blade_div")
+    blade_undiv = ArrayCharField(Leaf, "blade_undiv")
+    margin = ArrayCharField(Leaf, "margin")
+    surface = ArrayCharField(Leaf, "surface")
+    stipule_margin = ArrayCharField(Leaf, "stipule_margin")
 
     class Meta:
         model = Leaf

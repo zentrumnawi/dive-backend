@@ -5,19 +5,22 @@ from .forms import LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
+leaf_readonly_fields = (
+    "get_att_axis_output",
+    "get_dep_cuts_output",
+    "get_blade_div_output",
+    "get_blade_undiv_output",
+    "get_margin_output",
+    "get_surface_output",
+    "get_stipule_margin_output",
+)
+
+
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
     form = LeafAdminForm
-    readonly_fields = (
-        "get_att_axis_output",
-        "get_dep_cuts_output",
-        "get_blade_div_output",
-        "get_blade_undiv_output",
-        "get_margin_output",
-        "get_surface_output",
-        "get_stipule_margin_output",
-    )
+    readonly_fields = leaf_readonly_fields
     classes = ("collapse",)
 
 
@@ -62,14 +65,7 @@ admin.site.register(Plant, PlantAdmin)
 class LeafAdmin(admin.ModelAdmin):
     model = Leaf
     form = LeafAdminForm
-    readonly_fields = (
-        "get_att_axis_output",
-        "get_dep_cuts_output",
-        "get_blade_div_output",
-        "get_blade_undiv_output",
-        "get_surface_output",
-        "get_stipule_margin_output",
-    )
+    readonly_fields = leaf_readonly_fields
 
 
 admin.site.register(Leaf, LeafAdmin)

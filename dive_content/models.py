@@ -294,7 +294,7 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
     )
-    thick_flesh = models.CharField(
+    succulence = models.CharField(
         null=True,
         blank=True,
         max_length=3,

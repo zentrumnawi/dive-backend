@@ -630,9 +630,6 @@ class Sprout(models.Model):
     milk = models.CharField(
         max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
     )
-    rose = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose")
-    )
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),

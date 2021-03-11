@@ -186,7 +186,7 @@ SP_TOP_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
-YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
+SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
 
 
 # Blossom choices
@@ -408,6 +408,7 @@ POSITION_CHOICES = (
     ("hor", _("horstig")),
     ("loc", _("lockerrasig")),
 )
+YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 SP_DIAM_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),

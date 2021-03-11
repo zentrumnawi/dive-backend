@@ -187,7 +187,10 @@ SP_TOP_CHOICES = (
     ("aus", _("ausgerandet")),
 )
 SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
-
+ROSETTE_CHOICES = (
+    ("vor", _("Grundblattrossette vorhanden")),
+    (("kei"), _("keine Grundblattrosette")),
+)
 
 # Blossom choices
 

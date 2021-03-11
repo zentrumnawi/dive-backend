@@ -300,6 +300,12 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Dickfleischigkeit"),
     )
+    rosette = models.CharField(
+        max_length=3,
+        choices=ROSETTE_CHOICES,
+        blank=True,
+        verbose_name=_("Grundblattrosette"),
+    )
 
     class Meta:
         verbose_name = _("Blatt")

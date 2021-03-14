@@ -175,7 +175,7 @@ class Plant(BaseProfile):
 
 class Leaf(models.Model):
     plant = models.OneToOneField(
-        Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
+        Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
     veins = models.CharField(
         max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
@@ -184,7 +184,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=DIVISION_CHOICES,
         blank=True,
-        verbose_name=_("Aufteilung der Blattspreite"),
+        verbose_name=_("Spreitengliederung"),
     )
     succulence = models.CharField(
         max_length=3,
@@ -208,7 +208,7 @@ class Leaf(models.Model):
         base_field=models.CharField(
             max_length=3,
             choices=ATTACHMENT_CHOICES,
-            verbose_name=_("Anheftung an Sprossachse"),
+            verbose_name=_("Anheftung (an Sprossachse)"),
         ),
         size=2,
         blank=True,
@@ -218,7 +218,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=ARRANGMENT_CHOICES,
         blank=True,
-        verbose_name=_("Stellung an Sprossachse"),
+        verbose_name=_("Anordnung (an Sprossachse)"),
     )
     rosette = models.CharField(
         max_length=3,
@@ -230,7 +230,7 @@ class Leaf(models.Model):
         base_field=models.CharField(
             max_length=3,
             choices=BLADE_SUBDIV_SHAPE_CHOICES,
-            verbose_name=_("Gestalt der Spreite (geteiltes Blatt)"),
+            verbose_name=_("Spreitengestalt (unterteiltes Blatt)"),
         ),
         size=2,
         blank=True,
@@ -240,7 +240,7 @@ class Leaf(models.Model):
         base_field=models.CharField(
             max_length=3,
             choices=INCISION_DEPTH_CHOICES,
-            verbose_name=_("Tiefe von Einschnitten"),
+            verbose_name=_("Einschnitttiefe"),
         ),
         size=2,
         blank=True,
@@ -250,7 +250,7 @@ class Leaf(models.Model):
         base_field=models.CharField(
             max_length=3,
             choices=BLADE_UNDIV_SHAPE_CHOICES,
-            verbose_name=_("Gestalt der Spreite (ungeteiltes Blatt)"),
+            verbose_name=_("Spreitengestalt (ungeteiltes Blatt)"),
         ),
         size=2,
         blank=True,
@@ -295,19 +295,19 @@ class Leaf(models.Model):
         max_length=200,
         blank=True,
         verbose_name=_("Besondere Merkmale"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
     sheath = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Blattscheide"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
     seed_leaf_num = models.IntegerField(
         choices=((1, 1), (2, 2)),
         blank=True,
         null=True,
-        verbose_name=_("Anzahl der Keimblätter"),
+        verbose_name=_("Keimblattanzahl"),
     )
 
     class Meta:

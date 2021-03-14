@@ -13,6 +13,14 @@ from .choices import *
 # the profiles.
 
 
+def concatenate(field, choices):
+    if field:
+        output = " bis ".join(str(dict(choices).get(item)) for item in field)
+    else:
+        output = ""
+    return output
+
+
 class Plant(BaseProfile):
     HABITAT_CHOICES = (
         ("sch", _("Schlammfluren")),
@@ -315,93 +323,41 @@ class Leaf(models.Model):
         verbose_name_plural = _("Blätter")
 
     def get_attachment_output(self):
-        if self.attachment:
-            output = " bis ".join(
-                str(dict(ATTACHMENT_CHOICES).get(item)) for item in self.attachment
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.attachment, ATTACHMENT_CHOICES)
 
     get_attachment_output.short_description = _("Anheftung an Sprossachse (Ausgabe)")
 
     def get_blade_subdiv_shape_output(self):
-        if self.blade_subdiv_shape:
-            output = " bis ".join(
-                str(dict(BLADE_SUBDIV_SHAPE_CHOICES).get(item))
-                for item in self.blade_subdiv_shape
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES)
 
     get_blade_subdiv_shape_output.short_description = _(
         "Gestalt der Spreite (geteiltes Blatt) (Ausgabe)"
     )
 
     def get_incision_depth_output(self):
-        if self.incision_depth:
-            output = " bis ".join(
-                str(dict(INCISION_DEPTH_CHOICES).get(item))
-                for item in self.incision_depth
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.incision_depth, INCISION_DEPTH_CHOICES)
 
     get_incision_depth_output.short_description = _("Tiefe von Einschnitten (Ausgabe)")
 
     def get_blade_undiv_shape_output(self):
-        if self.blade_undiv_shape:
-            output = " bis ".join(
-                str(dict(BLADE_UNDIV_SHAPE_CHOICES).get(item))
-                for item in self.blade_undiv_shape
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES)
 
     get_blade_undiv_shape_output.short_description = _(
         "Gestalt der Spreite (ungeteiltes Blatt) (Ausgabe)"
     )
 
     def get_edge_output(self):
-        if self.edge:
-            output = " bis ".join(
-                str(dict(EDGE_CHOICES).get(item)) for item in self.edge
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.edge, EDGE_CHOICES)
 
     get_edge_output.short_description = _("Spreiten-/Blättchenrand (Ausgabe)")
 
     def get_surface_output(self):
-        if self.surface:
-            output = " bis ".join(
-                str(dict(SURFACE_CHOICES).get(item)) for item in self.surface
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.surface, SURFACE_CHOICES)
 
     get_surface_output.short_description = _("Blattoberfläche (Ausgabe)")
 
     def get_stipule_edge_output(self):
-        if self.stipule_edge:
-            output = " bis ".join(
-                str(dict(EDGE_CHOICES).get(item)) for item in self.stipule_edge
-            )
-        else:
-            output = ""
-
-        return output
+        return concatenate(self.stipule_edge, EDGE_CHOICES)
 
     get_stipule_edge_output.short_description = _("Nebenblattrand (Ausgabe)")
 

@@ -27,14 +27,18 @@ class PlantAdminForm(forms.ModelForm):
 
 
 class LeafAdminForm(forms.ModelForm):
-    att_axis = ArrayMultipleChoiceField(Leaf, "att_axis", choices=AXIS_CHOICES)
-    blade_div = ArrayMultipleChoiceField(Leaf, "blade_div", choices=BLADE_DIV_CHOICES)
-    dep_cuts = ArrayMultipleChoiceField(Leaf, "dep_cuts", choices=CUT_CHOICES)
-    blade_undiv = ArrayMultipleChoiceField(
-        Leaf, "blade_undiv", choices=BLADE_UNDIV_CHOICES
+    attachment = ArrayMultipleChoiceField(
+        Leaf, "attachment", choices=ATTACHMENT_CHOICES
     )
-    margin = ArrayMultipleChoiceField(Leaf, "margin", choices=MARGIN_CHOICES)
+    blade_subdiv_shape = ArrayMultipleChoiceField(
+        Leaf, "blade_subdiv_shape", choices=BLADE_SUBDIV_SHAPE_CHOICES
+    )
+    incision_depth = ArrayMultipleChoiceField(
+        Leaf, "incision_depth", choices=INCISION_DEPTH_CHOICES
+    )
+    blade_undiv_shape = ArrayMultipleChoiceField(
+        Leaf, "blade_undiv_shape", choices=BLADE_UNDIV_SHAPE_CHOICES
+    )
+    edge = ArrayMultipleChoiceField(Leaf, "edge", choices=EDGE_CHOICES)
     surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
-    stipule_margin = ArrayMultipleChoiceField(
-        Leaf, "stipule_margin", choices=MARGIN_CHOICES
-    )
+    stipule_edge = ArrayMultipleChoiceField(Leaf, "stipule_edge", choices=EDGE_CHOICES)

@@ -77,13 +77,13 @@ class ArrayCharField(serializers.CharField):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
-    att_axis = ArrayCharField(Leaf, "att_axis")
-    blade_div = ArrayCharField(Leaf, "blade_div")
-    dep_cuts = ArrayCharField(Leaf, "dep_cuts")
-    blade_undiv = ArrayCharField(Leaf, "blade_undiv")
-    margin = ArrayCharField(Leaf, "margin")
+    attachment = ArrayCharField(Leaf, "attachment")
+    blade_subdiv_shape = ArrayCharField(Leaf, "blade_subdiv_shape")
+    incision_depth = ArrayCharField(Leaf, "incision_depth")
+    blade_undiv_shape = ArrayCharField(Leaf, "blade_undiv_shape")
+    edge = ArrayCharField(Leaf, "edge")
     surface = ArrayCharField(Leaf, "surface")
-    stipule_margin = ArrayCharField(Leaf, "stipule_margin")
+    stipule_edge = ArrayCharField(Leaf, "stipule_edge")
 
     class Meta:
         model = Leaf

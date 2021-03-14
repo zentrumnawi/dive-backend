@@ -6,13 +6,13 @@ from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
 leaf_readonly_fields = (
-    "get_att_axis_output",
-    "get_blade_div_output",
-    "get_dep_cuts_output",
-    "get_blade_undiv_output",
-    "get_margin_output",
+    "get_attachment_output",
+    "get_blade_subdiv_shape_output",
+    "get_incision_depth_output",
+    "get_blade_undiv_shape_output",
+    "get_edge_output",
     "get_surface_output",
-    "get_stipule_margin_output",
+    "get_stipule_edge_output",
 )
 
 

@@ -177,12 +177,12 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
     )
-    nerves = models.CharField(
-        max_length=3, choices=NERV_CHOICES, blank=True, verbose_name=_("Blattnerven")
+    veins = models.CharField(
+        max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
-    spr_whole = models.CharField(
+    division = models.CharField(
         max_length=3,
-        choices=SPR_WHOLE_CHOICES,
+        choices=DIVISION_CHOICES,
         blank=True,
         verbose_name=_("Aufteilung der Blattspreite"),
     )
@@ -198,22 +198,25 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Beschaffenheit"),
     )
-    diam = models.CharField(
-        max_length=3, choices=DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
+    cross_section = models.CharField(
+        max_length=3,
+        choices=CROSS_SECTION_CHOICES,
+        blank=True,
+        verbose_name=_("Querschnitt"),
     )
-    att_axis = ArrayField(
+    attachment = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=AXIS_CHOICES,
+            choices=ATTACHMENT_CHOICES,
             verbose_name=_("Anheftung an Sprossachse"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    pos_axis = models.CharField(
+    arrangement = models.CharField(
         max_length=3,
-        choices=POS_CHOICES,
+        choices=ARRANGMENT_CHOICES,
         blank=True,
         verbose_name=_("Stellung an Sprossachse"),
     )
@@ -223,38 +226,40 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Grundblattrosette"),
     )
-    blade_div = ArrayField(
+    blade_subdiv_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=BLADE_DIV_CHOICES,
+            choices=BLADE_SUBDIV_SHAPE_CHOICES,
             verbose_name=_("Gestalt der Spreite (geteiltes Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    dep_cuts = ArrayField(
+    incision_depth = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=CUT_CHOICES, verbose_name=_("Tiefe von Einschnitten"),
+            max_length=3,
+            choices=INCISION_DEPTH_CHOICES,
+            verbose_name=_("Tiefe von Einschnitten"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    blade_undiv = ArrayField(
+    blade_undiv_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=BLADE_UNDIV_CHOICES,
+            choices=BLADE_UNDIV_SHAPE_CHOICES,
             verbose_name=_("Gestalt der Spreite (ungeteiltes Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    margin = ArrayField(
+    edge = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=MARGIN_CHOICES,
+            choices=EDGE_CHOICES,
             verbose_name=_("Spreiten-/Blättchenrand"),
         ),
         size=2,
@@ -269,24 +274,24 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
-    stipule_margin = ArrayField(
+    stipule_edge = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=MARGIN_CHOICES, verbose_name=_("Nebenblattrand"),
+            max_length=3, choices=EDGE_CHOICES, verbose_name=_("Nebenblattrand"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    sp_ground = models.CharField(
-        max_length=3, choices=SP_CHOICES, blank=True, verbose_name=_("Spreitengrund")
+    base = models.CharField(
+        max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Spreitengrund")
     )
-    sp_top = models.CharField(
+    apex = models.CharField(
         max_length=3,
-        choices=SP_TOP_CHOICES,
+        choices=APEX_CHOICES,
         blank=True,
         verbose_name=_("Spreitenspitze"),
     )
-    specialty = models.CharField(
+    special_features = models.CharField(
         max_length=200,
         blank=True,
         verbose_name=_("Besondere Merkmale"),
@@ -298,7 +303,7 @@ class Leaf(models.Model):
         verbose_name=_("Blattscheide"),
         help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
     )
-    cnt_germ = models.IntegerField(
+    seed_leaf_num = models.IntegerField(
         choices=((1, 1), (2, 2)),
         blank=True,
         null=True,
@@ -309,69 +314,72 @@ class Leaf(models.Model):
         verbose_name = _("Blatt")
         verbose_name_plural = _("Blätter")
 
-    def get_att_axis_output(self):
-        if self.att_axis:
+    def get_attachment_output(self):
+        if self.attachment:
             output = " bis ".join(
-                str(dict(AXIS_CHOICES).get(item)) for item in self.att_axis
+                str(dict(ATTACHMENT_CHOICES).get(item)) for item in self.attachment
             )
         else:
             output = ""
 
         return output
 
-    get_att_axis_output.short_description = _("Anheftung an Sprossachse (Ausgabe)")
+    get_attachment_output.short_description = _("Anheftung an Sprossachse (Ausgabe)")
 
-    def get_blade_div_output(self):
-        if self.blade_div:
+    def get_blade_subdiv_shape_output(self):
+        if self.blade_subdiv_shape:
             output = " bis ".join(
-                str(dict(BLADE_DIV_CHOICES).get(item)) for item in self.blade_div
+                str(dict(BLADE_SUBDIV_SHAPE_CHOICES).get(item))
+                for item in self.blade_subdiv_shape
             )
         else:
             output = ""
 
         return output
 
-    get_blade_div_output.short_description = _(
+    get_blade_subdiv_shape_output.short_description = _(
         "Gestalt der Spreite (geteiltes Blatt) (Ausgabe)"
     )
 
-    def get_dep_cuts_output(self):
-        if self.dep_cuts:
+    def get_incision_depth_output(self):
+        if self.incision_depth:
             output = " bis ".join(
-                str(dict(CUT_CHOICES).get(item)) for item in self.dep_cuts
+                str(dict(INCISION_DEPTH_CHOICES).get(item))
+                for item in self.incision_depth
             )
         else:
             output = ""
 
         return output
 
-    get_dep_cuts_output.short_description = _("Tiefe von Einschnitten (Ausgabe)")
+    get_incision_depth_output.short_description = _("Tiefe von Einschnitten (Ausgabe)")
 
-    def get_blade_undiv_output(self):
-        if self.blade_undiv:
+    def get_blade_undiv_shape_output(self):
+        if self.blade_undiv_shape:
             output = " bis ".join(
-                str(dict(BLADE_UNDIV_CHOICES).get(item)) for item in self.blade_undiv
+                str(dict(BLADE_UNDIV_SHAPE_CHOICES).get(item))
+                for item in self.blade_undiv_shape
             )
         else:
             output = ""
 
         return output
 
-    get_blade_undiv_output.short_description = _(
+    get_blade_undiv_shape_output.short_description = _(
         "Gestalt der Spreite (ungeteiltes Blatt) (Ausgabe)"
     )
 
-    def get_margin_output(self):
-        if self.margin:
+    def get_edge_output(self):
+        if self.edge:
             output = " bis ".join(
-                str(dict(MARGIN_CHOICES).get(item)) for item in self.margin
+                str(dict(EDGE_CHOICES).get(item)) for item in self.edge
             )
         else:
             output = ""
 
         return output
 
-    get_margin_output.short_description = _("Spreiten-/Blättchenrand (Ausgabe)")
+    get_edge_output.short_description = _("Spreiten-/Blättchenrand (Ausgabe)")
 
     def get_surface_output(self):
         if self.surface:
@@ -385,17 +393,17 @@ class Leaf(models.Model):
 
     get_surface_output.short_description = _("Blattoberfläche (Ausgabe)")
 
-    def get_stipule_margin_output(self):
-        if self.stipule_margin:
+    def get_stipule_edge_output(self):
+        if self.stipule_edge:
             output = " bis ".join(
-                str(dict(MARGIN_CHOICES).get(item)) for item in self.stipule_margin
+                str(dict(EDGE_CHOICES).get(item)) for item in self.stipule_edge
             )
         else:
             output = ""
 
         return output
 
-    get_stipule_margin_output.short_description = _("Nebenblattrand (Ausgabe)")
+    get_stipule_edge_output.short_description = _("Nebenblattrand (Ausgabe)")
 
 
 class Blossom(models.Model):

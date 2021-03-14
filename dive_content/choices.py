@@ -11,6 +11,25 @@ NERV_CHOICES = (
     ("fus", _("fußnervig")),
     ("gab", _("gabelnervig")),
 )
+SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
+SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
+TEXTURE_CHOICES = (
+    ("kra", _("krautig")),
+    ("fle", _("fleischig")),
+    ("led", _("lederig")),
+    ("hae", _("häutig/trockenhäutig")),
+    ("imm", _("immergrün")),
+    ("sta", _("starr/steif")),
+)
+DIAM_CHOICES = (
+    ("zur", _("zurückgerollt/umgerollt")),
+    ("ein", _("eingerollt")),
+    ("zus", _("zusammengerollt")),
+    ("gef", _("gefalzt/gefaltet")),
+    ("rin", _("rinnig")),
+    ("gek", _("gekielt")),
+    ("dop", _("doppelrillig")),
+)
 AXIS_CHOICES = (
     ("ges", _("gestielt")),
     ("sit", _("sitzend/ungestielt")),
@@ -37,17 +56,9 @@ POS_CHOICES = (
     ("ein", _("einseitig")),
     ("ges", _("gescheitelt")),
 )
-SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
-CUT_CHOICES = (
-    ("gan", _("ganz/ungeteilt")),
-    ("gel", _("gelappt")),
-    ("gep", _("gespalten")),
-    ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
-    ("gef", _("gefingert")),
-    ("zus", _("zusammengesetzt")),
-    ("fis", _("fiederschnittig")),
-    ("fie", _("gefiedert")),
+ROSETTE_CHOICES = (
+    ("vor", _("Grundblattrossette vorhanden")),
+    (("kei"), _("keine Grundblattrosette")),
 )
 BLADE_DIV_CHOICES = (
     ("han", _("handförmig")),
@@ -68,6 +79,17 @@ BLADE_DIV_CHOICES = (
     ("sch", _("schrotsägeförmig")),
     ("kam", _("kammförmig")),
     ("fus", _("fußförmig")),
+)
+CUT_CHOICES = (
+    ("gan", _("ganz/ungeteilt")),
+    ("gel", _("gelappt")),
+    ("gep", _("gespalten")),
+    ("get", _("geteilt")),
+    ("ges", _("geschnitten")),
+    ("gef", _("gefingert")),
+    ("zus", _("zusammengesetzt")),
+    ("fis", _("fiederschnittig")),
+    ("fie", _("gefiedert")),
 )
 BLADE_UNDIV_CHOICES = (
     ("kre", _("kreisrund")),
@@ -115,14 +137,6 @@ MARGIN_CHOICES = (
     ("vor", _("vorwärts rauh")),
     ("rur", _("rückwärts rauh")),
 )
-TEXTURE_CHOICES = (
-    ("kra", _("krautig")),
-    ("fle", _("fleischig")),
-    ("led", _("lederig")),
-    ("hae", _("häutig/trockenhäutig")),
-    ("imm", _("immergrün")),
-    ("sta", _("starr/steif")),
-)
 SURFACE_CHOICES = (
     ("gla", _("glatt")),
     ("run", _("runzelig")),
@@ -155,15 +169,6 @@ SURFACE_CHOICES = (
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
 )
-DIAM_CHOICES = (
-    ("zur", _("zurückgerollt/umgerollt")),
-    ("ein", _("eingerollt")),
-    ("zus", _("zusammengerollt")),
-    ("gef", _("gefalzt/gefaltet")),
-    ("rin", _("rinnig")),
-    ("gek", _("gekielt")),
-    ("dop", _("doppelrillig")),
-)
 SP_CHOICES = (
     ("kei", _("keilig/keilförmig")),
     ("ver", _("verschmälert")),
@@ -186,11 +191,7 @@ SP_TOP_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
-SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
-ROSETTE_CHOICES = (
-    ("vor", _("Grundblattrossette vorhanden")),
-    (("kei"), _("keine Grundblattrosette")),
-)
+
 
 # Blossom choices
 

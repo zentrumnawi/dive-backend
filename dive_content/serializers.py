@@ -78,8 +78,8 @@ class ArrayCharField(serializers.CharField):
 
 class LeafSerializer(DisplayNameModelSerializer):
     att_axis = ArrayCharField(Leaf, "att_axis")
-    dep_cuts = ArrayCharField(Leaf, "dep_cuts")
     blade_div = ArrayCharField(Leaf, "blade_div")
+    dep_cuts = ArrayCharField(Leaf, "dep_cuts")
     blade_undiv = ArrayCharField(Leaf, "blade_undiv")
     margin = ArrayCharField(Leaf, "margin")
     surface = ArrayCharField(Leaf, "surface")

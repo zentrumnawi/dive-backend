@@ -28,8 +28,8 @@ class PlantAdminForm(forms.ModelForm):
 
 class LeafAdminForm(forms.ModelForm):
     att_axis = ArrayMultipleChoiceField(Leaf, "att_axis", choices=AXIS_CHOICES)
-    dep_cuts = ArrayMultipleChoiceField(Leaf, "dep_cuts", choices=CUT_CHOICES)
     blade_div = ArrayMultipleChoiceField(Leaf, "blade_div", choices=BLADE_DIV_CHOICES)
+    dep_cuts = ArrayMultipleChoiceField(Leaf, "dep_cuts", choices=CUT_CHOICES)
     blade_undiv = ArrayMultipleChoiceField(
         Leaf, "blade_undiv", choices=BLADE_UNDIV_CHOICES
     )

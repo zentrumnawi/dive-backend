@@ -4,7 +4,6 @@ from solid_backend.photograph.admin import PhotographInline
 from .forms import LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
-
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
     (

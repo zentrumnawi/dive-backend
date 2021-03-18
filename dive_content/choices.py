@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
 
-
 # Leaf choices
 
 VEINS_CHOICES = (

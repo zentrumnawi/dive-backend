@@ -2,7 +2,7 @@ from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .choices import *
-from .models import Plant, Leaf, Sprout, Fruit, Blossom, ZeigerNumber
+from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):

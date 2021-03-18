@@ -1,8 +1,7 @@
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-
 from solid_backend.content.models import BaseProfile
 
 from .choices import *

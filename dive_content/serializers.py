@@ -102,6 +102,7 @@ class LeafSerializer(DisplayNameModelSerializer):
     )
     leaf_general = serializers.SerializerMethodField(label="Blattfläche – allgemein")
     miscellaneous = serializers.SerializerMethodField(label="Sonstiges")
+    seed_leaf = serializers.SerializerMethodField(label="Keimblatt")
 
     class Meta:
         model = Leaf
@@ -267,6 +268,18 @@ class LeafSerializer(DisplayNameModelSerializer):
         if fields[1]:
             fields[1] = "Blattscheide {}".format(fields[1])
         text = "; ".join(filter(None, fields))
+
+        return format_sentence(text)
+
+    def get_seed_leaf(self, obj):
+        # Generate "Keimblatt" line.
+        num = obj.seed_leaf_num
+        if not num:
+            text = ""
+        elif num == 1:
+            text = "{} Keimblatt".format(num)
+        else:
+            text = "{} Keimblätter".format(num)
 
         return format_sentence(text)
 

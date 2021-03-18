@@ -77,14 +77,6 @@ class ArrayCharField(serializers.CharField):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
-    attachment = ArrayCharField(Leaf, "attachment")
-    blade_subdiv_shape = ArrayCharField(Leaf, "blade_subdiv_shape")
-    incision_depth = ArrayCharField(Leaf, "incision_depth")
-    blade_undiv_shape = ArrayCharField(Leaf, "blade_undiv_shape")
-    edge = ArrayCharField(Leaf, "edge")
-    surface = ArrayCharField(Leaf, "surface")
-    stipule_edge = ArrayCharField(Leaf, "stipule_edge")
-
     class Meta:
         model = Leaf
         exclude = ["plant"]

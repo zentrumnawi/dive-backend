@@ -13,18 +13,6 @@ from .choices import *
 # the profiles.
 
 
-def concatenate(field, choices):
-    if field:
-        output = " bis ".join(str(dict(choices).get(item)) for item in field)
-    else:
-        output = ""
-    return output
-
-
-def label(field_name):
-    return "Ausgabe [{}]".format(field_name)
-
-
 class Plant(BaseProfile):
     HABITAT_CHOICES = (
         ("sch", _("Schlammfluren")),

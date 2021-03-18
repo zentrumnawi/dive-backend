@@ -341,49 +341,6 @@ class Leaf(models.Model):
         verbose_name = _("Blatt")
         verbose_name_plural = _("Blätter")
 
-    def get_attachment_output(self):
-        return concatenate(self.attachment, ATTACHMENT_CHOICES)
-
-    get_attachment_output.short_description = label(attachment.base_field.verbose_name)
-
-    def get_blade_subdiv_shape_output(self):
-        return concatenate(self.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES)
-
-    get_blade_subdiv_shape_output.short_description = label(
-        blade_subdiv_shape.base_field.verbose_name
-    )
-
-    def get_incision_depth_output(self):
-        return concatenate(self.incision_depth, INCISION_DEPTH_CHOICES)
-
-    get_incision_depth_output.short_description = label(
-        incision_depth.base_field.verbose_name
-    )
-
-    def get_blade_undiv_shape_output(self):
-        return concatenate(self.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES)
-
-    get_blade_undiv_shape_output.short_description = label(
-        blade_undiv_shape.base_field.verbose_name
-    )
-
-    def get_edge_output(self):
-        return concatenate(self.edge, EDGE_CHOICES)
-
-    get_edge_output.short_description = label(edge.base_field.verbose_name)
-
-    def get_surface_output(self):
-        return concatenate(self.surface, SURFACE_CHOICES)
-
-    get_surface_output.short_description = label(surface.base_field.verbose_name)
-
-    def get_stipule_edge_output(self):
-        return concatenate(self.stipule_edge, EDGE_CHOICES)
-
-    get_stipule_edge_output.short_description = label(
-        stipule_edge.base_field.verbose_name
-    )
-
 
 class Blossom(models.Model):
     season = models.CharField(

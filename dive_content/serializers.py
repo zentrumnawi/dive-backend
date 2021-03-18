@@ -81,6 +81,15 @@ def concatenate(field, choices, app=""):
     return output
 
 
+def format_sentence(line):
+    if line:
+        line = line.split(" ", 1)
+        line[0] = line[0].capitalize()
+        line = " ".join(line)
+        line += "."
+    return line
+
+
 class LeafSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Leaf

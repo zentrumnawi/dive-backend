@@ -101,6 +101,7 @@ class LeafSerializer(DisplayNameModelSerializer):
         label="Blattfläche – einfaches Blatt"
     )
     leaf_general = serializers.SerializerMethodField(label="Blattfläche – allgemein")
+    miscellaneous = serializers.SerializerMethodField(label="Sonstiges")
 
     class Meta:
         model = Leaf
@@ -253,6 +254,19 @@ class LeafSerializer(DisplayNameModelSerializer):
                     fields[i] = "{} {}".format(text[i], field)
         fields[3] = ", ".join(filter(None, fields[3:]))
         text = "; ".join(filter(None, fields[:4]))
+
+        return format_sentence(text)
+
+    def get_miscellaneous(self, obj):
+        # Generate "Sonstiges" line.
+        fields = [
+            obj.special_features,
+            obj.sheath,
+        ]
+
+        if fields[1]:
+            fields[1] = "Blattscheide {}".format(fields[1])
+        text = "; ".join(filter(None, fields))
 
         return format_sentence(text)
 

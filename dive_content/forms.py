@@ -5,12 +5,16 @@ from .models import Leaf, Plant
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
-    def __init__(self, model, array_field_name, *args, **kwargs):
+    def __init__(self, model=None, field_name="", **kwargs):
+        if model and field_name:
+            _label = model._meta.get_field(field_name).base_field.verbose_name
+        else:
+            _label = None
+
         required = kwargs.pop("required", False)
-        label = kwargs.pop(
-            "label", model._meta.get_field(array_field_name).base_field.verbose_name,
-        )
-        super().__init__(*args, required=required, label=label, **kwargs)
+        label = kwargs.pop("label", _label)
+
+        super().__init__(required=required, label=label, **kwargs)
 
 
 class PlantAdminForm(forms.ModelForm):

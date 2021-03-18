@@ -93,6 +93,7 @@ def format_sentence(line):
 
 class LeafSerializer(DisplayNameModelSerializer):
     overview = serializers.SerializerMethodField(label="Überblick")
+    attachment = serializers.SerializerMethodField(label="Anheftung")
 
     class Meta:
         model = Leaf
@@ -123,6 +124,31 @@ class LeafSerializer(DisplayNameModelSerializer):
             if not text:
                 text = "Blätter"
             text += " mit {} Querschnitt".format(fields[4])
+
+        return format_sentence(text)
+
+    def get_attachment(self, obj):
+        # Generate "Anheftung" line.
+        fields = [
+            (obj.attachment, ATTACHMENT_CHOICES),
+            (obj.arrangement, ARRANGMENT_CHOICES),
+            (obj.rosette, ROSETTE_CHOICES),
+        ]
+
+        for i, field in enumerate(fields):
+            if field[0]:
+                fields[i] = concatenate(field[0], field[1])
+            else:
+                fields[i] = ""
+
+        text = ["sitzen", "stehen"]
+        for i, field in enumerate(fields[:2]):
+            if field:
+                fields[i] = "{} {}".format(text[i], field)
+        fields[1] = ", ".join(filter(None, fields[:2]))
+        if fields[1]:
+            fields[1] = "Blätter " + fields[1]
+        text = "; ".join(filter(None, fields[1:]))
 
         return format_sentence(text)
 

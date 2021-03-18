@@ -39,6 +39,9 @@ class LeafAdminForm(forms.ModelForm):
     blade_undiv_shape = ArrayMultipleChoiceField(
         Leaf, "blade_undiv_shape", choices=BLADE_UNDIV_SHAPE_CHOICES
     )
+    leaflet_incision_depth = ArrayMultipleChoiceField(
+        Leaf, "leaflet_incision_depth", choices=LEAFLET_INCISION_DEPTH_CHOICES
+    )
     edge = ArrayMultipleChoiceField(Leaf, "edge", choices=EDGE_CHOICES)
     surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
     stipule_edge = ArrayMultipleChoiceField(Leaf, "stipule_edge", choices=EDGE_CHOICES)

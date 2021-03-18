@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
+from .choices import *
 from .models import Plant, Leaf, Sprout, Fruit, Blossom, ZeigerNumber
 
 
@@ -91,10 +92,39 @@ def format_sentence(line):
 
 
 class LeafSerializer(DisplayNameModelSerializer):
+    overview = serializers.SerializerMethodField(label="Überblick")
+
     class Meta:
         model = Leaf
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_overview(self, obj):
+        # Generate "Überblick" line.
+        fields = [
+            (obj.veins, VEINS_CHOICES),
+            (obj.division, DIVISION_CHOICES),
+            (obj.succulence, SUCCULENCE_CHOICES),
+            (obj.texture, TEXTURE_CHOICES),
+            (obj.cross_section, CROSS_SECTION_CHOICES),
+        ]
+
+        app = {0: "e", 1: "e", 2: "e", 3: "e", 4: "em"}
+        for i, field in enumerate(fields):
+            if field[0]:
+                fields[i] = concatenate(field[0], field[1], app[i])
+            else:
+                fields[i] = ""
+
+        text = ", ".join(filter(None, fields[:4]))
+        if text:
+            text += " Blätter"
+        if fields[4]:
+            if not text:
+                text = "Blätter"
+            text += " mit {} Querschnitt".format(fields[4])
+
+        return format_sentence(text)
 
 
 class BlossomSerializer(DisplayNameModelSerializer):

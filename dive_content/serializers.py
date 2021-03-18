@@ -106,7 +106,15 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Leaf
-        exclude = ["plant"]
+        fields = [
+            "overview",
+            "attachment",
+            "leaf_compound",
+            "leaf_simple",
+            "leaf_general",
+            "miscellaneous",
+            "seed_leaf",
+        ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_overview(self, obj):

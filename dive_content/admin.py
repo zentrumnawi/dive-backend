@@ -5,15 +5,6 @@ from .forms import LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 
-leaf_readonly_fields = (
-    "get_attachment_output",
-    "get_blade_subdiv_shape_output",
-    "get_incision_depth_output",
-    "get_blade_undiv_shape_output",
-    "get_edge_output",
-    "get_surface_output",
-    "get_stipule_edge_output",
-)
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
     (
@@ -52,7 +43,6 @@ class LeafInline(admin.StackedInline):
     model = Leaf
     fieldsets = leaf_fieldsets
     form = LeafAdminForm
-    readonly_fields = leaf_readonly_fields
     classes = ("collapse",)
 
 
@@ -98,7 +88,6 @@ class LeafAdmin(admin.ModelAdmin):
     model = Leaf
     fieldsets = leaf_fieldsets
     form = LeafAdminForm
-    readonly_fields = leaf_readonly_fields
 
 
 admin.site.register(Leaf, LeafAdmin)

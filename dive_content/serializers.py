@@ -97,6 +97,9 @@ class LeafSerializer(DisplayNameModelSerializer):
     leaf_compound = serializers.SerializerMethodField(
         label="Blattfläche – zusammengesetztes Blatt"
     )
+    leaf_simple = serializers.SerializerMethodField(
+        label="Blattfläche – einfaches Blatt"
+    )
 
     class Meta:
         model = Leaf
@@ -188,6 +191,32 @@ class LeafSerializer(DisplayNameModelSerializer):
             else:
                 text = "Blätter mit "
             text += "-".join(filter(None, fields[4:7])) + " Blättchen"
+
+        return format_sentence(text)
+
+    def get_leaf_simple(self, obj):
+        # Generate "Blattfläche – einfaches Blatt" line.
+        fields = [
+            obj.leaf_simple_num,
+            (obj.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES),
+        ]
+
+        if fields[0]:
+            num = int(fields[0].split("-")[-1])
+        else:
+            num = 0
+        app = {1: "es"}
+        if fields[1][0]:
+            fields[1] = concatenate(fields[1][0], fields[1][1], app.get(num, "e"))
+        else:
+            fields[1] = ""
+
+        text = " ".join(filter(None, fields))
+        if text:
+            if num == 1:
+                text += " Blatt"
+            else:
+                text += " Blätter"
 
         return format_sentence(text)
 

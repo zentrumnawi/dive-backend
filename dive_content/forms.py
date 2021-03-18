@@ -1,7 +1,7 @@
 from django import forms
 
 from .choices import *
-from .fields import ArrayMultipleChoiceField
+from .fields import ArrayMultipleChoiceField, IntegerRangeCharField
 from .models import Leaf, Plant
 
 
@@ -37,3 +37,8 @@ class LeafAdminForm(forms.ModelForm):
     edge = ArrayMultipleChoiceField(Leaf, "edge", choices=EDGE_CHOICES)
     surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
     stipule_edge = ArrayMultipleChoiceField(Leaf, "stipule_edge", choices=EDGE_CHOICES)
+
+    leaf_comp_num = IntegerRangeCharField(Leaf, "leaf_comp_num")
+    incision_num = IntegerRangeCharField(Leaf, "incision_num")
+    leaflet_incision_num = IntegerRangeCharField(Leaf, "leaflet_incision_num")
+    leaf_simple_num = IntegerRangeCharField(Leaf, "leaf_simple_num")

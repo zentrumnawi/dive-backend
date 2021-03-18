@@ -37,12 +37,15 @@ leaf_fieldsets = (
     ),
     ("Keimblattmerkmale", {"fields": ("seed_leaf_num",)}),
 )
+leaf_radio_fields = {"seed_leaf_num": admin.HORIZONTAL}
+
 
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
     fieldsets = leaf_fieldsets
     form = LeafAdminForm
+    radio_fields = leaf_radio_fields
     classes = ("collapse",)
 
 
@@ -88,6 +91,7 @@ class LeafAdmin(admin.ModelAdmin):
     model = Leaf
     fieldsets = leaf_fieldsets
     form = LeafAdminForm
+    radio_fields = leaf_radio_fields
 
 
 admin.site.register(Leaf, LeafAdmin)

@@ -64,6 +64,23 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
+def concatenate(field, choices, app=""):
+    if field and type(field) is list:
+        output = " bis ".join(str(dict(choices).get(item)) + app for item in field)
+    elif field:
+        output = str(dict(choices).get(field)) + app
+    else:
+        output = ""
+
+    if app and ("/" in output):
+        output = output.split("/")
+        for i, item in enumerate(output[:-1]):
+            output[i] = item + app
+        output = "/".join(output)
+
+    return output
+
+
 class LeafSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Leaf

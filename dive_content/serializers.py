@@ -100,6 +100,7 @@ class LeafSerializer(DisplayNameModelSerializer):
     leaf_simple = serializers.SerializerMethodField(
         label="Blattfläche – einfaches Blatt"
     )
+    leaf_general = serializers.SerializerMethodField(label="Blattfläche – allgemein")
 
     class Meta:
         model = Leaf
@@ -217,6 +218,41 @@ class LeafSerializer(DisplayNameModelSerializer):
                 text += " Blatt"
             else:
                 text += " Blätter"
+
+        return format_sentence(text)
+
+    def get_leaf_general(self, obj):
+        # Generate "Blattfläche – allgemein" line.
+        fields = [
+            (obj.edge, EDGE_CHOICES),
+            (obj.surface, SURFACE_CHOICES),
+            (obj.stipule_edge, STIPULE_EDGE_CHOICES),
+            (obj.base, BASE_CHOICES),
+            (obj.apex, APEX_CHOICES),
+        ]
+
+        app = {0: "", 1: "e", 2: "e", 3: "", 4: ""}
+        for i, field in enumerate(fields):
+            if field[0]:
+                fields[i] = concatenate(field[0], field[1], app[i])
+            else:
+                fields[i] = ""
+
+        text = [
+            "Blattränder",
+            "Blattoberfläche",
+            "Nebenblattränder",
+            "Spreite am Grund",
+            "an der Spitze",
+        ]
+        for i, field in enumerate(fields):
+            if field:
+                if i in (1, 2):
+                    fields[i] = "{} {}".format(field, text[i])
+                else:
+                    fields[i] = "{} {}".format(text[i], field)
+        fields[3] = ", ".join(filter(None, fields[3:]))
+        text = "; ".join(filter(None, fields[:4]))
 
         return format_sentence(text)
 

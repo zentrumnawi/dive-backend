@@ -2,6 +2,19 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 
+class ArrayMultipleChoiceField(forms.MultipleChoiceField):
+    def __init__(self, model=None, field_name="", **kwargs):
+        if model and field_name:
+            _label = model._meta.get_field(field_name).base_field.verbose_name
+        else:
+            _label = None
+
+        required = kwargs.pop("required", False)
+        label = kwargs.pop("label", _label)
+
+        super().__init__(required=required, label=label, **kwargs)
+
+
 class IntegerRangeCharWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         widgets = (

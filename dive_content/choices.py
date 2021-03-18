@@ -169,6 +169,7 @@ SURFACE_CHOICES = (
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
 )
+STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
     ("kei", _("keilig/keilförmig")),
     ("ver", _("verschmälert")),

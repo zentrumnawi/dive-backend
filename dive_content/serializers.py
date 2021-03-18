@@ -94,6 +94,9 @@ def format_sentence(line):
 class LeafSerializer(DisplayNameModelSerializer):
     overview = serializers.SerializerMethodField(label="Überblick")
     attachment = serializers.SerializerMethodField(label="Anheftung")
+    leaf_compound = serializers.SerializerMethodField(
+        label="Blattfläche – zusammengesetztes Blatt"
+    )
 
     class Meta:
         model = Leaf
@@ -149,6 +152,42 @@ class LeafSerializer(DisplayNameModelSerializer):
         if fields[1]:
             fields[1] = "Blätter " + fields[1]
         text = "; ".join(filter(None, fields[1:]))
+
+        return format_sentence(text)
+
+    def get_leaf_compound(self, obj):
+        # Generate "Blattfläche – zusammengesetztes Blatt" line.
+        fields = [
+            obj.leaf_comp_num,
+            (obj.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES),
+            obj.incision_num,
+            (obj.incision_depth, INCISION_DEPTH_CHOICES),
+            obj.leaflet_incision_num,
+            obj.leaflet_incision_add,
+            (obj.leaflet_incision_depth, LEAFLET_INCISION_DEPTH_CHOICES),
+        ]
+
+        app = {1: "", 3: "e", 6: "en"}
+        for i, field in enumerate(fields):
+            if i in (1, 3, 6):
+                if field[0]:
+                    fields[i] = concatenate(field[0], field[1], app=app[i])
+                else:
+                    fields[i] = ""
+
+        text = ""
+        if any(fields[:4]):
+            text = [
+                " ".join(filter(None, fields[:2])),
+                "-".join(filter(None, fields[2:4])),
+            ]
+            text = " ".join(filter(None, text)) + " Blätter"
+        if any(fields[4:]):
+            if any(fields[:4]):
+                text += " mit "
+            else:
+                text = "Blätter mit "
+            text += "-".join(filter(None, fields[4:7])) + " Blättchen"
 
         return format_sentence(text)
 

@@ -64,18 +64,6 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
-class ArrayCharField(serializers.CharField):
-    def __init__(self, model, array_field_name, *args, **kwargs):
-        source = kwargs.pop("source", "get_{}_output".format(array_field_name))
-        label = kwargs.pop(
-            "label", model._meta.get_field(array_field_name).base_field.verbose_name,
-        )
-        read_only = kwargs.pop("read_only", True)
-        super().__init__(
-            *args, source=source, label=label, read_only=read_only, **kwargs
-        )
-
-
 class LeafSerializer(DisplayNameModelSerializer):
     class Meta:
         model = Leaf

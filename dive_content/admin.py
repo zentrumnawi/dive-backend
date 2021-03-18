@@ -14,11 +14,43 @@ leaf_readonly_fields = (
     "get_surface_output",
     "get_stipule_edge_output",
 )
-
+leaf_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        "Blattmerkmale",
+        {
+            "fields": (
+                "veins",
+                "division",
+                "succulence",
+                "texture",
+                "cross_section",
+                ("attachment", "arrangement"),
+                "rosette",
+                ("leaf_comp_num", "blade_subdiv_shape"),
+                ("incision_num", "incision_depth"),
+                (
+                    "leaflet_incision_num",
+                    "leaflet_incision_add",
+                    "leaflet_incision_depth",
+                ),
+                ("leaf_simple_num", "blade_undiv_shape",),
+                "edge",
+                "surface",
+                "stipule_edge",
+                ("base", "apex"),
+                "special_features",
+                "sheath",
+            )
+        },
+    ),
+    ("Keimblattmerkmale", {"fields": ("seed_leaf_num",)}),
+)
 
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
+    fieldsets = leaf_fieldsets
     form = LeafAdminForm
     readonly_fields = leaf_readonly_fields
     classes = ("collapse",)
@@ -64,6 +96,7 @@ admin.site.register(Plant, PlantAdmin)
 
 class LeafAdmin(admin.ModelAdmin):
     model = Leaf
+    fieldsets = leaf_fieldsets
     form = LeafAdminForm
     readonly_fields = leaf_readonly_fields
 

@@ -238,6 +238,9 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Grundblattrosette"),
     )
+    leaf_comp_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)"),
+    )
     blade_subdiv_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
@@ -248,6 +251,9 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
+    incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl"),
+    )
     incision_depth = ArrayField(
         base_field=models.CharField(
             max_length=3,
@@ -257,6 +263,25 @@ class Leaf(models.Model):
         size=2,
         blank=True,
         default=list,
+    )
+    leaflet_incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)"),
+    )
+    leaflet_incision_add = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Einschnittzusatz (Blättchen)"),
+    )
+    leaflet_incision_depth = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=LEAFLET_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (Blättchen)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    leaf_simple_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)"),
     )
     blade_undiv_shape = ArrayField(
         base_field=models.CharField(

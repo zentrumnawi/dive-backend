@@ -91,6 +91,7 @@ INCISION_DEPTH_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("fie", _("gefiedert")),
 )
+LEAFLET_INCISION_DEPTH_CHOICES = INCISION_DEPTH_CHOICES
 BLADE_UNDIV_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),

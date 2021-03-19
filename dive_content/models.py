@@ -517,16 +517,18 @@ class Blossom(models.Model):
 
 
 class Fruit(models.Model):
+    plant = models.OneToOneField(
+        Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
+    )
+    type = models.CharField(
+        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
+    )
     pos = models.CharField(
         max_length=2,
         choices=FRUIT_POS_CHOICES,
         blank=True,
         verbose_name=_("Lage der Samenanlage"),
     )
-    type = models.CharField(
-        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
-    )
-
     cnt = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
     form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
     wings = models.CharField(
@@ -537,10 +539,6 @@ class Fruit(models.Model):
     )
     wings_spec = models.CharField(
         max_length=200, blank=True, verbose_name=_("Beflügelung Besonderheit")
-    )
-
-    plant = models.OneToOneField(
-        Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
 
     class Meta:

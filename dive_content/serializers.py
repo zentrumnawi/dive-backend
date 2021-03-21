@@ -294,10 +294,11 @@ class BlossomSerializer(DisplayNameModelSerializer):
 class FruitSerializer(DisplayNameModelSerializer):
     fruit = serializers.SerializerMethodField(label="Frucht")
     ovule = serializers.SerializerMethodField(label="Samenanlage")
+    seed = serializers.SerializerMethodField(label="Samen")
 
     class Meta:
         model = Fruit
-        fields = ["fruit", "ovule"]
+        fields = ["fruit", "ovule", "seed"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_fruit(self, obj):
@@ -318,6 +319,25 @@ class FruitSerializer(DisplayNameModelSerializer):
         fields = concatenate(obj.ovule_pos, OVULE_POS_CHOICES)
 
         text = f"{f'Samenanlage in {fields}' if fields else ''}"
+
+        return format_sentence(text)
+
+    def get_seed(self, obj):
+        # Generate sentence "Samen" according pattern:
+        # "[seed_num] [seed_form] Samen, [winging] [winging_feature]."
+        fields = [
+            obj.seed_num,
+            obj.seed_form,
+            obj.winging,
+            obj.winging_feature,
+        ]
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            " ".join(filter(None, fields[2:])),
+        ]
+        text[0] = f"{f'{text[0]} Samen' if text[0] else ''}"
+        text = ", ".join(filter(None, text))
 
         return format_sentence(text)
 

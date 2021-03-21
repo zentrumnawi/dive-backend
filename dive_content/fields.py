@@ -17,10 +17,10 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
 
 
 class IntegerRangeCharWidget(forms.MultiWidget):
-    def __init__(self, attrs=None):
+    def __init__(self, min, max, attrs=None):
         widgets = (
-            forms.NumberInput(attrs={"min": 1, "max": 99}),
-            forms.NumberInput(attrs={"min": 1, "max": 99}),
+            forms.NumberInput(attrs={"min": min, "max": max}),
+            forms.NumberInput(attrs={"min": min, "max": max}),
         )
         super().__init__(widgets, attrs=attrs)
 
@@ -31,7 +31,7 @@ class IntegerRangeCharWidget(forms.MultiWidget):
 
 
 class IntegerRangeCharField(forms.MultiValueField):
-    def __init__(self, model=None, field_name="", **kwargs):
+    def __init__(self, min=1, max=99, model=None, field_name="", **kwargs):
         _label = None
         if model and field_name:
             _label = model._meta.get_field(field_name).verbose_name
@@ -41,23 +41,23 @@ class IntegerRangeCharField(forms.MultiValueField):
 
         fields = (
             forms.IntegerField(
-                min_value=1,
-                max_value=99,
+                min_value=min,
+                max_value=max,
                 error_messages={
                     "min_value": "Ensure first value is greater than or equal to %(limit_value)s.",
                     "max_value": "Ensure first value is less than or equal to %(limit_value)s.",
                 },
             ),
             forms.IntegerField(
-                min_value=1,
-                max_value=99,
+                min_value=min,
+                max_value=max,
                 error_messages={
                     "min_value": "Ensure second value is greater than or equal to %(limit_value)s.",
                     "max_value": "Ensure second value is less than or equal to %(limit_value)s.",
                 },
             ),
         )
-        widget = IntegerRangeCharWidget
+        widget = IntegerRangeCharWidget(min, max)
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 

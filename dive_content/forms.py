@@ -38,11 +38,13 @@ class LeafAdminForm(forms.ModelForm):
     surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
     stipule_edge = ArrayMultipleChoiceField(Leaf, "stipule_edge", choices=EDGE_CHOICES)
 
-    leaf_comp_num = IntegerRangeCharField(Leaf, "leaf_comp_num")
-    incision_num = IntegerRangeCharField(Leaf, "incision_num")
-    leaflet_incision_num = IntegerRangeCharField(Leaf, "leaflet_incision_num")
-    leaf_simple_num = IntegerRangeCharField(Leaf, "leaf_simple_num")
+    leaf_comp_num = IntegerRangeCharField(model=Leaf, field_name="leaf_comp_num")
+    incision_num = IntegerRangeCharField(model=Leaf, field_name="incision_num")
+    leaflet_incision_num = IntegerRangeCharField(
+        model=Leaf, field_name="leaflet_incision_num"
+    )
+    leaf_simple_num = IntegerRangeCharField(model=Leaf, field_name="leaf_simple_num")
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(Fruit, "seed_num")
+    seed_num = IntegerRangeCharField(model=Fruit, field_name="seed_num")

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import LeafAdminForm, PlantAdminForm
+from .forms import FruitAdminForm, LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
 
 leaf_fieldsets = (
@@ -38,6 +38,21 @@ leaf_fieldsets = (
 )
 leaf_radio_fields = {"seed_leaf_num": admin.HORIZONTAL}
 
+fruit_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                ("fruit_form", "fruit_type"),
+                "ovule_pos",
+                ("seed_num", "seed_form"),
+                ("winging", "winging_feature"),
+            )
+        },
+    ),
+)
+
 
 # Inlines
 class LeafInline(admin.StackedInline):
@@ -55,6 +70,8 @@ class BlossomInline(admin.StackedInline):
 
 class FruitInline(admin.StackedInline):
     model = Fruit
+    fieldsets = fruit_fieldsets
+    form = FruitAdminForm
     classes = ("collapse",)
 
 
@@ -95,6 +112,14 @@ class LeafAdmin(admin.ModelAdmin):
 
 admin.site.register(Leaf, LeafAdmin)
 admin.site.register(Blossom, admin.ModelAdmin)
-admin.site.register(Fruit, admin.ModelAdmin)
+
+
+class FruitAdmin(admin.ModelAdmin):
+    model = Fruit
+    fieldsets = fruit_fieldsets
+    form = FruitAdminForm
+
+
+admin.site.register(Fruit, FruitAdmin)
 admin.site.register(Sprout, admin.ModelAdmin)
 admin.site.register(ZeigerNumber, admin.ModelAdmin)

@@ -292,10 +292,24 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
 
 class FruitSerializer(DisplayNameModelSerializer):
+    fruit = serializers.SerializerMethodField(label="Frucht")
+
     class Meta:
         model = Fruit
-        exclude = ["plant"]
+        fields = ["fruit"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_fruit(self, obj):
+        # Generate sentence "Fruit" according pattern:
+        # "[fruit_form] [fruit_type]."
+        fields = [
+            obj.fruit_form,
+            concatenate(obj.fruit_type, FRUIT_TYPE_CHOICES),
+        ]
+
+        text = " ".join(filter(None, fields))
+
+        return format_sentence(text)
 
 
 class SproutSerializer(DisplayNameModelSerializer):

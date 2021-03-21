@@ -359,7 +359,7 @@ GROUND_CHOICES = (
 
 # Fruit choices
 
-TYPE_CHOICES = (
+FRUIT_TYPE_CHOICES = (
     ("nus", _("Nuss")),
     ("kar", _("Karyopse")),
     ("ach", _("Achäne")),
@@ -383,7 +383,7 @@ TYPE_CHOICES = (
     ("stc", _("Steinfrüchtchen")),
     ("bac", _("Balgfrüchtchen")),
 )
-FRUIT_POS_CHOICES = (
+OVULE_POS_CHOICES = (
     ("fr", _("Fruchtknoten")),
     ("za", _("Zapfenschuppe")),
     ("sp", _("Sprossachse")),

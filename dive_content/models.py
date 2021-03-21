@@ -520,24 +520,27 @@ class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
-    type = models.CharField(
-        max_length=3, choices=TYPE_CHOICES, blank=True, verbose_name=_("Fruchttyp")
+    fruit_type = models.CharField(
+        max_length=3,
+        choices=FRUIT_TYPE_CHOICES,
+        blank=True,
+        verbose_name=_("Fruchttyp"),
     )
-    pos = models.CharField(
+    ovule_pos = models.CharField(
         max_length=2,
-        choices=FRUIT_POS_CHOICES,
+        choices=OVULE_POS_CHOICES,
         blank=True,
         verbose_name=_("Lage der Samenanlage"),
     )
-    cnt = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
-    form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
-    wings = models.CharField(
+    seed_num = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
+    seed_form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
+    winging = models.CharField(
         max_length=200,
         blank=True,
         verbose_name=_("Beflügelung"),
         help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
     )
-    wings_spec = models.CharField(
+    winging_feature = models.CharField(
         max_length=200, blank=True, verbose_name=_("Beflügelung Besonderheit")
     )
 

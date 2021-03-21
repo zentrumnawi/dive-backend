@@ -18,6 +18,7 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
 
 class IntegerRangeCharWidget(forms.MultiWidget):
     def __init__(self, min, max, attrs=None):
+        self.max = max
         widgets = (
             forms.NumberInput(attrs={"min": min, "max": max}),
             forms.NumberInput(attrs={"min": min, "max": max}),
@@ -26,18 +27,25 @@ class IntegerRangeCharWidget(forms.MultiWidget):
 
     def decompress(self, value):
         if value:
-            return value.split("-", 1)
+            return [self.max if v == "∞" else v for v in value.split("–", 1)]
         return [None, None]
 
 
 class IntegerRangeCharField(forms.MultiValueField):
-    def __init__(self, min=1, max=99, model=None, field_name="", **kwargs):
+    def __init__(
+        self, min=1, max=99, infinity=False, model=None, field_name="", **kwargs
+    ):
+        self.max = max
+        self.infinity = infinity
         _label = None
         if model and field_name:
             _label = model._meta.get_field(field_name).verbose_name
+        _help_text = "Einzelwert oder Wertebereich"
+        if infinity:
+            _help_text += f", {max} wird als ∞ gespeichert."
         kwargs.setdefault("required", False)
         kwargs.setdefault("label", _label)
-        kwargs.setdefault("help_text", "Einzelwert oder Wertebereich")
+        kwargs.setdefault("help_text", _help_text)
 
         fields = (
             forms.IntegerField(
@@ -67,6 +75,13 @@ class IntegerRangeCharField(forms.MultiValueField):
                 raise ValidationError(_("First value must not exceed second value."))
             if data_list[0] == data_list[1]:
                 data_list[1] = None
-        data = "-".join(filter(None, [str(i) if i else "" for i in data_list]))
+
+        for i, data in enumerate(data_list):
+            if data:
+                data_list[i] = str(data)
+                if self.infinity and data == self.max:
+                    data_list[i] = "∞"
+
+        data = "–".join(filter(None, data_list))
 
         return data

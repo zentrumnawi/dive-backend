@@ -47,4 +47,6 @@ class LeafAdminForm(forms.ModelForm):
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(model=Fruit, field_name="seed_num")
+    seed_num = IntegerRangeCharField(
+        max=100, infinity=True, model=Fruit, field_name="seed_num"
+    )

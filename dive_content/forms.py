@@ -2,7 +2,7 @@ from django import forms
 
 from .choices import *
 from .fields import ArrayMultipleChoiceField, IntegerRangeCharField
-from .models import Leaf, Plant
+from .models import Fruit, Leaf, Plant
 
 
 class PlantAdminForm(forms.ModelForm):
@@ -42,3 +42,7 @@ class LeafAdminForm(forms.ModelForm):
     incision_num = IntegerRangeCharField(Leaf, "incision_num")
     leaflet_incision_num = IntegerRangeCharField(Leaf, "leaflet_incision_num")
     leaf_simple_num = IntegerRangeCharField(Leaf, "leaf_simple_num")
+
+
+class FruitAdminForm(forms.ModelForm):
+    seed_num = IntegerRangeCharField(Fruit, "seed_num")

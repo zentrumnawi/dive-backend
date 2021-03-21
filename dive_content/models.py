@@ -226,7 +226,7 @@ class Leaf(models.Model):
         verbose_name=_("Grundblattrosette"),
     )
     leaf_comp_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)"),
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)")
     )
     blade_subdiv_shape = ArrayField(
         base_field=models.CharField(
@@ -239,7 +239,7 @@ class Leaf(models.Model):
         default=list,
     )
     incision_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Einschnittanzahl"),
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl")
     )
     incision_depth = ArrayField(
         base_field=models.CharField(
@@ -252,10 +252,10 @@ class Leaf(models.Model):
         default=list,
     )
     leaflet_incision_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)"),
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)")
     )
     leaflet_incision_add = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Einschnittzusatz (Blättchen)"),
+        max_length=100, blank=True, verbose_name=_("Einschnittzusatz (Blättchen)")
     )
     leaflet_incision_depth = ArrayField(
         base_field=models.CharField(
@@ -268,7 +268,7 @@ class Leaf(models.Model):
         default=list,
     )
     leaf_simple_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)"),
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)")
     )
     blade_undiv_shape = ArrayField(
         base_field=models.CharField(
@@ -292,7 +292,7 @@ class Leaf(models.Model):
     )
     surface = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Blattoberfläche"),
+            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Blattoberfläche")
         ),
         size=2,
         blank=True,
@@ -521,7 +521,7 @@ class Fruit(models.Model):
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
     fruit_form = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Fruchtform"),
+        max_length=100, blank=True, verbose_name=_("Fruchtform")
     )
     fruit_type = models.CharField(
         max_length=3,

@@ -520,6 +520,9 @@ class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
+    fruit_form = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Fruchtform"),
+    )
     fruit_type = models.CharField(
         max_length=3,
         choices=FRUIT_TYPE_CHOICES,

@@ -530,18 +530,28 @@ class Fruit(models.Model):
         max_length=2,
         choices=OVULE_POS_CHOICES,
         blank=True,
-        verbose_name=_("Lage der Samenanlage"),
+        verbose_name=_("Samenanlage (Lage)"),
     )
-    seed_num = models.CharField(max_length=200, blank=True, verbose_name=_("Samenzahl"))
-    seed_form = models.CharField(max_length=200, blank=True, verbose_name=_("Form"))
+    seed_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Samenanzahl")
+    )
+    seed_form = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Samenform"),
+        help_text="Alles ausschreiben.",
+    )
     winging = models.CharField(
-        max_length=200,
+        max_length=100,
         blank=True,
         verbose_name=_("Beflügelung"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+        help_text="Alles ausschreiben.",
     )
     winging_feature = models.CharField(
-        max_length=200, blank=True, verbose_name=_("Beflügelung Besonderheit")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Besonderheit (Beflügelung)"),
+        help_text="Alles ausschreiben.",
     )
 
     class Meta:

@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -61,13 +62,11 @@ class IntegerRangeCharField(forms.MultiValueField):
         super().__init__(fields=fields, widget=widget, **kwargs)
 
     def compress(self, data_list):
-        if data_list:
-            if all(data_list):
-                if data_list[0] > data_list[1]:
-                    raise ValidationError("First value must not exceed second value.")
-                if data_list[0] == data_list[1]:
-                    data_list[1] = None
-            data = "-".join(filter(None, [str(i) if i else "" for i in data_list]))
-        else:
-            data = ""
+        if len(data_list) > 1 and all(data_list):
+            if data_list[0] > data_list[1]:
+                raise ValidationError(_("First value must not exceed second value."))
+            if data_list[0] == data_list[1]:
+                data_list[1] = None
+        data = "-".join(filter(None, [str(i) if i else "" for i in data_list]))
+
         return data

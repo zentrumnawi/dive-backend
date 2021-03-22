@@ -31,10 +31,12 @@ class IntegerRangeCharWidget(forms.MultiWidget):
 
 class IntegerRangeCharField(forms.MultiValueField):
     def __init__(self, model=None, field_name="", **kwargs):
+        _label = None
         if model and field_name:
             _label = model._meta.get_field(field_name).verbose_name
-        else:
-            _label = None
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", _label)
+        kwargs.setdefault("help_text", "Einzelwert oder Wertebereich")
 
         fields = (
             forms.IntegerField(
@@ -54,19 +56,9 @@ class IntegerRangeCharField(forms.MultiValueField):
                 },
             ),
         )
-        required = kwargs.pop("required", False)
         widget = IntegerRangeCharWidget
-        label = kwargs.pop("label", _label)
-        help_text = kwargs.pop("help_text", "Einzelwert oder Wertebereich")
 
-        super().__init__(
-            fields=fields,
-            required=required,
-            widget=widget,
-            label=label,
-            help_text=help_text,
-            **kwargs
-        )
+        super().__init__(fields=fields, widget=widget, **kwargs)
 
     def compress(self, data_list):
         if data_list:

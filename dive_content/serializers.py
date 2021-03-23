@@ -66,18 +66,18 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
 
 
 def concatenate(field, choices, app=""):
-    if field and type(field) is list:
-        output = " bis ".join(str(dict(choices).get(item)) + app for item in field)
-    elif field:
-        output = str(dict(choices).get(field)) + app
-    else:
-        output = ""
+    output = ""
+    if field:
+        if isinstance(field, list):
+            output = " bis ".join(f"{dict(choices).get(item)}{app}" for item in field)
+        else:
+            output = f"{dict(choices).get(field)}{app}"
 
-    if app and ("/" in output):
-        output = output.split("/")
-        for i, item in enumerate(output[:-1]):
-            output[i] = item + app
-        output = "/".join(output)
+        if app and ("/" in output):
+            output = output.split("/")
+            for i, item in enumerate(output[:-1]):
+                output[i] = f"{item}{app}"
+            output = "/".join(output)
 
     return output
 

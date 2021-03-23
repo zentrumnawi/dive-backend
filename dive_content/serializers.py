@@ -130,10 +130,7 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         app = {0: "e", 1: "e", 2: "e", 3: "e", 4: "em"}
         for i, field in enumerate(fields):
-            if field[0]:
-                fields[i] = concatenate(field[0], field[1], app[i])
-            else:
-                fields[i] = ""
+            fields[i] = concatenate(field[0], field[1], app[i])
 
         text = ", ".join(filter(None, fields[:4]))
         if text:
@@ -141,7 +138,7 @@ class LeafSerializer(DisplayNameModelSerializer):
         if fields[4]:
             if not text:
                 text = "Blätter"
-            text += " mit {} Querschnitt".format(fields[4])
+            text += f" mit {fields[4]} Querschnitt"
 
         return format_sentence(text)
 
@@ -155,18 +152,15 @@ class LeafSerializer(DisplayNameModelSerializer):
         ]
 
         for i, field in enumerate(fields):
-            if field[0]:
-                fields[i] = concatenate(field[0], field[1])
-            else:
-                fields[i] = ""
+            fields[i] = concatenate(field[0], field[1])
 
         text = ["sitzen", "stehen"]
         for i, field in enumerate(fields[:2]):
             if field:
-                fields[i] = "{} {}".format(text[i], field)
+                fields[i] = f"{text[i]} {field}"
         fields[1] = ", ".join(filter(None, fields[:2]))
         if fields[1]:
-            fields[1] = "Blätter " + fields[1]
+            fields[1] = f"Blätter {fields[1]}"
         text = "; ".join(filter(None, fields[1:]))
 
         return format_sentence(text)
@@ -186,13 +180,12 @@ class LeafSerializer(DisplayNameModelSerializer):
             (obj.leaflet_incision_depth, LEAFLET_INCISION_DEPTH_CHOICES),
         ]
 
-        app = {1: "", 3: "e", 6: "en"}
+        app = {1: "e", 3: "e", 6: "en", 10: "Blätter"}
+        if fields[0] == "1":
+            app = {1: "es", 3: "es", 6: "en", 10: "Blatt"}
         for i, field in enumerate(fields):
             if i in (1, 3, 6):
-                if field[0]:
-                    fields[i] = concatenate(field[0], field[1], app=app[i])
-                else:
-                    fields[i] = ""
+                fields[i] = concatenate(field[0], field[1], app[i])
 
         text = ""
         if any(fields[:4]):
@@ -200,13 +193,13 @@ class LeafSerializer(DisplayNameModelSerializer):
                 " ".join(filter(None, fields[:2])),
                 "-".join(filter(None, fields[2:4])),
             ]
-            text = " ".join(filter(None, text)) + " Blätter"
+            text = f"{' '.join(filter(None, text))} {app[10]}"
         if any(fields[4:]):
             if any(fields[:4]):
                 text += " mit "
             else:
                 text = "Blätter mit "
-            text += "-".join(filter(None, fields[4:7])) + " Blättchen"
+            text += f"{'-'.join(filter(None, fields[4:7]))} Blättchen"
 
         return format_sentence(text)
 
@@ -218,22 +211,14 @@ class LeafSerializer(DisplayNameModelSerializer):
             (obj.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES),
         ]
 
-        if fields[0]:
-            num = int(fields[0].split("-")[-1])
-        else:
-            num = 0
-        app = {1: "es"}
-        if fields[1][0]:
-            fields[1] = concatenate(fields[1][0], fields[1][1], app.get(num, "e"))
-        else:
-            fields[1] = ""
+        app = {1: "e", 10: "Blätter"}
+        if fields[0] == "1":
+            app = app = {1: "es", 10: "Blatt"}
+        fields[1] = concatenate(fields[1][0], fields[1][1], app[1])
 
         text = " ".join(filter(None, fields))
         if text:
-            if num == 1:
-                text += " Blatt"
-            else:
-                text += " Blätter"
+            text += f" {app[10]}"
 
         return format_sentence(text)
 
@@ -251,25 +236,24 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         app = {0: "", 1: "e", 2: "e", 3: "", 4: ""}
         for i, field in enumerate(fields):
-            if field[0]:
-                fields[i] = concatenate(field[0], field[1], app[i])
-            else:
-                fields[i] = ""
+            fields[i] = concatenate(field[0], field[1], app[i])
 
         text = [
             "Blattränder",
             "Blattoberfläche",
             "Nebenblattränder",
-            "Spreite am Grund",
+            "am Grund",
             "an der Spitze",
         ]
         for i, field in enumerate(fields):
             if field:
                 if i in (1, 2):
-                    fields[i] = "{} {}".format(field, text[i])
+                    fields[i] = f"{field} {text[i]}"
                 else:
-                    fields[i] = "{} {}".format(text[i], field)
+                    fields[i] = f"{text[i]} {field}"
         fields[3] = ", ".join(filter(None, fields[3:]))
+        if fields[3]:
+            fields[3] = f"Spreite {fields[3]}"
         text = "; ".join(filter(None, fields[:4]))
 
         return format_sentence(text)
@@ -283,7 +267,7 @@ class LeafSerializer(DisplayNameModelSerializer):
         ]
 
         if fields[1]:
-            fields[1] = "Blattscheide {}".format(fields[1])
+            fields[1] = f"Blattscheide {fields[1]}"
         text = "; ".join(filter(None, fields))
 
         return format_sentence(text)
@@ -292,12 +276,10 @@ class LeafSerializer(DisplayNameModelSerializer):
         # Generate sentence "Keimblatt" according pattern:
         # "[seed_leaf_num] Keimblatt|Keimblätter."
         num = obj.seed_leaf_num
-        if not num:
-            text = ""
-        elif num == 1:
-            text = "{} Keimblatt".format(num)
-        else:
-            text = "{} Keimblätter".format(num)
+
+        text = ""
+        if num:
+            text = f"{num} {'Keimblatt' if num == 1 else 'Keimblätter'}"
 
         return format_sentence(text)
 

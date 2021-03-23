@@ -118,7 +118,9 @@ class LeafSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_overview(self, obj):
-        # Generate "Überblick" line.
+        # Generate sentence "Überblick" according pattern:
+        # "[veins]e, [division]e, [succulence]e, [texture]e Blätter mit
+        #  [cross_section]em Querschnitt."
         fields = [
             (obj.veins, VEINS_CHOICES),
             (obj.division, DIVISION_CHOICES),
@@ -145,7 +147,8 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_attachment(self, obj):
-        # Generate "Anheftung" line.
+        # Generate sentence "Anheftung" according pattern:
+        # "Blätter sitzen [attachment], stehen [arrangement]; [rosette]."
         fields = [
             (obj.attachment, ATTACHMENT_CHOICES),
             (obj.arrangement, ARRANGMENT_CHOICES),
@@ -170,7 +173,10 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_leaf_compound(self, obj):
-        # Generate "Blattfläche – zusammengesetztes Blatt" line.
+        # Generate sentence "Blattfläche – zusammengesetztes Blatt" according pattern:
+        # "[leaf_comp_num] [blade_subdiv_shape]es|e [incision_num]-[incision_depth]es|e
+        #  Blatt|Blätter mit [leaflet_incision_num]-[leaflet_incision_add]-[leaflet_
+        #  incision_depth]en Blättchen."
         fields = [
             obj.leaf_comp_num,
             (obj.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES),
@@ -206,7 +212,8 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_leaf_simple(self, obj):
-        # Generate "Blattfläche – einfaches Blatt" line.
+        # Generate sentence "Blattfläche – einfaches Blatt" according pattern:
+        # "[leaf_simple_num] [blade_undiv_shape]es|e Blatt|Blätter."
         fields = [
             obj.leaf_simple_num,
             (obj.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES),
@@ -232,7 +239,9 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_leaf_general(self, obj):
-        # Generate "Blattfläche – allgemein" line.
+        # Generate sentence "Blattfläche – allgemein" according pattern:
+        # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
+        #  Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
         fields = [
             (obj.edge, EDGE_CHOICES),
             (obj.surface, SURFACE_CHOICES),
@@ -267,7 +276,8 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_miscellaneous(self, obj):
-        # Generate "Sonstiges" line.
+        # Generate sentence "Sonstiges" according pattern:
+        # "[special_features]; Blattscheide [sheath]."
         fields = [
             obj.special_features,
             obj.sheath,
@@ -280,7 +290,8 @@ class LeafSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
     def get_seed_leaf(self, obj):
-        # Generate "Keimblatt" line.
+        # Generate sentence "Keimblatt" according pattern:
+        # "[seed_leaf_num] Keimblatt|Keimblätter."
         num = obj.seed_leaf_num
         if not num:
             text = ""

@@ -86,8 +86,7 @@ def format_sentence(line):
     if line:
         line = line.split(" ", 1)
         line[0] = line[0].capitalize()
-        line = " ".join(line)
-        line += "."
+        line = f"{' '.join(line)}."
     return line
 
 

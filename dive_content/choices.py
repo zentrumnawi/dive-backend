@@ -187,7 +187,7 @@ APEX_CHOICES = (
     ("spi", _("spitz")),
     ("zug", _("zugespitzt")),
     ("beg", _("begrannt")),
-    ("sta", _("stachelspitze")),
+    ("sta", _("stachelspitz")),
     ("haa", _("haarspitzig")),
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),

@@ -57,7 +57,7 @@ ARRANGMENT_CHOICES = (
 )
 ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
-    (("kei"), _("keine Grundblattrosette")),
+    ("kei", _("keine Grundblattrosette")),
 )
 BLADE_SUBDIV_SHAPE_CHOICES = (
     ("han", _("handförmig")),

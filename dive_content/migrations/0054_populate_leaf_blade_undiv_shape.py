@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_blade_undiv_shape_with_leaf_form(apps, schema_editor):
     """
-    Populate leaf model blade_undiv_shape fields with form values.
+    Populate Leaf model blade_undiv_shape fields with form values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_blade_undiv_shape_with_leaf_form(apps, schema_editor):
 
 def populate_leaf_form_with_leaf_blade_undiv_shape(apps, schema_editor):
     """
-    Populate leaf model form fields with blade_undiv_shape first values.
+    Populate Leaf model form fields with blade_undiv_shape first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

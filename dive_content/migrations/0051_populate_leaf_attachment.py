@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_attachment_with_leaf_att_axis(apps, schema_editor):
     """
-    Populate leaf model attachment fields with att_axis values.
+    Populate Leaf model attachment fields with att_axis values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_attachment_with_leaf_att_axis(apps, schema_editor):
 
 def populate_leaf_att_axis_with_leaf_attachment(apps, schema_editor):
     """
-    Populate leaf model att_axis fields with attachment first values.
+    Populate Leaf model att_axis fields with attachment first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

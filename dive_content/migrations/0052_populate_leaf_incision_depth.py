@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_incision_depth_with_leaf_dep_cuts(apps, schema_editor):
     """
-    Populate leaf model incision_depth fields with dep_cuts values.
+    Populate Leaf model incision_depth fields with dep_cuts values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_incision_depth_with_leaf_dep_cuts(apps, schema_editor):
 
 def populate_leaf_dep_cuts_with_leaf_incision_depth(apps, schema_editor):
     """
-    Populate leaf model dep_cuts fields with incision_depth first values.
+    Populate Leaf model dep_cuts fields with incision_depth first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

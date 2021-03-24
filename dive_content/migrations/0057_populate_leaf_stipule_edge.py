@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_stipule_edge_with_leaf_side_leaf(apps, schema_editor):
     """
-    Populate leaf model stipule_edge fields with side_leaf values.
+    Populate Leaf model stipule_edge fields with side_leaf values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_stipule_edge_with_leaf_side_leaf(apps, schema_editor):
 
 def populate_leaf_side_leaf_with_leaf_stipule_edge(apps, schema_editor):
     """
-    Populate leaf model side_leaf fields with stipule_edge first values.
+    Populate Leaf model side_leaf fields with stipule_edge first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

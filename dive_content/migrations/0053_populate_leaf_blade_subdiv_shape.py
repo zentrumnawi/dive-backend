@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_blade_subdiv_shape_with_leaf_arr_cuts(apps, schema_editor):
     """
-    Populate leaf model blade_subdiv_shape fields with arr_cuts values.
+    Populate Leaf model blade_subdiv_shape fields with arr_cuts values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_blade_subdiv_shape_with_leaf_arr_cuts(apps, schema_editor):
 
 def populate_leaf_arr_cuts_with_leaf_blade_subdiv_shape(apps, schema_editor):
     """
-    Populate leaf model arr_cuts fields with blade_subdiv_shape first values.
+    Populate Leaf model arr_cuts fields with blade_subdiv_shape first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

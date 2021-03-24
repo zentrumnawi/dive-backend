@@ -5,7 +5,7 @@ from django.db import migrations
 
 def populate_leaf_surface_with_leaf_sur_texture(apps, schema_editor):
     """
-    Populate leaf model surface fields with sur_texture values.
+    Populate Leaf model surface fields with sur_texture values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 
@@ -19,7 +19,7 @@ def populate_leaf_surface_with_leaf_sur_texture(apps, schema_editor):
 
 def populate_leaf_sur_texture_with_leaf_surface(apps, schema_editor):
     """
-    Populate leaf model sur_texture fields with surface first values.
+    Populate Leaf model sur_texture fields with surface first values.
     """
     Leaf = apps.get_model("dive_content", "Leaf")
 

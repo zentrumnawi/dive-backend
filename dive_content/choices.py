@@ -450,9 +450,9 @@ ORGANS_CHOICES = (
     ("Wuk", _("Wurzelknollen")),
     ("Wur", _("Wurzeln")),
 )
-ROOT_CHOICES = (
+PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
-    ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
+    ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )
 
 

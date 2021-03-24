@@ -648,7 +648,10 @@ class StemRoot(models.Model):
         verbose_name=_("Organe (unterirdisch)"),
     )
     primary_root = models.CharField(
-        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
+        max_length=3,
+        choices=PRIMARY_ROOT_CHOICES,
+        blank=True,
+        verbose_name=_("Primärwurzel"),
     )
 
     class Meta:

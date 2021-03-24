@@ -630,7 +630,10 @@ class StemRoot(models.Model):
         verbose_name=_("Beblätterung"),
     )
     milky_sap = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Milchsaft"),
+        help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
     )
     organ_features = models.CharField(
         max_length=100,

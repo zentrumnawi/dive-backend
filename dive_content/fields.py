@@ -21,7 +21,7 @@ class IntegerRangeCharWidget(forms.MultiWidget):
             forms.NumberInput(attrs={"min": min, "max": max}),
             forms.NumberInput(attrs={"min": min, "max": max}),
         )
-        super().__init__(widgets, attrs=attrs)
+        super().__init__(widgets, attrs)
 
     def decompress(self, value):
         if value:

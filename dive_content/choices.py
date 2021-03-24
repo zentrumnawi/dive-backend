@@ -474,6 +474,14 @@ RUNNERS_CHOICES = (
     ("bil", _("bildet oberirdische Ausläufer")),
     ("kei", _("keine Angabe")),
 )
+ORGANS_CHOICES = (
+    ("Rhi", _("Rhizom")),
+    ("Zwi", _("Zwiebel")),
+    ("Aus", _("unterirdische Ausläufer")),
+    ("Inn", _("Innovations-Wurzelknolle")),
+    ("Wuk", _("Wurzelknollen")),
+    ("Wur", _("Wurzeln")),
+)
 ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("ersetzt durch sprossbürtige Wurzeln")),

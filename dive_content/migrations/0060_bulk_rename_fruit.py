@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0082_bulk_add_leaf_fields"),
+        ("dive_content", "0059_remove_bulk_leaf"),
     ]
 
     operations = [

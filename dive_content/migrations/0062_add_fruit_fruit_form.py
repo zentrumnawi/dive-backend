@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0084_bulk_alter_fruit_fields"),
+        ("dive_content", "0061_bulk_alter_fruit"),
     ]
 
     operations = [

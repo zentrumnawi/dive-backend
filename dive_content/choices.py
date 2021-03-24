@@ -390,7 +390,7 @@ OVULE_POS_CHOICES = (
 )
 
 
-# Sprout choices
+# StemRoot choices
 
 POSITION_CHOICES = (
     ("auf", _("aufrecht")),

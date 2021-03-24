@@ -2,7 +2,7 @@ from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
 from .forms import FruitAdminForm, LeafAdminForm, PlantAdminForm
-from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
+from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
 
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -76,8 +76,8 @@ class FruitInline(admin.StackedInline):
     classes = ("collapse",)
 
 
-class SproutInline(admin.StackedInline):
-    model = Sprout
+class StemRootInline(admin.StackedInline):
+    model = StemRoot
     classes = ("collapse",)
 
 
@@ -95,7 +95,7 @@ class PlantAdmin(admin.ModelAdmin):
         LeafInline,
         BlossomInline,
         FruitInline,
-        SproutInline,
+        StemRootInline,
         ZeigerNumberInline,
         PhotographInline,
     ]
@@ -123,5 +123,5 @@ class FruitAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Fruit, FruitAdmin)
-admin.site.register(Sprout, admin.ModelAdmin)
+admin.site.register(StemRoot, admin.ModelAdmin)
 admin.site.register(ZeigerNumber, admin.ModelAdmin)

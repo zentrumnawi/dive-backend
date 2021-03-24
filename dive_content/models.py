@@ -562,7 +562,7 @@ class Fruit(models.Model):
         verbose_name_plural = _("Früchte")
 
 
-class Sprout(models.Model):
+class StemRoot(models.Model):
     appear = models.CharField(
         max_length=1,
         choices=(("k", _("krautig")), ("h", _("holzig"))),

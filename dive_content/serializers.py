@@ -2,7 +2,7 @@ from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .choices import *
-from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
+from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -318,9 +318,9 @@ class FruitSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
-class SproutSerializer(DisplayNameModelSerializer):
+class StemRootSerializer(DisplayNameModelSerializer):
     class Meta:
-        model = Sprout
+        model = StemRoot
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
@@ -346,7 +346,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     leaf = LeafSerializer(required=False)
     blossom = BlossomSerializer(required=False)
     fruit = FruitSerializer(required=False)
-    sprout = SproutSerializer(required=False)
+    stemroot = StemRootSerializer(required=False)
     zeigernumber = ZeigerNumberSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 

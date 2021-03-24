@@ -654,6 +654,12 @@ class StemRoot(models.Model):
     milk = models.CharField(
         max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
     )
+    organ_features = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Besonderheiten"),
+        help_text="Besondere Ausprägungen der unterirdischen Organe.",
+    )
     primary_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )

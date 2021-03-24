@@ -569,6 +569,16 @@ class StemRoot(models.Model):
         related_name="stemroot",
         verbose_name=_("Pflanze"),
     )
+    orientation = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=ORIENTATION_CHOICES,
+            verbose_name=_("Wuchsorientierung"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     pos = models.CharField(
         max_length=3,
         choices=POSITION_CHOICES,

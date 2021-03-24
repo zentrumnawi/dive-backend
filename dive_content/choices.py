@@ -392,6 +392,27 @@ OVULE_POS_CHOICES = (
 
 # StemRoot choices
 
+ORIENTATION_CHOICES = (
+    ("auf", _("aufrecht")),
+    ("aua", _("aufrecht-abstehend")),
+    ("abs", _("abstehend")),
+    ("spa", _("sparrig")),
+    ("zur", _("zurückgeschlagen")),
+    ("lie", _("liegend")),
+    ("kri", _("kriechend")),
+    ("aus", _("aufsteigend/aufstrebend")),
+    ("gek", _("gekniet")),
+    ("ueb", _("übergebogen")),
+    ("nic", _("nickend")),
+    ("hae", _("hängend")),
+    ("flu", _("flutend")),
+    ("hor", _("horstig")),
+    ("loc", _("lockerrasig")),
+    ("ran", _("rankenpflanzen")),
+    ("win", _("windepflanzen")),
+    ("spr", _("spreizklimmig")),
+    ("wur", _("wurzelkletternd")),
+)
 POSITION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),

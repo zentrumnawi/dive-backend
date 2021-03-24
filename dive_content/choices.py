@@ -466,6 +466,10 @@ SP_DIAM_CHOICES = (
 )
 # SURFACE_CHOICES  =>  Leaf choices
 SUR_TEXTURE_CHOICES = SURFACE_CHOICES
+CREEP_LAY_SHOOTS_CHOICES = (
+    ("bil", _("bildet Kriech- und Legetriebe")),
+    ("kei", _("keine Angabe")),
+)
 ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("ersetzt durch sprossbürtige Wurzeln")),

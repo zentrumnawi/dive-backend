@@ -633,6 +633,12 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Sprossoberfläche"),
     )
+    creep_lay_shoots = models.CharField(
+        max_length=3,
+        choices=CREEP_LAY_SHOOTS_CHOICES,
+        blank=True,
+        verbose_name=_("Kriech- und Legetriebe"),
+    )
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),

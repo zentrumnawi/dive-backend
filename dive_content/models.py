@@ -619,6 +619,14 @@ class StemRoot(models.Model):
     diam = models.CharField(
         max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
     )
+    surface = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Sprossoberfläche")
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     sur_texture = models.CharField(
         max_length=3,
         choices=SUR_TEXTURE_CHOICES,

@@ -464,6 +464,7 @@ SP_DIAM_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
+# SURFACE_CHOICES  =>  Leaf choices
 SUR_TEXTURE_CHOICES = SURFACE_CHOICES
 ROOT_CHOICES = (
     ("erh", _("erhalten")),

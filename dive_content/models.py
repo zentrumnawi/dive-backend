@@ -609,13 +609,13 @@ class StemRoot(models.Model):
     plant = models.OneToOneField(
         Plant,
         on_delete=models.CASCADE,
-        related_name="sprout",
+        related_name="stemroot",
         verbose_name=_("Pflanze"),
     )
 
     class Meta:
-        verbose_name = _("Spross")
-        verbose_name_plural = _("Spross")
+        verbose_name = _("Spross und Wurzel")
+        verbose_name_plural = _("Sprosse und Wurzeln")
 
 
 class ZeigerNumber(models.Model):

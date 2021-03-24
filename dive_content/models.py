@@ -579,12 +579,6 @@ class StemRoot(models.Model):
         blank=True,
         default=list,
     )
-    pos = models.CharField(
-        max_length=3,
-        choices=POSITION_CHOICES,
-        blank=True,
-        verbose_name=_("Wuchsorientierung"),
-    )
     appearance = ArrayField(
         base_field=models.CharField(
             max_length=1, choices=APPEARANCE_CHOICES, verbose_name=_("Erscheinung"),
@@ -592,12 +586,6 @@ class StemRoot(models.Model):
         size=2,
         blank=True,
         default=list,
-    )
-    appear = models.CharField(
-        max_length=1,
-        choices=(("k", _("krautig")), ("h", _("holzig"))),
-        blank=True,
-        verbose_name=_("Erscheinung"),
     )
     thick_flesh = models.CharField(
         null=True,
@@ -616,9 +604,6 @@ class StemRoot(models.Model):
         blank=True,
         default=list,
     )
-    diam = models.CharField(
-        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
-    )
     surface = ArrayField(
         base_field=models.CharField(
             max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Sprossoberfläche")
@@ -626,12 +611,6 @@ class StemRoot(models.Model):
         size=2,
         blank=True,
         default=list,
-    )
-    sur_texture = models.CharField(
-        max_length=3,
-        choices=SUR_TEXTURE_CHOICES,
-        blank=True,
-        verbose_name=_("Sprossoberfläche"),
     )
     creep_lay_shoots = models.CharField(
         max_length=3,
@@ -669,8 +648,6 @@ class StemRoot(models.Model):
     primary_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
-    blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
-    cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
 
     class Meta:
         verbose_name = _("Spross und Wurzel")

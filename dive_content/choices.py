@@ -413,27 +413,6 @@ ORIENTATION_CHOICES = (
     ("spr", _("spreizklimmig")),
     ("wur", _("wurzelkletternd")),
 )
-POSITION_CHOICES = (
-    ("auf", _("aufrecht")),
-    ("aua", _("aufrecht-abstehend")),
-    ("abs", _("abstehend")),
-    ("spa", _("sparrig")),
-    ("zur", _("zurückgeschlagen")),
-    ("lie", _("liegend")),
-    ("kri", _("kriechend")),
-    ("aus", _("aufsteigend/aufstrebend")),
-    ("gek", _("gekniet")),
-    ("ueb", _("übergebogen")),
-    ("nic", _("nickend")),
-    ("hae", _("hängend")),
-    ("flu", _("flutend")),
-    ("Ran", _("Rankenpflanze")),
-    ("Win", _("Windepflanze")),
-    ("Spr", _("Spreizklimmer")),
-    ("Wur", _("Wurzelkletterer")),
-    ("hor", _("horstig")),
-    ("loc", _("lockerrasig")),
-)
 APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 SR_CROSS_SECTION_CHOICES = (
@@ -450,22 +429,7 @@ SR_CROSS_SECTION_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
-SP_DIAM_CHOICES = (
-    ("sti", _("stielrund")),
-    ("hal", _("halbstielrund")),
-    ("zus", _("zusammengedrückt")),
-    ("zwe", _("zweischneidig")),
-    ("kan", _("kantig")),
-    ("stu", _("stumpfkantig")),
-    ("ger", _("gerieft /gerillt")),
-    ("gef", _("gefurcht")),
-    ("kan", _("kantig gefurcht /scharfkantig")),
-    ("gri", _("gerippt")),
-    ("gfl", _("geflügelt")),
-    ("kno", _("knotig")),
-)
 # SURFACE_CHOICES  =>  Leaf choices
-SUR_TEXTURE_CHOICES = SURFACE_CHOICES
 CREEP_LAY_SHOOTS_CHOICES = (
     ("bil", _("bildet Kriech- und Legetriebe")),
     ("kei", _("keine Angabe")),

@@ -606,6 +606,16 @@ class StemRoot(models.Model):
         choices=YES_NO_CHOICES,
         verbose_name=_("Dickfleischig"),
     )
+    cross_section = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=SR_CROSS_SECTION_CHOICES,
+            verbose_name=_("Querschnitt"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     diam = models.CharField(
         max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
     )

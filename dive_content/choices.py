@@ -436,6 +436,20 @@ POSITION_CHOICES = (
 )
 APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
+SR_CROSS_SECTION_CHOICES = (
+    ("sti", _("stielrund")),
+    ("hal", _("halbstielrund")),
+    ("zus", _("zusammengedrückt")),
+    ("zwe", _("zweischneidig")),
+    ("kan", _("kantig")),
+    ("stu", _("stumpfkantig")),
+    ("ger", _("gerieft/gerillt")),
+    ("gef", _("gefurcht")),
+    ("kan", _("kantig gefurcht/scharfkantig")),
+    ("gri", _("gerippt")),
+    ("gfl", _("geflügelt")),
+    ("kno", _("knotig")),
+)
 SP_DIAM_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),

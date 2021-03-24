@@ -563,11 +563,11 @@ class Fruit(models.Model):
 
 
 class StemRoot(models.Model):
-    appear = models.CharField(
-        max_length=1,
-        choices=(("k", _("krautig")), ("h", _("holzig"))),
-        blank=True,
-        verbose_name=_("Erscheinung"),
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="stemroot",
+        verbose_name=_("Pflanze"),
     )
     pos = models.CharField(
         max_length=3,
@@ -575,21 +575,18 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Wuchsorientierung"),
     )
+    appear = models.CharField(
+        max_length=1,
+        choices=(("k", _("krautig")), ("h", _("holzig"))),
+        blank=True,
+        verbose_name=_("Erscheinung"),
+    )
     thick_flesh = models.CharField(
         null=True,
         blank=True,
         max_length=3,
         choices=YES_NO_CHOICES,
         verbose_name=_("Dickfleischig"),
-    )
-    milk = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
-    )
-    leafly = models.CharField(
-        max_length=3,
-        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
-        blank=True,
-        verbose_name=_("Beblätterung"),
     )
     diam = models.CharField(
         max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
@@ -600,18 +597,20 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Sprossoberfläche"),
     )
+    leafly = models.CharField(
+        max_length=3,
+        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
+        blank=True,
+        verbose_name=_("Beblätterung"),
+    )
+    milk = models.CharField(
+        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
+    )
     primary_root = models.CharField(
         max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
     )
     blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
     cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
-
-    plant = models.OneToOneField(
-        Plant,
-        on_delete=models.CASCADE,
-        related_name="stemroot",
-        verbose_name=_("Pflanze"),
-    )
 
     class Meta:
         verbose_name = _("Spross und Wurzel")

@@ -639,6 +639,12 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Kriech- und Legetriebe"),
     )
+    runners = models.CharField(
+        max_length=3,
+        choices=RUNNERS_CHOICES,
+        blank=True,
+        verbose_name=_("Ausläufer (oberirdisch)"),
+    )
     leafly = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),

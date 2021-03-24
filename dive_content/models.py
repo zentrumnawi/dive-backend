@@ -588,11 +588,10 @@ class StemRoot(models.Model):
         default=list,
     )
     succulence = models.CharField(
-        null=True,
-        blank=True,
         max_length=3,
-        choices=YES_NO_CHOICES,
-        verbose_name=_("Dickfleischig"),
+        choices=SUCCULENCE_CHOICES,
+        blank=True,
+        verbose_name=_("Dickfleischigkeit"),
     )
     cross_section = ArrayField(
         base_field=models.CharField(

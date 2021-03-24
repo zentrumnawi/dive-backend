@@ -414,7 +414,7 @@ ORIENTATION_CHOICES = (
     ("wur", _("wurzelkletternd")),
 )
 APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
-YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
+# SUCCULENCE_CHOICES  =>  Leaf choices
 SR_CROSS_SECTION_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),

@@ -5,15 +5,13 @@ from django.utils.translation import ugettext_lazy as _
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
     def __init__(self, model=None, field_name="", **kwargs):
+        _label = None
         if model and field_name:
             _label = model._meta.get_field(field_name).base_field.verbose_name
-        else:
-            _label = None
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", _label)
 
-        required = kwargs.pop("required", False)
-        label = kwargs.pop("label", _label)
-
-        super().__init__(required=required, label=label, **kwargs)
+        super().__init__(**kwargs)
 
 
 class IntegerRangeCharWidget(forms.MultiWidget):

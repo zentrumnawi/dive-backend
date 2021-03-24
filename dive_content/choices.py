@@ -1,9 +1,8 @@
 from django.utils.translation import ugettext_lazy as _
 
-
 # Leaf choices
 
-NERV_CHOICES = (
+VEINS_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
     ("fie", _("fiedernervig")),
@@ -11,7 +10,26 @@ NERV_CHOICES = (
     ("fus", _("fußnervig")),
     ("gab", _("gabelnervig")),
 )
-AXIS_CHOICES = (
+DIVISION_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
+SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
+TEXTURE_CHOICES = (
+    ("kra", _("krautig")),
+    ("fle", _("fleischig")),
+    ("led", _("lederig")),
+    ("hae", _("häutig/trockenhäutig")),
+    ("imm", _("immergrün")),
+    ("sta", _("starr/steif")),
+)
+CROSS_SECTION_CHOICES = (
+    ("zur", _("zurückgerollt/umgerollt")),
+    ("ein", _("eingerollt")),
+    ("zus", _("zusammengerollt")),
+    ("gef", _("gefalzt/gefaltet")),
+    ("rin", _("rinnig")),
+    ("gek", _("gekielt")),
+    ("dop", _("doppelrillig")),
+)
+ATTACHMENT_CHOICES = (
     ("ges", _("gestielt")),
     ("sit", _("sitzend/ungestielt")),
     ("ste", _("stengelumfassend")),
@@ -23,7 +41,7 @@ AXIS_CHOICES = (
     ("rei", _("reitend")),
     ("hin", _("hinfällig")),
 )
-POS_CHOICES = (
+ARRANGMENT_CHOICES = (
     ("gru", _("grundständig")),
     ("wec", _("wechselständig/spiralig")),
     ("zwe", _("zweizeilig/distich")),
@@ -37,41 +55,43 @@ POS_CHOICES = (
     ("ein", _("einseitig")),
     ("ges", _("gescheitelt")),
 )
-SPR_WHOLE_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
-SPR_STRUCTURE_CHOICES = (("ei", _("Einschnitte")), ("bl", _("Blättchen")))
-CUT_CHOICES = (
-    ("gan", _("ganz/ungeteilt")),
-    ("gel", _("gelappt")),
-    ("gep", _("gespalten")),
-    ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
+ROSETTE_CHOICES = (
+    ("vor", _("Grundblattrossette vorhanden")),
+    (("kei"), _("keine Grundblattrosette")),
 )
-ARR_CHOICES = (
-    ("han", _("handförmig/fingerförmig")),
-    ("hgl", _("handförmig gelappt")),
-    ("hgt", _("handförmig geteilt")),
-    ("hgs", _("handförmig geschnitten")),
+BLADE_SUBDIV_SHAPE_CHOICES = (
+    ("han", _("handförmig")),
     ("gef", _("gefingert")),
-    ("fie", _("fiederförmig/fiederig")),
+    ("fif", _("fiederförmig")),
     ("fil", _("fiederlappig")),
     ("fip", _("fiederspaltig")),
     ("fit", _("fiederteilig")),
     ("fis", _("fiederschnittig")),
-    ("paa", _("paarig gefiedert")),
-    ("unp", _("unpaarig gefiedert")),
-    ("unf", _("unterbrochen fiederschnittig")),
-    ("ung", _("unterbrochen gefiedert")),
-    ("dog", _("doppelt gefiedert")),
-    ("meh", _("mehrfach gefiedert")),
+    ("paa", _("paarig")),
+    ("unp", _("unpaarig")),
+    ("unt", _("unterbrochen")),
+    ("dop", _("doppelt")),
+    ("meh", _("mehrfach")),
     ("dre", _("dreizählig")),
     ("dod", _("doppelt dreizählig")),
     ("lei", _("leierförmig")),
     ("sch", _("schrotsägeförmig")),
     ("kam", _("kammförmig")),
-    ("fug", _("fußförmig geschnitten")),
-    ("fuz", _("fußförmig zusammengesetzt")),
+    ("fus", _("fußförmig")),
 )
-FORM_CHOICES = (
+INCISION_DEPTH_CHOICES = (
+    ("gan", _("ganz/ungeteilt")),
+    ("gel", _("gelappt")),
+    ("gep", _("gespalten")),
+    ("get", _("geteilt")),
+    ("ges", _("geschnitten")),
+    ("gef", _("gefingert")),
+    ("zus", _("zusammengesetzt")),
+    ("fis", _("fiederschnittig")),
+    ("fie", _("gefiedert")),
+)
+LEAFLET_INCISION_DEPTH_CHOICES = INCISION_DEPTH_CHOICES
+BLADE_UNDIV_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
     ("ell", _("elliptisch")),
@@ -101,8 +121,8 @@ FORM_CHOICES = (
     ("sup", _("schuppenförmig")),
     ("sil", _("schildförmig")),
 )
-LEAFLET_CHOICES = (
-    (("dor"), _("dornig")),
+EDGE_CHOICES = (
+    ("dor", _("dornig")),
     ("gan", _("ganzrandig")),
     ("ges", _("gesägt")),
     ("dop", _("doppelt gesägt")),
@@ -112,20 +132,12 @@ LEAFLET_CHOICES = (
     ("gef", _("gefranst")),
     ("gek", _("gekerbt")),
     ("geb", _("gebuchtet")),
-    ("ges", _("geschweift")),
+    ("gew", _("geschweift")),
     ("bew", _("bewimpert")),
     ("vor", _("vorwärts rauh")),
-    ("rra", _("rückwärts rauh")),
+    ("rur", _("rückwärts rauh")),
 )
-TEXTURE_CHOICES = (
-    ("kra", _("krautig")),
-    ("fle", _("fleischig")),
-    ("led", _("lederig")),
-    ("hae", _("häutig/trockenhäutig")),
-    ("imm", _("immergrün")),
-    ("sta", _("starr/steif")),
-)
-SUR_TEXTURE_CHOICES = (
+SURFACE_CHOICES = (
     ("gla", _("glatt")),
     ("run", _("runzelig")),
     ("rau", _("rauh")),
@@ -157,31 +169,8 @@ SUR_TEXTURE_CHOICES = (
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
 )
-SIDE_CHOICES = (
-    ("gan", _("ganzrandig")),
-    ("ges", _("gesägt")),
-    ("dop", _("doppelt gesägt")),
-    ("rue", _("rückwärts gesägt")),
-    ("gez", _("gezähnt")),
-    ("gzt", _("gezähnelt")),
-    ("gef", _("gefranst")),
-    ("gek", _("gekerbt")),
-    ("geb", _("gebuchtet")),
-    ("gew", _("geschweift")),
-    ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rauh")),
-    ("rur", _("rückwärts rauh")),
-)
-DIAM_CHOICES = (
-    ("zur", _("zurückgerollt/umgerollt")),
-    ("ein", _("eingerollt")),
-    ("zus", _("zusammengerollt")),
-    ("gef", _("gefalzt/gefaltet")),
-    ("rin", _("rinnig")),
-    ("gek", _("gekielt")),
-    ("dop", _("doppelrillig")),
-)
-SP_CHOICES = (
+STIPULE_EDGE_CHOICES = EDGE_CHOICES
+BASE_CHOICES = (
     ("kei", _("keilig/keilförmig")),
     ("ver", _("verschmälert")),
     ("abg", _("abgerundet")),
@@ -191,19 +180,18 @@ SP_CHOICES = (
     ("pfe", _("pfeilförmig")),
     ("spi", _("spießförmig")),
 )
-SP_TOP_CHOICES = (
+APEX_CHOICES = (
     ("abg", _("abgerundet")),
     ("ges", _("gestutzt")),
     ("stu", _("stumpf")),
     ("spi", _("spitz")),
     ("zug", _("zugespitzt")),
     ("beg", _("begrannt")),
-    ("sta", _("stachelspitze")),
+    ("sta", _("stachelspitz")),
     ("haa", _("haarspitzig")),
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
-YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 
 
 # Blossom choices
@@ -425,6 +413,7 @@ POSITION_CHOICES = (
     ("hor", _("horstig")),
     ("loc", _("lockerrasig")),
 )
+YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 SP_DIAM_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),
@@ -439,6 +428,7 @@ SP_DIAM_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
+SUR_TEXTURE_CHOICES = SURFACE_CHOICES
 ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("ersetzt durch sprossbürtige Wurzeln")),

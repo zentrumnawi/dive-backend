@@ -1,8 +1,7 @@
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-
 from solid_backend.content.models import BaseProfile
 
 from .choices import *
@@ -174,75 +173,23 @@ class Plant(BaseProfile):
 
 
 class Leaf(models.Model):
-    nerves = models.CharField(
-        max_length=3, choices=NERV_CHOICES, blank=True, verbose_name=_("Blattnerven")
+    plant = models.OneToOneField(
+        Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
-    cnt_germ = models.IntegerField(
-        choices=((1, 1), (2, 2)),
-        blank=True,
-        null=True,
-        verbose_name=_("Anzahl der Keimblätter"),
+    veins = models.CharField(
+        max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
-    att_axis = models.CharField(
+    division = models.CharField(
         max_length=3,
-        choices=AXIS_CHOICES,
+        choices=DIVISION_CHOICES,
         blank=True,
-        verbose_name=_("Anheftung an Sprossachse"),
+        verbose_name=_("Spreitengliederung"),
     )
-    sheath = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Blattscheide"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
-    )
-    pos_axis = models.CharField(
+    succulence = models.CharField(
         max_length=3,
-        choices=POS_CHOICES,
+        choices=SUCCULENCE_CHOICES,
         blank=True,
-        verbose_name=_("Stellung an Sprossachse"),
-    )
-
-    spr_whole = models.CharField(
-        max_length=3,
-        choices=SPR_WHOLE_CHOICES,
-        blank=True,
-        verbose_name=_("Aufteilung der Blattspreite"),
-    )
-    spr_structure = models.CharField(
-        max_length=2,
-        choices=SPR_STRUCTURE_CHOICES,
-        blank=True,
-        verbose_name=_("Struktur der Blattspreite"),
-    )
-    dep_cuts = models.CharField(
-        max_length=3,
-        choices=CUT_CHOICES,
-        blank=True,
-        verbose_name=_("Tiefe von Einschnitten"),
-    )
-    arr_cuts = models.CharField(
-        max_length=3,
-        choices=ARR_CHOICES,
-        blank=True,
-        verbose_name=_("Anordnung der Spreite"),
-    )
-    arr_special = models.BooleanField(
-        default=False, verbose_name=_("Anordnung ist buchtig.")
-    )
-    form = models.CharField(
-        max_length=3,
-        choices=FORM_CHOICES,
-        blank=True,
-        verbose_name=_("Gestalt der Spreite"),
-    )
-    count = models.CharField(
-        max_length=200, blank=True, verbose_name=_("Anzahl Blättchen")
-    )
-    leaflets = models.CharField(
-        max_length=3,
-        choices=LEAFLET_CHOICES,
-        blank=True,
-        verbose_name=_("Spreiten-/Blättchenrand"),
+        verbose_name=_("Dickfleischigkeit"),
     )
     texture = models.CharField(
         max_length=3,
@@ -250,43 +197,143 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Beschaffenheit"),
     )
-    sur_texture = models.CharField(
+    cross_section = models.CharField(
         max_length=3,
-        choices=SUR_TEXTURE_CHOICES,
+        choices=CROSS_SECTION_CHOICES,
         blank=True,
-        verbose_name=_("Blattoberfläche"),
+        verbose_name=_("Querschnitt"),
     )
-    side_leaf = models.CharField(
-        max_length=3, choices=SIDE_CHOICES, blank=True, verbose_name=_("Nebenblattrand")
+    attachment = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=ATTACHMENT_CHOICES,
+            verbose_name=_("Anheftung (an Sprossachse)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
     )
-    diam = models.CharField(
-        max_length=3, choices=DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
-    )
-    sp_ground = models.CharField(
-        max_length=3, choices=SP_CHOICES, blank=True, verbose_name=_("Spreitengrund")
-    )
-    sp_top = models.CharField(
+    arrangement = models.CharField(
         max_length=3,
-        choices=SP_TOP_CHOICES,
+        choices=ARRANGMENT_CHOICES,
+        blank=True,
+        verbose_name=_("Anordnung (an Sprossachse)"),
+    )
+    rosette = models.CharField(
+        max_length=3,
+        choices=ROSETTE_CHOICES,
+        blank=True,
+        verbose_name=_("Grundblattrosette"),
+    )
+    leaf_comp_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)"),
+    )
+    blade_subdiv_shape = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=BLADE_SUBDIV_SHAPE_CHOICES,
+            verbose_name=_("Spreitengestalt (unterteiltes Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl"),
+    )
+    incision_depth = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    leaflet_incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)"),
+    )
+    leaflet_incision_add = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Einschnittzusatz (Blättchen)"),
+    )
+    leaflet_incision_depth = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=LEAFLET_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (Blättchen)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    leaf_simple_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)"),
+    )
+    blade_undiv_shape = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=BLADE_UNDIV_SHAPE_CHOICES,
+            verbose_name=_("Spreitengestalt (ungeteiltes Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    edge = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=EDGE_CHOICES,
+            verbose_name=_("Spreiten-/Blättchenrand"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    surface = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Blattoberfläche"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    stipule_edge = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=STIPULE_EDGE_CHOICES,
+            verbose_name=_("Nebenblattrand"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    base = models.CharField(
+        max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Spreitengrund")
+    )
+    apex = models.CharField(
+        max_length=3,
+        choices=APEX_CHOICES,
         blank=True,
         verbose_name=_("Spreitenspitze"),
     )
-    specialty = models.CharField(
+    special_features = models.CharField(
         max_length=200,
         blank=True,
         verbose_name=_("Besondere Merkmale"),
-        help_text='Gib "Nicht vorhanden" ein falls es wichtig ist, dass dieses Merkmal nicht ausgeprägt ist.',
+        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
-
-    plant = models.OneToOneField(
-        Plant, related_name="leaf", on_delete=models.CASCADE, verbose_name=_("Pflanze")
-    )
-    thick_flesh = models.CharField(
-        null=True,
+    sheath = models.CharField(
+        max_length=100,
         blank=True,
-        max_length=3,
-        choices=YES_NO_CHOICES,
-        verbose_name=_("Dickfleischig"),
+        verbose_name=_("Blattscheide"),
+        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
+    )
+    seed_leaf_num = models.IntegerField(
+        choices=((1, 1), (2, 2)),
+        blank=True,
+        null=True,
+        verbose_name=_("Keimblattanzahl"),
     )
 
     class Meta:
@@ -523,9 +570,6 @@ class Sprout(models.Model):
     )
     milk = models.CharField(
         max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
-    )
-    rose = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Grundblattrose")
     )
     leafly = models.CharField(
         max_length=3,

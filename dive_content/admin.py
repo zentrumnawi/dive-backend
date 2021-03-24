@@ -1,13 +1,50 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import PlantAdminForm
+from .forms import LeafAdminForm, PlantAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
+
+leaf_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        "Blattmerkmale",
+        {
+            "fields": (
+                "veins",
+                "division",
+                "succulence",
+                "texture",
+                "cross_section",
+                ("attachment", "arrangement"),
+                "rosette",
+                ("leaf_comp_num", "blade_subdiv_shape"),
+                ("incision_num", "incision_depth"),
+                (
+                    "leaflet_incision_num",
+                    "leaflet_incision_add",
+                    "leaflet_incision_depth",
+                ),
+                ("leaf_simple_num", "blade_undiv_shape",),
+                "edge",
+                "surface",
+                "stipule_edge",
+                ("base", "apex"),
+                "special_features",
+                "sheath",
+            )
+        },
+    ),
+    ("Keimblattmerkmale", {"fields": ("seed_leaf_num",)}),
+)
+leaf_radio_fields = {"seed_leaf_num": admin.HORIZONTAL}
 
 
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
+    fieldsets = leaf_fieldsets
+    form = LeafAdminForm
+    radio_fields = leaf_radio_fields
     classes = ("collapse",)
 
 
@@ -47,7 +84,16 @@ class PlantAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Plant, PlantAdmin)
-admin.site.register(Leaf, admin.ModelAdmin)
+
+
+class LeafAdmin(admin.ModelAdmin):
+    model = Leaf
+    fieldsets = leaf_fieldsets
+    form = LeafAdminForm
+    radio_fields = leaf_radio_fields
+
+
+admin.site.register(Leaf, LeafAdmin)
 admin.site.register(Blossom, admin.ModelAdmin)
 admin.site.register(Fruit, admin.ModelAdmin)
 admin.site.register(Sprout, admin.ModelAdmin)

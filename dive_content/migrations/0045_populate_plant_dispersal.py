@@ -3,9 +3,6 @@
 from django.db import migrations
 
 
-from django.db import migrations
-
-
 def populate_plant_dispersal_with_fruit_spread(apps, schema_editor):
     """
     Populate Plant model dispersal fields with Fruit model spread values.

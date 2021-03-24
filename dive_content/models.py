@@ -625,7 +625,7 @@ class StemRoot(models.Model):
     )
     bracts = models.CharField(
         max_length=3,
-        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
+        choices=BRACTS_CHOICES,
         blank=True,
         verbose_name=_("Beblätterung"),
     )

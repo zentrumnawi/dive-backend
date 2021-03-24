@@ -438,6 +438,10 @@ RUNNERS_CHOICES = (
     ("bil", _("bildet oberirdische Ausläufer")),
     ("kei", _("keine Angabe")),
 )
+BRACTS_CHOICES = (
+    ("nur", _("nur am Grund")),
+    ("auc", _("auch über dem Grund")),
+)
 ORGANS_CHOICES = (
     ("Rhi", _("Rhizom")),
     ("Zwi", _("Zwiebel")),

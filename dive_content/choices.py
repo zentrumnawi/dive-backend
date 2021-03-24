@@ -434,6 +434,7 @@ POSITION_CHOICES = (
     ("hor", _("horstig")),
     ("loc", _("lockerrasig")),
 )
+APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
 SP_DIAM_CHOICES = (
     ("sti", _("stielrund")),

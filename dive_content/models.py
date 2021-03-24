@@ -585,6 +585,14 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Wuchsorientierung"),
     )
+    appearance = ArrayField(
+        base_field=models.CharField(
+            max_length=1, choices=APPEARANCE_CHOICES, verbose_name=_("Erscheinung"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     appear = models.CharField(
         max_length=1,
         choices=(("k", _("krautig")), ("h", _("holzig"))),

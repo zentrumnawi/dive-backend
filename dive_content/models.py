@@ -587,7 +587,7 @@ class StemRoot(models.Model):
         blank=True,
         default=list,
     )
-    thick_flesh = models.CharField(
+    succulence = models.CharField(
         null=True,
         blank=True,
         max_length=3,
@@ -624,13 +624,13 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Ausläufer (oberirdisch)"),
     )
-    leafly = models.CharField(
+    bracts = models.CharField(
         max_length=3,
         choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
         blank=True,
         verbose_name=_("Beblätterung"),
     )
-    milk = models.CharField(
+    milky_sap = models.CharField(
         max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
     )
     organ_features = models.CharField(

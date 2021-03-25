@@ -321,10 +321,11 @@ class FruitSerializer(DisplayNameModelSerializer):
 class StemRootSerializer(DisplayNameModelSerializer):
     stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
     outgrowths = serializers.SerializerMethodField(label="Auswüchse")
+    bracts = serializers.SerializerMethodField(label="Beblätterung")
 
     class Meta:
         model = StemRoot
-        fields = ["stem_morphology", "outgrowths"]
+        fields = ["stem_morphology", "outgrowths", "bracts"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_stem_morphology(self, obj):
@@ -362,6 +363,15 @@ class StemRootSerializer(DisplayNameModelSerializer):
         ]
 
         text = "; ".join(filter(None, fields))
+
+        return format_sentence(text)
+
+    def get_bracts(self, obj):
+        # Generate sentence "Beblätterung" according pattern:
+        # "[bracts] beblättert."
+        fields = concatenate(obj.bracts, BRACTS_CHOICES)
+
+        text = f"{f'{fields} beblättert' if fields else ''}"
 
         return format_sentence(text)
 

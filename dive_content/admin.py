@@ -52,7 +52,7 @@ fruit_fieldsets = (
         },
     ),
 )
-
+fruit_radio_fields = {"ovule_pos": admin.HORIZONTAL}
 
 # Inlines
 class LeafInline(admin.StackedInline):
@@ -72,6 +72,7 @@ class FruitInline(admin.StackedInline):
     model = Fruit
     fieldsets = fruit_fieldsets
     form = FruitAdminForm
+    radio_fields = fruit_radio_fields
     classes = ("collapse",)
 
 
@@ -118,6 +119,7 @@ class FruitAdmin(admin.ModelAdmin):
     model = Fruit
     fieldsets = fruit_fieldsets
     form = FruitAdminForm
+    radio_fields = fruit_radio_fields
 
 
 admin.site.register(Fruit, FruitAdmin)

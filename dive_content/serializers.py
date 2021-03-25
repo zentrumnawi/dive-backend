@@ -322,10 +322,11 @@ class StemRootSerializer(DisplayNameModelSerializer):
     stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
     outgrowths = serializers.SerializerMethodField(label="Auswüchse")
     bracts = serializers.SerializerMethodField(label="Beblätterung")
+    milky_sap = serializers.SerializerMethodField(label="Milchsaft")
 
     class Meta:
         model = StemRoot
-        fields = ["stem_morphology", "outgrowths", "bracts"]
+        fields = ["stem_morphology", "outgrowths", "bracts", "milky_sap"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_stem_morphology(self, obj):
@@ -372,6 +373,15 @@ class StemRootSerializer(DisplayNameModelSerializer):
         fields = concatenate(obj.bracts, BRACTS_CHOICES)
 
         text = f"{f'{fields} beblättert' if fields else ''}"
+
+        return format_sentence(text)
+
+    def get_milky_sap(self, obj):
+        # Generate sentence "Milchsaft" according pattern:
+        # "[milky_sap].."
+        fields = obj.milky_sap
+
+        text = f"{f'{fields}' if fields else ''}"
 
         return format_sentence(text)
 

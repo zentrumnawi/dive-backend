@@ -320,10 +320,11 @@ class FruitSerializer(DisplayNameModelSerializer):
 
 class StemRootSerializer(DisplayNameModelSerializer):
     stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
+    outgrowths = serializers.SerializerMethodField(label="Auswüchse")
 
     class Meta:
         model = StemRoot
-        fields = ["morphology"]
+        fields = ["stem_morphology", "outgrowths"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_stem_morphology(self, obj):
@@ -349,6 +350,18 @@ class StemRootSerializer(DisplayNameModelSerializer):
         ]
         text[0] = f"{f'{text[0]} Spross' if text[0] else ''}"
         text = "; ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_outgrowths(self, obj):
+        # Generate sentence "Auswüchse" according pattern:
+        # "[creep_lay_shoots]; [runners]."
+        fields = [
+            concatenate(obj.creep_lay_shoots, CREEP_LAY_SHOOTS_CHOICES),
+            concatenate(obj.runners, RUNNERS_CHOICES),
+        ]
+
+        text = "; ".join(filter(None, fields))
 
         return format_sentence(text)
 

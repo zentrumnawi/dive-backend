@@ -319,10 +319,38 @@ class FruitSerializer(DisplayNameModelSerializer):
 
 
 class StemRootSerializer(DisplayNameModelSerializer):
+    stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
+
     class Meta:
         model = StemRoot
-        exclude = ["plant"]
+        fields = ["morphology"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_stem_morphology(self, obj):
+        # Generate sentence "Sprossmorphologie" according pattern:
+        # "[orientation]er [appearance]er, [succulence]er Spross; [cross_section]er
+        # Querschnitt mit [surface]er Oberfläche."
+        app = "er"
+        if not obj.cross_section:
+            app = "e"
+        fields = [
+            concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
+            concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
+            concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
+            concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
+            concatenate(obj.surface, SURFACE_CHOICES, app),
+        ]
+        fields[3] = f"{f'{fields[3]} Querschnitt' if fields[3] else ''}"
+        fields[4] = f"{f'{fields[4]} Oberfläche' if fields[4] else ''}"
+
+        text = [
+            ", ".join(filter(None, fields[:3])),
+            " mit ".join(filter(None, fields[3:])),
+        ]
+        text[0] = f"{f'{text[0]} Spross' if text[0] else ''}"
+        text = "; ".join(filter(None, text))
+
+        return format_sentence(text)
 
 
 class ZeigerNumberSerializer(DisplayNameModelSerializer):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import FruitAdminForm, LeafAdminForm, PlantAdminForm
+from .forms import FruitAdminForm, LeafAdminForm, PlantAdminForm, StemRootAdminForm
 from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
 
 leaf_fieldsets = (
@@ -54,6 +54,37 @@ fruit_fieldsets = (
 )
 fruit_radio_fields = {"ovule_pos": admin.HORIZONTAL}
 
+stemroot_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        "Sprossmerkmale",
+        {
+            "fields": (
+                "orientation",
+                "appearance",
+                "succulence",
+                "cross_section",
+                "surface",
+                "creep_lay_shoots",
+                "runners",
+                "bracts",
+                "milky_sap",
+            )
+        },
+    ),
+    (
+        "Wurzeln und unterirdische Planzenorgane",
+        {"fields": ("organ_features", "organs", "primary_root")},
+    ),
+)
+stemroot_radio_fields = {
+    "succulence": admin.HORIZONTAL,
+    "creep_lay_shoots": admin.HORIZONTAL,
+    "runners": admin.HORIZONTAL,
+    "bracts": admin.HORIZONTAL,
+    "primary_root": admin.HORIZONTAL,
+}
+
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
@@ -78,6 +109,9 @@ class FruitInline(admin.StackedInline):
 
 class StemRootInline(admin.StackedInline):
     model = StemRoot
+    fieldsets = stemroot_fieldsets
+    form = StemRootAdminForm
+    radio_fields = stemroot_radio_fields
     classes = ("collapse",)
 
 
@@ -123,5 +157,14 @@ class FruitAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Fruit, FruitAdmin)
-admin.site.register(StemRoot, admin.ModelAdmin)
+
+
+class StemRootAdmin(admin.ModelAdmin):
+    model = StemRoot
+    fieldsets = stemroot_fieldsets
+    form = StemRootAdminForm
+    radio_fields = stemroot_radio_fields
+
+
+admin.site.register(StemRoot, StemRootAdmin)
 admin.site.register(ZeigerNumber, admin.ModelAdmin)

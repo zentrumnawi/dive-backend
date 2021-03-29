@@ -359,12 +359,8 @@ GROUND_CHOICES = (
 
 # Fruit choices
 
-FRUIT_POS_CHOICES = (
-    ("fr", _("Fruchtknoten")),
-    ("za", _("Zapfenschuppe")),
-    ("sp", _("Sprossachse")),
-)
-TYPE_CHOICES = (
+FRUIT_TYPE_CHOICES = (
+    ("apf", _("Apfelfrucht")),
     ("nus", _("Nuss")),
     ("kar", _("Karyopse")),
     ("ach", _("Achäne")),
@@ -387,6 +383,10 @@ TYPE_CHOICES = (
     ("nue", _("Nüsschen")),
     ("stc", _("Steinfrüchtchen")),
     ("bac", _("Balgfrüchtchen")),
+)
+OVULE_POS_CHOICES = (
+    ("fr", _("Fruchtknoten (Angiospermen)")),
+    ("za", _("Zapfenschuppe (Gymnospermen)")),
 )
 
 

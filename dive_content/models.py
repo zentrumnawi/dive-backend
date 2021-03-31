@@ -659,6 +659,40 @@ class StemRoot(models.Model):
         verbose_name_plural = _("Sprosse und Wurzeln")
 
 
+class Indicators(models.Model):
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="indicators",
+        verbose_name=_("Pflanze"),
+    )
+    not_specified = models.BooleanField(
+        default=False,
+        verbose_name=_("Keine Angabe"),
+        help_text=_("Die Ausgabe aller Zeigerwerte wird unterdrückt."),
+    )
+    light = models.CharField(max_length=10, blank=True, verbose_name=_("Lichtzahl"))
+    temperature = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Temperaturzahl"),
+    )
+    humidity = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Feuchtezahl"),
+    )
+    reaction = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Reaktionszahl"),
+    )
+    nitrogen = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Stickstoffzahl"),
+    )
+    key = ArrayField(
+        base_field=models.CharField(max_length=3), default=list, editable=False
+    )
+
+    class Meta:
+        verbose_name = _("Zeigerwerte")
+        verbose_name_plural = _("Zeigerwerte")
+
+
 class ZeigerNumber(models.Model):
     light_number = models.CharField(
         max_length=100,

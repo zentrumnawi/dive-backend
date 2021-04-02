@@ -20,14 +20,14 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
 
 class IntegerRangeCharField(forms.MultiValueField):
     def __init__(
-        self, min=1, max=99, infinity=False, model=None, field_name="", **kwargs
+        self, model=None, field_name=None, min=1, max=99, infinity=False, **kwargs
     ):
-        self.max = max
-        self.infinity = infinity
         _label = None
         if model and field_name:
             _label = model._meta.get_field(field_name).verbose_name
         _help_text = "Einzelwert oder Wertebereich"
+        self.max = max
+        self.infinity = infinity
         if infinity:
             _help_text += f", {max} wird als ∞ gespeichert."
         kwargs.setdefault("required", False)
@@ -69,9 +69,7 @@ class IntegerRangeCharField(forms.MultiValueField):
                 if self.infinity and data == self.max:
                     data_list[i] = "∞"
 
-        data = "–".join(filter(None, data_list))
-
-        return data
+        return "–".join(filter(None, data_list))
 
 
 class IndicatorField(forms.MultiValueField):

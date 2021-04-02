@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .choices import INDICATORS, INDICATORS_CHOICES
 from .models import Indicators
-from .widgets import IndicatorWidget
+from .widgets import IndicatorWidget, IntegerRangeCharWidget
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -16,21 +16,6 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
         kwargs.setdefault("label", _label)
 
         super().__init__(**kwargs)
-
-
-class IntegerRangeCharWidget(forms.MultiWidget):
-    def __init__(self, min, max, attrs=None):
-        self.max = max
-        widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max}),
-            forms.NumberInput(attrs={"min": min, "max": max}),
-        )
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        if value:
-            return [self.max if v == "∞" else v for v in value.split("–", 1)]
-        return [None, None]
 
 
 class IntegerRangeCharField(forms.MultiValueField):

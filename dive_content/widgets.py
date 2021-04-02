@@ -1,6 +1,21 @@
 from django import forms
 
 
+class IntegerRangeCharWidget(forms.MultiWidget):
+    def __init__(self, min, max, attrs=None):
+        self.max = max
+        widgets = (
+            forms.NumberInput(attrs={"min": min, "max": max}),
+            forms.NumberInput(attrs={"min": min, "max": max}),
+        )
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return [self.max if v == "∞" else v for v in value.split("–", 1)]
+        return [None, None]
+
+
 class IndicatorWidget(forms.MultiWidget):
     def __init__(self, choices, mode=None, attrs=None):
         self.mode = mode

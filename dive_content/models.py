@@ -692,6 +692,11 @@ class Indicators(models.Model):
         verbose_name = _("Zeigerwerte")
         verbose_name_plural = _("Zeigerwerte")
 
+    def get_key(self):
+        return ", ".join(f"{dict(KEY_CHOICES).get(key)}" for key in self.key)
+
+    get_key.short_description = _("Zeichenerklärung")
+
 
 class ZeigerNumber(models.Model):
     light_number = models.CharField(

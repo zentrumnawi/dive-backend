@@ -1,8 +1,14 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
-from .forms import FruitAdminForm, LeafAdminForm, PlantAdminForm, StemRootAdminForm
-from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
+from .forms import (
+    FruitAdminForm,
+    IndicatorsAdminForm,
+    LeafAdminForm,
+    PlantAdminForm,
+    StemRootAdminForm,
+)
+from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot, ZeigerNumber
 
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -85,6 +91,13 @@ stemroot_radio_fields = {
     "primary_root": admin.HORIZONTAL,
 }
 
+indicators_fieldsets = (
+    (None, {"fields": ("plant", "not_specified")}),
+    (None, {"fields": ("light", "temperature", "humidity", "reaction", "nitrogen")}),
+    (None, {"fields": ("get_key",)}),
+)
+indicators_readonly_fields = ("get_key",)
+
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
@@ -115,6 +128,14 @@ class StemRootInline(admin.StackedInline):
     classes = ("collapse",)
 
 
+class IndicatorsInline(admin.StackedInline):
+    model = Indicators
+    fieldsets = indicators_fieldsets
+    form = IndicatorsAdminForm
+    readonly_fields = indicators_readonly_fields
+    classes = ("collapse",)
+
+
 class ZeigerNumberInline(admin.StackedInline):
     model = ZeigerNumber
     classes = ("collapse",)
@@ -130,6 +151,7 @@ class PlantAdmin(admin.ModelAdmin):
         BlossomInline,
         FruitInline,
         StemRootInline,
+        IndicatorsInline,
         ZeigerNumberInline,
         PhotographInline,
     ]
@@ -167,4 +189,16 @@ class StemRootAdmin(admin.ModelAdmin):
 
 
 admin.site.register(StemRoot, StemRootAdmin)
+
+
+class IndicatorsAdmin(admin.ModelAdmin):
+    model = Indicators
+    fieldsets = indicators_fieldsets
+    form = IndicatorsAdminForm
+    readonly_fields = indicators_readonly_fields
+
+
+admin.site.register(Indicators, IndicatorsAdmin)
+
+
 admin.site.register(ZeigerNumber, admin.ModelAdmin)

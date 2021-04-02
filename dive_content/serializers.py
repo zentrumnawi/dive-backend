@@ -2,7 +2,7 @@ from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .choices import *
-from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
+from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot, ZeigerNumber
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -408,6 +408,46 @@ class StemRootSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
+class IndicatorsSerializer(serializers.ModelSerializer):
+    not_specified = serializers.CharField(label="", read_only=True)
+    key = serializers.CharField(source="get_key", label="", read_only=True)
+
+    class Meta:
+        model = Indicators
+        fields = ["not_specified", *INDICATORS, "key"]
+        extra_kwargs = dict.fromkeys(INDICATORS, {"max_length": 100})
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+
+        if ret.get("not_specified") == "True":
+            ret.clear()
+            ret["not_specified"] = "Keine Angabe"
+        else:
+            ret.pop("not_specified")
+            for key in INDICATORS_DICT:
+                value = ret[key]
+                # Remove items with empty values.
+                if not value:
+                    ret.pop(key)
+                # Add verbose descriptions to indicator values.
+                else:
+                    value_key = value[:2]
+                    if value[2:3].isdigit():
+                        value_key = value[:3]
+                    ret[key] = f"{value} – {INDICATORS_DICT[key][value_key]}"
+            # Set light value digit in parentheses.
+            value = ret.get("light", "")
+            if "()" in value:
+                ret["light"] = f"{value[0]}({value[1]}){value[4:]}"
+            # Remove empty key.
+            if not ret.get("key"):
+                ret.pop("key")
+
+        return ret
+
+
 class ZeigerNumberSerializer(DisplayNameModelSerializer):
 
     serializer_choice_field = ZeigerNumberField
@@ -430,6 +470,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     blossom = BlossomSerializer(required=False)
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)
+    indicators = IndicatorsSerializer(required=False)
     zeigernumber = ZeigerNumberSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 

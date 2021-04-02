@@ -19,24 +19,22 @@ class PlantAdminForm(forms.ModelForm):
 
 
 class LeafAdminForm(forms.ModelForm):
-    attachment = ArrayMultipleChoiceField(
-        Leaf, "attachment", choices=ATTACHMENT_CHOICES
-    )
+    attachment = ArrayMultipleChoiceField(ATTACHMENT_CHOICES, Leaf, "attachment")
     blade_subdiv_shape = ArrayMultipleChoiceField(
-        Leaf, "blade_subdiv_shape", choices=BLADE_SUBDIV_SHAPE_CHOICES
+        BLADE_SUBDIV_SHAPE_CHOICES, Leaf, "blade_subdiv_shape"
     )
     incision_depth = ArrayMultipleChoiceField(
-        Leaf, "incision_depth", choices=INCISION_DEPTH_CHOICES
+        INCISION_DEPTH_CHOICES, Leaf, "incision_depth"
     )
     blade_undiv_shape = ArrayMultipleChoiceField(
-        Leaf, "blade_undiv_shape", choices=BLADE_UNDIV_SHAPE_CHOICES
+        BLADE_UNDIV_SHAPE_CHOICES, Leaf, "blade_undiv_shape"
     )
     leaflet_incision_depth = ArrayMultipleChoiceField(
-        Leaf, "leaflet_incision_depth", choices=LEAFLET_INCISION_DEPTH_CHOICES
+        LEAFLET_INCISION_DEPTH_CHOICES, Leaf, "leaflet_incision_depth"
     )
-    edge = ArrayMultipleChoiceField(Leaf, "edge", choices=EDGE_CHOICES)
-    surface = ArrayMultipleChoiceField(Leaf, "surface", choices=SURFACE_CHOICES)
-    stipule_edge = ArrayMultipleChoiceField(Leaf, "stipule_edge", choices=EDGE_CHOICES)
+    edge = ArrayMultipleChoiceField(EDGE_CHOICES, Leaf, "edge")
+    surface = ArrayMultipleChoiceField(SURFACE_CHOICES, Leaf, "surface")
+    stipule_edge = ArrayMultipleChoiceField(STIPULE_EDGE_CHOICES, Leaf, "stipule_edge")
 
     leaf_comp_num = IntegerRangeCharField(model=Leaf, field_name="leaf_comp_num")
     incision_num = IntegerRangeCharField(model=Leaf, field_name="incision_num")
@@ -53,19 +51,14 @@ class FruitAdminForm(forms.ModelForm):
 
 
 class StemRootAdminForm(forms.ModelForm):
-    orientation = ArrayMultipleChoiceField(
-        StemRoot, "orientation", choices=ORIENTATION_CHOICES
-    )
+    orientation = ArrayMultipleChoiceField(ORIENTATION_CHOICES, StemRoot, "orientation")
     appearance = ArrayMultipleChoiceField(
-        StemRoot,
-        "appearance",
-        choices=APPEARANCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple,
+        APPEARANCE_CHOICES, StemRoot, "appearance", widget=forms.CheckboxSelectMultiple
     )
     cross_section = ArrayMultipleChoiceField(
-        StemRoot, "cross_section", choices=SR_CROSS_SECTION_CHOICES
+        SR_CROSS_SECTION_CHOICES, StemRoot, "cross_section"
     )
-    surface = ArrayMultipleChoiceField(StemRoot, "surface", choices=SURFACE_CHOICES)
+    surface = ArrayMultipleChoiceField(SURFACE_CHOICES, StemRoot, "surface")
 
 
 class IndicatorsAdminForm(forms.ModelForm):

@@ -8,7 +8,7 @@ from .forms import (
     PlantAdminForm,
     StemRootAdminForm,
 )
-from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot, ZeigerNumber
+from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot
 
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -136,11 +136,6 @@ class IndicatorsInline(admin.StackedInline):
     classes = ("collapse",)
 
 
-class ZeigerNumberInline(admin.StackedInline):
-    model = ZeigerNumber
-    classes = ("collapse",)
-
-
 class PlantAdmin(admin.ModelAdmin):
     form = PlantAdminForm
     readonly_fields = ("taxonomy", "get_ground_output")
@@ -152,7 +147,6 @@ class PlantAdmin(admin.ModelAdmin):
         FruitInline,
         StemRootInline,
         IndicatorsInline,
-        ZeigerNumberInline,
         PhotographInline,
     ]
 
@@ -199,6 +193,3 @@ class IndicatorsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Indicators, IndicatorsAdmin)
-
-
-admin.site.register(ZeigerNumber, admin.ModelAdmin)

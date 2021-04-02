@@ -2,7 +2,7 @@ from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .choices import *
-from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot, ZeigerNumber
+from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -12,6 +12,7 @@ class HumanReadableChoiceField(serializers.ChoiceField):
         return str(self.grouped_choices[value])
 
 
+# -------------------------------------- LEGACY -------------------------------------- #
 class ZeigerNumberField(serializers.Field):
     """
     This field is designed to be used as 'serializer_choice_field' in the ZeigerNumberSerializer.
@@ -53,6 +54,9 @@ class ZeigerNumberField(serializers.Field):
         if extra_field_value and field_value:
             field_value = f" {extra_field_value} - ".join(field_value.split(" - "))
         return field_value
+
+
+# ------------------------------------------------------------------------------------ #
 
 
 class DisplayNameModelSerializer(serializers.ModelSerializer):
@@ -448,10 +452,13 @@ class IndicatorsSerializer(serializers.ModelSerializer):
         return ret
 
 
+# -------------------------------------- LEGACY -------------------------------------- #
 class ZeigerNumberSerializer(DisplayNameModelSerializer):
 
     serializer_choice_field = ZeigerNumberField
 
+
+"""
     class Meta:
         model = ZeigerNumber
         exclude = [
@@ -463,6 +470,8 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
             "nutri_extra",
         ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+"""
+# ------------------------------------------------------------------------------------ #
 
 
 class PlantSerializer(DisplayNameModelSerializer):
@@ -471,7 +480,6 @@ class PlantSerializer(DisplayNameModelSerializer):
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)
-    zeigernumber = ZeigerNumberSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 
     taxonomy = serializers.CharField(

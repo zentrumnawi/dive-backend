@@ -426,6 +426,12 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Verwachsungstyp"),
     )
+    sepal_connation = models.CharField(
+        max_length=1,
+        choices=SEPAL_CONNATION_CHOICES,
+        blank=True,
+        verbose_name=_("Verwachsung (Kelchblatt)"),
+    )
     sec_out = models.CharField(max_length=100, blank=True, verbose_name=_("Außenkelch"))
     crown_plate = models.CharField(
         max_length=100, blank=True, verbose_name=_("Kronblatt Platte")

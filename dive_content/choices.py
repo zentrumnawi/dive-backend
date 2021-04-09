@@ -316,11 +316,12 @@ CH_TYPE_CHOICES = (
     ("5-t", _("5-teilig")),
     ("zwe", _("zweilippig")),
 )
-CROWN_VER_CHOICES = (
+SEPAL_CONNATION_CHOICES = (
     ("v", _("verwachsen")),
     ("u", _("unverwachsen")),
     ("a", _("am Grund verwachsen")),
 )
+CROWN_VER_CHOICES = SEPAL_CONNATION_CHOICES
 BUILD_CHOICES = (
     ("mo", _("monokarp")),
     ("ap", _("apokarp/chorikarp")),

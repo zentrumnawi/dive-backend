@@ -356,12 +356,6 @@ class Blossom(models.Model):
         blank=True,
         default=list,
     )
-    season_old = models.CharField(
-        max_length=200,
-        blank=True,
-        verbose_name=_("Blütezeit"),
-        help_text="Bsp. (Januar) Februar bis März",
-    )
     inflorescence_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blütenstandsanzahl")
     )
@@ -402,20 +396,8 @@ class Blossom(models.Model):
         blank=True,
         default=list,
     )
-    parting = models.CharField(
-        max_length=3,
-        choices=PART_CHOICES,
-        blank=True,
-        verbose_name=_("Tragblattspreite"),
-    )
     diameter = models.CharField(
         max_length=10, blank=True, verbose_name=_("Durchmesser")
-    )
-    chalice = models.CharField(
-        max_length=1,
-        choices=(("v", _("verwachsen")), ("u", _("unverwachsen"))),
-        blank=True,
-        verbose_name=_("Kelchblätter"),
     )
     sepal_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Kelchblattanzahl")
@@ -456,9 +438,6 @@ class Blossom(models.Model):
     nectary = models.CharField(
         max_length=100, blank=True, verbose_name=_("Nektarium/Honigdrüse")
     )
-    crown_out = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Ausstülpung der Unterlippe")
-    )
     stamen_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Staubblattanzahl")
     )
@@ -498,19 +477,12 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Griffelstellung"),
     )
-    griffel_sub = models.CharField(
-        max_length=3,
-        choices=GRIFFEL_SUB_CHOICES,
-        blank=True,
-        verbose_name=_("Ständigkeit des Griffels ist sub-"),
-    )
     stigma_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Narbenanzahl (pro Griffel)")
     )
     stylopodium = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")
     )
-    spec_pipe = models.CharField(max_length=100, blank=True, verbose_name=_("Schlauch"))
     # -------------------------------- TO BE MODIFIED -------------------------------- #
     grann_top = models.CharField(
         max_length=2,

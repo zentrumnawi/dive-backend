@@ -287,37 +287,6 @@ BRACT_BLADE_CHOICES = (
     + BLADE_UNDIV_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )
-PART_CHOICES = (
-    ("gan", _("ganz/ungeteilt")),
-    ("gel", _("gelappt")),
-    ("gsp", _("gespalten")),
-    ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
-    ("han", _("handförmig/fingerförmig")),
-    ("hgl", _("handförmig gelappt")),
-    ("hgt", _("handförmig geteilt")),
-    ("hgs", _("handförmig geschnitten")),
-    ("gef", _("gefingert")),
-    ("fie", _("fiederförmig/fiederig")),
-    ("fil", _("fiederlappig")),
-    ("fsp", _("fiederspaltig")),
-    ("fit", _("fiederteilig")),
-    ("fis", _("fiederschnittig")),
-    ("paf", _("paarig gefiedert")),
-    ("upf", _("unpaarig gefiedert")),
-    ("unf", _("unterbrochen fiederschnittig")),
-    ("ung", _("unterbrochen gefiedert")),
-    ("dop", _("doppelt gefiedert")),
-    ("meh", _("mehrfach gefiedert")),
-    ("dre", _("dreizählig")),
-    ("dod", _("doppelt dreizählig")),
-    ("lei", _("leierförmig")),
-    ("sch", _("schrotsägeförmig")),
-    ("kam", _("kammförmig")),
-    ("fug", _("fußförmig geschnitten")),
-    ("fuz", _("fußförmig zusammengesetzt")),
-    ("non", _("nicht vorhanden")),
-)
 CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (
     ("", "---------"),
@@ -361,12 +330,6 @@ PISTIL_POS_CHOICES = (
     ("sse", _("subseitenständig")),
     ("sgr", _("subgrundständig")),
     ("sgy", _("subgynobasisch")),
-)
-GRIFFEL_SUB_CHOICES = (
-    ("end", _("subendständig")),
-    ("sei", _("subseitenständig")),
-    ("gru", _("subgrundständig")),
-    ("gyn", _("subgynobasisch")),
 )
 # ---------------------------------- TO BE MODIFIED ---------------------------------- #
 GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))

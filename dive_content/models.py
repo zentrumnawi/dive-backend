@@ -342,6 +342,12 @@ class Leaf(models.Model):
 
 
 class Blossom(models.Model):
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="blossom",
+        verbose_name=_("Pflanze"),
+    )
     season = models.CharField(
         max_length=200,
         blank=True,
@@ -357,8 +363,20 @@ class Blossom(models.Model):
     bl_cnt = models.CharField(
         max_length=100, blank=True, verbose_name=_("Blüten pro Blütenstand")
     )
+    cnt = models.IntegerField(
+        choices=((3, 3), (4, 4), (5, 5)),
+        blank=True,
+        null=True,
+        verbose_name=_("Zähligkeit"),
+    )
     sym = models.CharField(
         max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")
+    )
+    hull = models.CharField(
+        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenhülle")
+    )
+    spec_sporn = models.CharField(
+        max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")
     )
     parting = models.CharField(
         max_length=3,
@@ -366,16 +384,6 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Tragblattspreite"),
     )
-    cnt = models.IntegerField(
-        choices=((3, 3), (4, 4), (5, 5)),
-        blank=True,
-        null=True,
-        verbose_name=_("Zähligkeit"),
-    )
-    hull = models.CharField(
-        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenhülle")
-    )
-
     chalice = models.CharField(
         max_length=1,
         choices=(("v", _("verwachsen")), ("u", _("unverwachsen"))),
@@ -388,18 +396,12 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Verwachsungstyp"),
     )
-
-    crown_color = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Kronblattfarbe")
-    )
-    crown_ver = models.CharField(
-        max_length=1,
-        choices=CROWN_VER_CHOICES,
-        blank=True,
-        verbose_name=_("Verwachsung der Kronblätter"),
-    )
+    sec_out = models.CharField(max_length=100, blank=True, verbose_name=_("Außenkelch"))
     crown_plate = models.CharField(
         max_length=100, blank=True, verbose_name=_("Kronblatt Platte")
+    )
+    crown_color = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Kronblattfarbe")
     )
     crown_lower = models.CharField(
         max_length=3,
@@ -407,10 +409,18 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Kronblatt Unterlippe"),
     )
+    crown_ver = models.CharField(
+        max_length=1,
+        choices=CROWN_VER_CHOICES,
+        blank=True,
+        verbose_name=_("Verwachsung der Kronblätter"),
+    )
+    spec_hon = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Honigdrüsen / Nektarien")
+    )
     crown_out = models.CharField(
         max_length=100, blank=True, verbose_name=_("Ausstülpung der Unterlippe")
     )
-
     dust_cnt = models.CharField(
         max_length=100, blank=True, verbose_name=_("Staubblatt Anzahl")
     )
@@ -423,15 +433,8 @@ class Blossom(models.Model):
     dust_pipe = models.CharField(
         max_length=100, blank=True, verbose_name=_("Staubfadenröhre")
     )
-
     fruit_cnt = models.CharField(
         max_length=100, blank=True, verbose_name=_("Fruchtknoten Anzahl")
-    )
-    fruit_stand = models.CharField(
-        max_length=2,
-        choices=STAND_TYPE_CHOICES,
-        blank=True,
-        verbose_name=_("Ständigkeit des Fruchtknotens"),
     )
     fruit_build = models.CharField(
         max_length=2,
@@ -439,8 +442,11 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Bau des Gynoeceums"),
     )
-    fruit_scar = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Narben pro Griffel")
+    fruit_stand = models.CharField(
+        max_length=2,
+        choices=STAND_TYPE_CHOICES,
+        blank=True,
+        verbose_name=_("Ständigkeit des Fruchtknotens"),
     )
     griffel_stand = models.CharField(
         max_length=2,
@@ -454,19 +460,14 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Ständigkeit des Griffels ist sub-"),
     )
-
-    spec_sporn = models.CharField(
-        max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")
+    fruit_scar = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Narben pro Griffel")
     )
-    spec_hon = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Honigdrüsen / Nektarien")
-    )
-    sec_out = models.CharField(max_length=100, blank=True, verbose_name=_("Außenkelch"))
     spec_pol = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")
     )
     spec_pipe = models.CharField(max_length=100, blank=True, verbose_name=_("Schlauch"))
-
+    # -------------------------------- TO BE MODIFIED -------------------------------- #
     grann_top = models.CharField(
         max_length=2,
         choices=GRANN_TOP_CHOICES,
@@ -503,14 +504,7 @@ class Blossom(models.Model):
     aer_per_ab = models.CharField(
         max_length=100, blank=True, verbose_name=_("Ährchen pro Absatz der Ährenachse")
     )
-
-    plant = models.OneToOneField(
-        Plant,
-        on_delete=models.CASCADE,
-        related_name="blossom",
-        verbose_name=_("Pflanze"),
-    )
-
+    # -------------------------------------------------------------------------------- #
     class Meta:
         verbose_name = _("Blüte")
         verbose_name_plural = _("Blüten")

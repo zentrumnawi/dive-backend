@@ -233,6 +233,32 @@ SYM_CHOICES = (
     ("z", _("zygomorph/dorsiventral")),
     ("a", _("asymmetrisch/unregelmäßig")),
 )
+HULL_CHOICES = (
+    ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
+    ("ein", _("einfache Blütenhülle (Perigon)")),
+    ("feh", _("fehlende Blütenhülle")),
+    ("lip", _("Lippenblüte")),
+    ("sch", _("Schmetterlingsblüte")),
+    ("zun", _("Zungenblüte")),
+    ("str", _("strahlende Randblüten")),
+)
+SPEC_SPORN_CHOICES = (
+    ("ro", _("röhrig")),
+    ("ke", _("keulig")),
+    ("gl", _("glockig")),
+    ("tr", _("trichterförmig")),
+    ("be", _("becherförmig")),
+    ("na", _("napfförmig")),
+    ("ku", _("kugelig")),
+    ("au", _("aufgeblasen")),
+    ("kr", _("krugförmig")),
+    ("ra", _("radförmig")),
+    ("st", _("stielförmig")),
+    ("zu", _("zungenförmig")),
+    ("ba", _("bauchig")),
+    ("as", _("ausgesackt")),
+    ("gr", _("gespornt")),
+)
 PART_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
@@ -264,15 +290,6 @@ PART_CHOICES = (
     ("fuz", _("fußförmig zusammengesetzt")),
     ("non", _("nicht vorhanden")),
 )
-HULL_CHOICES = (
-    ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
-    ("ein", _("einfache Blütenhülle (Perigon)")),
-    ("feh", _("fehlende Blütenhülle")),
-    ("lip", _("Lippenblüte")),
-    ("sch", _("Schmetterlingsblüte")),
-    ("zun", _("Zungenblüte")),
-    ("str", _("strahlende Randblüten")),
-)
 CH_TYPE_CHOICES = (
     ("fre", _("freiblättrig")),
     ("ver", _("verwachsenblättrig")),
@@ -299,18 +316,18 @@ CROWN_VER_CHOICES = (
     ("u", _("unverwachsen")),
     ("a", _("am Grund verwachsen")),
 )
+BUILD_CHOICES = (
+    ("mo", _("monokarp")),
+    ("ap", _("apokarp/chorikarp")),
+    ("cs", _("coeno-synkarp")),
+    ("cp", _("coeno-parakarp")),
+)
 STAND_TYPE_CHOICES = (
     ("hy", _("hypogyn/oberständig")),
     ("eh", _("epihypogyn/halboberständig")),
     ("pe", _("perigyn/mittelständig")),
     ("he", _("hemiepigyn/halbunterständig")),
     ("ep", _("epigyn/unterständig")),
-)
-BUILD_CHOICES = (
-    ("mo", _("monokarp")),
-    ("ap", _("apokarp/chorikarp")),
-    ("cs", _("coeno-synkarp")),
-    ("cp", _("coeno-parakarp")),
 )
 GRIFFEL_CHOICES = (
     ("en", _("endständig")),
@@ -324,23 +341,7 @@ GRIFFEL_SUB_CHOICES = (
     ("gru", _("subgrundständig")),
     ("gyn", _("subgynobasisch")),
 )
-SPEC_SPORN_CHOICES = (
-    ("ro", _("röhrig")),
-    ("ke", _("keulig")),
-    ("gl", _("glockig")),
-    ("tr", _("trichterförmig")),
-    ("be", _("becherförmig")),
-    ("na", _("napfförmig")),
-    ("ku", _("kugelig")),
-    ("au", _("aufgeblasen")),
-    ("kr", _("krugförmig")),
-    ("ra", _("radförmig")),
-    ("st", _("stielförmig")),
-    ("zu", _("zungenförmig")),
-    ("ba", _("bauchig")),
-    ("as", _("ausgesackt")),
-    ("gr", _("gespornt")),
-)
+# ---------------------------------- TO BE MODIFIED ---------------------------------- #
 GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
 GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
 GROUND_CHOICES = (
@@ -355,6 +356,7 @@ GROUND_CHOICES = (
     ("re", _("reitend")),
     ("hi", _("hinfällig")),
 )
+# ------------------------------------------------------------------------------------ #
 
 
 # Fruit choices

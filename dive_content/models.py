@@ -405,6 +405,9 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Tragblattspreite"),
     )
+    diameter = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Durchmesser")
+    )
     chalice = models.CharField(
         max_length=1,
         choices=(("v", _("verwachsen")), ("u", _("unverwachsen"))),

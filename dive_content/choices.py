@@ -196,37 +196,56 @@ APEX_CHOICES = (
 
 # Blossom choices
 
-BL_TYPE_CHOICES = (
-    ("ein", _("einzeln")),
+INFLORESCENCE_TYPE_CHOICES_1_3 = (
+    ("kol", _("Kolben")),
+    ("kae", _("Kätzchen")),
+    ("zap", _("Zapfen")),
+    ("koc", _("Köpfchen")),
+    ("krc", _("Körbchen")),
+    ("bue", _("Büschel")),
+    ("kna", _("Knäuel")),
+)
+INFLORESCENCE_TYPE_CHOICES_2_3 = (
+    ("ein", _("Einzelblüte")),
     ("tra", _("Traube")),
     ("ris", _("Rispe")),
-    ("ebe", _("Ebenstrauß/Corymbus")),
     ("sct", _("Schirmtraube")),
     ("scr", _("Schirmrispe")),
     ("spi", _("Spirre/Trichterrispe")),
     ("aer", _("Ähre")),
-    ("kol", _("Kolben")),
-    ("kae", _("Kätzchen")),
-    ("zap", _("Zapfen")),
     ("dol", _("Dolde")),
     ("dod", _("Doppeldolde")),
-    ("kop", _("Kopf")),
-    ("koc", _("Köpfchen")),
-    ("kor", _("Korb")),
-    ("krc", _("Körbchen")),
     ("zym", _("Zyme")),
+    ("wic", _("Wickel")),
+    ("dow", _("Doppelwickel")),
+    ("thy", _("Thyrse")),
+    ("scd", _("Scheindolde/Trugdolde")),
+)
+INFLORESCENCE_TYPE_CHOICES_3_3 = (
+    ("ebe", _("Ebenstrauß/Corymbus")),
+    ("kop", _("Kopf")),
+    ("kor", _("Korb")),
     ("ple", _("Pleiochasium")),
     ("dic", _("Dichasium")),
     ("mon", _("Monochasium")),
-    ("wic", _("Wickel")),
-    ("dow", _("Doppelwickel")),
     ("scq", _("Scheinquirl")),
-    ("bue", _("Büschel")),
-    ("kna", _("Knäuel")),
-    ("thy", _("Thyrse")),
-    ("scd", _("Scheindolde/Trugdolde")),
     ("scb", _("Scheinblüte/Pseudanthium")),
 )
+INFLORESCENCE_TYPE_CHOICES = (
+    INFLORESCENCE_TYPE_CHOICES_1_3
+    + INFLORESCENCE_TYPE_CHOICES_2_3
+    + INFLORESCENCE_TYPE_CHOICES_3_3
+)
+INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
+    "ebe": _("Ebensträuße/Corymbusse"),
+    "kop": _("Köpfe"),
+    "kor": _("Körbe"),
+    "ple": _("Pleiochasien"),
+    "dic": _("Dichasien"),
+    "mon": _("Monochasien"),
+    "scq": _("Scheinquirle"),
+    "scb": _("Scheinblüten/Pseudanthien"),
+}
 SYM_CHOICES = (
     ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
     ("d", _("disymmetrisch/bilateral")),

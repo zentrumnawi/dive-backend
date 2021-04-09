@@ -367,9 +367,9 @@ class Blossom(models.Model):
     )
     inflorescence_type = models.CharField(
         max_length=3,
-        choices=BL_TYPE_CHOICES,
+        choices=INFLORESCENCE_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Blütenstandsform"),
+        verbose_name=_("Blütenstandstyp"),
     )
     blossom_num = models.CharField(
         max_length=100, blank=True, verbose_name=_("Blüten pro Blütenstand")

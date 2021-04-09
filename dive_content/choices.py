@@ -249,11 +249,11 @@ INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )
-SYM_CHOICES = (
-    ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
-    ("d", _("disymmetrisch/bilateral")),
-    ("z", _("zygomorph/dorsiventral")),
-    ("a", _("asymmetrisch/unregelmäßig")),
+SYMMETRY_CHOICES = (
+    ("r", _("radiärsymmetrisch")),
+    ("d", _("disymmetrisch")),
+    ("z", _("zygomorph")),
+    ("a", _("asymmetrisch")),
 )
 HULL_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),

@@ -378,7 +378,7 @@ class Blossom(models.Model):
         choices=MEROSITY_CHOICES, blank=True, null=True, verbose_name=_("Zähligkeit")
     )
     symmetry = models.CharField(
-        max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")
+        max_length=1, choices=SYMMETRY_CHOICES, blank=True, verbose_name=_("Symmetrie")
     )
     perianth = models.CharField(
         max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenhülle")

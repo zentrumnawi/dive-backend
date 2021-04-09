@@ -417,6 +417,9 @@ class Blossom(models.Model):
     sepal_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Kelchblattanzahl")
     )
+    sepal_color_form = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Kelchblatt)")
+    )
     ch_type = models.CharField(
         max_length=3,
         choices=CH_TYPE_CHOICES,

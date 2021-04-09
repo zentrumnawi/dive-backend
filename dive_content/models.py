@@ -387,7 +387,10 @@ class Blossom(models.Model):
         verbose_name=_("Blütenhülle"),
     )
     perianth_form = models.CharField(
-        max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")
+        max_length=2,
+        choices=PERIANTH_FORM_CHOICES,
+        blank=True,
+        verbose_name=_("Blütenhüllenform (verwachsenblättrig)"),
     )
     bract_blade = ArrayField(
         base_field=models.CharField(

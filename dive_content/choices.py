@@ -265,7 +265,7 @@ PERIANTH_CHOICES = (
     ("roe", _("Röhrenblüte")),
     ("str", _("strahlende Randblüten")),
 )
-SPEC_SPORN_CHOICES = (
+PERIANTH_FORM_CHOICES = (
     ("ro", _("röhrig")),
     ("ke", _("keulig")),
     ("gl", _("glockig")),

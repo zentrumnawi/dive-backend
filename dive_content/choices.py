@@ -255,13 +255,14 @@ SYMMETRY_CHOICES = (
     ("z", _("zygomorph")),
     ("a", _("asymmetrisch")),
 )
-HULL_CHOICES = (
+PERIANTH_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
     ("ein", _("einfache Blütenhülle (Perigon)")),
     ("feh", _("fehlende Blütenhülle")),
     ("lip", _("Lippenblüte")),
     ("sch", _("Schmetterlingsblüte")),
     ("zun", _("Zungenblüte")),
+    ("roe", _("Röhrenblüte")),
     ("str", _("strahlende Randblüten")),
 )
 SPEC_SPORN_CHOICES = (

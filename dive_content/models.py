@@ -381,7 +381,10 @@ class Blossom(models.Model):
         max_length=1, choices=SYMMETRY_CHOICES, blank=True, verbose_name=_("Symmetrie")
     )
     perianth = models.CharField(
-        max_length=3, choices=HULL_CHOICES, blank=True, verbose_name=_("Blütenhülle")
+        max_length=3,
+        choices=PERIANTH_CHOICES,
+        blank=True,
+        verbose_name=_("Blütenhülle"),
     )
     perianth_form = models.CharField(
         max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")

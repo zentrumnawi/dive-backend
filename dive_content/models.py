@@ -362,6 +362,9 @@ class Blossom(models.Model):
         verbose_name=_("Blütezeit"),
         help_text="Bsp. (Januar) Februar bis März",
     )
+    inflorescence_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Blütenstandsanzahl")
+    )
     type = models.CharField(
         max_length=3,
         choices=BL_TYPE_CHOICES,

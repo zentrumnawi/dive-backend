@@ -318,6 +318,17 @@ PART_CHOICES = (
     ("fuz", _("fußförmig zusammengesetzt")),
     ("non", _("nicht vorhanden")),
 )
+CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
+CONNATION_TYPE_CHOICES = (
+    ("", "---------"),
+    ("-z", _("-zähnig")),
+    ("-l", _("-lappig")),
+    ("-s", _("-spaltig")),
+    ("-t", _("-teilig")),
+    ("fre", _("freiblättrig")),
+    ("ver", _("verwachsenblättrig")),
+    ("zwe", _("zweilippig")),
+)
 CH_TYPE_CHOICES = (
     ("fre", _("freiblättrig")),
     ("ver", _("verwachsenblättrig")),

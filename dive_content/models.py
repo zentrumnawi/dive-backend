@@ -424,10 +424,7 @@ class Blossom(models.Model):
         max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Kelchblatt)")
     )
     sepal_connation_type = models.CharField(
-        max_length=3,
-        choices=CH_TYPE_CHOICES,
-        blank=True,
-        verbose_name=_("Verwachsungstyp"),
+        max_length=3, blank=True, verbose_name=_("Verwachsungstyp (Kelchblatt)")
     )
     sepal_connation = models.CharField(
         max_length=1,

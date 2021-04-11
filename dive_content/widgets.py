@@ -2,11 +2,13 @@ from django import forms
 
 
 class NumberRangeCharWidget(forms.MultiWidget):
-    def __init__(self, min, max, attrs=None):
+    def __init__(self, min, max, step=1, suffix=None, attrs=None):
         self.max = max
+        if suffix == "cm":
+            self.template_name = "centimeter.html"
         widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max}),
-            forms.NumberInput(attrs={"min": min, "max": max}),
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
         )
         super().__init__(widgets, attrs)
 

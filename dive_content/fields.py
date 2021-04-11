@@ -2,9 +2,20 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
+from .choices import (
+    CONNATION_NUM_CHOICES,
+    CONNATION_TYPE_CHOICES,
+    INDICATORS,
+    INDICATORS_CHOICES,
+    SEASON_CHOICES,
+)
 from .models import Blossom, Indicators
-from .widgets import IndicatorWidget, NumberRangeCharWidget, SeasonWidget
+from .widgets import (
+    ConnationTypeWidget,
+    IndicatorWidget,
+    NumberRangeCharWidget,
+    SeasonWidget,
+)
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -110,6 +121,30 @@ class SeasonField(forms.MultiValueField):
                 data_list[3] = None
 
         return data_list
+
+
+class ConnationTypeField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", Blossom._meta.get_field(field_name).verbose_name)
+
+        choices = (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES)
+        fields = [
+            forms.ChoiceField(choices=choices[0]),
+            forms.ChoiceField(choices=choices[1]),
+        ]
+        widget = ConnationTypeWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        value = ""
+        if data_list:
+            if not data_list[0] and len(data_list[1]) == 2:
+                raise ValidationError(_("Numeric prefix must be provided."))
+            value = "".join(data_list) if len(data_list[1]) == 2 else data_list[1]
+
+        return value
 
 
 class IndicatorField(forms.MultiValueField):

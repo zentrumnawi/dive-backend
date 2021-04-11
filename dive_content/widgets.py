@@ -11,9 +11,11 @@ class IntegerRangeCharWidget(forms.MultiWidget):
         super().__init__(widgets, attrs)
 
     def decompress(self, value):
+        data_list = [None, None]
         if value:
-            return [self.max if v == "∞" else v for v in value.split("–", 1)]
-        return [None, None]
+            data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
+
+        return data_list
 
 
 class IndicatorWidget(forms.MultiWidget):

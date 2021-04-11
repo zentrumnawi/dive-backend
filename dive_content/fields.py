@@ -20,7 +20,14 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
 
 class NumberRangeCharField(forms.MultiValueField):
     def __init__(
-        self, model=None, field_name=None, min=1, max=99, infinity=False, **kwargs
+        self,
+        model=None,
+        field_name=None,
+        min=1,
+        max=99,
+        suffix=None,
+        infinity=False,
+        **kwargs,
     ):
         _label = None
         if model and field_name:
@@ -34,25 +41,32 @@ class NumberRangeCharField(forms.MultiValueField):
         kwargs.setdefault("label", _label)
         kwargs.setdefault("help_text", _help_text)
 
+        def error_messages(pos):
+            position = {1: "first", 2: "second"}
+            return {
+                "min_value": f"Ensure {position[pos]} value is greater than or equal to %(limit_value)s.",
+                "max_value": f"Ensure {position[pos]} value is less than or equal to %(limit_value)s.",
+            }
+
         fields = (
             forms.IntegerField(
-                min_value=min,
-                max_value=max,
-                error_messages={
-                    "min_value": "Ensure first value is greater than or equal to %(limit_value)s.",
-                    "max_value": "Ensure first value is less than or equal to %(limit_value)s.",
-                },
+                min_value=min, max_value=max, error_messages=error_messages(1)
             ),
             forms.IntegerField(
-                min_value=min,
-                max_value=max,
-                error_messages={
-                    "min_value": "Ensure second value is greater than or equal to %(limit_value)s.",
-                    "max_value": "Ensure second value is less than or equal to %(limit_value)s.",
-                },
+                min_value=min, max_value=max, error_messages=error_messages(2)
             ),
         )
         widget = NumberRangeCharWidget(min, max)
+        if suffix == "cm":
+            fields = (
+                forms.FloatField(
+                    min_value=min, max_value=max, error_messages=error_messages(1)
+                ),
+                forms.FloatField(
+                    min_value=min, max_value=max, error_messages=error_messages(2)
+                ),
+            )
+            widget = NumberRangeCharWidget(min, max, 0.1, "cm")
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 

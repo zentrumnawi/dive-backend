@@ -31,6 +31,23 @@ class SeasonWidget(forms.MultiWidget):
         return [None] * 4
 
 
+class ConnationTypeWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        widgets = (
+            forms.Select(choices=choices[0]),
+            forms.Select(choices=choices[1]),
+        )
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        data_list = ["", ""]
+        if value:
+            data_list = [value[0], value[1:]] if value[0].isdigit() else ["", value]
+
+        return data_list
+
+
 class IndicatorWidget(forms.MultiWidget):
     def __init__(self, choices, mode=None, attrs=None):
         self.mode = mode

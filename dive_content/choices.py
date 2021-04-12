@@ -335,6 +335,10 @@ SEPAL_CONNATION_CHOICES = (
     ("a", _("am Grund verwachsen")),
 )
 PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
+STAMEN_CONNATION_TYPE_CHOICES = (
+    ("s", _("Staubfadenröhre")),
+    ("v", _("verwachsen mit Kronblättern")),
+)
 BUILD_CHOICES = (
     ("mo", _("monokarp")),
     ("ap", _("apokarp/chorikarp")),

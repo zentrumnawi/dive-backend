@@ -469,7 +469,10 @@ class Blossom(models.Model):
         max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Staubblatt)")
     )
     stamen_connation_type = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Staubfadenröhre")
+        max_length=1,
+        choices=STAMEN_CONNATION_TYPE_CHOICES,
+        blank=True,
+        verbose_name=_("Verwachsungstyp (Staubblatt)"),
     )
     stamen_connation_type_add = models.CharField(
         max_length=100, blank=True, verbose_name=_("Verwachsungstypzusatz")

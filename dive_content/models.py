@@ -562,60 +562,101 @@ class Fruit(models.Model):
         verbose_name_plural = _("Früchte")
 
 
-class Sprout(models.Model):
-    appear = models.CharField(
-        max_length=1,
-        choices=(("k", _("krautig")), ("h", _("holzig"))),
-        blank=True,
-        verbose_name=_("Erscheinung"),
-    )
-    pos = models.CharField(
-        max_length=3,
-        choices=POSITION_CHOICES,
-        blank=True,
-        verbose_name=_("Wuchsorientierung"),
-    )
-    thick_flesh = models.CharField(
-        null=True,
-        blank=True,
-        max_length=3,
-        choices=YES_NO_CHOICES,
-        verbose_name=_("Dickfleischig"),
-    )
-    milk = models.CharField(
-        max_length=3, null=True, blank=True, verbose_name=_("Milchsaft")
-    )
-    leafly = models.CharField(
-        max_length=3,
-        choices=(("nur", _("Nur am Grund")), ("auc", _("Auch über Grund"))),
-        blank=True,
-        verbose_name=_("Beblätterung"),
-    )
-    diam = models.CharField(
-        max_length=3, choices=SP_DIAM_CHOICES, blank=True, verbose_name=_("Querschnitt")
-    )
-    sur_texture = models.CharField(
-        max_length=3,
-        choices=SUR_TEXTURE_CHOICES,
-        blank=True,
-        verbose_name=_("Sprossoberfläche"),
-    )
-    primary_root = models.CharField(
-        max_length=3, choices=ROOT_CHOICES, blank=True, verbose_name=_("Primärwurzel")
-    )
-    blade = models.CharField(max_length=200, blank=True, verbose_name=_("Halm"))
-    cluster = models.CharField(max_length=200, blank=True, verbose_name=_("Horst"))
-
+class StemRoot(models.Model):
     plant = models.OneToOneField(
         Plant,
         on_delete=models.CASCADE,
-        related_name="sprout",
+        related_name="stemroot",
         verbose_name=_("Pflanze"),
+    )
+    orientation = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=ORIENTATION_CHOICES,
+            verbose_name=_("Wuchsorientierung"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    appearance = ArrayField(
+        base_field=models.CharField(
+            max_length=1, choices=APPEARANCE_CHOICES, verbose_name=_("Erscheinung"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    succulence = models.CharField(
+        max_length=3,
+        choices=SUCCULENCE_CHOICES,
+        blank=True,
+        verbose_name=_("Dickfleischigkeit"),
+    )
+    cross_section = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=SR_CROSS_SECTION_CHOICES,
+            verbose_name=_("Querschnitt"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    surface = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Sprossoberfläche")
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    creep_lay_shoots = models.CharField(
+        max_length=3,
+        choices=CREEP_LAY_SHOOTS_CHOICES,
+        blank=True,
+        verbose_name=_("Kriech- und Legetriebe"),
+    )
+    runners = models.CharField(
+        max_length=3,
+        choices=RUNNERS_CHOICES,
+        blank=True,
+        verbose_name=_("Ausläufer (oberirdisch)"),
+    )
+    bracts = models.CharField(
+        max_length=3,
+        choices=BRACTS_CHOICES,
+        blank=True,
+        verbose_name=_("Beblätterung"),
+    )
+    milky_sap = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Milchsaft"),
+        help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
+    )
+    organ_features = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Besonderheiten"),
+        help_text="Besondere Ausprägungen der unterirdischen Organe.",
+    )
+    organs = models.CharField(
+        max_length=3,
+        choices=ORGANS_CHOICES,
+        blank=True,
+        verbose_name=_("Organe (unterirdisch)"),
+    )
+    primary_root = models.CharField(
+        max_length=3,
+        choices=PRIMARY_ROOT_CHOICES,
+        blank=True,
+        verbose_name=_("Primärwurzel"),
     )
 
     class Meta:
-        verbose_name = _("Spross")
-        verbose_name_plural = _("Spross")
+        verbose_name = _("Spross und Wurzel")
+        verbose_name_plural = _("Sprosse und Wurzeln")
 
 
 class ZeigerNumber(models.Model):

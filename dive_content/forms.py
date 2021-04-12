@@ -2,7 +2,7 @@ from django import forms
 
 from .choices import *
 from .fields import ArrayMultipleChoiceField, IntegerRangeCharField
-from .models import Fruit, Leaf, Plant
+from .models import Fruit, Leaf, Plant, StemRoot
 
 
 class PlantAdminForm(forms.ModelForm):
@@ -50,3 +50,19 @@ class FruitAdminForm(forms.ModelForm):
     seed_num = IntegerRangeCharField(
         max=100, infinity=True, model=Fruit, field_name="seed_num"
     )
+
+
+class StemRootAdminForm(forms.ModelForm):
+    orientation = ArrayMultipleChoiceField(
+        StemRoot, "orientation", choices=ORIENTATION_CHOICES
+    )
+    appearance = ArrayMultipleChoiceField(
+        StemRoot,
+        "appearance",
+        choices=APPEARANCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+    )
+    cross_section = ArrayMultipleChoiceField(
+        StemRoot, "cross_section", choices=SR_CROSS_SECTION_CHOICES
+    )
+    surface = ArrayMultipleChoiceField(StemRoot, "surface", choices=SURFACE_CHOICES)

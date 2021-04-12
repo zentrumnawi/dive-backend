@@ -57,7 +57,7 @@ ARRANGMENT_CHOICES = (
 )
 ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
-    (("kei"), _("keine Grundblattrosette")),
+    ("kei", _("keine Grundblattrosette")),
 )
 BLADE_SUBDIV_SHAPE_CHOICES = (
     ("han", _("handförmig")),
@@ -390,9 +390,9 @@ OVULE_POS_CHOICES = (
 )
 
 
-# Sprout choices
+# StemRoot choices
 
-POSITION_CHOICES = (
+ORIENTATION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
     ("abs", _("abstehend")),
@@ -406,32 +406,53 @@ POSITION_CHOICES = (
     ("nic", _("nickend")),
     ("hae", _("hängend")),
     ("flu", _("flutend")),
-    ("Ran", _("Rankenpflanze")),
-    ("Win", _("Windepflanze")),
-    ("Spr", _("Spreizklimmer")),
-    ("Wur", _("Wurzelkletterer")),
     ("hor", _("horstig")),
     ("loc", _("lockerrasig")),
+    ("ran", _("rankenpflanzen")),
+    ("win", _("windepflanzen")),
+    ("spr", _("spreizklimmig")),
+    ("wur", _("wurzelkletternd")),
 )
-YES_NO_CHOICES = (("yes", _("ja")), ("no", _("nein")))
-SP_DIAM_CHOICES = (
+APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
+# SUCCULENCE_CHOICES  =>  Leaf choices
+SR_CROSS_SECTION_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),
     ("zus", _("zusammengedrückt")),
     ("zwe", _("zweischneidig")),
     ("kan", _("kantig")),
     ("stu", _("stumpfkantig")),
-    ("ger", _("gerieft /gerillt")),
+    ("ger", _("gerieft/gerillt")),
     ("gef", _("gefurcht")),
-    ("kan", _("kantig gefurcht /scharfkantig")),
+    ("kan", _("kantig gefurcht/scharfkantig")),
     ("gri", _("gerippt")),
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
-SUR_TEXTURE_CHOICES = SURFACE_CHOICES
-ROOT_CHOICES = (
+# SURFACE_CHOICES  =>  Leaf choices
+CREEP_LAY_SHOOTS_CHOICES = (
+    ("bil", _("bildet Kriech- und Legetriebe")),
+    ("kei", _("keine Angabe")),
+)
+RUNNERS_CHOICES = (
+    ("bil", _("bildet oberirdische Ausläufer")),
+    ("kei", _("keine Angabe")),
+)
+BRACTS_CHOICES = (
+    ("nur", _("nur am Grund")),
+    ("auc", _("auch über dem Grund")),
+)
+ORGANS_CHOICES = (
+    ("Rhi", _("Rhizom")),
+    ("Zwi", _("Zwiebel")),
+    ("Aus", _("unterirdische Ausläufer")),
+    ("Inn", _("Innovations-Wurzelknolle")),
+    ("Wuk", _("Wurzelknollen")),
+    ("Wur", _("Wurzeln")),
+)
+PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
-    ("ers", _("ersetzt durch sprossbürtige Wurzeln")),
+    ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )
 
 

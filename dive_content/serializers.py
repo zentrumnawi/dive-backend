@@ -2,7 +2,7 @@ from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
 from .choices import *
-from .models import Blossom, Fruit, Leaf, Plant, Sprout, ZeigerNumber
+from .models import Blossom, Fruit, Leaf, Plant, StemRoot, ZeigerNumber
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -318,11 +318,94 @@ class FruitSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
-class SproutSerializer(DisplayNameModelSerializer):
+class StemRootSerializer(DisplayNameModelSerializer):
+    stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
+    outgrowths = serializers.SerializerMethodField(label="Auswüchse")
+    bracts = serializers.SerializerMethodField(label="Beblätterung")
+    milky_sap = serializers.SerializerMethodField(label="Milchsaft")
+    root_morphology = serializers.SerializerMethodField(label="Wurzelmorphologie")
+
     class Meta:
-        model = Sprout
-        exclude = ["plant"]
+        model = StemRoot
+        fields = [
+            "stem_morphology",
+            "outgrowths",
+            "bracts",
+            "milky_sap",
+            "root_morphology",
+        ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_stem_morphology(self, obj):
+        # Generate sentence "Sprossmorphologie" according pattern:
+        # "[orientation]er [appearance]er, [succulence]er Spross; [cross_section]er
+        # Querschnitt mit [surface]er Oberfläche."
+        app = "er"
+        if not obj.cross_section:
+            app = "e"
+        fields = [
+            concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
+            concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
+            concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
+            concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
+            concatenate(obj.surface, SURFACE_CHOICES, app),
+        ]
+        fields[3] = f"{f'{fields[3]} Querschnitt' if fields[3] else ''}"
+        fields[4] = f"{f'{fields[4]} Oberfläche' if fields[4] else ''}"
+
+        text = [
+            ", ".join(filter(None, fields[:3])),
+            " mit ".join(filter(None, fields[3:])),
+        ]
+        text[0] = f"{f'{text[0]} Spross' if text[0] else ''}"
+        text = "; ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_outgrowths(self, obj):
+        # Generate sentence "Auswüchse" according pattern:
+        # "[creep_lay_shoots]; [runners]."
+        fields = [
+            concatenate(obj.creep_lay_shoots, CREEP_LAY_SHOOTS_CHOICES),
+            concatenate(obj.runners, RUNNERS_CHOICES),
+        ]
+
+        text = "; ".join(filter(None, fields))
+
+        return format_sentence(text)
+
+    def get_bracts(self, obj):
+        # Generate sentence "Beblätterung" according pattern:
+        # "[bracts] beblättert."
+        fields = concatenate(obj.bracts, BRACTS_CHOICES)
+
+        text = f"{f'{fields} beblättert' if fields else ''}"
+
+        return format_sentence(text)
+
+    def get_milky_sap(self, obj):
+        # Generate sentence "Milchsaft" according pattern:
+        # "[milky_sap].."
+        fields = obj.milky_sap
+
+        text = f"{f'{fields}' if fields else ''}"
+
+        return format_sentence(text)
+
+    def get_root_morphology(self, obj):
+        # Generate sentence "Wurzelmorphologie" according pattern:
+        # "[organ_features] [organs]; Primärwurzel [primary_root]."
+        fields = [
+            obj.organ_features,
+            concatenate(obj.organs, ORGANS_CHOICES),
+            concatenate(obj.primary_root, PRIMARY_ROOT_CHOICES),
+        ]
+        fields[2] = f"{f'Primärwurzel {fields[2]}' if fields[2] else ''}"
+
+        text = " ".join(filter(None, fields[:2]))
+        text = "; ".join(filter(None, (text, fields[2])))
+
+        return format_sentence(text)
 
 
 class ZeigerNumberSerializer(DisplayNameModelSerializer):
@@ -346,7 +429,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     leaf = LeafSerializer(required=False)
     blossom = BlossomSerializer(required=False)
     fruit = FruitSerializer(required=False)
-    sprout = SproutSerializer(required=False)
+    stemroot = StemRootSerializer(required=False)
     zeigernumber = ZeigerNumberSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 

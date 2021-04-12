@@ -454,7 +454,7 @@ class Blossom(models.Model):
         verbose_name=_("Verwachsung (Kronblatt)"),
     )
     nectary = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Honigdrüsen / Nektarien")
+        max_length=100, blank=True, verbose_name=_("Nektarium/Honigdrüse")
     )
     crown_out = models.CharField(
         max_length=100, blank=True, verbose_name=_("Ausstülpung der Unterlippe")

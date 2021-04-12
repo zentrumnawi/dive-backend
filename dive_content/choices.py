@@ -329,27 +329,6 @@ CONNATION_TYPE_CHOICES = (
     ("ver", _("verwachsenblättrig")),
     ("zwe", _("zweilippig")),
 )
-CH_TYPE_CHOICES = (
-    ("fre", _("freiblättrig")),
-    ("ver", _("verwachsenblättrig")),
-    ("2-z", _("2-zähnig")),
-    ("3-z", _("3-zähnig")),
-    ("4-z", _("4-zähnig")),
-    ("5-z", _("5-zähnig")),
-    ("2-l", _("2-lappig")),
-    ("3-l", _("3-lappig")),
-    ("4-l", _("4-lappig")),
-    ("5-l", _("5-lappig")),
-    ("2-s", _("2-spaltig")),
-    ("3-s", _("3-spaltig")),
-    ("4-s", _("4-spaltig")),
-    ("5-s", _("5-spaltig")),
-    ("2-t", _("2-teilig")),
-    ("3-t", _("3-teilig")),
-    ("4-t", _("4-teilig")),
-    ("5-t", _("5-teilig")),
-    ("zwe", _("zweilippig")),
-)
 SEPAL_CONNATION_CHOICES = (
     ("v", _("verwachsen")),
     ("u", _("unverwachsen")),

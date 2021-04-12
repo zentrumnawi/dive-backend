@@ -460,7 +460,7 @@ class Blossom(models.Model):
         max_length=100, blank=True, verbose_name=_("Ausstülpung der Unterlippe")
     )
     stamen_num = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Staubblatt Anzahl")
+        max_length=10, blank=True, verbose_name=_("Staubblattanzahl")
     )
     stamen_len = models.CharField(
         max_length=100, blank=True, verbose_name=_("Staubblatt Länge")

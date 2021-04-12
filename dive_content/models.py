@@ -442,7 +442,7 @@ class Blossom(models.Model):
         max_length=10, blank=True, verbose_name=_("Kronblattlänge (Platte)")
     )
     petal_color_form = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Kronblattfarbe")
+        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Kronblatt)")
     )
     petal_connation_type = models.CharField(
         max_length=3,

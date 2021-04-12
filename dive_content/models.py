@@ -472,6 +472,9 @@ class Blossom(models.Model):
     dust_pipe = models.CharField(
         max_length=100, blank=True, verbose_name=_("Staubfadenröhre")
     )
+    stamen_connation_type_add = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Verwachsungstypzusatz")
+    )
     fruit_cnt = models.CharField(
         max_length=100, blank=True, verbose_name=_("Fruchtknoten Anzahl")
     )

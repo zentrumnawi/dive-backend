@@ -449,9 +449,9 @@ class Blossom(models.Model):
     )
     petal_connation = models.CharField(
         max_length=1,
-        choices=CROWN_VER_CHOICES,
+        choices=PETAL_CONNATION_CHOICES,
         blank=True,
-        verbose_name=_("Verwachsung der Kronblätter"),
+        verbose_name=_("Verwachsung (Kronblatt)"),
     )
     nectary = models.CharField(
         max_length=100, blank=True, verbose_name=_("Honigdrüsen / Nektarien")

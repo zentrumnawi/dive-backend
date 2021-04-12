@@ -334,7 +334,7 @@ SEPAL_CONNATION_CHOICES = (
     ("u", _("unverwachsen")),
     ("a", _("am Grund verwachsen")),
 )
-CROWN_VER_CHOICES = SEPAL_CONNATION_CHOICES
+PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
 BUILD_CHOICES = (
     ("mo", _("monokarp")),
     ("ap", _("apokarp/chorikarp")),

@@ -1,8 +1,14 @@
 from django import forms
 
 from .choices import *
-from .fields import ArrayMultipleChoiceField, NumberRangeCharField, IndicatorField
-from .models import Fruit, Leaf, Plant, StemRoot
+from .fields import (
+    ArrayMultipleChoiceField,
+    ConnationTypeField,
+    IndicatorField,
+    NumberRangeCharField,
+    SeasonField,
+)
+from .models import Blossom, Fruit, Leaf, Plant, StemRoot
 
 
 class PlantAdminForm(forms.ModelForm):
@@ -40,6 +46,25 @@ class LeafAdminForm(forms.ModelForm):
     incision_num = NumberRangeCharField(Leaf, "incision_num")
     leaflet_incision_num = NumberRangeCharField(Leaf, "leaflet_incision_num")
     leaf_simple_num = NumberRangeCharField(Leaf, "leaf_simple_num")
+
+
+class BlossomAdminForm(forms.ModelForm):
+    season = SeasonField("season")
+    inflorescence_num = NumberRangeCharField(
+        Blossom, "inflorescence_num", max=100, infinity=True
+    )
+    blossom_num = NumberRangeCharField(Blossom, "blossom_num", max=100, infinity=True)
+    bract_blade = ArrayMultipleChoiceField(BRACT_BLADE_CHOICES, Blossom, "bract_blade")
+    diameter = NumberRangeCharField(Blossom, "diameter", 0.1, 100, "cm")
+    sepal_num = NumberRangeCharField(Blossom, "sepal_num", max=11, infinity=True)
+    sepal_connation_type = ConnationTypeField("sepal_connation_type")
+    petal_num = NumberRangeCharField(Blossom, "petal_num", max=11, infinity=True)
+    petal_len = NumberRangeCharField(Blossom, "petal_len", 0.1, 100, "cm")
+    petal_connation_type = ConnationTypeField("petal_connation_type")
+    stamen_num = NumberRangeCharField(Blossom, "stamen_num", max=11, infinity=True)
+    stamen_len = NumberRangeCharField(Blossom, "stamen_len", 0.1, 100, "cm")
+    carpel_num = NumberRangeCharField(Blossom, "carpel_num", max=11, infinity=True)
+    stigma_num = NumberRangeCharField(Blossom, "stigma_num", max=11, infinity=True)
 
 
 class FruitAdminForm(forms.ModelForm):

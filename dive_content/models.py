@@ -433,6 +433,9 @@ class Blossom(models.Model):
         verbose_name=_("Verwachsung (Kelchblatt)"),
     )
     sec_out = models.CharField(max_length=100, blank=True, verbose_name=_("Außenkelch"))
+    petal_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Kronblattanzahl")
+    )
     crown_plate = models.CharField(
         max_length=100, blank=True, verbose_name=_("Kronblatt Platte")
     )

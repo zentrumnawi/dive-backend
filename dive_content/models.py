@@ -466,7 +466,7 @@ class Blossom(models.Model):
         max_length=10, blank=True, verbose_name=_("Staubblattlänge")
     )
     stamen_color_form = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Staubbeutel Farbe")
+        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Staubblatt)")
     )
     stamen_connation_type = models.CharField(
         max_length=100, blank=True, verbose_name=_("Staubfadenröhre")

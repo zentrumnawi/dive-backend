@@ -478,7 +478,7 @@ class Blossom(models.Model):
         max_length=100, blank=True, verbose_name=_("Verwachsungstypzusatz")
     )
     carpel_num = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Fruchtknoten Anzahl")
+        max_length=10, blank=True, verbose_name=_("Fruchtblattanzahl")
     )
     carpel_connation_type = models.CharField(
         max_length=2,

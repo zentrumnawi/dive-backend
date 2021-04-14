@@ -488,9 +488,9 @@ class Blossom(models.Model):
     )
     ovary_pos = models.CharField(
         max_length=2,
-        choices=STAND_TYPE_CHOICES,
+        choices=OVARY_POS_CHOICES,
         blank=True,
-        verbose_name=_("Ständigkeit des Fruchtknotens"),
+        verbose_name=_("Fruchtknotenstellung"),
     )
     pistil_pos = models.CharField(
         max_length=2,

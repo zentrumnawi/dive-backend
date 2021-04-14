@@ -345,12 +345,12 @@ CARPEL_CONNATION_TYPE_CHOICES = (
     ("cs", _("coeno-synkarp")),
     ("cp", _("coeno-parakarp")),
 )
-STAND_TYPE_CHOICES = (
-    ("hy", _("hypogyn/oberständig")),
-    ("eh", _("epihypogyn/halboberständig")),
-    ("pe", _("perigyn/mittelständig")),
-    ("he", _("hemiepigyn/halbunterständig")),
-    ("ep", _("epigyn/unterständig")),
+OVARY_POS_CHOICES = (
+    ("ob", _("oberständig")),
+    ("ho", _("halboberständig")),
+    ("mi", _("mittelständig")),
+    ("hu", _("halbunterständig")),
+    ("un", _("unterständig")),
 )
 GRIFFEL_CHOICES = (
     ("en", _("endständig")),

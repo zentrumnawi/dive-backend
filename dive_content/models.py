@@ -505,7 +505,7 @@ class Blossom(models.Model):
         verbose_name=_("Ständigkeit des Griffels ist sub-"),
     )
     stigma_num = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Narben pro Griffel")
+        max_length=10, blank=True, verbose_name=_("Narbenanzahl (pro Griffel)")
     )
     stylopodium = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")

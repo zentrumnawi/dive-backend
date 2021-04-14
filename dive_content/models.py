@@ -482,9 +482,9 @@ class Blossom(models.Model):
     )
     carpel_connation_type = models.CharField(
         max_length=2,
-        choices=BUILD_CHOICES,
+        choices=CARPEL_CONNATION_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Bau des Gynoeceums"),
+        verbose_name=_("Verwachsungstyp (Fruchtblatt)"),
     )
     ovary_pos = models.CharField(
         max_length=2,

@@ -339,7 +339,7 @@ STAMEN_CONNATION_TYPE_CHOICES = (
     ("s", _("Staubfadenröhre")),
     ("v", _("verwachsen mit Kronblättern")),
 )
-BUILD_CHOICES = (
+CARPEL_CONNATION_TYPE_CHOICES = (
     ("mo", _("monokarp")),
     ("ap", _("apokarp/chorikarp")),
     ("cs", _("coeno-synkarp")),

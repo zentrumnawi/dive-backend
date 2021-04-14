@@ -352,11 +352,15 @@ OVARY_POS_CHOICES = (
     ("hu", _("halbunterständig")),
     ("un", _("unterständig")),
 )
-GRIFFEL_CHOICES = (
-    ("en", _("endständig")),
-    ("se", _("seitenständig")),
-    ("gr", _("grundständig")),
-    ("gy", _("gynobasisch")),
+PISTIL_POS_CHOICES = (
+    ("end", _("endständig")),
+    ("sei", _("seitenständig")),
+    ("gru", _("grundständig")),
+    ("gyn", _("gynobasisch")),
+    ("sen", _("subendständig")),
+    ("sse", _("subseitenständig")),
+    ("sgr", _("subgrundständig")),
+    ("sgy", _("subgynobasisch")),
 )
 GRIFFEL_SUB_CHOICES = (
     ("end", _("subendständig")),

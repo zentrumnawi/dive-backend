@@ -493,10 +493,10 @@ class Blossom(models.Model):
         verbose_name=_("Fruchtknotenstellung"),
     )
     pistil_pos = models.CharField(
-        max_length=2,
-        choices=GRIFFEL_CHOICES,
+        max_length=3,
+        choices=PISTIL_POS_CHOICES,
         blank=True,
-        verbose_name=_("Ständigkeit des Griffels"),
+        verbose_name=_("Griffelstellung"),
     )
     griffel_sub = models.CharField(
         max_length=3,

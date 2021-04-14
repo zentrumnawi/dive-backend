@@ -259,6 +259,11 @@ SPEC_SPORN_CHOICES = (
     ("as", _("ausgesackt")),
     ("gr", _("gespornt")),
 )
+BRACT_BLADE_CHOICES = (
+    BLADE_SUBDIV_SHAPE_CHOICES
+    + BLADE_UNDIV_SHAPE_CHOICES
+    + (("nvo", _("nicht vorhanden")),)
+)
 PART_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),

@@ -389,6 +389,16 @@ class Blossom(models.Model):
     spec_sporn = models.CharField(
         max_length=2, choices=SPEC_SPORN_CHOICES, blank=True, verbose_name=_("Sporn")
     )
+    bract_blade = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=BRACT_BLADE_CHOICES,
+            verbose_name=_("Tragblattspreite"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     parting = models.CharField(
         max_length=3,
         choices=PART_CHOICES,

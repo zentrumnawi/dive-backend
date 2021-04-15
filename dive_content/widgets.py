@@ -18,6 +18,17 @@ class IntegerRangeCharWidget(forms.MultiWidget):
         return data_list
 
 
+class SeasonWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        self.template_name = "season.html"
+        widgets = [forms.Select(choices=choices)] * 4
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return [None] * 4
+
+
 class IndicatorWidget(forms.MultiWidget):
     def __init__(self, choices, mode=None, attrs=None):
         self.mode = mode

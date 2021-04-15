@@ -18,7 +18,7 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
         super().__init__(choices=choices, **kwargs)
 
 
-class IntegerRangeCharField(forms.MultiValueField):
+class NumberRangeCharField(forms.MultiValueField):
     def __init__(
         self, model=None, field_name=None, min=1, max=99, infinity=False, **kwargs
     ):

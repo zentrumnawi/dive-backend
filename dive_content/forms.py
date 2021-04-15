@@ -1,7 +1,7 @@
 from django import forms
 
 from .choices import *
-from .fields import ArrayMultipleChoiceField, IntegerRangeCharField, IndicatorField
+from .fields import ArrayMultipleChoiceField, NumberRangeCharField, IndicatorField
 from .models import Fruit, Leaf, Plant, StemRoot
 
 
@@ -36,14 +36,14 @@ class LeafAdminForm(forms.ModelForm):
     surface = ArrayMultipleChoiceField(SURFACE_CHOICES, Leaf, "surface")
     stipule_edge = ArrayMultipleChoiceField(STIPULE_EDGE_CHOICES, Leaf, "stipule_edge")
 
-    leaf_comp_num = IntegerRangeCharField(Leaf, "leaf_comp_num")
-    incision_num = IntegerRangeCharField(Leaf, "incision_num")
-    leaflet_incision_num = IntegerRangeCharField(Leaf, "leaflet_incision_num")
-    leaf_simple_num = IntegerRangeCharField(Leaf, "leaf_simple_num")
+    leaf_comp_num = NumberRangeCharField(Leaf, "leaf_comp_num")
+    incision_num = NumberRangeCharField(Leaf, "incision_num")
+    leaflet_incision_num = NumberRangeCharField(Leaf, "leaflet_incision_num")
+    leaf_simple_num = NumberRangeCharField(Leaf, "leaf_simple_num")
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(Fruit, "seed_num", max=100, infinity=True)
+    seed_num = NumberRangeCharField(Fruit, "seed_num", max=100, infinity=True)
 
 
 class StemRootAdminForm(forms.ModelForm):

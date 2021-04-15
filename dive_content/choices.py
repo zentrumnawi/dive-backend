@@ -196,6 +196,7 @@ APEX_CHOICES = (
 
 # Blossom choices
 
+SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
 INFLORESCENCE_TYPE_CHOICES_1_3 = (
     ("kol", _("Kolben")),
     ("kae", _("Kätzchen")),

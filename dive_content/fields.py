@@ -2,9 +2,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .choices import INDICATORS, INDICATORS_CHOICES
-from .models import Indicators
-from .widgets import IndicatorWidget, IntegerRangeCharWidget
+from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
+from .models import Blossom, Indicators
+from .widgets import IndicatorWidget, IntegerRangeCharWidget, SeasonWidget
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -70,6 +70,32 @@ class IntegerRangeCharField(forms.MultiValueField):
                     data_list[i] = "∞"
 
         return "–".join(filter(None, data_list))
+
+
+class SeasonField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        kwargs.setdefault("required", False)
+        kwargs.setdefault(
+            "label", Blossom._meta.get_field(field_name).base_field.verbose_name
+        )
+        kwargs.setdefault("help_text", _("Einzelwert in Feld 2 oder 3 eintragen."))
+
+        choices = SEASON_CHOICES
+        fields = [
+            forms.TypedChoiceField(choices=choices, coerce=int, empty_value=None)
+        ] * 4
+        widget = SeasonWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        if data_list:
+            if data_list[0] and not data_list[1] or data_list[0] == data_list[1]:
+                data_list[0] = None
+            if data_list[3] and not data_list[2] or data_list[3] == data_list[2]:
+                data_list[3] = None
+
+        return data_list
 
 
 class IndicatorField(forms.MultiValueField):

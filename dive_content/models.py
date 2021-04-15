@@ -348,6 +348,14 @@ class Blossom(models.Model):
         related_name="blossom",
         verbose_name=_("Pflanze"),
     )
+    season = ArrayField(
+        base_field=models.IntegerField(
+            blank=True, null=True, verbose_name=_("Blütezeit")
+        ),
+        size=4,
+        blank=True,
+        default=list,
+    )
     season_old = models.CharField(
         max_length=200,
         blank=True,

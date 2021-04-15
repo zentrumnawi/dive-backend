@@ -1,7 +1,7 @@
 from django import forms
 
 
-class IntegerRangeCharWidget(forms.MultiWidget):
+class NumberRangeCharWidget(forms.MultiWidget):
     def __init__(self, min, max, attrs=None):
         self.max = max
         widgets = (

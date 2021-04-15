@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
 from .models import Blossom, Indicators
-from .widgets import IndicatorWidget, IntegerRangeCharWidget, SeasonWidget
+from .widgets import IndicatorWidget, NumberRangeCharWidget, SeasonWidget
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -52,7 +52,7 @@ class IntegerRangeCharField(forms.MultiValueField):
                 },
             ),
         )
-        widget = IntegerRangeCharWidget(min, max)
+        widget = NumberRangeCharWidget(min, max)
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 

@@ -348,7 +348,7 @@ class Blossom(models.Model):
         related_name="blossom",
         verbose_name=_("Pflanze"),
     )
-    season = models.CharField(
+    season_old = models.CharField(
         max_length=200,
         blank=True,
         verbose_name=_("Blütezeit"),

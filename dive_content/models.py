@@ -659,65 +659,40 @@ class StemRoot(models.Model):
         verbose_name_plural = _("Sprosse und Wurzeln")
 
 
-class ZeigerNumber(models.Model):
-    light_number = models.CharField(
-        max_length=100,
-        choices=LIGHT_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name=_("Lichtzahl"),
-    )
-    light_extra = models.CharField(
-        max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
-    )
-    temp_number = models.CharField(
-        max_length=100,
-        choices=TEMP_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name=_("Temperaturzahl"),
-    )
-    temp_extra = models.CharField(
-        max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
-    )
-    humid_number = models.CharField(
-        max_length=100,
-        choices=HUMID_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name=_("Feuchtezahl"),
-    )
-    humid_extra = models.CharField(
-        max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
-    )
-    react_number = models.CharField(
-        max_length=100,
-        choices=REACT_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name=_("Reaktionszahl"),
-    )
-    react_extra = models.CharField(
-        max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
-    )
-    nutri_number = models.CharField(
-        max_length=100,
-        choices=NUTRIENT_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name=_("Stickstoff/Nährstoffzahl"),
-    )
-    nutri_extra = models.CharField(
-        max_length=100, choices=ZEIGER_EXTRA, blank=True, null=True
-    )
-
+class Indicators(models.Model):
     plant = models.OneToOneField(
         Plant,
         on_delete=models.CASCADE,
-        related_name="zeigernumber",
+        related_name="indicators",
         verbose_name=_("Pflanze"),
+    )
+    not_specified = models.BooleanField(
+        default=False,
+        verbose_name=_("Keine Angabe"),
+        help_text=_("Die Ausgabe aller Zeigerwerte wird unterdrückt."),
+    )
+    light = models.CharField(max_length=10, blank=True, verbose_name=_("Lichtzahl"))
+    temperature = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Temperaturzahl"),
+    )
+    humidity = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Feuchtezahl"),
+    )
+    reaction = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Reaktionszahl"),
+    )
+    nitrogen = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Stickstoffzahl"),
+    )
+    key = ArrayField(
+        base_field=models.CharField(max_length=3), default=list, editable=False
     )
 
     class Meta:
-        verbose_name = _("Zeigerzahl")
-        verbose_name_plural = _("Zeigerzahlen")
+        verbose_name = _("Zeigerwerte")
+        verbose_name_plural = _("Zeigerwerte")
+
+    def get_key(self):
+        return ", ".join(f"{dict(KEY_CHOICES).get(key)}" for key in self.key)
+
+    get_key.short_description = _("Zeichenerklärung")

@@ -456,149 +456,101 @@ PRIMARY_ROOT_CHOICES = (
 )
 
 
-# ZeigerNumber Choices
+# Indicators Choices
 
 LIGHT_CHOICES = (
-    ("L1 - Tiefschattenpflanze", "L1 - Tiefschattenpflanze"),
-    (
-        "L2 - zwischen Tiefschatten- und Schattenpflanze",
-        "L2 - zwischen Tiefschatten- und Schattenpflanze",
-    ),
-    ("L3 - Schattenpflanze", "L3 - Schattenpflanze"),
-    (
-        "L4 - zwischen Schatten- und Halbschattenpflanze",
-        "L4 - zwischen Schatten- und Halbschattenpflanze",
-    ),
-    ("L5 - Halbschattenpflanze", "L5 - Halbschattenpflanze"),
-    (
-        "L6 - zwischen Halbschatten- und Halblichtpflanze",
-        "L6 - zwischen Halbschatten- und Halblichtpflanze",
-    ),
-    ("L7 - Halblichtpflanze", "L7 - Halblichtpflanze"),
-    ("L8 - Lichtpflanze", "L8 - Lichtpflanze"),
-    ("L9 - Vollichtpflanze", "L9 - Vollichtpflanze"),
-    ("Lx - indifferentes Verhalten", "Lx - indifferentes Verhalten"),
-    ("L? - ungeklärtes Verhalten", "L? - ungeklärtes Verhalten"),
-    ("nicht angegeben", "nicht angegeben"),
+    ("L1", _("L1 – Tiefschattenpflanze")),
+    ("L2", _("L2 – zwischen Tiefschatten- und Schattenpflanze")),
+    ("L3", _("L3 – Schattenpflanze")),
+    ("L4", _("L4 – zwischen Schatten- und Halbschattenpflanze")),
+    ("L5", _("L5 – Halbschattenpflanze")),
+    ("L6", _("L6 – zwischen Halbschatten- und Halblichtpflanze")),
+    ("L7", _("L7 – Halblichtpflanze")),
+    ("L8", _("L8 – Lichtpflanze")),
+    ("L9", _("L9 – Vollichtpflanze")),
+    ("Lx", _("Lx – indifferentes Vehalten")),
+    ("L?", _("L? – ungeklärtes Verhalten")),
 )
-TEMP_CHOICES = (
-    ("T1 - Kältezeiger", "T1 - Kältezeiger"),
-    ("T2 - zwischen Kälte- und Kühlezeiger", "T2 - zwischen Kälte- und Kühlezeiger"),
-    ("T3 - Kühlezeiger", "T3 - Kühlezeiger"),
-    (
-        "T4 - zwischen Kühle- und Mäßigwärmezeiger",
-        "T4 - zwischen Kühle- und Mäßigwärmezeiger",
-    ),
-    ("T5 - Mäßigwärmezeiger", "T5 - Mäßigwärmezeiger"),
-    (
-        "T6 - zwischen Mäßigwärme- und Wärmezeiger",
-        "T6 - zwischen Mäßigwärme- und Wärmezeiger",
-    ),
-    ("T7 - Wärmezeiger", "T7 - Wärmezeiger"),
-    (
-        "T8 - zwischen Wärme- und extremer Wärmezeiger",
-        "T8 - zwischen Wärme- und extremer Wärmezeiger",
-    ),
-    ("T9 - extremer Wärmezeiger", "T9 - extremer Wärmezeiger"),
-    ("Tx - indifferentes Verhalten", "Tx - indifferentes Verhalten"),
-    ("T? - ungeklärtes Verhalten", "T? - ungeklärtes Verhalten"),
-    ("nicht angegeben", "nicht angegeben"),
+TEMPERATURE_CHOICES = (
+    ("T1", _("T1 – Kältezeiger")),
+    ("T2", _("T2 – zwischen Kälte- und Kühlezeiger")),
+    ("T3", _("T3 – Kühlezeiger")),
+    ("T4", _("T4 – zwischen Kühle- und Mäßigwärmezeiger")),
+    ("T5", _("T5 – Mäßigwärmezeiger")),
+    ("T6", _("T6 – zwischen Mäßigwärme- und Wärmezeiger")),
+    ("T7", _("T7 – Wärmezeiger")),
+    ("T8", _("T8 – zwischen Wärme- und extremer Wärmezeiger")),
+    ("T9", _("T9 – extremer Wärmezeiger")),
+    ("Tx", _("Tx – indifferentes Verhalten")),
+    ("T?", _("T? – ungeklärtes Verhalten")),
 )
-HUMID_CHOICES = (
-    ("F1 - Starktrockniszeiger", "F1 - Starktrockniszeiger"),
-    (
-        "F2 - zwischen Starktrocknis- und Trockniszeiger",
-        "F2 - zwischen Starktrocknis- und Trockniszeiger",
-    ),
-    ("F3 - Trockniszeiger", "F3 - Trockniszeiger"),
-    (
-        "F4 - zwischen Trocknis- und Frischezeiger",
-        "F4 - zwischen Trocknis- und Frischezeiger",
-    ),
-    ("F5 - Frischezeiger", "F5 - Frischezeiger"),
-    (
-        "F6 - zwischen Frische- und Feuchtezeiger",
-        "F6 - zwischen Frische- und Feuchtezeiger",
-    ),
-    ("F7 - Feuchtezeiger", "F7 - Feuchtezeiger"),
-    (
-        "F8 - zwischen Feuchte- und Nässezeiger",
-        "F8 - zwischen Feuchte- und Nässezeiger",
-    ),
-    ("F9 - Nässezeiger", "F9 - Nässezeiger"),
-    ("F10 - Wechselwasserzeiger", "F10 - Wechselwasserzeiger"),
-    ("F11 - Wasserpflanze", "F11 - Wasserpflanze"),
-    ("F12 - Unterwasserpflanze", "F12 - Unterwasserpflanze"),
-    ("Fx - indifferentes Verhalten", "Fx - indifferentes Verhalten"),
-    ("F? - ungeklärtes Verhalten", "F? - ungeklärtes Verhalten"),
-    ("F= - Überschwemmungszeiger", "F= - Überschwemmungszeiger"),
-    ("nicht angegeben", "nicht angegeben"),
+HUMIDITY_CHOICES = (
+    ("F1", _("F1 – Starktrockniszeiger")),
+    ("F2", _("F2 – zwischen Starktrocknis- und Trockniszeiger")),
+    ("F3", _("F3 – Trockniszeiger")),
+    ("F4", _("F4 – zwischen Trocknis- und Frischezeiger")),
+    ("F5", _("F5 – Frischezeiger")),
+    ("F6", _("F6 – zwischen Frische- und Feuchtezeiger")),
+    ("F7", _("F7 – Feuchtezeiger")),
+    ("F8", _("F8 – zwischen Feuchte- und Nässezeiger")),
+    ("F9", _("F9 – Nässezeiger")),
+    ("F10", _("F10 – Wechselwasserzeiger")),
+    ("F11", _("F11 – Wasserpflanze")),
+    ("F12", _("F12 – Unterwasserpflanze")),
+    ("Fx", _("Fx – indifferentes Verhalten")),
+    ("F?", _("F? – ungeklärtes Verhalten")),
 )
-REACT_CHOICES = (
-    ("R1 - Starksäurezeiger", "R1 - Starksäurezeiger"),
+REACTION_CHOICES = (
+    ("R1", _("R1 – Starksäurezeiger")),
+    ("R2", _("R2 – zwischen Starksäure- und Säurezeiger")),
+    ("R3", _("R3 – Säurezeiger")),
+    ("R4", _("R4 – zwischen Säure- und Mäßigsäurezeiger")),
+    ("R5", _("R5 – Mäßigsäurezeiger")),
     (
-        "R2 - zwischen Starksäure- und Säurezeiger",
-        "R2 - zwischen Starksäure- und Säurezeiger",
+        "R6",
+        _("R6 – zwischen Mäßigsäurezeiger und Schwachsäure- bis Schwachbasenzeiger"),
     ),
-    ("R3 - Säurezeiger", "R3 - Säurezeiger"),
+    ("R7", _("R7 – Schwachsäure- bis Schwachbasenzeiger")),
     (
-        "R4 - zwischen Säure- und Mäßigsäurezeiger",
-        "R4 - zwischen Säure- und Mäßigsäurezeiger",
+        "R8",
+        _("R8 – zwischen Schwachsäure- bis Schwachbasen- und Basen- und Kalkzeiger"),
     ),
-    ("R5 - Mäßigsäurezeiger", "R5 - Mäßigsäurezeiger"),
-    (
-        "R6 - zwischen Mäßigsäurezeiger und Schwachsäure- bis Schwachbasenzeiger",
-        "R6 - zwischen Mäßigsäurezeiger und Schwachsäure- bis Schwachbasenzeiger",
-    ),
-    (
-        "R7 - Schwachsäure- bis Schwachbasenzeiger",
-        " R7 - Schwachsäure- bis Schwachbasenzeiger",
-    ),
-    (
-        "R8 - zwischen Schwachsäure- bis Schwachbasen- und Basen- und Kalkzeiger",
-        "R8 - zwischen Schwachsäure- bis Schwachbasen- und Basen- und Kalkzeiger",
-    ),
-    ("R9 - Basen- und Kalkzeiger", "R9 - Basen- und Kalkzeiger"),
-    ("Rx - indifferentes Verhalten", "Rx - indifferentes Verhalten"),
-    ("R? - ungeklärtes Verhalten", "R? - ungeklärtes Verhalten"),
-    ("nicht angegeben", "nicht angegeben"),
+    ("R9", _("R9 – Basen- und Kalkzeiger")),
+    ("Rx", _("Rx – indifferentes Verhalten")),
+    ("R?", _("R? – ungeklärtes Verhalten")),
 )
-NUTRIENT_CHOICES = (
-    (
-        "N1 - stickstoffärmste Stanorte anzeigend",
-        "N1 - stickstoffärmste Stanorte anzeigend",
-    ),
-    (
-        "N2 - zwischen stickstoffärmsten und -armen Standorten",
-        "N2 - zwischen stickstoffärmsten und -armen Standorten",
-    ),
-    (
-        "N3 - häufig auf stickstoffarmen Standorten",
-        "N3 - häufig auf stickstoffarmen Standorten",
-    ),
-    (
-        "N4 - zwischen: häufig auf stickstoffarmen und mäßig -reichen Standorten",
-        "N4 - zwischen: häufig auf stickstoffarmen und mäßig -reichen Standorten",
-    ),
-    ("N5 - mäßig stickstoffreiche Standorte", "N5 - mäßig stickstoffreiche Standorte"),
-    (
-        "N6 - zwischen: mäßig und häufig anstickstoffreichen Standorten",
-        "N6 - zwischen: mäßig und häufig anstickstoffreichen Standorten",
-    ),
-    (
-        "N7 - häufig an stickstoffreichen Standorten",
-        "N7 - häufig an stickstoffreichen Standorten",
-    ),
-    (
-        "N8 - zwischen: häufig an und übermäßig stickstoffreichen Stanorten",
-        "N8 - zwischen: häufig an und übermäßig stickstoffreichen Stanorten",
-    ),
-    (
-        "N9 - übermäßig stickstoffreiche Standorte",
-        "N9 - übermäßig stickstoffreiche Standorte",
-    ),
-    ("Nx - indifferentes Verhalten", "Nx - indifferentes Verhalten"),
-    ("N? - ungeklärtes Verhalten", "N? - ungeklärtes Verhalten"),
-    ("nicht angegeben", "nicht angegeben"),
+NITROGEN_CHOICES = (
+    ("N1", _("N1 – stickstoffärmste Standorte")),
+    ("N2", _("N2 – zwischen stickstoffärmste und -arme Standorte")),
+    ("N3", _("N3 – stickstoffarme häufiger als mäßig -reiche Standorte")),
+    ("N4", _("N4 – mäßig stickstoffreiche häufiger als -arme Standorte")),
+    ("N5", _("N5 – mäßig stickstoffreiche Standorte")),
+    ("N6", _("N6 – mäßig stickstoffreiche häufiger als -reiche Standorte")),
+    ("N7", _("N7 – stickstoffreiche haufiger als mäßig -reiche Standorte")),
+    ("N8", _("N8 – zwischen stickstoffreiche und übermäßig -reiche Standorte")),
+    ("N9", _("N9 – übermäßig stickstoffreiche Standorte")),
+    ("Nx", _("Nx – indifferentes Verhalten")),
+    ("N?", _("N? – ungeklärtes Verhalten")),
 )
-ZEIGER_EXTRA = (("~", "~"), ("(?)", "(?)"))
+KEY_CHOICES = (
+    ("( )", _("( ) Keimlingsangabe")),
+    ("(?)", _("(?) unsichere Einstufung")),
+    ("~", _("~ Zeiger für starken Wechsel")),
+    ("=", _("= Überschwemmungszeiger")),
+)
+# Generate dictionary with indicators as keys and dictionaries as values, with the
+# dictionaries having indicator values as keys and verbose descriptions as values.
+INDICATORS = ("light", "temperature", "humidity", "reaction", "nitrogen")
+INDICATORS_CHOICES = (
+    LIGHT_CHOICES,
+    TEMPERATURE_CHOICES,
+    HUMIDITY_CHOICES,
+    REACTION_CHOICES,
+    NITROGEN_CHOICES,
+)
+INDICATORS_DICT = dict(
+    zip(
+        INDICATORS,
+        (dict((x, y.split(" – ")[-1]) for x, y in z) for z in INDICATORS_CHOICES),
+    )
+)

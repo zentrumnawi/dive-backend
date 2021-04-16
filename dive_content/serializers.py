@@ -268,10 +268,29 @@ class LeafSerializer(DisplayNameModelSerializer):
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
+    season = serializers.SerializerMethodField(label="Blütezeit")
+
     class Meta:
         model = Blossom
         exclude = ["plant"]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_season(self, obj):
+        # Generate sentence "Blütezeit" according pattern:
+        # "([season[0]]) [season[1]] bis [season[2] ([season[3]])."
+        fields = obj.season
+        if fields:
+            fields = [f"{SEASON_DICT.get(x, '')}" for x in fields]
+            fields[0] = f"({fields[0]})" if fields[0] else ""
+            fields[3] = f"({fields[3]})" if fields[3] else ""
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            " ".join(filter(None, fields[2:])),
+        ]
+        text = " bis ".join(filter(None, text))
+
+        return format_sentence(text)
 
 
 class FruitSerializer(DisplayNameModelSerializer):

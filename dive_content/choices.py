@@ -197,6 +197,21 @@ APEX_CHOICES = (
 # Blossom choices
 
 SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
+SEASON_DICT = {
+    None: "",
+    1: _("Januar"),
+    2: _("Februar"),
+    3: _("März"),
+    4: _("April"),
+    5: _("Mai"),
+    6: _("Juni"),
+    7: _("Juli"),
+    8: _("August"),
+    9: _("September"),
+    10: _("Oktober"),
+    11: _("November"),
+    12: _("Dezember"),
+}
 INFLORESCENCE_TYPE_CHOICES_1_3 = (
     ("kol", _("Kolben")),
     ("kae", _("Kätzchen")),

@@ -269,6 +269,7 @@ class LeafSerializer(DisplayNameModelSerializer):
 
 class BlossomSerializer(DisplayNameModelSerializer):
     season = serializers.SerializerMethodField(label="Blütezeit")
+    inflorescence = serializers.SerializerMethodField(label="Blütenstand")
 
     class Meta:
         model = Blossom
@@ -289,6 +290,31 @@ class BlossomSerializer(DisplayNameModelSerializer):
             " ".join(filter(None, fields[2:])),
         ]
         text = " bis ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_inflorescence(self, obj):
+        # Generate sentence "Blütenstand" according pattern:
+        # "[inflorescence_num] [inflorescence_type] mit [blossom_num] Blüte|Blüten."
+        fields = [
+            obj.inflorescence_num,
+            obj.inflorescence_type,
+            obj.blossom_num,
+        ]
+        if fields[0] not in ("", "1"):
+            if fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3).keys():
+                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES_2_3, "n")
+            elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3).keys():
+                fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
+            else:
+                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+        else:
+            fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+
+        text = " ".join(filter(None, fields[:2]))
+        text = " mit ".join(filter(None, (text, fields[2])))
+        if fields[2]:
+            text = f"{text} Blüte" if text[-1] == "1" else f"{text} Blüten"
 
         return format_sentence(text)
 

@@ -90,6 +90,20 @@ class BlossomAdminForm(forms.ModelForm):
 
         return value
 
+    def save(self, commit=True):
+        # Clear blossom_num if option "Einzelblüte" is selected as inflorescence_type.
+        instance = super().save(commit=False)
+
+        inflorescence_type = self.cleaned_data.get("inflorescence_type", "")
+        blossom_num = self.cleaned_data.get("blossom_num", "")
+        if inflorescence_type == "ein" and blossom_num:
+            instance.blossom_num = ""
+
+        if commit:
+            instance.save()
+
+        return instance
+
 
 class FruitAdminForm(forms.ModelForm):
     seed_num = NumberRangeCharField(Fruit, "seed_num", max=100, infinity=True)

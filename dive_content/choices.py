@@ -246,6 +246,9 @@ INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
     "scq": _("Scheinquirle"),
     "scb": _("Scheinblüten/Pseudanthien"),
 }
+MEROSITY_CHOICES = (
+    ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
+)
 SYM_CHOICES = (
     ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
     ("d", _("disymmetrisch/bilateral")),

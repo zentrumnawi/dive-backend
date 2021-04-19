@@ -375,10 +375,7 @@ class Blossom(models.Model):
         max_length=10, blank=True, verbose_name=_("Blütenanzahl (pro Stand)")
     )
     merosity = models.IntegerField(
-        choices=((3, 3), (4, 4), (5, 5)),
-        blank=True,
-        null=True,
-        verbose_name=_("Zähligkeit"),
+        choices=MEROSITY_CHOICES, blank=True, null=True, verbose_name=_("Zähligkeit")
     )
     symmetry = models.CharField(
         max_length=1, choices=SYM_CHOICES, blank=True, verbose_name=_("Symmetrie")

@@ -270,6 +270,7 @@ class LeafSerializer(DisplayNameModelSerializer):
 class BlossomSerializer(DisplayNameModelSerializer):
     season = serializers.SerializerMethodField(label="Blütezeit")
     inflorescence = serializers.SerializerMethodField(label="Blütenstand")
+    overview = serializers.SerializerMethodField(label="Überblick")
 
     class Meta:
         model = Blossom
@@ -315,6 +316,30 @@ class BlossomSerializer(DisplayNameModelSerializer):
         text = " mit ".join(filter(None, (text, fields[2])))
         if fields[2]:
             text = f"{text} Blüte" if text[-1] == "1" else f"{text} Blüten"
+
+        return format_sentence(text)
+
+    def get_overview(self, obj):
+        # Generate sentence "Blütenstand" according pattern:
+        # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
+        # Blütenform, [bract_blade]es Tragblatt."
+        fields = [
+            concatenate(obj.merosity, MEROSITY_CHOICES, "-zählige"),
+            concatenate(obj.symmetry, SYMMETRY_CHOICES, "e"),
+            concatenate(obj.perianth, PERIANTH_CHOICES),
+            concatenate(obj.perianth_form, PERIANTH_FORM_CHOICES, "e"),
+            concatenate(obj.bract_blade, BRACT_BLADE_CHOICES, "es"),
+        ]
+
+        text = [
+            " ".join(filter(None, fields[:3])),
+            f"{fields[3]} Blütenform" if fields[3] else "",
+            f"{fields[4]} Tragblatt" if fields[4] else "",
+        ]
+        if text[0] and not fields[2]:
+            text[0] = f"{text[0]} Blütenhülle"
+        text[1:3] = [", ".join(filter(None, text[1:3]))]
+        text = "; ".join(filter(None, text))
 
         return format_sentence(text)
 

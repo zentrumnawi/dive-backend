@@ -271,6 +271,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     season = serializers.SerializerMethodField(label="Blütezeit")
     inflorescence = serializers.SerializerMethodField(label="Blütenstand")
     overview = serializers.SerializerMethodField(label="Überblick")
+    diameter = serializers.SerializerMethodField(label="Durchmesser")
 
     class Meta:
         model = Blossom
@@ -340,6 +341,15 @@ class BlossomSerializer(DisplayNameModelSerializer):
             text[0] = f"{text[0]} Blütenhülle"
         text[1:3] = [", ".join(filter(None, text[1:3]))]
         text = "; ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_diameter(self, obj):
+        # Generate sentence "Durchmesser" according pattern:
+        # "[diameter] cm."
+        fields = ",".join(obj.diameter.split("."))
+
+        text = f"{fields} cm" if fields else ""
 
         return format_sentence(text)
 

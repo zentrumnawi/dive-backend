@@ -69,19 +69,22 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
-def concatenate(field, choices, app=""):
+def concatenate(field, choices=None, app=""):
     output = ""
     if field:
-        if isinstance(field, list):
-            output = " bis ".join(f"{dict(choices).get(item)}{app}" for item in field)
-        else:
-            output = f"{dict(choices).get(field)}{app}"
+        if choices:
+            if isinstance(field, list):
+                output = " bis ".join(f"{dict(choices).get(x)}{app}" for x in field)
+            else:
+                output = f"{dict(choices).get(field)}{app}"
 
-        if app and ("/" in output):
-            output = output.split("/")
-            for i, item in enumerate(output[:-1]):
-                output[i] = f"{item}{app}"
-            output = "/".join(output)
+            if app and ("/" in output):
+                output = output.split("/")
+                for i, x in enumerate(output[:-1]):
+                    output[i] = f"{x}{app}"
+                output = "/".join(output)
+        else:
+            output = f"{field}{app}"
 
     return output
 

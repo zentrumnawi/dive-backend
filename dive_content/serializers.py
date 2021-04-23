@@ -279,7 +279,16 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Blossom
-        exclude = ["plant"]
+        fields = [
+            "season",
+            "inflorescence",
+            "overview",
+            "diameter",
+            "sepal",
+            "petal",
+            "stamen",
+            "carpel",
+        ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_season(self, obj):

@@ -273,6 +273,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     overview = serializers.SerializerMethodField(label="Überblick")
     diameter = serializers.SerializerMethodField(label="Durchmesser")
     sepal = serializers.SerializerMethodField(label="Kelchblatt")
+    petal = serializers.SerializerMethodField(label="Kronblatt")
 
     class Meta:
         model = Blossom
@@ -383,6 +384,40 @@ class BlossomSerializer(DisplayNameModelSerializer):
         text[1] = f"{app} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
         text = ", ".join(filter(None, text))
         text = "; ".join(filter(None, (text, fields[4])))
+
+        return format_sentence(text)
+
+    def get_petal(self, obj):
+        # Generate sentence "Kronblatt" according pattern:
+        # "[petal_num] [petal_len] cm lange|-s, [petal_color_form] Kronblätter|-blatt,
+        # [petal_connation_type] [petal_connation]; [nectary]."
+        app = {1: " cm lange", 10: "Kronblätter"}
+        if obj.petal_num == "1":
+            app = {1: " cm langes", 10: "Kronblatt"}
+
+        fields = [
+            obj.petal_num,
+            concatenate(",".join(obj.petal_len.split(".")), app=app[1]),
+            obj.petal_color_form,
+            obj.petal_connation_type,
+            concatenate(obj.petal_connation, PETAL_CONNATION_CHOICES),
+            obj.nectary,
+        ]
+        fields[3] = (
+            f"{fields[3][0]}{concatenate(fields[3][1:], CONNATION_TYPE_CHOICES)}"
+            if fields[3][0:1].isdigit()
+            else concatenate(fields[3], CONNATION_TYPE_CHOICES)
+        )
+
+        text = [
+            ", ".join(filter(None, fields[1:3])),
+            " ".join(filter(None, fields[3:5])),
+        ]
+        text[0] = " ".join(filter(None, (fields[0], text[0])))
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[5])))
 
         return format_sentence(text)
 

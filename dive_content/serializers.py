@@ -274,6 +274,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     diameter = serializers.SerializerMethodField(label="Durchmesser")
     sepal = serializers.SerializerMethodField(label="Kelchblatt")
     petal = serializers.SerializerMethodField(label="Kronblatt")
+    stamen = serializers.SerializerMethodField(label="Staubblatt")
 
     class Meta:
         model = Blossom
@@ -418,6 +419,33 @@ class BlossomSerializer(DisplayNameModelSerializer):
         text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
         text = ", ".join(filter(None, text))
         text = "; ".join(filter(None, (text, fields[5])))
+
+        return format_sentence(text)
+
+    def get_stamen(self, obj):
+        # Generate sentence "Staubblatt" according pattern:
+        # "[stamen_num] [stamen_len] cm lange|-s, [stamen_color_form]
+        # Staubblätter|-blatt, [stamen_connation_type] [stamen_connation]."
+        app = {1: " cm lange", 10: "Staubblätter"}
+        if obj.stamen_num == "1":
+            app = {1: " cm langes", 10: "Staubblatt"}
+
+        fields = [
+            obj.stamen_num,
+            concatenate(",".join(obj.stamen_len.split(".")), app=app[1]),
+            obj.stamen_color_form,
+            concatenate(obj.stamen_connation_type, STAMEN_CONNATION_TYPE_CHOICES),
+            obj.stamen_connation_type_add,
+        ]
+
+        text = [
+            ", ".join(filter(None, fields[1:3])),
+            " ".join(filter(None, fields[3:5])),
+        ]
+        text[0] = " ".join(filter(None, (fields[0], text[0])))
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
 
         return format_sentence(text)
 

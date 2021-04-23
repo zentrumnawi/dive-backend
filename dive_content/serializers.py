@@ -275,6 +275,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     sepal = serializers.SerializerMethodField(label="Kelchblatt")
     petal = serializers.SerializerMethodField(label="Kronblatt")
     stamen = serializers.SerializerMethodField(label="Staubblatt")
+    carpel = serializers.SerializerMethodField(label="Fruchtblatt")
 
     class Meta:
         model = Blossom
@@ -446,6 +447,40 @@ class BlossomSerializer(DisplayNameModelSerializer):
         text[0] = f"{text[0]} {app[10]}" if text[0] else ""
         text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
         text = ", ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_carpel(self, obj):
+        # Generate sentence "Fruchtblatt" according pattern:
+        # "[carpel_num] [carpel_connation_type] verwachsene|-s Fruchtblätter|-blatt,
+        # [ovary_pos]er Fruchtkonten, [pistil_pos]er Griffel mit [stigma_num] Narbe|-n;
+        # [stylopodium]."
+
+        app = {10: "verwachsene Fruchtblätter", 11: "Narben"}
+        if obj.carpel_num == "1":
+            app[10] = "verwachsenes Fruchtblatt"
+        if obj.stigma_num == "1":
+            app[11] = "Narbe"
+
+        fields = [
+            obj.carpel_num,
+            concatenate(obj.carpel_connation_type, CARPEL_CONNATION_TYPE_CHOICES),
+            concatenate(obj.ovary_pos, OVARY_POS_CHOICES, "er"),
+            concatenate(obj.pistil_pos, PISTIL_POS_CHOICES, "er"),
+            obj.stigma_num,
+            obj.stylopodium,
+        ]
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            f"{fields[2]} Fruchtknoten" if fields[2] else "",
+            f"{fields[3]} Griffel" if fields[3] else "",
+            f"{fields[4]} {app[11]}" if fields[4] else "",
+        ]
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[2:4] = [" mit ".join(filter(None, text[2:4]))]
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[5])))
 
         return format_sentence(text)
 

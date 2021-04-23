@@ -272,6 +272,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     inflorescence = serializers.SerializerMethodField(label="Blütenstand")
     overview = serializers.SerializerMethodField(label="Überblick")
     diameter = serializers.SerializerMethodField(label="Durchmesser")
+    sepal = serializers.SerializerMethodField(label="Kelchblatt")
 
     class Meta:
         model = Blossom
@@ -350,6 +351,38 @@ class BlossomSerializer(DisplayNameModelSerializer):
         fields = ",".join(obj.diameter.split("."))
 
         text = f"{fields} cm" if fields else ""
+
+        return format_sentence(text)
+
+    def get_sepal(self, obj):
+        # Generate sentence "Kelchblatt" according pattern:
+        # "[sepal_num] [sepal_color_form] Kelchblatt|Kelchblätter, [sepal_connation_
+        # type] [sepal_connation]; [epicalyx]."
+        app = "Kelchblätter"
+        if obj.sepal_num == "1":
+            app = "Kelchblatt"
+
+        fields = [
+            obj.sepal_num,
+            obj.sepal_color_form,
+            obj.sepal_connation_type,
+            concatenate(obj.sepal_connation, SEPAL_CONNATION_CHOICES),
+            obj.epicalyx,
+        ]
+        fields[2] = (
+            f"{fields[2][0]}{concatenate(fields[2][1:], CONNATION_TYPE_CHOICES)}"
+            if fields[2][0:1].isdigit()
+            else concatenate(fields[2], CONNATION_TYPE_CHOICES)
+        )
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+        text[0] = f"{text[0]} {app}" if text[0] else ""
+        text[1] = f"{app} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[4])))
 
         return format_sentence(text)
 

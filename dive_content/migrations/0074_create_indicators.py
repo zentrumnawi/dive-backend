@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0072_bulk_alter_stemroot"),
+        ("dive_content", "0073_bulk_update_stemroot"),
     ]
 
     operations = [

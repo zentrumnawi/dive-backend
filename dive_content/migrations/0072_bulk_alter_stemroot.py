@@ -3,34 +3,6 @@
 from django.db import migrations, models
 
 
-def update_stemroot_succulence_forwards(apps, schema_editor):
-    SUCCULENCE_UPDATE_FORWARDS = {None: "", "yes": "dic", "no": "ndi"}
-
-    StemRoot = apps.get_model("dive_content", "StemRoot")
-
-    for obj in StemRoot.objects.all():
-        obj.succulence = SUCCULENCE_UPDATE_FORWARDS.get(obj.succulence, "")
-        obj.save()
-
-
-def update_stemroot_succulence_reverse(apps, schema_editor):
-    SUCCULENCE_UPDATE_REVERSE = {"": None, "dic": "yes", "ndi": "no"}
-
-    StemRoot = apps.get_model("dive_content", "StemRoot")
-
-    for obj in StemRoot.objects.all():
-        obj.succulence = SUCCULENCE_UPDATE_REVERSE.get(obj.succulence, None)
-        obj.save()
-
-
-def prune_stemroot_milky_sap(apps, schema_editor):
-    StemRoot = apps.get_model("dive_content", "StemRoot")
-
-    for obj in StemRoot.objects.exclude(milky_sap=""):
-        obj.milky_sap = obj.milky_sap[:3]
-        obj.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -38,9 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(
-            update_stemroot_succulence_forwards, update_stemroot_succulence_reverse
-        ),
         migrations.AlterField(
             model_name="stemroot",
             name="succulence",
@@ -63,26 +32,17 @@ class Migration(migrations.Migration):
                 verbose_name="Beblätterung",
             ),
         ),
-        migrations.SeparateDatabaseAndState(
-            database_operations=[
-                migrations.RunPython(
-                    migrations.RunPython.noop, prune_stemroot_milky_sap
-                ),
-            ],
-            state_operations=[
-                migrations.AlterField(
-                    model_name="stemroot",
-                    name="milky_sap",
-                    field=models.CharField(
-                        blank=True,
-                        default="",
-                        help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
-                        max_length=100,
-                        verbose_name="Milchsaft",
-                    ),
-                    preserve_default=False,
-                ),
-            ],
+        migrations.AlterField(
+            model_name="stemroot",
+            name="milky_sap",
+            field=models.CharField(
+                blank=True,
+                default="",
+                help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
+                max_length=100,
+                verbose_name="Milchsaft",
+            ),
+            preserve_default=False,
         ),
         migrations.AlterField(
             model_name="stemroot",

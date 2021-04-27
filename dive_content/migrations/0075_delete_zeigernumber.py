@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("dive_content", "0073_create_indicators"),
+        ("dive_content", "0074_create_indicators"),
     ]
 
     operations = [

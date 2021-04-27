@@ -2,6 +2,7 @@ from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
 
 from .forms import (
+    BlossomAdminForm,
     FruitAdminForm,
     IndicatorsAdminForm,
     LeafAdminForm,
@@ -43,6 +44,51 @@ leaf_fieldsets = (
     ("Keimblattmerkmale", {"fields": ("seed_leaf_num",)}),
 )
 leaf_radio_fields = {"rosette": admin.HORIZONTAL, "seed_leaf_num": admin.HORIZONTAL}
+
+blossom_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        "Blütenmerkmale",
+        {
+            "fields": (
+                "season",
+                ("inflorescence_num", "inflorescence_type", "blossom_num"),
+                ("merosity", "symmetry", "perianth"),
+                "perianth_form",
+                "bract_blade",
+                "diameter",
+                ("sepal_num", "sepal_color_form"),
+                ("sepal_connation_type", "sepal_connation"),
+                "epicalyx",
+                ("petal_num", "petal_len", "petal_color_form"),
+                ("petal_connation_type", "petal_connation"),
+                "nectary",
+                ("stamen_num", "stamen_len", "stamen_color_form"),
+                ("stamen_connation_type", "stamen_connation_type_add"),
+                ("carpel_num", "carpel_connation_type", "ovary_pos"),
+                "pistil_pos",
+                "stigma_num",
+                "stylopodium",
+            )
+        },
+    ),
+    (
+        "Sonderform Poales",
+        {
+            "fields": (
+                "grann_top",
+                "grann_form",
+                "cons_top",
+                "gull_spel",
+                "blos",
+                "straw_ground",
+                "order",
+                "aer_per_aer",
+                "aer_per_ab",
+            )
+        },
+    ),
+)
 
 fruit_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -109,6 +155,8 @@ class LeafInline(admin.StackedInline):
 
 class BlossomInline(admin.StackedInline):
     model = Blossom
+    fieldsets = blossom_fieldsets
+    form = BlossomAdminForm
     classes = ("collapse",)
 
 
@@ -162,7 +210,15 @@ class LeafAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Leaf, LeafAdmin)
-admin.site.register(Blossom, admin.ModelAdmin)
+
+
+class BlossomAdmin(admin.ModelAdmin):
+    model = Blossom
+    fieldsets = blossom_fieldsets
+    form = BlossomAdminForm
+
+
+admin.site.register(Blossom, BlossomAdmin)
 
 
 class FruitAdmin(admin.ModelAdmin):

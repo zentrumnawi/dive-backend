@@ -1,8 +1,16 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from .choices import *
-from .fields import ArrayMultipleChoiceField, IntegerRangeCharField, IndicatorField
-from .models import Fruit, Leaf, Plant, StemRoot
+from .fields import (
+    ArrayMultipleChoiceField,
+    ConnationTypeField,
+    IndicatorField,
+    NumberRangeCharField,
+    SeasonField,
+)
+from .models import Blossom, Fruit, Leaf, Plant, StemRoot
 
 
 class PlantAdminForm(forms.ModelForm):
@@ -36,14 +44,69 @@ class LeafAdminForm(forms.ModelForm):
     surface = ArrayMultipleChoiceField(SURFACE_CHOICES, Leaf, "surface")
     stipule_edge = ArrayMultipleChoiceField(STIPULE_EDGE_CHOICES, Leaf, "stipule_edge")
 
-    leaf_comp_num = IntegerRangeCharField(Leaf, "leaf_comp_num")
-    incision_num = IntegerRangeCharField(Leaf, "incision_num")
-    leaflet_incision_num = IntegerRangeCharField(Leaf, "leaflet_incision_num")
-    leaf_simple_num = IntegerRangeCharField(Leaf, "leaf_simple_num")
+    leaf_comp_num = NumberRangeCharField(Leaf, "leaf_comp_num")
+    incision_num = NumberRangeCharField(Leaf, "incision_num")
+    leaflet_incision_num = NumberRangeCharField(Leaf, "leaflet_incision_num")
+    leaf_simple_num = NumberRangeCharField(Leaf, "leaf_simple_num")
+
+
+class BlossomAdminForm(forms.ModelForm):
+    season = SeasonField("season")
+    inflorescence_num = NumberRangeCharField(
+        Blossom, "inflorescence_num", max=100, infinity=True
+    )
+    blossom_num = NumberRangeCharField(Blossom, "blossom_num", max=100, infinity=True)
+    bract_blade = ArrayMultipleChoiceField(BRACT_BLADE_CHOICES, Blossom, "bract_blade")
+    diameter = NumberRangeCharField(Blossom, "diameter", 0.1, 100, "cm")
+    sepal_num = NumberRangeCharField(Blossom, "sepal_num", max=11, infinity=True)
+    sepal_connation_type = ConnationTypeField("sepal_connation_type")
+    petal_num = NumberRangeCharField(Blossom, "petal_num", max=11, infinity=True)
+    petal_len = NumberRangeCharField(Blossom, "petal_len", 0.1, 100, "cm")
+    petal_connation_type = ConnationTypeField("petal_connation_type")
+    stamen_num = NumberRangeCharField(Blossom, "stamen_num", max=11, infinity=True)
+    stamen_len = NumberRangeCharField(Blossom, "stamen_len", 0.1, 100, "cm")
+    carpel_num = NumberRangeCharField(Blossom, "carpel_num", max=11, infinity=True)
+    stigma_num = NumberRangeCharField(Blossom, "stigma_num", max=11, infinity=True)
+
+    def clean_bract_blade(self):
+        choices = BRACT_BLADE_CHOICES
+        sublists = (BLADE_SUBDIV_SHAPE_CHOICES, BLADE_UNDIV_SHAPE_CHOICES)
+        value = self.cleaned_data.get("bract_blade")
+
+        error_messages = {
+            "invalid_choice": _(
+                f"Only first {len(sublists[0])} or following {len(sublists[1])} options may be selected together."
+            ),
+            "multiple_choice_not_allowed": _(
+                f'Option "{dict(choices).get("nvo")}" may only be selected alone.'
+            ),
+        }
+        if any(v in dict(sublists[0]).keys() for v in value) and any(
+            v in dict(sublists[1]).keys() for v in value
+        ):
+            raise ValidationError(error_messages["invalid_choice"])
+        if choices[-1][0] in value and len(value) > 1:
+            raise ValidationError(error_messages["multiple_choice_not_allowed"])
+
+        return value
+
+    def save(self, commit=True):
+        # Clear blossom_num if option "Einzelblüte" is selected as inflorescence_type.
+        instance = super().save(commit=False)
+
+        inflorescence_type = self.cleaned_data.get("inflorescence_type", "")
+        blossom_num = self.cleaned_data.get("blossom_num", "")
+        if inflorescence_type == "ein" and blossom_num:
+            instance.blossom_num = ""
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(Fruit, "seed_num", max=100, infinity=True)
+    seed_num = NumberRangeCharField(Fruit, "seed_num", max=100, infinity=True)
 
 
 class StemRootAdminForm(forms.ModelForm):

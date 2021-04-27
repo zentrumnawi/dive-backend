@@ -1,12 +1,14 @@
 from django import forms
 
 
-class IntegerRangeCharWidget(forms.MultiWidget):
-    def __init__(self, min, max, attrs=None):
+class NumberRangeCharWidget(forms.MultiWidget):
+    def __init__(self, min, max, step=1, suffix=None, attrs=None):
         self.max = max
+        if suffix == "cm":
+            self.template_name = "centimeter.html"
         widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max}),
-            forms.NumberInput(attrs={"min": min, "max": max}),
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
         )
         super().__init__(widgets, attrs)
 
@@ -14,6 +16,34 @@ class IntegerRangeCharWidget(forms.MultiWidget):
         data_list = [None, None]
         if value:
             data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
+
+        return data_list
+
+
+class SeasonWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        self.template_name = "season.html"
+        widgets = [forms.Select(choices=choices)] * 4
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return [None] * 4
+
+
+class ConnationTypeWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        widgets = (
+            forms.Select(choices=choices[0]),
+            forms.Select(choices=choices[1]),
+        )
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        data_list = ["", ""]
+        if value:
+            data_list = [value[0], value[1:]] if value[0].isdigit() else ["", value]
 
         return data_list
 

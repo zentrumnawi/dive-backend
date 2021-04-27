@@ -69,19 +69,22 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
-def concatenate(field, choices, app=""):
+def concatenate(field, choices=None, app=""):
     output = ""
     if field:
-        if isinstance(field, list):
-            output = " bis ".join(f"{dict(choices).get(item)}{app}" for item in field)
-        else:
-            output = f"{dict(choices).get(field)}{app}"
+        if choices:
+            if isinstance(field, list):
+                output = " bis ".join(f"{dict(choices).get(x)}{app}" for x in field)
+            else:
+                output = f"{dict(choices).get(field)}{app}"
 
-        if app and ("/" in output):
-            output = output.split("/")
-            for i, item in enumerate(output[:-1]):
-                output[i] = f"{item}{app}"
-            output = "/".join(output)
+            if app and ("/" in output):
+                output = output.split("/")
+                for i, x in enumerate(output[:-1]):
+                    output[i] = f"{x}{app}"
+                output = "/".join(output)
+        else:
+            output = f"{field}{app}"
 
     return output
 
@@ -265,10 +268,230 @@ class LeafSerializer(DisplayNameModelSerializer):
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
+    season = serializers.SerializerMethodField(label="Blütezeit")
+    inflorescence = serializers.SerializerMethodField(label="Blütenstand")
+    overview = serializers.SerializerMethodField(label="Überblick")
+    diameter = serializers.SerializerMethodField(label="Durchmesser")
+    sepal = serializers.SerializerMethodField(label="Kelchblatt")
+    petal = serializers.SerializerMethodField(label="Kronblatt")
+    stamen = serializers.SerializerMethodField(label="Staubblatt")
+    carpel = serializers.SerializerMethodField(label="Fruchtblatt")
+
     class Meta:
         model = Blossom
-        exclude = ["plant"]
+        fields = [
+            "season",
+            "inflorescence",
+            "overview",
+            "diameter",
+            "sepal",
+            "petal",
+            "stamen",
+            "carpel",
+        ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_season(self, obj):
+        # Generate sentence "Blütezeit" according pattern:
+        # "([season[0]]) [season[1]] bis [season[2] ([season[3]])."
+        fields = obj.season
+        if fields:
+            fields = [f"{SEASON_DICT.get(x, '')}" for x in fields]
+            fields[0] = f"({fields[0]})" if fields[0] else ""
+            fields[3] = f"({fields[3]})" if fields[3] else ""
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            " ".join(filter(None, fields[2:])),
+        ]
+        text = " bis ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_inflorescence(self, obj):
+        # Generate sentence "Blütenstand" according pattern:
+        # "[inflorescence_num] [inflorescence_type] mit [blossom_num] Blüte|Blüten."
+        fields = [
+            obj.inflorescence_num,
+            obj.inflorescence_type,
+            obj.blossom_num,
+        ]
+        if fields[0] not in ("", "1"):
+            if fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3).keys():
+                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES_2_3, "n")
+            elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3).keys():
+                fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
+            else:
+                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+        else:
+            fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+
+        text = " ".join(filter(None, fields[:2]))
+        text = " mit ".join(filter(None, (text, fields[2])))
+        if fields[2]:
+            text = f"{text} Blüte" if text[-1] == "1" else f"{text} Blüten"
+
+        return format_sentence(text)
+
+    def get_overview(self, obj):
+        # Generate sentence "Blütenstand" according pattern:
+        # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
+        # Blütenform, [bract_blade]es Tragblatt."
+        fields = [
+            concatenate(obj.merosity, MEROSITY_CHOICES, "-zählige"),
+            concatenate(obj.symmetry, SYMMETRY_CHOICES, "e"),
+            concatenate(obj.perianth, PERIANTH_CHOICES),
+            concatenate(obj.perianth_form, PERIANTH_FORM_CHOICES, "e"),
+            concatenate(obj.bract_blade, BRACT_BLADE_CHOICES, "es"),
+        ]
+
+        text = [
+            " ".join(filter(None, fields[:3])),
+            f"{fields[3]} Blütenform" if fields[3] else "",
+            f"{fields[4]} Tragblatt" if fields[4] else "",
+        ]
+        if text[0] and not fields[2]:
+            text[0] = f"{text[0]} Blütenhülle"
+        text[1:3] = [", ".join(filter(None, text[1:3]))]
+        text = "; ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_diameter(self, obj):
+        # Generate sentence "Durchmesser" according pattern:
+        # "[diameter] cm."
+        fields = ",".join(obj.diameter.split("."))
+
+        text = f"{fields} cm" if fields else ""
+
+        return format_sentence(text)
+
+    def get_sepal(self, obj):
+        # Generate sentence "Kelchblatt" according pattern:
+        # "[sepal_num] [sepal_color_form] Kelchblatt|Kelchblätter, [sepal_connation_
+        # type] [sepal_connation]; [epicalyx]."
+        app = "Kelchblätter"
+        if obj.sepal_num == "1":
+            app = "Kelchblatt"
+
+        fields = [
+            obj.sepal_num,
+            obj.sepal_color_form,
+            obj.sepal_connation_type,
+            concatenate(obj.sepal_connation, SEPAL_CONNATION_CHOICES),
+            obj.epicalyx,
+        ]
+        fields[2] = (
+            f"{fields[2][0]}{concatenate(fields[2][1:], CONNATION_TYPE_CHOICES)}"
+            if fields[2][0:1].isdigit()
+            else concatenate(fields[2], CONNATION_TYPE_CHOICES)
+        )
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+        text[0] = f"{text[0]} {app}" if text[0] else ""
+        text[1] = f"{app} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[4])))
+
+        return format_sentence(text)
+
+    def get_petal(self, obj):
+        # Generate sentence "Kronblatt" according pattern:
+        # "[petal_num] [petal_len] cm lange|-s, [petal_color_form] Kronblätter|-blatt,
+        # [petal_connation_type] [petal_connation]; [nectary]."
+        app = {1: " cm lange", 10: "Kronblätter"}
+        if obj.petal_num == "1":
+            app = {1: " cm langes", 10: "Kronblatt"}
+
+        fields = [
+            obj.petal_num,
+            concatenate(",".join(obj.petal_len.split(".")), app=app[1]),
+            obj.petal_color_form,
+            obj.petal_connation_type,
+            concatenate(obj.petal_connation, PETAL_CONNATION_CHOICES),
+            obj.nectary,
+        ]
+        fields[3] = (
+            f"{fields[3][0]}{concatenate(fields[3][1:], CONNATION_TYPE_CHOICES)}"
+            if fields[3][0:1].isdigit()
+            else concatenate(fields[3], CONNATION_TYPE_CHOICES)
+        )
+
+        text = [
+            ", ".join(filter(None, fields[1:3])),
+            " ".join(filter(None, fields[3:5])),
+        ]
+        text[0] = " ".join(filter(None, (fields[0], text[0])))
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[5])))
+
+        return format_sentence(text)
+
+    def get_stamen(self, obj):
+        # Generate sentence "Staubblatt" according pattern:
+        # "[stamen_num] [stamen_len] cm lange|-s, [stamen_color_form]
+        # Staubblätter|-blatt, [stamen_connation_type] [stamen_connation]."
+        app = {1: " cm lange", 10: "Staubblätter"}
+        if obj.stamen_num == "1":
+            app = {1: " cm langes", 10: "Staubblatt"}
+
+        fields = [
+            obj.stamen_num,
+            concatenate(",".join(obj.stamen_len.split(".")), app=app[1]),
+            obj.stamen_color_form,
+            concatenate(obj.stamen_connation_type, STAMEN_CONNATION_TYPE_CHOICES),
+            obj.stamen_connation_type_add,
+        ]
+
+        text = [
+            ", ".join(filter(None, fields[1:3])),
+            " ".join(filter(None, fields[3:5])),
+        ]
+        text[0] = " ".join(filter(None, (fields[0], text[0])))
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
+        text = ", ".join(filter(None, text))
+
+        return format_sentence(text)
+
+    def get_carpel(self, obj):
+        # Generate sentence "Fruchtblatt" according pattern:
+        # "[carpel_num] [carpel_connation_type] verwachsene|-s Fruchtblätter|-blatt,
+        # [ovary_pos]er Fruchtkonten, [pistil_pos]er Griffel mit [stigma_num] Narbe|-n;
+        # [stylopodium]."
+
+        app = {10: "verwachsene Fruchtblätter", 11: "Narben"}
+        if obj.carpel_num == "1":
+            app[10] = "verwachsenes Fruchtblatt"
+        if obj.stigma_num == "1":
+            app[11] = "Narbe"
+
+        fields = [
+            obj.carpel_num,
+            concatenate(obj.carpel_connation_type, CARPEL_CONNATION_TYPE_CHOICES),
+            concatenate(obj.ovary_pos, OVARY_POS_CHOICES, "er"),
+            concatenate(obj.pistil_pos, PISTIL_POS_CHOICES, "er"),
+            obj.stigma_num,
+            obj.stylopodium,
+        ]
+
+        text = [
+            " ".join(filter(None, fields[:2])),
+            f"{fields[2]} Fruchtknoten" if fields[2] else "",
+            f"{fields[3]} Griffel" if fields[3] else "",
+            f"{fields[4]} {app[11]}" if fields[4] else "",
+        ]
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text[2:4] = [" mit ".join(filter(None, text[2:4]))]
+        text = ", ".join(filter(None, text))
+        text = "; ".join(filter(None, (text, fields[5])))
+
+        return format_sentence(text)
 
 
 class FruitSerializer(DisplayNameModelSerializer):

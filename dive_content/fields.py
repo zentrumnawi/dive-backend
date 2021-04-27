@@ -2,9 +2,20 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .choices import INDICATORS, INDICATORS_CHOICES
-from .models import Indicators
-from .widgets import IndicatorWidget, IntegerRangeCharWidget
+from .choices import (
+    CONNATION_NUM_CHOICES,
+    CONNATION_TYPE_CHOICES,
+    INDICATORS,
+    INDICATORS_CHOICES,
+    SEASON_CHOICES,
+)
+from .models import Blossom, Indicators
+from .widgets import (
+    ConnationTypeWidget,
+    IndicatorWidget,
+    NumberRangeCharWidget,
+    SeasonWidget,
+)
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
@@ -18,9 +29,16 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
         super().__init__(choices=choices, **kwargs)
 
 
-class IntegerRangeCharField(forms.MultiValueField):
+class NumberRangeCharField(forms.MultiValueField):
     def __init__(
-        self, model=None, field_name=None, min=1, max=99, infinity=False, **kwargs
+        self,
+        model=None,
+        field_name=None,
+        min=1,
+        max=99,
+        suffix=None,
+        infinity=False,
+        **kwargs,
     ):
         _label = None
         if model and field_name:
@@ -34,25 +52,32 @@ class IntegerRangeCharField(forms.MultiValueField):
         kwargs.setdefault("label", _label)
         kwargs.setdefault("help_text", _help_text)
 
+        def error_messages(pos):
+            position = {1: "first", 2: "second"}
+            return {
+                "min_value": f"Ensure {position[pos]} value is greater than or equal to %(limit_value)s.",
+                "max_value": f"Ensure {position[pos]} value is less than or equal to %(limit_value)s.",
+            }
+
         fields = (
             forms.IntegerField(
-                min_value=min,
-                max_value=max,
-                error_messages={
-                    "min_value": "Ensure first value is greater than or equal to %(limit_value)s.",
-                    "max_value": "Ensure first value is less than or equal to %(limit_value)s.",
-                },
+                min_value=min, max_value=max, error_messages=error_messages(1)
             ),
             forms.IntegerField(
-                min_value=min,
-                max_value=max,
-                error_messages={
-                    "min_value": "Ensure second value is greater than or equal to %(limit_value)s.",
-                    "max_value": "Ensure second value is less than or equal to %(limit_value)s.",
-                },
+                min_value=min, max_value=max, error_messages=error_messages(2)
             ),
         )
-        widget = IntegerRangeCharWidget(min, max)
+        widget = NumberRangeCharWidget(min, max)
+        if suffix == "cm":
+            fields = (
+                forms.FloatField(
+                    min_value=min, max_value=max, error_messages=error_messages(1)
+                ),
+                forms.FloatField(
+                    min_value=min, max_value=max, error_messages=error_messages(2)
+                ),
+            )
+            widget = NumberRangeCharWidget(min, max, 0.1, "cm")
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 
@@ -70,6 +95,56 @@ class IntegerRangeCharField(forms.MultiValueField):
                     data_list[i] = "∞"
 
         return "–".join(filter(None, data_list))
+
+
+class SeasonField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        kwargs.setdefault("required", False)
+        kwargs.setdefault(
+            "label", Blossom._meta.get_field(field_name).base_field.verbose_name
+        )
+        kwargs.setdefault("help_text", _("Einzelwert in Feld 2 oder 3 eintragen."))
+
+        choices = SEASON_CHOICES
+        fields = [
+            forms.TypedChoiceField(choices=choices, coerce=int, empty_value=None)
+        ] * 4
+        widget = SeasonWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        if data_list:
+            if data_list[0] and not data_list[1] or data_list[0] == data_list[1]:
+                data_list[0] = None
+            if data_list[3] and not data_list[2] or data_list[3] == data_list[2]:
+                data_list[3] = None
+
+        return data_list
+
+
+class ConnationTypeField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", Blossom._meta.get_field(field_name).verbose_name)
+
+        choices = (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES)
+        fields = [
+            forms.ChoiceField(choices=choices[0]),
+            forms.ChoiceField(choices=choices[1]),
+        ]
+        widget = ConnationTypeWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        value = ""
+        if data_list:
+            if not data_list[0] and len(data_list[1]) == 2:
+                raise ValidationError(_("Numeric prefix must be provided."))
+            value = "".join(data_list) if len(data_list[1]) == 2 else data_list[1]
+
+        return value
 
 
 class IndicatorField(forms.MultiValueField):

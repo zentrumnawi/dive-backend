@@ -196,135 +196,92 @@ APEX_CHOICES = (
 
 # Blossom choices
 
-BL_TYPE_CHOICES = (
-    ("ein", _("einzeln")),
+SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
+SEASON_DICT = {
+    None: "",
+    1: _("Januar"),
+    2: _("Februar"),
+    3: _("März"),
+    4: _("April"),
+    5: _("Mai"),
+    6: _("Juni"),
+    7: _("Juli"),
+    8: _("August"),
+    9: _("September"),
+    10: _("Oktober"),
+    11: _("November"),
+    12: _("Dezember"),
+}
+INFLORESCENCE_TYPE_CHOICES_1_3 = (
+    ("kol", _("Kolben")),
+    ("kae", _("Kätzchen")),
+    ("zap", _("Zapfen")),
+    ("koc", _("Köpfchen")),
+    ("krc", _("Körbchen")),
+    ("bue", _("Büschel")),
+    ("kna", _("Knäuel")),
+)
+INFLORESCENCE_TYPE_CHOICES_2_3 = (
+    ("ein", _("Einzelblüte")),
     ("tra", _("Traube")),
     ("ris", _("Rispe")),
-    ("ebe", _("Ebenstrauß/Corymbus")),
     ("sct", _("Schirmtraube")),
     ("scr", _("Schirmrispe")),
     ("spi", _("Spirre/Trichterrispe")),
     ("aer", _("Ähre")),
-    ("kol", _("Kolben")),
-    ("kae", _("Kätzchen")),
-    ("zap", _("Zapfen")),
     ("dol", _("Dolde")),
     ("dod", _("Doppeldolde")),
-    ("kop", _("Kopf")),
-    ("koc", _("Köpfchen")),
-    ("kor", _("Korb")),
-    ("krc", _("Körbchen")),
     ("zym", _("Zyme")),
+    ("wic", _("Wickel")),
+    ("dow", _("Doppelwickel")),
+    ("thy", _("Thyrse")),
+    ("scd", _("Scheindolde/Trugdolde")),
+)
+INFLORESCENCE_TYPE_CHOICES_3_3 = (
+    ("ebe", _("Ebenstrauß/Corymbus")),
+    ("kop", _("Kopf")),
+    ("kor", _("Korb")),
     ("ple", _("Pleiochasium")),
     ("dic", _("Dichasium")),
     ("mon", _("Monochasium")),
-    ("wic", _("Wickel")),
-    ("dow", _("Doppelwickel")),
     ("scq", _("Scheinquirl")),
-    ("bue", _("Büschel")),
-    ("kna", _("Knäuel")),
-    ("thy", _("Thyrse")),
-    ("scd", _("Scheindolde/Trugdolde")),
     ("scb", _("Scheinblüte/Pseudanthium")),
 )
-SYM_CHOICES = (
-    ("r", _("radiärsymmetrisch/aktinomorph/strahlig")),
-    ("d", _("disymmetrisch/bilateral")),
-    ("z", _("zygomorph/dorsiventral")),
-    ("a", _("asymmetrisch/unregelmäßig")),
+INFLORESCENCE_TYPE_CHOICES = (
+    INFLORESCENCE_TYPE_CHOICES_1_3
+    + INFLORESCENCE_TYPE_CHOICES_2_3
+    + INFLORESCENCE_TYPE_CHOICES_3_3
 )
-PART_CHOICES = (
-    ("gan", _("ganz/ungeteilt")),
-    ("gel", _("gelappt")),
-    ("gsp", _("gespalten")),
-    ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
-    ("han", _("handförmig/fingerförmig")),
-    ("hgl", _("handförmig gelappt")),
-    ("hgt", _("handförmig geteilt")),
-    ("hgs", _("handförmig geschnitten")),
-    ("gef", _("gefingert")),
-    ("fie", _("fiederförmig/fiederig")),
-    ("fil", _("fiederlappig")),
-    ("fsp", _("fiederspaltig")),
-    ("fit", _("fiederteilig")),
-    ("fis", _("fiederschnittig")),
-    ("paf", _("paarig gefiedert")),
-    ("upf", _("unpaarig gefiedert")),
-    ("unf", _("unterbrochen fiederschnittig")),
-    ("ung", _("unterbrochen gefiedert")),
-    ("dop", _("doppelt gefiedert")),
-    ("meh", _("mehrfach gefiedert")),
-    ("dre", _("dreizählig")),
-    ("dod", _("doppelt dreizählig")),
-    ("lei", _("leierförmig")),
-    ("sch", _("schrotsägeförmig")),
-    ("kam", _("kammförmig")),
-    ("fug", _("fußförmig geschnitten")),
-    ("fuz", _("fußförmig zusammengesetzt")),
-    ("non", _("nicht vorhanden")),
+INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
+    "ebe": _("Ebensträuße/Corymbusse"),
+    "kop": _("Köpfe"),
+    "kor": _("Körbe"),
+    "ple": _("Pleiochasien"),
+    "dic": _("Dichasien"),
+    "mon": _("Monochasien"),
+    "scq": _("Scheinquirle"),
+    "scb": _("Scheinblüten/Pseudanthien"),
+}
+MEROSITY_CHOICES = (
+    ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )
-HULL_CHOICES = (
+SYMMETRY_CHOICES = (
+    ("r", _("radiärsymmetrisch")),
+    ("d", _("disymmetrisch")),
+    ("z", _("zygomorph")),
+    ("a", _("asymmetrisch")),
+)
+PERIANTH_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),
     ("ein", _("einfache Blütenhülle (Perigon)")),
     ("feh", _("fehlende Blütenhülle")),
     ("lip", _("Lippenblüte")),
     ("sch", _("Schmetterlingsblüte")),
     ("zun", _("Zungenblüte")),
+    ("roe", _("Röhrenblüte")),
     ("str", _("strahlende Randblüten")),
 )
-CH_TYPE_CHOICES = (
-    ("fre", _("freiblättrig")),
-    ("ver", _("verwachsenblättrig")),
-    ("2-z", _("2-zähnig")),
-    ("3-z", _("3-zähnig")),
-    ("4-z", _("4-zähnig")),
-    ("5-z", _("5-zähnig")),
-    ("2-l", _("2-lappig")),
-    ("3-l", _("3-lappig")),
-    ("4-l", _("4-lappig")),
-    ("5-l", _("5-lappig")),
-    ("2-s", _("2-spaltig")),
-    ("3-s", _("3-spaltig")),
-    ("4-s", _("4-spaltig")),
-    ("5-s", _("5-spaltig")),
-    ("2-t", _("2-teilig")),
-    ("3-t", _("3-teilig")),
-    ("4-t", _("4-teilig")),
-    ("5-t", _("5-teilig")),
-    ("zwe", _("zweilippig")),
-)
-CROWN_VER_CHOICES = (
-    ("v", _("verwachsen")),
-    ("u", _("unverwachsen")),
-    ("a", _("am Grund verwachsen")),
-)
-STAND_TYPE_CHOICES = (
-    ("hy", _("hypogyn/oberständig")),
-    ("eh", _("epihypogyn/halboberständig")),
-    ("pe", _("perigyn/mittelständig")),
-    ("he", _("hemiepigyn/halbunterständig")),
-    ("ep", _("epigyn/unterständig")),
-)
-BUILD_CHOICES = (
-    ("mo", _("monokarp")),
-    ("ap", _("apokarp/chorikarp")),
-    ("cs", _("coeno-synkarp")),
-    ("cp", _("coeno-parakarp")),
-)
-GRIFFEL_CHOICES = (
-    ("en", _("endständig")),
-    ("se", _("seitenständig")),
-    ("gr", _("grundständig")),
-    ("gy", _("gynobasisch")),
-)
-GRIFFEL_SUB_CHOICES = (
-    ("end", _("subendständig")),
-    ("sei", _("subseitenständig")),
-    ("gru", _("subgrundständig")),
-    ("gyn", _("subgynobasisch")),
-)
-SPEC_SPORN_CHOICES = (
+PERIANTH_FORM_CHOICES = (
     ("ro", _("röhrig")),
     ("ke", _("keulig")),
     ("gl", _("glockig")),
@@ -341,6 +298,56 @@ SPEC_SPORN_CHOICES = (
     ("as", _("ausgesackt")),
     ("gr", _("gespornt")),
 )
+BRACT_BLADE_CHOICES = (
+    BLADE_SUBDIV_SHAPE_CHOICES
+    + BLADE_UNDIV_SHAPE_CHOICES
+    + (("nvo", _("nicht vorhanden")),)
+)
+CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
+CONNATION_TYPE_CHOICES = (
+    ("", "---------"),
+    ("-z", _("-zähnig")),
+    ("-l", _("-lappig")),
+    ("-s", _("-spaltig")),
+    ("-t", _("-teilig")),
+    ("fre", _("freiblättrig")),
+    ("ver", _("verwachsenblättrig")),
+    ("zwe", _("zweilippig")),
+)
+SEPAL_CONNATION_CHOICES = (
+    ("v", _("verwachsen")),
+    ("u", _("unverwachsen")),
+    ("a", _("am Grund verwachsen")),
+)
+PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
+STAMEN_CONNATION_TYPE_CHOICES = (
+    ("s", _("Staubfadenröhre")),
+    ("v", _("verwachsen mit Kronblättern")),
+)
+CARPEL_CONNATION_TYPE_CHOICES = (
+    ("mo", _("monokarp")),
+    ("ap", _("apokarp/chorikarp")),
+    ("cs", _("coeno-synkarp")),
+    ("cp", _("coeno-parakarp")),
+)
+OVARY_POS_CHOICES = (
+    ("ob", _("oberständig")),
+    ("ho", _("halboberständig")),
+    ("mi", _("mittelständig")),
+    ("hu", _("halbunterständig")),
+    ("un", _("unterständig")),
+)
+PISTIL_POS_CHOICES = (
+    ("end", _("endständig")),
+    ("sei", _("seitenständig")),
+    ("gru", _("grundständig")),
+    ("gyn", _("gynobasisch")),
+    ("sen", _("subendständig")),
+    ("sse", _("subseitenständig")),
+    ("sgr", _("subgrundständig")),
+    ("sgy", _("subgynobasisch")),
+)
+# ---------------------------------- TO BE MODIFIED ---------------------------------- #
 GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
 GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
 GROUND_CHOICES = (
@@ -355,6 +362,7 @@ GROUND_CHOICES = (
     ("re", _("reitend")),
     ("hi", _("hinfällig")),
 )
+# ------------------------------------------------------------------------------------ #
 
 
 # Fruit choices

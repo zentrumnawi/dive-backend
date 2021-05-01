@@ -59,7 +59,7 @@ ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
     ("kei", _("keine Grundblattrosette")),
 )
-BLADE_SUBDIV_SHAPE_CHOICES = (
+LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("han", _("handförmig")),
     ("gef", _("gefingert")),
     ("fif", _("fiederförmig")),
@@ -306,7 +306,7 @@ PERIANTH_FORM_CHOICES = (
     ("gr", _("gespornt")),
 )
 BRACT_BLADE_CHOICES = (
-    BLADE_SUBDIV_SHAPE_CHOICES
+    LEAF_COMP_BLADE_SHAPE_CHOICES
     + BLADE_UNDIV_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )

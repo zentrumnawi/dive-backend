@@ -232,8 +232,8 @@ class Leaf(models.Model):
     leaf_comp_blade_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=BLADE_SUBDIV_SHAPE_CHOICES,
-            verbose_name=_("Spreitengestalt (unterteiltes Blatt)"),
+            choices=LEAF_COMP_BLADE_SHAPE_CHOICES,
+            verbose_name=_("Spreitengestalt (zusg. Blatt)"),
         ),
         size=2,
         blank=True,

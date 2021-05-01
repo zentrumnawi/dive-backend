@@ -227,7 +227,7 @@ class Leaf(models.Model):
         verbose_name=_("Grundblattrosette"),
     )
     leaf_comp_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)")
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blatt)")
     )
     leaf_comp_blade_shape = ArrayField(
         base_field=models.CharField(

@@ -28,26 +28,30 @@ class PlantAdminForm(forms.ModelForm):
 
 class LeafAdminForm(forms.ModelForm):
     attachment = ArrayMultipleChoiceField(ATTACHMENT_CHOICES, Leaf, "attachment")
-    blade_subdiv_shape = ArrayMultipleChoiceField(
-        BLADE_SUBDIV_SHAPE_CHOICES, Leaf, "blade_subdiv_shape"
+    leaf_comp_blade_shape = ArrayMultipleChoiceField(
+        LEAF_COMP_BLADE_SHAPE_CHOICES, Leaf, "leaf_comp_blade_shape"
     )
-    incision_depth = ArrayMultipleChoiceField(
-        INCISION_DEPTH_CHOICES, Leaf, "incision_depth"
-    )
-    blade_undiv_shape = ArrayMultipleChoiceField(
-        BLADE_UNDIV_SHAPE_CHOICES, Leaf, "blade_undiv_shape"
+    leaf_comp_incision_depth = ArrayMultipleChoiceField(
+        LEAF_COMP_INCISION_DEPTH_CHOICES, Leaf, "leaf_comp_incision_depth"
     )
     leaflet_incision_depth = ArrayMultipleChoiceField(
         LEAFLET_INCISION_DEPTH_CHOICES, Leaf, "leaflet_incision_depth"
+    )
+    leaf_simple_blade_shape = ArrayMultipleChoiceField(
+        LEAF_SIMPLE_BLADE_SHAPE_CHOICES, Leaf, "leaf_simple_blade_shape"
+    )
+    leaf_simple_incision_depth = ArrayMultipleChoiceField(
+        LEAF_SIMPLE_INCISION_DEPTH_CHOICES, Leaf, "leaf_simple_incision_depth"
     )
     edge = ArrayMultipleChoiceField(EDGE_CHOICES, Leaf, "edge")
     surface = ArrayMultipleChoiceField(SURFACE_CHOICES, Leaf, "surface")
     stipule_edge = ArrayMultipleChoiceField(STIPULE_EDGE_CHOICES, Leaf, "stipule_edge")
 
     leaf_comp_num = NumberRangeCharField(Leaf, "leaf_comp_num")
-    incision_num = NumberRangeCharField(Leaf, "incision_num")
+    leaf_comp_incision_num = NumberRangeCharField(Leaf, "leaf_comp_incision_num")
     leaflet_incision_num = NumberRangeCharField(Leaf, "leaflet_incision_num")
     leaf_simple_num = NumberRangeCharField(Leaf, "leaf_simple_num")
+    leaf_simple_incision_num = NumberRangeCharField(Leaf, "leaf_simple_incision_num")
 
 
 class BlossomAdminForm(forms.ModelForm):
@@ -70,7 +74,7 @@ class BlossomAdminForm(forms.ModelForm):
 
     def clean_bract_blade(self):
         choices = BRACT_BLADE_CHOICES
-        sublists = (BLADE_SUBDIV_SHAPE_CHOICES, BLADE_UNDIV_SHAPE_CHOICES)
+        sublists = (LEAF_COMP_BLADE_SHAPE_CHOICES, LEAF_SIMPLE_BLADE_SHAPE_CHOICES)
         value = self.cleaned_data.get("bract_blade")
 
         error_messages = {

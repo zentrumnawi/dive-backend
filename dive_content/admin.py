@@ -17,6 +17,7 @@ leaf_fieldsets = (
         "Blattmerkmale",
         {
             "fields": (
+                "color",
                 "veins",
                 "division",
                 "succulence",
@@ -24,14 +25,23 @@ leaf_fieldsets = (
                 "cross_section",
                 ("attachment", "arrangement"),
                 "rosette",
-                ("leaf_comp_num", "blade_subdiv_shape"),
-                ("incision_num", "incision_depth"),
+                (
+                    "leaf_comp_num",
+                    "leaf_comp_blade_shape",
+                    "leaf_comp_incision_num",
+                    "leaf_comp_incision_depth",
+                ),
                 (
                     "leaflet_incision_num",
                     "leaflet_incision_add",
                     "leaflet_incision_depth",
                 ),
-                ("leaf_simple_num", "blade_undiv_shape",),
+                (
+                    "leaf_simple_num",
+                    "leaf_simple_blade_shape",
+                    "leaf_simple_incision_num",
+                    "leaf_simple_incision_depth",
+                ),
                 "edge",
                 "surface",
                 "stipule_edge",

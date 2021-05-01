@@ -176,6 +176,7 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
+    color = models.CharField(max_length=100, blank=True, verbose_name=_("Blattfarbe"))
     veins = models.CharField(
         max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )

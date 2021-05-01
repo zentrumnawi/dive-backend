@@ -79,7 +79,7 @@ LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("kam", _("kammförmig")),
     ("fus", _("fußförmig")),
 )
-INCISION_DEPTH_CHOICES = (
+LEAF_COMP_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
     ("gep", _("gespalten")),
@@ -90,7 +90,7 @@ INCISION_DEPTH_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("fie", _("gefiedert")),
 )
-LEAFLET_INCISION_DEPTH_CHOICES = INCISION_DEPTH_CHOICES
+LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
 BLADE_UNDIV_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),

@@ -245,8 +245,8 @@ class Leaf(models.Model):
     leaf_comp_incision_depth = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=INCISION_DEPTH_CHOICES,
-            verbose_name=_("Einschnitttiefe"),
+            choices=LEAF_COMP_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (zusg. Blatt)"),
         ),
         size=2,
         blank=True,

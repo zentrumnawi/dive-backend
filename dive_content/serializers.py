@@ -158,18 +158,22 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     def get_leaf_compound(self, obj):
         # Generate sentence "Blattfläche – zusammengesetztes Blatt" according pattern:
-        # "[leaf_comp_num] [blade_subdiv_shape]es|e [incision_num]-[incision_depth]es|e
-        #  Blatt|Blätter mit [leaflet_incision_num]-[leaflet_incision_add]-[leaflet_
-        #  incision_depth]en Blättchen."
+        # "[leaf_comp_num] [leaf_comp_blade_shape]es|e [leaf_comp_incision_num]-[leaf_
+        # comp_incision_depth]es|e Blatt|Blätter mit [leaflet_incision_num]-[leaflet_
+        # incision_add]-[leaflet_incision_depth]en Blättchen."
         app = {1: "e", 3: "e", 6: "en", 10: "Blätter"}
         if obj.leaf_comp_num == "1":
             app = {1: "es", 3: "es", 6: "en", 10: "Blatt"}
 
         fields = [
             obj.leaf_comp_num,
-            concatenate(obj.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES, app[1]),
-            obj.incision_num,
-            concatenate(obj.incision_depth, INCISION_DEPTH_CHOICES, app[3]),
+            concatenate(
+                obj.leaf_comp_blade_shape, LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
+            ),
+            obj.leaf_comp_incision_num,
+            concatenate(
+                obj.leaf_comp_incision_depth, LEAF_COMP_INCISION_DEPTH_CHOICES, app[3]
+            ),
             obj.leaflet_incision_num,
             obj.leaflet_incision_add,
             concatenate(
@@ -177,7 +181,7 @@ class LeafSerializer(DisplayNameModelSerializer):
             ),
         ]
         for i in (2, 4, 5):
-            fields[i] = f"{f'{fields[i]}-' if fields[i] else ''}"
+            fields[i] = f"{fields[i]}-" if fields[i] else ""
         if fields[2] and " bis " in fields[3]:
             fields[3] = fields[3].split(" bis ", 1)
             fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
@@ -193,9 +197,9 @@ class LeafSerializer(DisplayNameModelSerializer):
             " ".join(filter(None, text)),
             "".join(filter(None, fields[4:7])),
         ]
-        text[0] = f"{f'{text[0]} {app[10]}' if text[0] else ''}"
-        text = f"{f'{text[0]} mit {text[1]} Blättchen' if text[1] else text[0]}"
-        text = f"{f'Blätter{text}' if text[:4] == ' mit' else text}"
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text = f"{text[0]} mit {text[1]} Blättchen" if text[1] else f"{text[0]}"
+        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
 
         return format_sentence(text)
 

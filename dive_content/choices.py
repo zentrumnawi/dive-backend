@@ -141,14 +141,14 @@ EDGE_CHOICES = (
     ("geb", _("gebuchtet")),
     ("gew", _("geschweift")),
     ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rauh")),
-    ("rur", _("rückwärts rauh")),
+    ("vor", _("vorwärts rau")),
+    ("rur", _("rückwärts rau")),
 )
 SURFACE_CHOICES = (
     ("gla", _("glatt")),
     ("run", _("runzelig")),
-    ("rau", _("rauh")),
-    ("vra", _("vorwärts rauh")),
+    ("rau", _("rau")),
+    ("vra", _("vorwärts rau")),
     ("ber", _("bereift")),
     ("bes", _("bestäubt/bemehlt")),
     ("pap", _("papillös")),

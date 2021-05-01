@@ -239,7 +239,7 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
-    incision_num = models.CharField(
+    leaf_comp_incision_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl")
     )
     incision_depth = ArrayField(

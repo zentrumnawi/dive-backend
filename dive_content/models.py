@@ -341,7 +341,7 @@ class Leaf(models.Model):
         help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
     seed_leaf_num = models.IntegerField(
-        choices=((1, 1), (2, 2)),
+        choices=SEED_LEAF_NUM_CHOICES,
         blank=True,
         null=True,
         verbose_name=_("Keimblattanzahl"),

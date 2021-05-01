@@ -200,6 +200,7 @@ APEX_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
+SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
 
 
 # Blossom choices

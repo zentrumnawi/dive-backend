@@ -271,7 +271,7 @@ class Leaf(models.Model):
     leaf_simple_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)")
     )
-    blade_undiv_shape = ArrayField(
+    leaf_simple_blade_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
             choices=BLADE_UNDIV_SHAPE_CHOICES,

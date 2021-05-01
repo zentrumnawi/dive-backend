@@ -269,7 +269,7 @@ class Leaf(models.Model):
         default=list,
     )
     leaf_simple_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)")
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blatt)")
     )
     leaf_simple_blade_shape = ArrayField(
         base_field=models.CharField(

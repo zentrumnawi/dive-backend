@@ -168,13 +168,14 @@ SURFACE_CHOICES = (
     ("ste", _("steifhaarig")),
     ("gew", _("gewimpert")),
     ("dru", _("drüsenhaarig")),
-    ("ste", _("sternhaarig")),
+    ("stn", _("sternhaarig")),
     ("sdh", _("schildhaarig")),
     ("sup", _("schuppenhaarig/schuppig")),
     ("sue", _("schülferig")),
     ("bae", _("bärtig")),
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
+    ("glz", _("glänzend")),
 )
 STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (

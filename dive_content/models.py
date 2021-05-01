@@ -332,10 +332,7 @@ class Leaf(models.Model):
         verbose_name=_("Spreitenspitze"),
     )
     special_features = models.CharField(
-        max_length=200,
-        blank=True,
-        verbose_name=_("Besondere Merkmale"),
-        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
+        max_length=200, blank=True, verbose_name=_("Besondere Merkmale")
     )
     sheath = models.CharField(
         max_length=100,

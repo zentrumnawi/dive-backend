@@ -91,7 +91,7 @@ LEAF_COMP_INCISION_DEPTH_CHOICES = (
     ("fie", _("gefiedert")),
 )
 LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
-BLADE_UNDIV_SHAPE_CHOICES = (
+LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
     ("ell", _("elliptisch")),
@@ -307,7 +307,7 @@ PERIANTH_FORM_CHOICES = (
 )
 BRACT_BLADE_CHOICES = (
     LEAF_COMP_BLADE_SHAPE_CHOICES
-    + BLADE_UNDIV_SHAPE_CHOICES
+    + LEAF_SIMPLE_BLADE_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )
 CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))

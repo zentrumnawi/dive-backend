@@ -121,6 +121,13 @@ BLADE_UNDIV_SHAPE_CHOICES = (
     ("sup", _("schuppenförmig")),
     ("sil", _("schildförmig")),
 )
+LEAF_SIMPLE_INCISION_DEPTH_CHOICES = (
+    ("gan", _("ganz/ungeteilt")),
+    ("gel", _("gelappt")),
+    ("gep", _("gespalten")),
+    ("get", _("geteilt")),
+    ("ges", _("geschnitten")),
+)
 EDGE_CHOICES = (
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),

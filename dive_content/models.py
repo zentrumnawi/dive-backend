@@ -284,6 +284,16 @@ class Leaf(models.Model):
     leaf_simple_incision_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (einf. Blatt)")
     )
+    leaf_simple_incision_depth = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (einf. Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
     edge = ArrayField(
         base_field=models.CharField(
             max_length=3,

@@ -542,7 +542,7 @@ class FruitSerializer(DisplayNameModelSerializer):
         # "Samenanlage in [ovule_pos]."
         fields = concatenate(obj.ovule_pos, OVULE_POS_CHOICES)
 
-        text = f"{f'Samenanlage in {fields}' if fields else ''}"
+        text = f"Samenanlage in {fields}" if fields else ""
 
         return format_sentence(text)
 

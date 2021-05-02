@@ -649,7 +649,7 @@ class StemRootSerializer(DisplayNameModelSerializer):
             concatenate(obj.organs, ORGANS_CHOICES),
             concatenate(obj.primary_root, PRIMARY_ROOT_CHOICES),
         ]
-        fields[2] = f"{f'Primärwurzel {fields[2]}' if fields[2] else ''}"
+        fields[2] = f"Primärwurzel {fields[2]}" if fields[2] else ""
 
         text = " ".join(filter(None, fields[:2]))
         text = "; ".join(filter(None, (text, fields[2])))

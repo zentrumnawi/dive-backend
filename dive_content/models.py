@@ -13,6 +13,7 @@ from .choices import *
 
 
 class Plant(BaseProfile):
+    ARTICLE_CHOICES = (("der", _("Der")), ("die", _("Die")), ("das", _("Das")))
     HABITAT_CHOICES = (
         ("sch", _("Schlammfluren")),
         ("roe", _("Röhrichte")),
@@ -81,6 +82,9 @@ class Plant(BaseProfile):
 
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
     name = models.CharField(max_length=100, verbose_name=_("Art"))
+    article = models.CharField(
+        max_length=3, choices=ARTICLE_CHOICES, blank=True, verbose_name=_("Artikel")
+    )
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")

@@ -562,7 +562,7 @@ class Fruit(models.Model):
     seed_color_form = models.CharField(
         max_length=100,
         blank=True,
-        verbose_name=_("Samenform"),
+        verbose_name=_("Farbe/Form (Samen)"),
         help_text="Alles ausschreiben.",
     )
     winging = models.CharField(

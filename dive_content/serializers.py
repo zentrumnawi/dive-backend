@@ -205,18 +205,35 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     def get_leaf_simple(self, obj):
         # Generate sentence "Blattfläche – einfaches Blatt" according pattern:
-        # "[leaf_simple_num] [blade_undiv_shape]es|e Blatt|Blätter."
-        app = {1: "e", 10: "Blätter"}
+        # "[leaf_simple_num] [leaf_simple_blade_shape]es|e [leaf_simple_incision_num]-
+        # [leaf_simple_incision_depth]es|e Blatt|Blätter."
+        app = {1: "e", 3: "e", 10: "Blätter"}
         if obj.leaf_simple_num == "1":
-            app = {1: "es", 10: "Blatt"}
+            app = {1: "es", 3: "es", 10: "Blatt"}
 
         fields = [
             obj.leaf_simple_num,
-            concatenate(obj.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES, app[1]),
+            concatenate(
+                obj.leaf_simple_blade_shape, LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1]
+            ),
+            obj.leaf_simple_incision_num,
+            concatenate(
+                obj.leaf_simple_incision_depth,
+                LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+                app[3],
+            ),
         ]
+        fields[2] = f"{fields[2]}-" if fields[2] else ""
+        if fields[2] and " bis " in fields[3]:
+            fields[3] = fields[3].split(" bis ", 1)
+            fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
 
-        text = " ".join(filter(None, fields))
-        text = f"{f'{text} {app[10]}' if text else ''}"
+        text = [
+            " ".join(filter(None, fields[:2])),
+            "".join(filter(None, fields[2:])),
+        ]
+        text = " ".join(filter(None, text))
+        text = f"{text} {app[10]}" if text else ""
 
         return format_sentence(text)
 

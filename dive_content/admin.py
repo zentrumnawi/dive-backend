@@ -108,7 +108,7 @@ fruit_fieldsets = (
             "fields": (
                 ("fruit_form", "fruit_type"),
                 "ovule_pos",
-                ("seed_num", "seed_form"),
+                ("seed_num", "seed_color_form"),
                 ("winging", "winging_feature"),
             )
         },

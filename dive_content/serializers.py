@@ -628,7 +628,7 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # "[bracts] beblättert."
         fields = concatenate(obj.bracts, BRACTS_CHOICES)
 
-        text = f"{f'{fields} beblättert' if fields else ''}"
+        text = f"{fields} beblättert" if fields else ""
 
         return format_sentence(text)
 

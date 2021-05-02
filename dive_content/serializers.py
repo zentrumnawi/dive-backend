@@ -586,8 +586,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
 
     def get_stem_morphology(self, obj):
         # Generate sentence "Sprossmorphologie" according pattern:
-        # "[orientation]er [appearance]er, [succulence]er Spross; [cross_section]er
-        # Querschnitt mit [surface]er Oberfläche."
+        # "[orientation]er, [appearance]er, [succulence]er, [pith]er Spross; [cross_
+        # section]er Querschnitt mit [surface]er Oberfläche."
         app = "er"
         if not obj.cross_section:
             app = "e"
@@ -595,17 +595,18 @@ class StemRootSerializer(DisplayNameModelSerializer):
             concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
             concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
             concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
+            concatenate(obj.pith, PITH_CHOICES, "er"),
             concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
             concatenate(obj.surface, SURFACE_CHOICES, app),
         ]
-        fields[3] = f"{f'{fields[3]} Querschnitt' if fields[3] else ''}"
-        fields[4] = f"{f'{fields[4]} Oberfläche' if fields[4] else ''}"
+        fields[4] = f"{fields[4]} Querschnitt" if fields[4] else ""
+        fields[5] = f"{fields[5]} Oberfläche" if fields[5] else ""
 
         text = [
-            ", ".join(filter(None, fields[:3])),
-            " mit ".join(filter(None, fields[3:])),
+            ", ".join(filter(None, fields[:4])),
+            " mit ".join(filter(None, fields[4:])),
         ]
-        text[0] = f"{f'{text[0]} Spross' if text[0] else ''}"
+        text[0] = f"{text[0]} Spross" if text[0] else ""
         text = "; ".join(filter(None, text))
 
         return format_sentence(text)

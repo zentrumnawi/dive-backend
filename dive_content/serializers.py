@@ -240,8 +240,7 @@ class LeafSerializer(DisplayNameModelSerializer):
     def get_leaf_general(self, obj):
         # Generate sentence "Blattfläche – allgemein" according pattern:
         # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
-        #  Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
-
+        # Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
         fields = [
             concatenate(obj.edge, EDGE_CHOICES),
             concatenate(obj.surface, SURFACE_CHOICES, "e"),
@@ -249,17 +248,17 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.base, BASE_CHOICES),
             concatenate(obj.apex, APEX_CHOICES),
         ]
-        fields[0] = f"{f'Blattränder {fields[0]}' if fields[0] else ''}"
-        fields[1] = f"{f'{fields[1]} Blattoberfläche' if fields[1] else ''}"
-        fields[2] = f"{f'{fields[2]} Nebenblattränder' if fields[2] else ''}"
-        fields[3] = f"{f'am Grund {fields[3]}' if fields[3] else ''}"
-        fields[4] = f"{f'an der Spitze {fields[4]}' if fields[4] else ''}"
+        fields[0] = f"Blattränder {fields[0]}" if fields[0] else ""
+        fields[1] = f"{fields[1]} Blattoberfläche" if fields[1] else ""
+        fields[2] = f"{fields[2]} Nebenblattränder" if fields[2] else ""
+        fields[3] = f"am Grund {fields[3]}" if fields[3] else ""
+        fields[4] = f"an der Spitze {fields[4]}" if fields[4] else ""
 
         text = [
             "; ".join(filter(None, fields[:3])),
             ", ".join(filter(None, fields[3:])),
         ]
-        text[1] = f"{f'Spreite {text[1]}' if text[1] else ''}"
+        text[1] = f"Spreite {text[1]}" if text[1] else ""
         text = "; ".join(filter(None, text))
 
         return format_sentence(text)

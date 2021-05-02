@@ -634,10 +634,10 @@ class StemRootSerializer(DisplayNameModelSerializer):
 
     def get_milky_sap(self, obj):
         # Generate sentence "Milchsaft" according pattern:
-        # "[milky_sap].."
+        # "[milky_sap]."
         fields = obj.milky_sap
 
-        text = f"{f'{fields}' if fields else ''}"
+        text = f"{fields}" if fields else ""
 
         return format_sentence(text)
 

@@ -270,7 +270,7 @@ class LeafSerializer(DisplayNameModelSerializer):
             obj.special_features,
             obj.sheath,
         ]
-        fields[1] = f"{f'Blattscheide {fields[1]}' if fields[1] else ''}"
+        fields[1] = f"Blattscheide {fields[1]}" if fields[1] else ""
 
         text = "; ".join(filter(None, fields))
 

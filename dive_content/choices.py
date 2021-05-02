@@ -442,7 +442,7 @@ SR_CROSS_SECTION_CHOICES = (
     ("stu", _("stumpfkantig")),
     ("ger", _("gerieft/gerillt")),
     ("gef", _("gefurcht")),
-    ("kan", _("kantig gefurcht/scharfkantig")),
+    ("kgs", _("kantig gefurcht/scharfkantig")),
     ("gri", _("gerippt")),
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),

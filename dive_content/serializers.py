@@ -147,11 +147,11 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.arrangement, ARRANGMENT_CHOICES),
             concatenate(obj.rosette, ROSETTE_CHOICES),
         ]
-        fields[0] = f"{f'sitzen {fields[0]}' if fields[0] else ''}"
-        fields[1] = f"{f'stehen {fields[1]}' if fields[1] else ''}"
+        fields[0] = f"sitzen {fields[0]}" if fields[0] else ""
+        fields[1] = f"stehen {fields[1]}" if fields[1] else ""
 
         text = ", ".join(filter(None, fields[:2]))
-        text = f"{f'Blätter {text}' if text else ''}"
+        text = f"Blätter {text}" if text else ""
         text = "; ".join(filter(None, (text, fields[2])))
 
         return format_sentence(text)

@@ -82,22 +82,6 @@ blossom_fieldsets = (
             )
         },
     ),
-    (
-        "Sonderform Poales",
-        {
-            "fields": (
-                "grann_top",
-                "grann_form",
-                "cons_top",
-                "gull_spel",
-                "blos",
-                "straw_ground",
-                "order",
-                "aer_per_aer",
-                "aer_per_ab",
-            )
-        },
-    ),
 )
 
 fruit_fieldsets = (

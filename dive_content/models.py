@@ -92,7 +92,8 @@ class Plant(BaseProfile):
         ("sch", _("Schwimmpflanze")),
     )
     DISPERSAL_CHOICES = (
-        ("sa", _("Samenpflanze")),
+        ("na", _("Nacktsamer")),
+        ("be", _("Bedecktsamer")),
         ("sp", _("Sporenpflanze")),
     )
 

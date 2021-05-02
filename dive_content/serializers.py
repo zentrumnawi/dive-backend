@@ -526,7 +526,7 @@ class FruitSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_fruit(self, obj):
-        # Generate sentence "Fruit" according pattern:
+        # Generate sentence "Frucht" according pattern:
         # "[fruit_form] [fruit_type]."
         fields = [
             obj.fruit_form,

@@ -164,18 +164,6 @@ class Plant(BaseProfile):
 
     taxonomy.short_description = _("Taxonomie")
 
-    def get_ground_output(self):
-        if self.ground:
-            output = " bis ".join(
-                str(dict(self.GROUND_CHOICES).get(item)) for item in self.ground
-            )
-        else:
-            output = ""
-
-        return output
-
-    get_ground_output.short_description = _("Untergrund (Ausgabe)")
-
     def __str__(self):
         return self.name
 

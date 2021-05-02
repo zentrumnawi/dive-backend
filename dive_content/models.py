@@ -141,6 +141,12 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Ausbreitungsform"),
     )
+    other_features = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Weitere Merkmale"),
+        help_text="Bsp. Geruch",
+    )
 
     class Meta:
         verbose_name = _("Pflanze")

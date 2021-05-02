@@ -125,6 +125,7 @@ stemroot_fieldsets = (
                 "orientation",
                 "appearance",
                 "succulence",
+                "pith",
                 "cross_section",
                 "surface",
                 "creep_lay_shoots",
@@ -141,6 +142,7 @@ stemroot_fieldsets = (
 )
 stemroot_radio_fields = {
     "succulence": admin.HORIZONTAL,
+    "pith": admin.HORIZONTAL,
     "creep_lay_shoots": admin.HORIZONTAL,
     "runners": admin.HORIZONTAL,
     "bracts": admin.HORIZONTAL,

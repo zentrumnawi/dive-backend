@@ -485,10 +485,10 @@ class BlossomSerializer(DisplayNameModelSerializer):
         # "[carpel_num] [carpel_connation_type] verwachsene|-s Fruchtblätter|-blatt,
         # [ovary_pos]er Fruchtkonten, [pistil_pos]er Griffel mit [stigma_num] Narbe|-n;
         # [stylopodium]."
-
-        app = {10: "verwachsene Fruchtblätter", 11: "Narben"}
+        app = {1: "e", 10: "Fruchtblätter", 11: "Narben"}
         if obj.carpel_num == "1":
-            app[10] = "verwachsenes Fruchtblatt"
+            app[1] = "es"
+            app[10] = "Fruchtblatt"
         if obj.stigma_num == "1":
             app[11] = "Narbe"
 
@@ -500,6 +500,10 @@ class BlossomSerializer(DisplayNameModelSerializer):
             obj.stigma_num,
             obj.stylopodium,
         ]
+        if fields[1]:
+            fields[1] = fields[1].split(" (", 1)
+            fields[1][0] = f"{fields[1][0]}{app[1]}"
+            fields[1] = " (".join(fields[1])
 
         text = [
             " ".join(filter(None, fields[:2])),

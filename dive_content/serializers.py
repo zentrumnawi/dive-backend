@@ -90,7 +90,7 @@ def concatenate(field, choices=None, app=""):
 
 
 def format_sentence(line):
-    return f"{f'{line[0].capitalize()}{line[1:]}.' if line else ''}"
+    return f"{line[0].capitalize()}{line[1:]}." if line else ""
 
 
 class LeafSerializer(DisplayNameModelSerializer):

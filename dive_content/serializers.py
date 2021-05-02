@@ -121,9 +121,10 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     def get_overview(self, obj):
         # Generate sentence "Überblick" according pattern:
-        # "[veins]e, [division]e, [succulence]e, [texture]e Blätter mit
-        #  [cross_section]em Querschnitt."
+        # "[color], [veins]e, [division]e, [succulence]e, [texture]e Blätter mit [cross_
+        # section]em Querschnitt."
         fields = [
+            obj.color,
             concatenate(obj.veins, VEINS_CHOICES, "e"),
             concatenate(obj.division, DIVISION_CHOICES, "e"),
             concatenate(obj.succulence, SUCCULENCE_CHOICES, "e"),
@@ -131,10 +132,10 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.cross_section, CROSS_SECTION_CHOICES, "em"),
         ]
 
-        text = ", ".join(filter(None, fields[:4]))
-        text = f"{f'{text} Blätter' if text else ''}"
-        text = f"{f'{text} mit {fields[4]} Querschnitt' if fields[4] else text}"
-        text = f"{f'Blätter{text}' if text[:4] == ' mit' else text}"
+        text = ", ".join(filter(None, fields[:5]))
+        text = f"{text} Blätter" if text else ""
+        text = f"{text} mit {fields[5]} Querschnitt" if fields[5] else f"{text}"
+        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
 
         return format_sentence(text)
 

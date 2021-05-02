@@ -71,6 +71,9 @@ class Plant(BaseProfile):
         ("hem", _("Hemikryptophyt")),
         ("kry", _("Kryptophyt")),
         ("the", _("Therophyt")),
+        ("geo", _("Geophyt")),
+        ("hel", _("Helophyt (Sumpfpflanze)")),
+        ("hyd", _("Hydrophyt (Wasserpflanze)")),
     )
     GROWTH_FORM_CHOICES = (
         ("bau", _("Baum")),

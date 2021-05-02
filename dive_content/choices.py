@@ -334,10 +334,11 @@ STAMEN_CONNATION_TYPE_CHOICES = (
     ("v", _("verwachsen mit Kronblättern")),
 )
 CARPEL_CONNATION_TYPE_CHOICES = (
+    ("ap", _("apokarp (chorikarp, unverwachsen)")),
     ("mo", _("monokarp")),
-    ("ap", _("apokarp/chorikarp")),
-    ("cs", _("coeno-synkarp")),
-    ("cp", _("coeno-parakarp")),
+    ("co", _("coenocarp (verwachsen)")),
+    ("cs", _("coeno-synkarp verwachsen")),
+    ("cp", _("coeno-parakarp verwachsen")),
 )
 OVARY_POS_CHOICES = (
     ("ob", _("oberständig")),

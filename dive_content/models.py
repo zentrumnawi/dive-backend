@@ -80,11 +80,11 @@ class Plant(BaseProfile):
     )
 
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
+    name = models.CharField(max_length=100, verbose_name=_("Art"))
+    trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
     )
-    name = models.CharField(max_length=100, verbose_name=_("Art"))
-    trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     alt_trivial_name = models.CharField(
         default="",
         max_length=500,
@@ -97,6 +97,13 @@ class Plant(BaseProfile):
         ),
         blank=True,
     )
+    ground = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
+        ),
+        size=2,
+        blank=True,
+    )
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
     )
@@ -105,13 +112,6 @@ class Plant(BaseProfile):
         choices=INTERACTION_CHOICES,
         blank=True,
         verbose_name=_("Interaktionen"),
-    )
-    ground = ArrayField(
-        base_field=models.CharField(
-            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
-        ),
-        size=2,
-        blank=True,
     )
     life_form = models.CharField(
         max_length=3,

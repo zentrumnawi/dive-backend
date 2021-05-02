@@ -432,6 +432,7 @@ ORIENTATION_CHOICES = (
 )
 APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 # SUCCULENCE_CHOICES  =>  Leaf choices
+PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
 SR_CROSS_SECTION_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),

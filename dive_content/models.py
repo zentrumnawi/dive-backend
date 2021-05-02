@@ -614,6 +614,9 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Dickfleischigkeit"),
     )
+    pith = models.CharField(
+        max_length=1, choices=PITH_CHOICES, blank=True, verbose_name=_("Mark")
+    )
     cross_section = ArrayField(
         base_field=models.CharField(
             max_length=3,

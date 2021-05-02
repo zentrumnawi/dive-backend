@@ -724,6 +724,10 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
 
 
 class PlantSerializer(DisplayNameModelSerializer):
+    taxonomy = serializers.CharField(
+        label=Plant.taxonomy.short_description, read_only=True
+    )
+
     leaf = LeafSerializer(required=False)
     blossom = BlossomSerializer(required=False)
     fruit = FruitSerializer(required=False)
@@ -731,17 +735,8 @@ class PlantSerializer(DisplayNameModelSerializer):
     indicators = IndicatorsSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 
-    taxonomy = serializers.CharField(
-        label=Plant.taxonomy.short_description, read_only=True
-    )
-    ground = serializers.CharField(
-        source="get_ground_output",
-        label=Plant._meta.get_field("ground").base_field.verbose_name,
-        read_only=True,
-    )
-
     class Meta:
         model = Plant
-        fields = "__all__"
+        exclude = ["article"]
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}

@@ -59,7 +59,7 @@ ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
     ("kei", _("keine Grundblattrosette")),
 )
-BLADE_SUBDIV_SHAPE_CHOICES = (
+LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("han", _("handförmig")),
     ("gef", _("gefingert")),
     ("fif", _("fiederförmig")),
@@ -79,7 +79,7 @@ BLADE_SUBDIV_SHAPE_CHOICES = (
     ("kam", _("kammförmig")),
     ("fus", _("fußförmig")),
 )
-INCISION_DEPTH_CHOICES = (
+LEAF_COMP_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
     ("gep", _("gespalten")),
@@ -90,8 +90,8 @@ INCISION_DEPTH_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("fie", _("gefiedert")),
 )
-LEAFLET_INCISION_DEPTH_CHOICES = INCISION_DEPTH_CHOICES
-BLADE_UNDIV_SHAPE_CHOICES = (
+LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
+LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
     ("ell", _("elliptisch")),
@@ -121,6 +121,13 @@ BLADE_UNDIV_SHAPE_CHOICES = (
     ("sup", _("schuppenförmig")),
     ("sil", _("schildförmig")),
 )
+LEAF_SIMPLE_INCISION_DEPTH_CHOICES = (
+    ("gan", _("ganz/ungeteilt")),
+    ("gel", _("gelappt")),
+    ("gep", _("gespalten")),
+    ("get", _("geteilt")),
+    ("ges", _("geschnitten")),
+)
 EDGE_CHOICES = (
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),
@@ -134,14 +141,14 @@ EDGE_CHOICES = (
     ("geb", _("gebuchtet")),
     ("gew", _("geschweift")),
     ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rauh")),
-    ("rur", _("rückwärts rauh")),
+    ("vor", _("vorwärts rau")),
+    ("rur", _("rückwärts rau")),
 )
 SURFACE_CHOICES = (
     ("gla", _("glatt")),
     ("run", _("runzelig")),
-    ("rau", _("rauh")),
-    ("vra", _("vorwärts rauh")),
+    ("rau", _("rau")),
+    ("vra", _("vorwärts rau")),
     ("ber", _("bereift")),
     ("bes", _("bestäubt/bemehlt")),
     ("pap", _("papillös")),
@@ -161,13 +168,14 @@ SURFACE_CHOICES = (
     ("ste", _("steifhaarig")),
     ("gew", _("gewimpert")),
     ("dru", _("drüsenhaarig")),
-    ("ste", _("sternhaarig")),
+    ("stn", _("sternhaarig")),
     ("sdh", _("schildhaarig")),
     ("sup", _("schuppenhaarig/schuppig")),
     ("sue", _("schülferig")),
     ("bae", _("bärtig")),
     ("ach", _("achselbärtig")),
     ("nac", _("nackt")),
+    ("glz", _("glänzend")),
 )
 STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
@@ -192,6 +200,7 @@ APEX_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
+SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
 
 
 # Blossom choices
@@ -299,8 +308,8 @@ PERIANTH_FORM_CHOICES = (
     ("gr", _("gespornt")),
 )
 BRACT_BLADE_CHOICES = (
-    BLADE_SUBDIV_SHAPE_CHOICES
-    + BLADE_UNDIV_SHAPE_CHOICES
+    LEAF_COMP_BLADE_SHAPE_CHOICES
+    + LEAF_SIMPLE_BLADE_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )
 CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
@@ -325,10 +334,11 @@ STAMEN_CONNATION_TYPE_CHOICES = (
     ("v", _("verwachsen mit Kronblättern")),
 )
 CARPEL_CONNATION_TYPE_CHOICES = (
+    ("ap", _("apokarp (chorikarp, unverwachsen)")),
     ("mo", _("monokarp")),
-    ("ap", _("apokarp/chorikarp")),
-    ("cs", _("coeno-synkarp")),
-    ("cp", _("coeno-parakarp")),
+    ("co", _("coenocarp (verwachsen)")),
+    ("cs", _("coeno-synkarp verwachsen")),
+    ("cp", _("coeno-parakarp verwachsen")),
 )
 OVARY_POS_CHOICES = (
     ("ob", _("oberständig")),
@@ -423,6 +433,7 @@ ORIENTATION_CHOICES = (
 )
 APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 # SUCCULENCE_CHOICES  =>  Leaf choices
+PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
 SR_CROSS_SECTION_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),
@@ -432,7 +443,7 @@ SR_CROSS_SECTION_CHOICES = (
     ("stu", _("stumpfkantig")),
     ("ger", _("gerieft/gerillt")),
     ("gef", _("gefurcht")),
-    ("kan", _("kantig gefurcht/scharfkantig")),
+    ("kgs", _("kantig gefurcht/scharfkantig")),
     ("gri", _("gerippt")),
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),

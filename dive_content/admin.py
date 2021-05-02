@@ -17,6 +17,7 @@ leaf_fieldsets = (
         "Blattmerkmale",
         {
             "fields": (
+                "color",
                 "veins",
                 "division",
                 "succulence",
@@ -24,14 +25,23 @@ leaf_fieldsets = (
                 "cross_section",
                 ("attachment", "arrangement"),
                 "rosette",
-                ("leaf_comp_num", "blade_subdiv_shape"),
-                ("incision_num", "incision_depth"),
+                (
+                    "leaf_comp_num",
+                    "leaf_comp_blade_shape",
+                    "leaf_comp_incision_num",
+                    "leaf_comp_incision_depth",
+                ),
                 (
                     "leaflet_incision_num",
                     "leaflet_incision_add",
                     "leaflet_incision_depth",
                 ),
-                ("leaf_simple_num", "blade_undiv_shape",),
+                (
+                    "leaf_simple_num",
+                    "leaf_simple_blade_shape",
+                    "leaf_simple_incision_num",
+                    "leaf_simple_incision_depth",
+                ),
                 "edge",
                 "surface",
                 "stipule_edge",
@@ -72,22 +82,6 @@ blossom_fieldsets = (
             )
         },
     ),
-    (
-        "Sonderform Poales",
-        {
-            "fields": (
-                "grann_top",
-                "grann_form",
-                "cons_top",
-                "gull_spel",
-                "blos",
-                "straw_ground",
-                "order",
-                "aer_per_aer",
-                "aer_per_ab",
-            )
-        },
-    ),
 )
 
 fruit_fieldsets = (
@@ -98,7 +92,7 @@ fruit_fieldsets = (
             "fields": (
                 ("fruit_form", "fruit_type"),
                 "ovule_pos",
-                ("seed_num", "seed_form"),
+                ("seed_num", "seed_color_form"),
                 ("winging", "winging_feature"),
             )
         },
@@ -115,6 +109,7 @@ stemroot_fieldsets = (
                 "orientation",
                 "appearance",
                 "succulence",
+                "pith",
                 "cross_section",
                 "surface",
                 "creep_lay_shoots",
@@ -131,6 +126,7 @@ stemroot_fieldsets = (
 )
 stemroot_radio_fields = {
     "succulence": admin.HORIZONTAL,
+    "pith": admin.HORIZONTAL,
     "creep_lay_shoots": admin.HORIZONTAL,
     "runners": admin.HORIZONTAL,
     "bracts": admin.HORIZONTAL,

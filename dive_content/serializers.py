@@ -90,7 +90,7 @@ def concatenate(field, choices=None, app=""):
 
 
 def format_sentence(line):
-    return f"{f'{line[0].capitalize()}{line[1:]}.' if line else ''}"
+    return f"{line[0].capitalize()}{line[1:]}." if line else ""
 
 
 class LeafSerializer(DisplayNameModelSerializer):
@@ -121,9 +121,10 @@ class LeafSerializer(DisplayNameModelSerializer):
 
     def get_overview(self, obj):
         # Generate sentence "Überblick" according pattern:
-        # "[veins]e, [division]e, [succulence]e, [texture]e Blätter mit
-        #  [cross_section]em Querschnitt."
+        # "[color], [veins]e, [division]e, [succulence]e, [texture]e Blätter mit [cross_
+        # section]em Querschnitt."
         fields = [
+            obj.color,
             concatenate(obj.veins, VEINS_CHOICES, "e"),
             concatenate(obj.division, DIVISION_CHOICES, "e"),
             concatenate(obj.succulence, SUCCULENCE_CHOICES, "e"),
@@ -131,10 +132,10 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.cross_section, CROSS_SECTION_CHOICES, "em"),
         ]
 
-        text = ", ".join(filter(None, fields[:4]))
-        text = f"{f'{text} Blätter' if text else ''}"
-        text = f"{f'{text} mit {fields[4]} Querschnitt' if fields[4] else text}"
-        text = f"{f'Blätter{text}' if text[:4] == ' mit' else text}"
+        text = ", ".join(filter(None, fields[:5]))
+        text = f"{text} Blätter" if text else ""
+        text = f"{text} mit {fields[5]} Querschnitt" if fields[5] else f"{text}"
+        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
 
         return format_sentence(text)
 
@@ -146,29 +147,33 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.arrangement, ARRANGMENT_CHOICES),
             concatenate(obj.rosette, ROSETTE_CHOICES),
         ]
-        fields[0] = f"{f'sitzen {fields[0]}' if fields[0] else ''}"
-        fields[1] = f"{f'stehen {fields[1]}' if fields[1] else ''}"
+        fields[0] = f"sitzen {fields[0]}" if fields[0] else ""
+        fields[1] = f"stehen {fields[1]}" if fields[1] else ""
 
         text = ", ".join(filter(None, fields[:2]))
-        text = f"{f'Blätter {text}' if text else ''}"
+        text = f"Blätter {text}" if text else ""
         text = "; ".join(filter(None, (text, fields[2])))
 
         return format_sentence(text)
 
     def get_leaf_compound(self, obj):
         # Generate sentence "Blattfläche – zusammengesetztes Blatt" according pattern:
-        # "[leaf_comp_num] [blade_subdiv_shape]es|e [incision_num]-[incision_depth]es|e
-        #  Blatt|Blätter mit [leaflet_incision_num]-[leaflet_incision_add]-[leaflet_
-        #  incision_depth]en Blättchen."
+        # "[leaf_comp_num] [leaf_comp_blade_shape]es|e [leaf_comp_incision_num]-[leaf_
+        # comp_incision_depth]es|e Blatt|Blätter mit [leaflet_incision_num]-[leaflet_
+        # incision_add]-[leaflet_incision_depth]en Blättchen."
         app = {1: "e", 3: "e", 6: "en", 10: "Blätter"}
         if obj.leaf_comp_num == "1":
             app = {1: "es", 3: "es", 6: "en", 10: "Blatt"}
 
         fields = [
             obj.leaf_comp_num,
-            concatenate(obj.blade_subdiv_shape, BLADE_SUBDIV_SHAPE_CHOICES, app[1]),
-            obj.incision_num,
-            concatenate(obj.incision_depth, INCISION_DEPTH_CHOICES, app[3]),
+            concatenate(
+                obj.leaf_comp_blade_shape, LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
+            ),
+            obj.leaf_comp_incision_num,
+            concatenate(
+                obj.leaf_comp_incision_depth, LEAF_COMP_INCISION_DEPTH_CHOICES, app[3]
+            ),
             obj.leaflet_incision_num,
             obj.leaflet_incision_add,
             concatenate(
@@ -176,7 +181,7 @@ class LeafSerializer(DisplayNameModelSerializer):
             ),
         ]
         for i in (2, 4, 5):
-            fields[i] = f"{f'{fields[i]}-' if fields[i] else ''}"
+            fields[i] = f"{fields[i]}-" if fields[i] else ""
         if fields[2] and " bis " in fields[3]:
             fields[3] = fields[3].split(" bis ", 1)
             fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
@@ -192,34 +197,50 @@ class LeafSerializer(DisplayNameModelSerializer):
             " ".join(filter(None, text)),
             "".join(filter(None, fields[4:7])),
         ]
-        text[0] = f"{f'{text[0]} {app[10]}' if text[0] else ''}"
-        text = f"{f'{text[0]} mit {text[1]} Blättchen' if text[1] else text[0]}"
-        text = f"{f'Blätter{text}' if text[:4] == ' mit' else text}"
+        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
+        text = f"{text[0]} mit {text[1]} Blättchen" if text[1] else f"{text[0]}"
+        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
 
         return format_sentence(text)
 
     def get_leaf_simple(self, obj):
         # Generate sentence "Blattfläche – einfaches Blatt" according pattern:
-        # "[leaf_simple_num] [blade_undiv_shape]es|e Blatt|Blätter."
-        app = {1: "e", 10: "Blätter"}
+        # "[leaf_simple_num] [leaf_simple_blade_shape]es|e [leaf_simple_incision_num]-
+        # [leaf_simple_incision_depth]es|e Blatt|Blätter."
+        app = {1: "e", 3: "e", 10: "Blätter"}
         if obj.leaf_simple_num == "1":
-            app = {1: "es", 10: "Blatt"}
+            app = {1: "es", 3: "es", 10: "Blatt"}
 
         fields = [
             obj.leaf_simple_num,
-            concatenate(obj.blade_undiv_shape, BLADE_UNDIV_SHAPE_CHOICES, app[1]),
+            concatenate(
+                obj.leaf_simple_blade_shape, LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1]
+            ),
+            obj.leaf_simple_incision_num,
+            concatenate(
+                obj.leaf_simple_incision_depth,
+                LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+                app[3],
+            ),
         ]
+        fields[2] = f"{fields[2]}-" if fields[2] else ""
+        if fields[2] and " bis " in fields[3]:
+            fields[3] = fields[3].split(" bis ", 1)
+            fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
 
-        text = " ".join(filter(None, fields))
-        text = f"{f'{text} {app[10]}' if text else ''}"
+        text = [
+            " ".join(filter(None, fields[:2])),
+            "".join(filter(None, fields[2:])),
+        ]
+        text = " ".join(filter(None, text))
+        text = f"{text} {app[10]}" if text else ""
 
         return format_sentence(text)
 
     def get_leaf_general(self, obj):
         # Generate sentence "Blattfläche – allgemein" according pattern:
         # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
-        #  Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
-
+        # Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
         fields = [
             concatenate(obj.edge, EDGE_CHOICES),
             concatenate(obj.surface, SURFACE_CHOICES, "e"),
@@ -227,17 +248,17 @@ class LeafSerializer(DisplayNameModelSerializer):
             concatenate(obj.base, BASE_CHOICES),
             concatenate(obj.apex, APEX_CHOICES),
         ]
-        fields[0] = f"{f'Blattränder {fields[0]}' if fields[0] else ''}"
-        fields[1] = f"{f'{fields[1]} Blattoberfläche' if fields[1] else ''}"
-        fields[2] = f"{f'{fields[2]} Nebenblattränder' if fields[2] else ''}"
-        fields[3] = f"{f'am Grund {fields[3]}' if fields[3] else ''}"
-        fields[4] = f"{f'an der Spitze {fields[4]}' if fields[4] else ''}"
+        fields[0] = f"Blattränder {fields[0]}" if fields[0] else ""
+        fields[1] = f"{fields[1]} Blattoberfläche" if fields[1] else ""
+        fields[2] = f"{fields[2]} Nebenblattränder" if fields[2] else ""
+        fields[3] = f"am Grund {fields[3]}" if fields[3] else ""
+        fields[4] = f"an der Spitze {fields[4]}" if fields[4] else ""
 
         text = [
             "; ".join(filter(None, fields[:3])),
             ", ".join(filter(None, fields[3:])),
         ]
-        text[1] = f"{f'Spreite {text[1]}' if text[1] else ''}"
+        text[1] = f"Spreite {text[1]}" if text[1] else ""
         text = "; ".join(filter(None, text))
 
         return format_sentence(text)
@@ -249,7 +270,7 @@ class LeafSerializer(DisplayNameModelSerializer):
             obj.special_features,
             obj.sheath,
         ]
-        fields[1] = f"{f'Blattscheide {fields[1]}' if fields[1] else ''}"
+        fields[1] = f"Blattscheide {fields[1]}" if fields[1] else ""
 
         text = "; ".join(filter(None, fields))
 
@@ -464,10 +485,10 @@ class BlossomSerializer(DisplayNameModelSerializer):
         # "[carpel_num] [carpel_connation_type] verwachsene|-s Fruchtblätter|-blatt,
         # [ovary_pos]er Fruchtkonten, [pistil_pos]er Griffel mit [stigma_num] Narbe|-n;
         # [stylopodium]."
-
-        app = {10: "verwachsene Fruchtblätter", 11: "Narben"}
+        app = {1: "e", 10: "Fruchtblätter", 11: "Narben"}
         if obj.carpel_num == "1":
-            app[10] = "verwachsenes Fruchtblatt"
+            app[1] = "es"
+            app[10] = "Fruchtblatt"
         if obj.stigma_num == "1":
             app[11] = "Narbe"
 
@@ -479,6 +500,10 @@ class BlossomSerializer(DisplayNameModelSerializer):
             obj.stigma_num,
             obj.stylopodium,
         ]
+        if fields[1]:
+            fields[1] = fields[1].split(" (", 1)
+            fields[1][0] = f"{fields[1][0]}{app[1]}"
+            fields[1] = " (".join(fields[1])
 
         text = [
             " ".join(filter(None, fields[:2])),
@@ -505,7 +530,7 @@ class FruitSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_fruit(self, obj):
-        # Generate sentence "Fruit" according pattern:
+        # Generate sentence "Frucht" according pattern:
         # "[fruit_form] [fruit_type]."
         fields = [
             obj.fruit_form,
@@ -521,16 +546,16 @@ class FruitSerializer(DisplayNameModelSerializer):
         # "Samenanlage in [ovule_pos]."
         fields = concatenate(obj.ovule_pos, OVULE_POS_CHOICES)
 
-        text = f"{f'Samenanlage in {fields}' if fields else ''}"
+        text = f"Samenanlage in {fields}" if fields else ""
 
         return format_sentence(text)
 
     def get_seed(self, obj):
         # Generate sentence "Samen" according pattern:
-        # "[seed_num] [seed_form] Samen, [winging] [winging_feature]."
+        # "[seed_num] [seed_color_form] Samen, [winging] [winging_feature]."
         fields = [
             obj.seed_num,
-            obj.seed_form,
+            obj.seed_color_form,
             obj.winging,
             obj.winging_feature,
         ]
@@ -539,7 +564,7 @@ class FruitSerializer(DisplayNameModelSerializer):
             " ".join(filter(None, fields[:2])),
             " ".join(filter(None, fields[2:])),
         ]
-        text[0] = f"{f'{text[0]} Samen' if text[0] else ''}"
+        text[0] = f"{text[0]} Samen" if text[0] else ""
         text = ", ".join(filter(None, text))
 
         return format_sentence(text)
@@ -565,8 +590,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
 
     def get_stem_morphology(self, obj):
         # Generate sentence "Sprossmorphologie" according pattern:
-        # "[orientation]er [appearance]er, [succulence]er Spross; [cross_section]er
-        # Querschnitt mit [surface]er Oberfläche."
+        # "[orientation]er, [appearance]er, [succulence]er, [pith]er Spross; [cross_
+        # section]er Querschnitt mit [surface]er Oberfläche."
         app = "er"
         if not obj.cross_section:
             app = "e"
@@ -574,17 +599,18 @@ class StemRootSerializer(DisplayNameModelSerializer):
             concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
             concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
             concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
+            concatenate(obj.pith, PITH_CHOICES, "er"),
             concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
             concatenate(obj.surface, SURFACE_CHOICES, app),
         ]
-        fields[3] = f"{f'{fields[3]} Querschnitt' if fields[3] else ''}"
-        fields[4] = f"{f'{fields[4]} Oberfläche' if fields[4] else ''}"
+        fields[4] = f"{fields[4]} Querschnitt" if fields[4] else ""
+        fields[5] = f"{fields[5]} Oberfläche" if fields[5] else ""
 
         text = [
-            ", ".join(filter(None, fields[:3])),
-            " mit ".join(filter(None, fields[3:])),
+            ", ".join(filter(None, fields[:4])),
+            " mit ".join(filter(None, fields[4:])),
         ]
-        text[0] = f"{f'{text[0]} Spross' if text[0] else ''}"
+        text[0] = f"{text[0]} Spross" if text[0] else ""
         text = "; ".join(filter(None, text))
 
         return format_sentence(text)
@@ -606,16 +632,16 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # "[bracts] beblättert."
         fields = concatenate(obj.bracts, BRACTS_CHOICES)
 
-        text = f"{f'{fields} beblättert' if fields else ''}"
+        text = f"{fields} beblättert" if fields else ""
 
         return format_sentence(text)
 
     def get_milky_sap(self, obj):
         # Generate sentence "Milchsaft" according pattern:
-        # "[milky_sap].."
+        # "[milky_sap]."
         fields = obj.milky_sap
 
-        text = f"{f'{fields}' if fields else ''}"
+        text = f"{fields}" if fields else ""
 
         return format_sentence(text)
 
@@ -627,7 +653,7 @@ class StemRootSerializer(DisplayNameModelSerializer):
             concatenate(obj.organs, ORGANS_CHOICES),
             concatenate(obj.primary_root, PRIMARY_ROOT_CHOICES),
         ]
-        fields[2] = f"{f'Primärwurzel {fields[2]}' if fields[2] else ''}"
+        fields[2] = f"Primärwurzel {fields[2]}" if fields[2] else ""
 
         text = " ".join(filter(None, fields[:2]))
         text = "; ".join(filter(None, (text, fields[2])))

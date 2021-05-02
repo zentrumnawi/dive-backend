@@ -176,6 +176,7 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
+    color = models.CharField(max_length=100, blank=True, verbose_name=_("Blattfarbe"))
     veins = models.CharField(
         max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
     )
@@ -226,26 +227,26 @@ class Leaf(models.Model):
         verbose_name=_("Grundblattrosette"),
     )
     leaf_comp_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blätter)")
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blatt)")
     )
-    blade_subdiv_shape = ArrayField(
+    leaf_comp_blade_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=BLADE_SUBDIV_SHAPE_CHOICES,
-            verbose_name=_("Spreitengestalt (unterteiltes Blatt)"),
+            choices=LEAF_COMP_BLADE_SHAPE_CHOICES,
+            verbose_name=_("Spreitengestalt (zusg. Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    incision_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Einschnittanzahl")
+    leaf_comp_incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (zusg. Blatt)")
     )
-    incision_depth = ArrayField(
+    leaf_comp_incision_depth = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=INCISION_DEPTH_CHOICES,
-            verbose_name=_("Einschnitttiefe"),
+            choices=LEAF_COMP_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (zusg. Blatt)"),
         ),
         size=2,
         blank=True,
@@ -268,13 +269,26 @@ class Leaf(models.Model):
         default=list,
     )
     leaf_simple_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blätter)")
+        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blatt)")
     )
-    blade_undiv_shape = ArrayField(
+    leaf_simple_blade_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=BLADE_UNDIV_SHAPE_CHOICES,
-            verbose_name=_("Spreitengestalt (ungeteiltes Blatt)"),
+            choices=LEAF_SIMPLE_BLADE_SHAPE_CHOICES,
+            verbose_name=_("Spreitengestalt (einf. Blatt)"),
+        ),
+        size=2,
+        blank=True,
+        default=list,
+    )
+    leaf_simple_incision_num = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Einschnittanzahl (einf. Blatt)")
+    )
+    leaf_simple_incision_depth = ArrayField(
+        base_field=models.CharField(
+            max_length=3,
+            choices=LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+            verbose_name=_("Einschnitttiefe (einf. Blatt)"),
         ),
         size=2,
         blank=True,
@@ -318,10 +332,7 @@ class Leaf(models.Model):
         verbose_name=_("Spreitenspitze"),
     )
     special_features = models.CharField(
-        max_length=200,
-        blank=True,
-        verbose_name=_("Besondere Merkmale"),
-        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
+        max_length=200, blank=True, verbose_name=_("Besondere Merkmale")
     )
     sheath = models.CharField(
         max_length=100,
@@ -330,7 +341,7 @@ class Leaf(models.Model):
         help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
     seed_leaf_num = models.IntegerField(
-        choices=((1, 1), (2, 2)),
+        choices=SEED_LEAF_NUM_CHOICES,
         blank=True,
         null=True,
         verbose_name=_("Keimblattanzahl"),
@@ -548,10 +559,10 @@ class Fruit(models.Model):
     seed_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Samenanzahl")
     )
-    seed_form = models.CharField(
+    seed_color_form = models.CharField(
         max_length=100,
         blank=True,
-        verbose_name=_("Samenform"),
+        verbose_name=_("Farbe/Form (Samen)"),
         help_text="Alles ausschreiben.",
     )
     winging = models.CharField(
@@ -602,6 +613,9 @@ class StemRoot(models.Model):
         choices=SUCCULENCE_CHOICES,
         blank=True,
         verbose_name=_("Dickfleischigkeit"),
+    )
+    pith = models.CharField(
+        max_length=1, choices=PITH_CHOICES, blank=True, verbose_name=_("Mark")
     )
     cross_section = ArrayField(
         base_field=models.CharField(

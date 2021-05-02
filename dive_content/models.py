@@ -154,15 +154,13 @@ class Plant(BaseProfile):
 
     def taxonomy(self):
         tree_node = getattr(self, "tree_node")
-        leaf = "<i>{}</i> / <i>{}</i>".format(tree_node.name, self.name)
+        leaf = f"{tree_node.name} / {self.name}"
 
-        if tree_node.is_root_node():
-            output = leaf
-        else:
-            ancestors = " / ".join(obj.name for obj in tree_node.get_ancestors())
-            output = ancestors + " / " + leaf
-
-        return format_html(output)
+        return (
+            leaf
+            if tree_node.is_root_node()
+            else f"{' / '.join(i.name for i in tree_node.get_ancestors())} / {leaf}"
+        )
 
     taxonomy.short_description = _("Taxonomie")
 

@@ -13,13 +13,15 @@ from .choices import *
 
 
 class Plant(BaseProfile):
+    ARTICLE_CHOICES = (("der", _("Der")), ("die", _("Die")), ("das", _("Das")))
     HABITAT_CHOICES = (
-        ("sch", _("Schlammfluren")),
+        ("sch", _("Schlammflure")),
         ("roe", _("Röhrichte")),
         ("sae", _("Säume")),
-        ("sta", _("Staudenfluren")),
-        ("gru", _("Grünland und Zwergstrauchheiden")),
-        ("rud", _("Ruderalvegetation")),
+        ("sta", _("Staudenflure")),
+        ("gru", _("Grünland")),
+        ("zwe", _("Zwergstrauchheiden")),
+        ("rud", _("Ruderalvegetationen")),
         ("aec", _("Äcker")),
         ("wei", _("Weinberge")),
         ("int", _("Intensivgrünland")),
@@ -29,10 +31,22 @@ class Plant(BaseProfile):
         ("fel", _("Felsbiotope")),
         ("aue", _("Auenwälder")),
         ("geb", _("Gebüsche")),
-        ("ger", _("Geröll")),
-        ("ext", _("Extensivgrünland oder natürlicher Rasen")),
+        ("ger", _("Gerölle")),
+        ("ext", _("Extensivgrünland")),
+        ("nar", _("natürliche Rasen")),
         ("wae", _("Wälder")),
         ("ufe", _("Ufer")),
+        ("wed", _("Weiden")),
+        ("wie", _("Wiesen")),
+        ("hec", _("Hecken")),
+        ("gra", _("Gräben")),
+        ("weg", _("Weg-/Straßenränder")),
+        ("bah", _("Bahndämme")),
+        ("bae", _("Bäche")),
+        ("sct", _("Schutt")),
+        ("brw", _("Bruchwälder")),
+        ("que", _("Quellen")),
+        ("scl", _("Schläge")),
     )
     STATUS_CHOICES = (
         ("e", _("einheimisch")),
@@ -57,34 +71,41 @@ class Plant(BaseProfile):
         ("hem", _("Hemikryptophyt")),
         ("kry", _("Kryptophyt")),
         ("the", _("Therophyt")),
+        ("geo", _("Geophyt")),
+        ("hel", _("Helophyt (Sumpfpflanze)")),
+        ("hyd", _("Hydrophyt (Wasserpflanze)")),
     )
     GROWTH_FORM_CHOICES = (
         ("bau", _("Baum")),
         ("str", _("Strauch")),
         ("stb", _("Strauchbaum")),
         ("zwe", _("Zwergstrauch")),
-        ("lia", _("Liane")),
-        ("kle", _("Kletterpflanze")),
         ("hal", _("Halbstrauch")),
         ("spa", _("Spalierstrauch")),
+        ("scs", _("Scheinstrauch")),
+        ("sta", _("Staudenstrauch")),
+        ("kra", _("Kraut")),
         ("krc", _("krautiger Chemaephyt")),
-        ("geo", _("Geophyt")),
-        ("hel", _("Helophyt (Sumpfpflanze)")),
-        ("hyd", _("Hydrophyt (Wasserpflanze)")),
+        ("lia", _("Liane")),
+        ("kle", _("Kletterpflanze")),
         ("tau", _("Tauchpflanze")),
         ("sch", _("Schwimmpflanze")),
     )
     DISPERSAL_CHOICES = (
-        ("sa", _("Samenpflanze")),
+        ("na", _("Nacktsamer")),
+        ("be", _("Bedecktsamer")),
         ("sp", _("Sporenpflanze")),
     )
 
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
+    name = models.CharField(max_length=100, verbose_name=_("Art"))
+    article = models.CharField(
+        max_length=3, choices=ARTICLE_CHOICES, blank=True, verbose_name=_("Artikel")
+    )
+    trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     short_description = models.TextField(
         default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
     )
-    name = models.CharField(max_length=100, verbose_name=_("Art"))
-    trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
     alt_trivial_name = models.CharField(
         default="",
         max_length=500,
@@ -97,6 +118,13 @@ class Plant(BaseProfile):
         ),
         blank=True,
     )
+    ground = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
+        ),
+        size=2,
+        blank=True,
+    )
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
     )
@@ -105,13 +133,6 @@ class Plant(BaseProfile):
         choices=INTERACTION_CHOICES,
         blank=True,
         verbose_name=_("Interaktionen"),
-    )
-    ground = ArrayField(
-        base_field=models.CharField(
-            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
-        ),
-        size=2,
-        blank=True,
     )
     life_form = models.CharField(
         max_length=3,
@@ -137,6 +158,12 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Ausbreitungsform"),
     )
+    other_features = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Weitere Merkmale"),
+        help_text="Bsp. Geruch",
+    )
 
     class Meta:
         verbose_name = _("Pflanze")
@@ -144,29 +171,15 @@ class Plant(BaseProfile):
 
     def taxonomy(self):
         tree_node = getattr(self, "tree_node")
-        leaf = "<i>{}</i> / <i>{}</i>".format(tree_node.name, self.name)
+        leaf = f"{tree_node.name} / {self.name}"
 
-        if tree_node.is_root_node():
-            output = leaf
-        else:
-            ancestors = " / ".join(obj.name for obj in tree_node.get_ancestors())
-            output = ancestors + " / " + leaf
-
-        return format_html(output)
+        return (
+            leaf
+            if tree_node.is_root_node()
+            else f"{' / '.join(i.name for i in tree_node.get_ancestors())} / {leaf}"
+        )
 
     taxonomy.short_description = _("Taxonomie")
-
-    def get_ground_output(self):
-        if self.ground:
-            output = " bis ".join(
-                str(dict(self.GROUND_CHOICES).get(item)) for item in self.ground
-            )
-        else:
-            output = ""
-
-        return output
-
-    get_ground_output.short_description = _("Untergrund (Ausgabe)")
 
     def __str__(self):
         return self.name

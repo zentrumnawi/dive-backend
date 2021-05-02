@@ -7,24 +7,20 @@ def prune_leaf_surface(apps, schema_editor):
     Leaf = apps.get_model("dive_content", "Leaf")
 
     for obj in Leaf.objects.exclude(surface=[]):
-        if "stn" in obj.surface:
-            obj.surface.remove("stn")
-            obj.save()
-        if "glz" in obj.surface:
-            obj.surface.remove("glz")
-            obj.save()
+        for opt in ("stn", "glz"):
+            if opt in obj.surface:
+                obj.surface.remove(opt)
+                obj.save()
 
 
 def prune_stemroot_surface(apps, schema_editor):
     StemRoot = apps.get_model("dive_content", "StemRoot")
 
     for obj in StemRoot.objects.exclude(surface=[]):
-        if "stn" in obj.surface:
-            obj.surface.remove("stn")
-            obj.save()
-        if "glz" in obj.surface:
-            obj.surface.remove("glz")
-            obj.save()
+        for opt in ("stn", "glz"):
+            if opt in obj.surface:
+                obj.surface.remove(opt)
+                obj.save()
 
 
 class Migration(migrations.Migration):

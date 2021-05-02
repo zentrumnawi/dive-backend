@@ -181,8 +181,21 @@ class IndicatorsInline(admin.StackedInline):
 
 
 class PlantAdmin(admin.ModelAdmin):
+    fields = (
+        ("tree_node", "taxonomy"),
+        "name",
+        ("article", "trivial_name"),
+        "short_description",
+        "alt_trivial_name",
+        ("habitat", "ground"),
+        "status",
+        "interaction",
+        ("life_form", "growth_form", "growth_height"),
+        "dispersal",
+        "other_features",
+    )
     form = PlantAdminForm
-    readonly_fields = ("taxonomy", "get_ground_output")
+    readonly_fields = ("taxonomy",)
     list_display = ("id", "name", "trivial_name")
     list_display_links = ("name",)
     inlines = [

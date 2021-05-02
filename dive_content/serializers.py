@@ -548,10 +548,10 @@ class FruitSerializer(DisplayNameModelSerializer):
 
     def get_seed(self, obj):
         # Generate sentence "Samen" according pattern:
-        # "[seed_num] [seed_form] Samen, [winging] [winging_feature]."
+        # "[seed_num] [seed_color_form] Samen, [winging] [winging_feature]."
         fields = [
             obj.seed_num,
-            obj.seed_form,
+            obj.seed_color_form,
             obj.winging,
             obj.winging_feature,
         ]
@@ -560,7 +560,7 @@ class FruitSerializer(DisplayNameModelSerializer):
             " ".join(filter(None, fields[:2])),
             " ".join(filter(None, fields[2:])),
         ]
-        text[0] = f"{f'{text[0]} Samen' if text[0] else ''}"
+        text[0] = f"{text[0]} Samen" if text[0] else ""
         text = ", ".join(filter(None, text))
 
         return format_sentence(text)

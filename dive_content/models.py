@@ -559,7 +559,7 @@ class Fruit(models.Model):
     seed_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Samenanzahl")
     )
-    seed_form = models.CharField(
+    seed_color_form = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Samenform"),

@@ -16,9 +16,15 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
+
 
 urlpatterns = [
-    url(r"^api/", include("api-docs.api_docs"), name="api_docs"),
-    url(r"^api/", include("content.urls"), name="content"),
-    url(r"^admin/", admin.site.urls),
+    url(
+        r"^{}".format(settings.URI_PREFIX),
+        include("api_docs.api_docs"),
+        name="api_docs",
+    ),
+    url(r"^{}".format(settings.URI_PREFIX), include("solid_backend.urls")),
+    url(r"^{}admin/".format(settings.URI_PREFIX), admin.site.urls),
 ]

@@ -13,11 +13,13 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import environ
 import importlib
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path("")
+APPS_DIR = ROOT_DIR.path("dive_content")
 
 env = environ.Env()
 
@@ -32,13 +34,23 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
-    "content.apps.ContentConfig",
-    "quiz.apps.QuizConfig",
-    "glossary.apps.GlossaryConfig",
+    "mptt",
+    "stdimage",
+    "corsheaders",
+    "dive_content.apps.DiveContentConfig",
+    "solid_backend.content",
+    "solid_backend.contact",
+    "solid_backend.glossary",
+    "solid_backend.message",
+    "solid_backend.slideshow",
+    "solid_backend.quiz",
+    "solid_backend.photograph",
+    "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -95,13 +107,28 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Berlin"
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = [("de", _("German")), ("en", _("English"))]
+
+LOCALE_PATHS = [str(ROOT_DIR("locale"))]
+
+# MEDIA CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = str(ROOT_DIR("media"))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = "/media/"
+
+
+URI_PREFIX = env("URI_PREFIX", default="")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
@@ -116,9 +143,14 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-PROFILES_SERIALIZER = env("PROFILES_SERIALIZER", default="")
+PROFILES_SERIALIZER_MODULE, PROFILES_SERIALIZER_NAME = env(
+    "PROFILES_SERIALIZER", default=""
+).rsplit(".", 1)
 
 # Configure this dictionary to have a mapping from database fieldnames to
 # human readable names. You might want to consider internationalizing
 # the human readable names.
 DATABASE_FIELD_MAPPING = {}
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True

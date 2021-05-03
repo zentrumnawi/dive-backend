@@ -5,10 +5,10 @@ services:
 
 language: python
 python:
-  - "3.6"
+  - "3.7"
 
 env:
-  - TRAVIS_CI=True
+  - TRAVIS_CI=True PATH="$PATH:$HOME/.poetry/bin" POETRY_VIRTUALENVS_CREATE=false PROFILES_SERIALIZER="dive_content.serializers.PlantSerializer"
 
 cache:
   directories:
@@ -21,7 +21,6 @@ before_script:
   - psql -c "CREATE USER db_user WITH PASSWORD 'db_pass';" -U postgres
 
 script:
-  - make ci
   - black . --check
 after_success:
   - codecov

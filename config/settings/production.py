@@ -34,6 +34,14 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ALLOWED HOSTS
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
+# Uploaded Media Files
+# ------------------------
+DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+
+# URL that handles the media served from MEDIA_ROOT, used for managing
+# stored files.
+MEDIA_URL = env("DJANGO_CDN_URL")
+
 # Raven Sentry client
 # See https://docs.getsentry.com/hosted/clients/python/integrations/django/
 INSTALLED_APPS += ("raven.contrib.django.raven_compat",)
@@ -98,3 +106,7 @@ RAVEN_CONFIG = {
 
 # ADMIN URL
 ADMIN_URL = env("DJANGO_ADMIN_URL")
+
+# Static
+
+STATIC_URL = "https://{}/{}static/".format(ALLOWED_HOSTS[0], URI_PREFIX)

@@ -110,3 +110,21 @@ ADMIN_URL = env("DJANGO_ADMIN_URL")
 # Static
 
 STATIC_URL = "https://{}/{}static/".format(ALLOWED_HOSTS[0], URI_PREFIX)
+
+# EMAIL
+# ------------------------------------------------------------------------------
+SYSTEM_EMAIL = env("SYSTEM_EMAIL")
+DEFAULT_FROM_EMAIL = SYSTEM_EMAIL
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
+
+# Anymail with Mailgun
+INSTALLED_APPS += ("anymail",)
+
+EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+
+ANYMAIL = {
+    "MAILJET_API_KEY": env("MAILJET_API_KEY"),
+    "MAILJET_SECRET_KEY": env("MAILJET_SECRET_KEY"),
+}
+# Unlikely to change this as mentioned here https://anymail.readthedocs.io/en/stable/esps/mailjet/#settings
+MAILJET_API_URL = "https://api.mailjet.com/v3.1/"

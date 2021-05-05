@@ -20,7 +20,7 @@ markupsafe = "==1.1.1"
 pillow = "*"
 psycopg2-binary = "*"
 raven = "*"
-solid-backend = "*"
+solid-backend = "^0.1.17"
 whitenoise = "*"
 django-anymail = "^8.2"
 

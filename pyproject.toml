@@ -20,8 +20,9 @@ markupsafe = "==1.1.1"
 pillow = "*"
 psycopg2-binary = "*"
 raven = "*"
-solid-backend = "*"
+solid-backend = "0.1.19"
 whitenoise = "*"
+django-anymail = "^8.2"
 
 [tool.poetry.dev-dependencies]
 black = "19.10b0"

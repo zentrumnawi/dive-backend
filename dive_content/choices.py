@@ -203,6 +203,105 @@ APEX_CHOICES = (
 SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
 
 
+# LeafPoales choices
+
+# overview -----------------------------------------------------------------------------
+LEAFPOALES_SHAPE_CHOICES = (("f", _("flach")), ("r", _("röhrig")))
+HAIRINESS_CHOICES = (
+    ("kah", _("kahl")),
+    ("sam", _("samtig")),
+    ("lob", _("locker behaart")),
+    ("beh", _("behaart")),
+    ("dib", _("dicht behaart")),
+    ("wol", _("wollig")),
+)
+LEAFPOALES_CROSS_SECTION_CHOICES = (
+    ("Voa", _("Vogelflug-artig")),
+    ("VPa", _("V-Profil-artig")),
+    ("UPa", _("U-Profil-artig")),
+    ("roe", _("röhrig")),
+    ("run", _("rund")),
+    ("abg", _("abgeflacht")),
+    ("fla", _("flach")),
+    ("bor", _("borstig")),
+)
+ALIGNMENT_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"))
+ALIGNMENT_CHOICES = (
+    ("", "---------"),
+    ("-w", _("-wirtelig")),
+    ("-z", _("-zeilig")),
+)
+ATTACHMENT_POINT_CHOICES = (("K", _("Knoten")), ("T", _("Triebgrund")))
+# leaf_blade ---------------------------------------------------------------------------
+BLADE_SHAPE_CHOICES = (
+    ("bor", _("borstenförmig")),
+    ("lan", _("lanzettlich")),
+    ("lin", _("linealisch")),
+    ("par", _("parallelrandig")),
+    ("pfr", _("pfriemlich")),
+)
+BLADE_CORRUGATION_CHOICES = (
+    ("gla", _("glatt")),
+    ("gmS", _("glatt mit Skispur")),
+    ("ung", _("undeutlich gerieft")),
+    ("deg", _("deutlich gerieft")),
+    ("ssg", _("sehr stark gerieft")),
+)
+BLADE_DOUBLE_GROOVE = (("m", _("mit Doppelrille")), ("o", _("ohne Doppelrille")))
+BLADE_SHINE_CHOICES = (
+    ("gla", _("glanzlos")),
+    ("mag", _("matt glänzend")),
+    ("seg", _("seidig glänzend")),
+    ("stg", _("stark glänzend")),
+)
+BLADE_KEEL_CHOICES = (("m", _("mit auffälligem Kiel")), ("o", _("ohne Kiel")))
+BLADE_EDGE_CHOICES = (
+    ("gla", _("glatt")),
+    ("vor", _("vorwärts rau")),
+    ("rur", _("rückwärts rau")),
+    ("bew", _("bewimpert")),
+    ("bor", _("borstig")),
+    ("gez", _("gezähnt")),
+)
+BLADE_BUD_SYSTEM_CHOICES = (("f", _("gefaltet")), ("r", _("gerollt")))
+# leaf_base ----------------------------------------------------------------------------
+BASE_EDGE_CHOICES = (("k", _("kahl")), ("b", _("behaart (< 3 mm)")))
+BASE_AURICLE_CHOICES = (("m", _("mit Öhrchen")), ("o", _("ohne Öhrchen")))
+# ligule -------------------------------------------------------------------------------
+LIGULE_LENGTH_CHOICES = (
+    ("kur", _("kurz")),
+    ("mit", _("mittellang")),
+    ("lan", _("lang")),
+    ("sel", _("sehr lang")),
+)
+LIGULE_SHAPE_CHOICES = (
+    ("abg", _("abgerundet")),
+    ("aHa", _("als Haarkranz ausgebildet")),
+    ("bew", _("bewimpert")),
+    ("feh", _("fehlend")),
+    ("ges", _("geschlitzt")),
+    ("man", _("manschettenförmig")),
+    ("roe", _("röhrenförmig")),
+    ("sau", _("saumartig")),
+    ("spi", _("spitz")),
+    ("stu", _("stumpf")),
+    ("zer", _("zerschlitzt")),
+)
+LIGULE_CONSISTENCY_CHOICES = (
+    ("der", _("derb")),
+    ("hae", _("häutig")),
+    ("zar", _("zart")),
+)
+# leaf_sheath --------------------------------------------------------------------------
+SHEATH_CONNATION_CHOICES = (
+    ("off", _("offen")),
+    ("iTv", _("in Teilen verwachsen")),
+    ("fbo", _("fast bis oben geschlossen")),
+    ("ges", _("geschlossen")),
+)
+# --------------------------------------------------------------------------------------
+
+
 # Blossom choices
 
 SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))

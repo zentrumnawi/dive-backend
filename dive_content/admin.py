@@ -89,6 +89,15 @@ leafpoales_fieldsets = (
         },
     ),
 )
+leafpoales_radio_fields = {
+    "shape": admin.VERTICAL,
+    "attachment_point": admin.HORIZONTAL,
+    "blade_double_groove": admin.VERTICAL,
+    "blade_keel": admin.HORIZONTAL,
+    "blade_bud_system": admin.HORIZONTAL,
+    "base_edge": admin.VERTICAL,
+    "base_auricle": admin.VERTICAL,
+}
 
 blossom_fieldsets = (
     (None, {"fields": ("plant",)}),

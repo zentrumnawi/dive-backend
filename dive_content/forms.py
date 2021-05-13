@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,6 +12,14 @@ from .fields import (
     SeasonField,
 )
 from .models import Blossom, Fruit, Leaf, Plant, StemRoot
+
+
+def get_label(model, field_name):
+    label = model._meta.get_field(field_name).verbose_name
+    if isinstance(model._meta.get_field(field_name), ArrayField):
+        label = model._meta.get_field(field_name).base_field.verbose_name
+
+    return label
 
 
 class PlantAdminForm(forms.ModelForm):

@@ -5,14 +5,19 @@ from django.utils.translation import ugettext_lazy as _
 
 from .choices import *
 from .fields import (
+    AdaptedSimpleArrayField,
     ArrayMultipleChoiceField,
+    FloatRangeTermCharField,
     IndicatorField,
     IntegerRangeCharField,
     NumberRangeCharField_to_be_replaced,
     NumericPrefixTermField,
+    OutputField,
     SeasonField,
+    SubsectionTitleField,
 )
-from .models import Blossom, Fruit, Leaf, Plant, StemRoot
+from .models import Blossom, Fruit, Leaf, LeafPoales, Plant, StemRoot
+from .outputs import LeafPoalesOutput
 
 
 TEXTINPUT_ATTRS = {"size": 60, "class": False}
@@ -81,6 +86,60 @@ class LeafAdminForm(forms.ModelForm):
     leaf_simple_incision_num = IntegerRangeCharField(
         1, 99, label=get_label(Leaf, "leaf_simple_incision_num")
     )
+
+
+class LeafPoalesAdminForm(forms.ModelForm):
+    subsection_title_overview = SubsectionTitleField("Überblick")
+    subsection_title_leaf_blade = SubsectionTitleField("Blattspreite")
+    subsection_title_leaf_base = SubsectionTitleField("Blattgrund")
+    subsection_title_ligule = SubsectionTitleField("Blatthäutchen")
+    subsection_title_leaf_sheath = SubsectionTitleField("Blattscheide")
+
+    length = FloatRangeTermCharField(0, 100, "cm")
+    alignment = NumericPrefixTermField((ALIGNMENT_NUM_CHOICES, ALIGNMENT_CHOICES))
+
+    output_overview = OutputField()
+    output_leaf_blade = OutputField()
+    output_leaf_base = OutputField()
+    output_ligule = OutputField()
+    output_leaf_sheath = OutputField()
+
+    class Meta:
+        model = LeafPoales
+        fields = []
+        field_classes = {
+            "hairiness": AdaptedSimpleArrayField,
+            "cross_section": AdaptedSimpleArrayField,
+            "blade_corrugation": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "hairiness": forms.SelectMultiple(choices=HAIRINESS_CHOICES),
+            "cross_section": forms.SelectMultiple(
+                choices=LEAFPOALES_CROSS_SECTION_CHOICES
+            ),
+            "blade_corrugation": forms.CheckboxSelectMultiple(
+                choices=BLADE_CORRUGATION_CHOICES
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["length"].label = get_label(obj, "length")
+        self.fields["alignment"].label = get_label(obj, "alignment",)
+        self.fields["ligule_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+        self.fields["sheath_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+
+        self.initial.update(
+            {
+                "output_overview": LeafPoalesOutput.generate_overview(obj),
+                "output_leaf_blade": LeafPoalesOutput.generate_leaf_blade(obj),
+                "output_leaf_base": LeafPoalesOutput.generate_leaf_base(obj),
+                "output_ligule": LeafPoalesOutput.generate_ligule(obj),
+                "output_leaf_sheath": LeafPoalesOutput.generate_leaf_sheath(obj),
+            }
+        )
 
 
 class BlossomAdminForm(forms.ModelForm):

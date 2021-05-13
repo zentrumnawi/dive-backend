@@ -3,13 +3,7 @@ from django.contrib.postgres.forms import SimpleArrayField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .choices import (
-    CONNATION_NUM_CHOICES,
-    CONNATION_TYPE_CHOICES,
-    INDICATORS,
-    INDICATORS_CHOICES,
-    SEASON_CHOICES,
-)
+from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
 from .models import Blossom, Indicators
 from .widgets import (
     IndicatorWidget,
@@ -87,11 +81,9 @@ class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
 
 
 class NumericPrefixTermField(forms.MultiValueField):
-    def __init__(self, field_name, **kwargs):
+    def __init__(self, choices, **kwargs):
         kwargs.setdefault("required", False)
-        kwargs.setdefault("label", Blossom._meta.get_field(field_name).verbose_name)
 
-        choices = (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES)
         fields = [
             forms.ChoiceField(choices=choices[0]),
             forms.ChoiceField(choices=choices[1]),

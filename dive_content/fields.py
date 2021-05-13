@@ -12,9 +12,9 @@ from .choices import (
 )
 from .models import Blossom, Indicators
 from .widgets import (
-    ConnationTypeWidget,
     IndicatorWidget,
     NumberRangeCharWidget_to_be_deleted,
+    NumericPrefixTermWidget,
     SeasonWidget,
 )
 
@@ -122,7 +122,7 @@ class ConnationTypeField(forms.MultiValueField):
             forms.ChoiceField(choices=choices[0]),
             forms.ChoiceField(choices=choices[1]),
         ]
-        widget = ConnationTypeWidget(choices)
+        widget = NumericPrefixTermWidget(choices)
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 

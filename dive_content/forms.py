@@ -26,12 +26,10 @@ class PlantAdminForm(forms.ModelForm):
     habitat = forms.MultipleChoiceField(
         choices=Plant.HABITAT_CHOICES,
         required=False,
-        label=Plant._meta.get_field("habitat").base_field.verbose_name,
+        label=get_label(Plant, "habitat"),
     )
     ground = forms.MultipleChoiceField(
-        choices=Plant.GROUND_CHOICES,
-        required=False,
-        label=Plant._meta.get_field("ground").base_field.verbose_name,
+        choices=Plant.GROUND_CHOICES, required=False, label=get_label(Plant, "ground")
     )
 
 

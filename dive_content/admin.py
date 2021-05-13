@@ -6,10 +6,11 @@ from .forms import (
     FruitAdminForm,
     IndicatorsAdminForm,
     LeafAdminForm,
+    LeafPoalesAdminForm,
     PlantAdminForm,
     StemRootAdminForm,
 )
-from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot
+from .models import Blossom, Fruit, Indicators, Leaf, LeafPoales, Plant, StemRoot
 
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -263,6 +264,16 @@ class LeafAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Leaf, LeafAdmin)
+
+
+class LeafPoalesAdmin(admin.ModelAdmin):
+    model = LeafPoales
+    fieldsets = leafpoales_fieldsets
+    form = LeafPoalesAdminForm
+    radio_fields = leafpoales_radio_fields
+
+
+admin.site.register(LeafPoales, LeafPoalesAdmin)
 
 
 class BlossomAdmin(admin.ModelAdmin):

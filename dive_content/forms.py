@@ -81,7 +81,7 @@ class LeafAdminForm(forms.ModelForm):
 
 
 class BlossomAdminForm(forms.ModelForm):
-    season = SeasonField("season")
+    season = SeasonField(label=get_label(Blossom, "season"))
     inflorescence_num = NumberRangeCharField_to_be_replaced(
         max=100, infinity=True, label=get_label(Blossom, "inflorescence_num")
     )

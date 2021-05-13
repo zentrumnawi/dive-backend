@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
-from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot
+from .models import Blossom, Fruit, Indicators, Leaf, LeafPoales, Plant, StemRoot
 from .outputs import *
 
 
@@ -292,6 +292,34 @@ class LeafSerializer(DisplayNameModelSerializer):
             text = f"{fields} {'Keimblatt' if fields == 1 else 'Keimblätter'}"
 
         return format_sentence(text)
+
+
+class LeafPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    overview = serializers.SerializerMethodField(label="Überblick")
+    leaf_blade = serializers.SerializerMethodField(label="Blattspreite")
+    leaf_base = serializers.SerializerMethodField(label="Blattgrund")
+    ligule = serializers.SerializerMethodField(label="Blatthäutchen")
+    leaf_sheath = serializers.SerializerMethodField(label="Blattscheide")
+
+    class Meta:
+        model = LeafPoales
+        fields = ("overview", "leaf_blade", "leaf_base", "ligule", "leaf_sheath")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_overview(self, obj):
+        return LeafPoalesOutput.generate_overview(obj)
+
+    def get_leaf_blade(self, obj):
+        return LeafPoalesOutput.generate_leaf_blade(obj)
+
+    def get_leaf_base(self, obj):
+        return LeafPoalesOutput.generate_leaf_base(obj)
+
+    def get_ligule(self, obj):
+        return LeafPoalesOutput.generate_ligule(obj)
+
+    def get_leaf_sheath(self, obj):
+        return LeafPoalesOutput.generate_leaf_sheath(obj)
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
@@ -753,6 +781,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     )
 
     leaf = LeafSerializer(required=False)
+    leafpoales = LeafPoalesSerializer(required=False)
     blossom = BlossomSerializer(required=False)
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)

@@ -55,6 +55,41 @@ leaf_fieldsets = (
 )
 leaf_radio_fields = {"rosette": admin.HORIZONTAL, "seed_leaf_num": admin.HORIZONTAL}
 
+leafpoales_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                "subsection_title_overview",
+                ("length", "width", "color"),
+                ("shape", "hairiness", "cross_section"),
+                ("alignment", "attachment_point"),
+                "output_overview",
+                "subsection_title_leaf_blade",
+                ("blade_shape", "blade_shape_feature"),
+                ("blade_corrugation", "blade_double_groove"),
+                ("blade_shine", "blade_keel"),
+                "blade_edge",
+                "blade_bud_system",
+                "output_leaf_blade",
+                "subsection_title_leaf_base",
+                ("base_edge", "base_auricle", "base_auricle_feature"),
+                "output_leaf_base",
+                "subsection_title_ligule",
+                ("ligule_length", "ligule_color"),
+                ("ligule_shape", "ligule_consistency"),
+                "ligule_features",
+                "output_ligule",
+                "subsection_title_leaf_sheath",
+                ("sheath_coloring", "sheath_connation"),
+                "sheath_features",
+                "output_leaf_sheath",
+            )
+        },
+    ),
+)
+
 blossom_fieldsets = (
     (None, {"fields": ("plant",)}),
     (

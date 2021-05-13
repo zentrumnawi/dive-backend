@@ -194,6 +194,14 @@ class LeafInline(admin.StackedInline):
     classes = ("collapse",)
 
 
+class LeafPoalesInline(admin.StackedInline):
+    model = LeafPoales
+    fieldsets = leafpoales_fieldsets
+    form = LeafPoalesAdminForm
+    radio_fields = leafpoales_radio_fields
+    classes = ("collapse",)
+
+
 class BlossomInline(admin.StackedInline):
     model = Blossom
     fieldsets = blossom_fieldsets
@@ -245,6 +253,7 @@ class PlantAdmin(admin.ModelAdmin):
     list_display_links = ("name",)
     inlines = [
         LeafInline,
+        LeafPoalesInline,
         BlossomInline,
         FruitInline,
         StemRootInline,

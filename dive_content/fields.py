@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
-from .models import Blossom, Indicators
+from .models import Indicators
 from .widgets import (
     IndicatorWidget,
     NumberRangeCharWidget_to_be_deleted,
@@ -103,12 +103,9 @@ class NumericPrefixTermField(forms.MultiValueField):
 
 
 class SeasonField(forms.MultiValueField):
-    def __init__(self, field_name, **kwargs):
+    def __init__(self, **kwargs):
         kwargs.setdefault("required", False)
-        kwargs.setdefault(
-            "label", Blossom._meta.get_field(field_name).base_field.verbose_name
-        )
-        kwargs.setdefault("help_text", _("Einzelwert in Feld 2 oder 3 eintragen."))
+        kwargs.setdefault("help_text", _("Einzelwert in Feld 2 eintragen."))
 
         choices = SEASON_CHOICES
         fields = [
@@ -124,6 +121,11 @@ class SeasonField(forms.MultiValueField):
                 data_list[0] = None
             if data_list[3] and not data_list[2] or data_list[3] == data_list[2]:
                 data_list[3] = None
+            if (data_list.count(None) == 3 and data_list[2]) or (
+                data_list.count(None) == 2 and data_list[2] == data_list[1]
+            ):
+                data_list[1] = data_list[2]
+                data_list[2] = None
 
         return data_list
 

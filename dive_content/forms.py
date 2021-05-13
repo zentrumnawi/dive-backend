@@ -6,9 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 from .choices import *
 from .fields import (
     ArrayMultipleChoiceField,
-    ConnationTypeField,
     IndicatorField,
     NumberRangeCharField_to_be_replaced,
+    NumericPrefixTermField,
     SeasonField,
 )
 from .models import Blossom, Fruit, Leaf, Plant, StemRoot
@@ -97,14 +97,20 @@ class BlossomAdminForm(forms.ModelForm):
     sepal_num = NumberRangeCharField_to_be_replaced(
         max=11, infinity=True, label=get_label(Blossom, "sepal_num")
     )
-    sepal_connation_type = ConnationTypeField("sepal_connation_type")
+    sepal_connation_type = NumericPrefixTermField(
+        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        label=get_label(Blossom, "sepal_connation_type"),
+    )
     petal_num = NumberRangeCharField_to_be_replaced(
         max=11, infinity=True, label=get_label(Blossom, "petal_num")
     )
     petal_len = NumberRangeCharField_to_be_replaced(
         0.1, 100, "cm", label=get_label(Blossom, "petal_len")
     )
-    petal_connation_type = ConnationTypeField("petal_connation_type")
+    petal_connation_type = NumericPrefixTermField(
+        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        label=get_label(Blossom, "petal_connation_type"),
+    )
     stamen_num = NumberRangeCharField_to_be_replaced(
         max=11, infinity=True, label=get_label(Blossom, "stamen_num")
     )

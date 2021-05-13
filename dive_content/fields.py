@@ -25,12 +25,8 @@ class AdaptedSimpleArrayField(SimpleArrayField):
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):
-    def __init__(self, choices, model=None, field_name=None, **kwargs):
-        _label = None
-        if model and field_name:
-            _label = model._meta.get_field(field_name).base_field.verbose_name
+    def __init__(self, choices, **kwargs):
         kwargs.setdefault("required", False)
-        kwargs.setdefault("label", _label)
 
         super().__init__(choices=choices, **kwargs)
 

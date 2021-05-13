@@ -86,6 +86,30 @@ class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
         return "–".join(filter(None, data_list))
 
 
+class NumericPrefixTermField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", Blossom._meta.get_field(field_name).verbose_name)
+
+        choices = (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES)
+        fields = [
+            forms.ChoiceField(choices=choices[0]),
+            forms.ChoiceField(choices=choices[1]),
+        ]
+        widget = NumericPrefixTermWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        value = ""
+        if data_list:
+            if not data_list[0] and len(data_list[1]) == 2:
+                raise ValidationError(_("Numeric prefix must be provided."))
+            value = "".join(data_list) if len(data_list[1]) == 2 else data_list[1]
+
+        return value
+
+
 class SeasonField(forms.MultiValueField):
     def __init__(self, field_name, **kwargs):
         kwargs.setdefault("required", False)
@@ -110,30 +134,6 @@ class SeasonField(forms.MultiValueField):
                 data_list[3] = None
 
         return data_list
-
-
-class ConnationTypeField(forms.MultiValueField):
-    def __init__(self, field_name, **kwargs):
-        kwargs.setdefault("required", False)
-        kwargs.setdefault("label", Blossom._meta.get_field(field_name).verbose_name)
-
-        choices = (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES)
-        fields = [
-            forms.ChoiceField(choices=choices[0]),
-            forms.ChoiceField(choices=choices[1]),
-        ]
-        widget = NumericPrefixTermWidget(choices)
-
-        super().__init__(fields=fields, widget=widget, **kwargs)
-
-    def compress(self, data_list):
-        value = ""
-        if data_list:
-            if not data_list[0] and len(data_list[1]) == 2:
-                raise ValidationError(_("Numeric prefix must be provided."))
-            value = "".join(data_list) if len(data_list[1]) == 2 else data_list[1]
-
-        return value
 
 
 class IndicatorField(forms.MultiValueField):

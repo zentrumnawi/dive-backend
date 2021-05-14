@@ -274,6 +274,7 @@ INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )
+MEROSITY_CHOICES_DICT = {**dict({None: ""}), **dict(MEROSITY_CHOICES[1:])}
 SYMMETRY_CHOICES = (
     ("r", _("radiärsymmetrisch")),
     ("d", _("disymmetrisch")),

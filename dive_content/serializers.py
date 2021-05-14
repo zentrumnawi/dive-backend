@@ -352,25 +352,30 @@ class BlossomSerializer(DisplayNameModelSerializer):
     def get_inflorescence(self, obj):
         # Generate sentence "Blütenstand" according pattern:
         # "[inflorescence_num] [inflorescence_type] mit [blossom_num] Blüte|Blüten."
+        app = {1: "Blütenstände", 2: "Blüten"}
+        if obj.inflorescence_num == "1":
+            app[1] = "Bütenstand"
+        if obj.blossom_num == "1":
+            app[2] = "Blüte"
+
         fields = [
             obj.inflorescence_num,
             obj.inflorescence_type,
             obj.blossom_num,
         ]
-        if fields[0] not in ("", "1"):
-            if fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3).keys():
-                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES_2_3, "n")
-            elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3).keys():
-                fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
-            else:
-                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+        if fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES_2_3)[fields[1]]}"
+            fields[1] = add_suffix(fields[1], "n")
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3):
+            fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
+        elif not any(fields):
+            pass
         else:
-            fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES).get(fields[1], app[1])}"
+        fields[2] = add_suffix(fields[2], f" {app[2]}")
 
         text = " ".join(filter(None, fields[:2]))
         text = " mit ".join(filter(None, (text, fields[2])))
-        if fields[2]:
-            text = f"{text} Blüte" if text[-1] == "1" else f"{text} Blüten"
 
         return format_sentence(text)
 
@@ -379,12 +384,14 @@ class BlossomSerializer(DisplayNameModelSerializer):
         # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
         # Blütenform, [bract_blade]es Tragblatt."
         fields = [
-            concatenate(obj.merosity, MEROSITY_CHOICES, "-zählige"),
-            concatenate(obj.symmetry, SYMMETRY_CHOICES, "e"),
-            concatenate(obj.perianth, PERIANTH_CHOICES),
-            concatenate(obj.perianth_form, PERIANTH_FORM_CHOICES, "e"),
-            concatenate(obj.bract_blade, BRACT_BLADE_CHOICES, "es"),
+            add_suffix(f"{MEROSITY_CHOICES_DICT[obj.merosity]}", "-zählige"),
+            add_suffix(obj.get_symmetry_display(), "e"),
+            obj.get_perianth_display(),
+            add_suffix(obj.get_perianth_form_display(), "e"),
+            obj.bract_blade,
         ]
+        if fields[4]:
+            fields[4] = format_ArrayField(fields[4], BRACT_BLADE_CHOICES, "es", "/")
 
         text = [
             " ".join(filter(None, fields[:3])),
@@ -401,7 +408,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     def get_diameter(self, obj):
         # Generate sentence "Durchmesser" according pattern:
         # "[diameter] cm."
-        fields = ",".join(obj.diameter.split("."))
+        fields = convert_decimal_separator(remove_empty_decimal_places(obj.diameter))
 
         text = f"{fields} cm" if fields else ""
 
@@ -418,15 +425,12 @@ class BlossomSerializer(DisplayNameModelSerializer):
         fields = [
             obj.sepal_num,
             obj.sepal_color_form,
-            obj.sepal_connation_type,
-            concatenate(obj.sepal_connation, SEPAL_CONNATION_CHOICES),
+            get_NumericPrefixTermField_display(
+                obj.sepal_connation_type, CONNATION_TYPE_CHOICES
+            ),
+            obj.get_sepal_connation_display(),
             obj.epicalyx,
         ]
-        fields[2] = (
-            f"{fields[2][0]}{concatenate(fields[2][1:], CONNATION_TYPE_CHOICES)}"
-            if fields[2][0:1].isdigit()
-            else concatenate(fields[2], CONNATION_TYPE_CHOICES)
-        )
 
         text = [
             " ".join(filter(None, fields[:2])),
@@ -449,17 +453,17 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.petal_num,
-            concatenate(",".join(obj.petal_len.split(".")), app=app[1]),
+            add_suffix(
+                convert_decimal_separator(remove_empty_decimal_places(obj.petal_len)),
+                app[1],
+            ),
             obj.petal_color_form,
-            obj.petal_connation_type,
-            concatenate(obj.petal_connation, PETAL_CONNATION_CHOICES),
+            get_NumericPrefixTermField_display(
+                obj.petal_connation_type, CONNATION_TYPE_CHOICES
+            ),
+            obj.get_petal_connation_display(),
             obj.nectary,
         ]
-        fields[3] = (
-            f"{fields[3][0]}{concatenate(fields[3][1:], CONNATION_TYPE_CHOICES)}"
-            if fields[3][0:1].isdigit()
-            else concatenate(fields[3], CONNATION_TYPE_CHOICES)
-        )
 
         text = [
             ", ".join(filter(None, fields[1:3])),
@@ -483,9 +487,12 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.stamen_num,
-            concatenate(",".join(obj.stamen_len.split(".")), app=app[1]),
+            add_suffix(
+                convert_decimal_separator(remove_empty_decimal_places(obj.stamen_len)),
+                app[1],
+            ),
             obj.stamen_color_form,
-            concatenate(obj.stamen_connation_type, STAMEN_CONNATION_TYPE_CHOICES),
+            obj.get_stamen_connation_type_display(),
             obj.stamen_connation_type_add,
         ]
 
@@ -514,9 +521,9 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.carpel_num,
-            concatenate(obj.carpel_connation_type, CARPEL_CONNATION_TYPE_CHOICES),
-            concatenate(obj.ovary_pos, OVARY_POS_CHOICES, "er"),
-            concatenate(obj.pistil_pos, PISTIL_POS_CHOICES, "er"),
+            obj.get_carpel_connation_type_display(),
+            add_suffix(obj.get_ovary_pos_display(), "er"),
+            add_suffix(obj.get_pistil_pos_display(), "er"),
             obj.stigma_num,
             obj.stylopodium,
         ]

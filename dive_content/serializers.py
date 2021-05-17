@@ -623,13 +623,24 @@ class StemRootSerializer(DisplayNameModelSerializer):
         if not obj.cross_section:
             app = "e"
         fields = [
-            concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
-            concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
-            concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
-            concatenate(obj.pith, PITH_CHOICES, "er"),
-            concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
-            concatenate(obj.surface, SURFACE_CHOICES, app),
+            obj.orientation,
+            obj.appearance,
+            add_suffix(obj.get_succulence_display(), "er"),
+            add_suffix(obj.get_pith_display(), "er"),
+            obj.cross_section,
+            obj.surface,
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], ORIENTATION_CHOICES, "er", "/")
+        if fields[1]:
+            fields[1] = format_ArrayField(fields[1], APPEARANCE_CHOICES, "er")
+        if fields[4]:
+            fields[4] = format_ArrayField(
+                fields[4], SR_CROSS_SECTION_CHOICES, "er", "/"
+            )
+        if fields[5]:
+            fields[5] = format_ArrayField(fields[5], SURFACE_CHOICES, app, "/")
+
         fields[4] = f"{fields[4]} Querschnitt" if fields[4] else ""
         fields[5] = f"{fields[5]} Oberfläche" if fields[5] else ""
 
@@ -646,8 +657,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # Generate sentence "Auswüchse" according pattern:
         # "[creep_lay_shoots]; [runners]."
         fields = [
-            concatenate(obj.creep_lay_shoots, CREEP_LAY_SHOOTS_CHOICES),
-            concatenate(obj.runners, RUNNERS_CHOICES),
+            obj.get_creep_lay_shoots_display(),
+            obj.get_runners_display(),
         ]
 
         text = "; ".join(filter(None, fields))
@@ -657,7 +668,7 @@ class StemRootSerializer(DisplayNameModelSerializer):
     def get_bracts(self, obj):
         # Generate sentence "Beblätterung" according pattern:
         # "[bracts] beblättert."
-        fields = concatenate(obj.bracts, BRACTS_CHOICES)
+        fields = obj.get_bracts_display()
 
         text = f"{fields} beblättert" if fields else ""
 
@@ -677,8 +688,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # "[organ_features] [organs]; Primärwurzel [primary_root]."
         fields = [
             obj.organ_features,
-            concatenate(obj.organs, ORGANS_CHOICES),
-            concatenate(obj.primary_root, PRIMARY_ROOT_CHOICES),
+            obj.get_organs_display(),
+            obj.get_primary_root_display(),
         ]
         fields[2] = f"Primärwurzel {fields[2]}" if fields[2] else ""
 

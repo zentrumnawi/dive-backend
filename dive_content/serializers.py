@@ -125,11 +125,11 @@ class LeafSerializer(DisplayNameModelSerializer):
         # section]em Querschnitt."
         fields = [
             obj.color,
-            concatenate(obj.veins, VEINS_CHOICES, "e"),
-            concatenate(obj.division, DIVISION_CHOICES, "e"),
-            concatenate(obj.succulence, SUCCULENCE_CHOICES, "e"),
-            concatenate(obj.texture, TEXTURE_CHOICES, "e"),
-            concatenate(obj.cross_section, CROSS_SECTION_CHOICES, "em"),
+            add_suffix(obj.get_veins_display(), "e"),
+            add_suffix(obj.get_division_display(), "e"),
+            add_suffix(obj.get_succulence_display(), "e"),
+            add_suffix(obj.get_texture_display(), "e", "/"),
+            add_suffix(obj.get_cross_section_display(), "em", "/"),
         ]
 
         text = ", ".join(filter(None, fields[:5]))
@@ -143,10 +143,13 @@ class LeafSerializer(DisplayNameModelSerializer):
         # Generate sentence "Anheftung" according pattern:
         # "Blätter sitzen [attachment], stehen [arrangement]; [rosette]."
         fields = [
-            concatenate(obj.attachment, ATTACHMENT_CHOICES),
-            concatenate(obj.arrangement, ARRANGMENT_CHOICES),
-            concatenate(obj.rosette, ROSETTE_CHOICES),
+            obj.attachment,
+            obj.get_arrangement_display(),
+            obj.get_rosette_display(),
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], ATTACHMENT_CHOICES)
+
         fields[0] = f"sitzen {fields[0]}" if fields[0] else ""
         fields[1] = f"stehen {fields[1]}" if fields[1] else ""
 
@@ -167,19 +170,26 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.leaf_comp_num,
-            concatenate(
-                obj.leaf_comp_blade_shape, LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
-            ),
+            obj.leaf_comp_blade_shape,
             obj.leaf_comp_incision_num,
-            concatenate(
-                obj.leaf_comp_incision_depth, LEAF_COMP_INCISION_DEPTH_CHOICES, app[3]
-            ),
+            obj.leaf_comp_incision_depth,
             obj.leaflet_incision_num,
             obj.leaflet_incision_add,
-            concatenate(
-                obj.leaflet_incision_depth, LEAFLET_INCISION_DEPTH_CHOICES, app[6]
-            ),
+            obj.leaflet_incision_depth,
         ]
+        if fields[1]:
+            fields[1] = format_ArrayField(
+                fields[1], LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
+            )
+        if fields[3]:
+            fields[3] = format_ArrayField(
+                fields[3], LEAF_COMP_INCISION_DEPTH_CHOICES, app[3], "/"
+            )
+        if fields[6]:
+            fields[6] = format_ArrayField(
+                fields[6], LEAFLET_INCISION_DEPTH_CHOICES, app[6], "/"
+            )
+
         for i in (2, 4, 5):
             fields[i] = f"{fields[i]}-" if fields[i] else ""
         if fields[2] and " bis " in fields[3]:
@@ -213,16 +223,19 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.leaf_simple_num,
-            concatenate(
-                obj.leaf_simple_blade_shape, LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1]
-            ),
+            obj.leaf_simple_blade_shape,
             obj.leaf_simple_incision_num,
-            concatenate(
-                obj.leaf_simple_incision_depth,
-                LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
-                app[3],
-            ),
+            obj.leaf_simple_incision_depth,
         ]
+        if fields[1]:
+            fields[1] = format_ArrayField(
+                fields[1], LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1], "/"
+            )
+        if fields[3]:
+            fields[3] = format_ArrayField(
+                fields[3], LEAF_SIMPLE_INCISION_DEPTH_CHOICES, app[3], "/"
+            )
+
         fields[2] = f"{fields[2]}-" if fields[2] else ""
         if fields[2] and " bis " in fields[3]:
             fields[3] = fields[3].split(" bis ", 1)
@@ -242,12 +255,19 @@ class LeafSerializer(DisplayNameModelSerializer):
         # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
         # Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
         fields = [
-            concatenate(obj.edge, EDGE_CHOICES),
-            concatenate(obj.surface, SURFACE_CHOICES, "e"),
-            concatenate(obj.stipule_edge, STIPULE_EDGE_CHOICES, "e"),
-            concatenate(obj.base, BASE_CHOICES),
-            concatenate(obj.apex, APEX_CHOICES),
+            obj.edge,
+            obj.surface,
+            obj.stipule_edge,
+            obj.get_base_display(),
+            obj.get_apex_display(),
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], EDGE_CHOICES)
+        if fields[1]:
+            fields[1] = format_ArrayField(fields[1], SURFACE_CHOICES, "e", "/")
+        if fields[2]:
+            fields[2] = format_ArrayField(fields[2], EDGE_CHOICES, "e")
+
         fields[0] = f"Blattränder {fields[0]}" if fields[0] else ""
         fields[1] = f"{fields[1]} Blattoberfläche" if fields[1] else ""
         fields[2] = f"{fields[2]} Nebenblattränder" if fields[2] else ""

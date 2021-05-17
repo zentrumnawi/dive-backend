@@ -561,7 +561,7 @@ class FruitSerializer(DisplayNameModelSerializer):
         # "[fruit_form] [fruit_type]."
         fields = [
             obj.fruit_form,
-            concatenate(obj.fruit_type, FRUIT_TYPE_CHOICES),
+            obj.get_fruit_type_display(),
         ]
 
         text = " ".join(filter(None, fields))
@@ -571,7 +571,7 @@ class FruitSerializer(DisplayNameModelSerializer):
     def get_ovule(self, obj):
         # Generate sentence "Samenanlage" according pattern:
         # "Samenanlage in [ovule_pos]."
-        fields = concatenate(obj.ovule_pos, OVULE_POS_CHOICES)
+        fields = obj.get_ovule_pos_display()
 
         text = f"Samenanlage in {fields}" if fields else ""
 

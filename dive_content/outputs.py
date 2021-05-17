@@ -12,3 +12,7 @@ def add_suffix(term, suffix, separator=None):
             term = f"{term}{suffix}"
 
     return term
+
+
+def get_ArrayField_display(field, choices):
+    return [f"{dict(choices).get(f)}" for f in field]

@@ -38,3 +38,7 @@ def format_ArrayField(field, choices, suffix="", separator=None, conjunction="bi
     string = format_enumeration(field, conjunction)
 
     return string
+
+
+def convert_decimal_separator(string):
+    return string.replace(".", ",")

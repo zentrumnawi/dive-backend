@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.postgres.forms import SimpleArrayField
 from django.core.exceptions import ValidationError
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
@@ -128,6 +129,13 @@ class SeasonField(forms.MultiValueField):
                 data_list[2] = None
 
         return data_list
+
+
+class SubsectionTitleField(forms.Field):
+    def __init__(self, title, color="#2f7692"):
+        label = format_html(f'<span style="color:{color};"><b>{title}</b></span>')
+        super().__init__(required=False, label=label, label_suffix="")
+        self.widget.attrs = {"style": "display:none;"}
 
 
 class IndicatorField(forms.MultiValueField):

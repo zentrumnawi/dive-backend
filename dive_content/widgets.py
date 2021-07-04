@@ -1,53 +1,6 @@
 from django import forms
 
 
-class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
-    def __init__(self, min, max, step=1, suffix=None, attrs=None):
-        self.max = max
-        if suffix == "cm":
-            self.template_name = "centimeter.html"
-        widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-        )
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        data_list = [None, None]
-        if value:
-            data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
-
-        return data_list
-
-
-class NumericPrefixTermWidget(forms.MultiWidget):
-    def __init__(self, choices, attrs=None):
-        widgets = (
-            forms.Select(choices=choices[0]),
-            forms.Select(choices=choices[1]),
-        )
-
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        data_list = ["", ""]
-        if value:
-            data_list = [value[0], value[1:]] if value[0].isdigit() else ["", value]
-
-        return data_list
-
-
-class SeasonWidget(forms.MultiWidget):
-    def __init__(self, choices, attrs=None):
-        self.template_name = "season.html"
-        widgets = [forms.Select(choices=choices)] * 4
-
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        return [None] * 4
-
-
 class IndicatorWidget(forms.MultiWidget):
     def __init__(self, choices, mode=None, attrs=None):
         self.mode = mode
@@ -89,7 +42,54 @@ class IndicatorWidget(forms.MultiWidget):
         return data_list
 
 
+class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
+    def __init__(self, min, max, step=1, suffix=None, attrs=None):
+        self.max = max
+        if suffix == "cm":
+            self.template_name = "centimeter.html"
+        widgets = (
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
+            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
+        )
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        data_list = [None, None]
+        if value:
+            data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
+
+        return data_list
+
+
+class NumericPrefixTermWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        widgets = (
+            forms.Select(choices=choices[0]),
+            forms.Select(choices=choices[1]),
+        )
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        data_list = ["", ""]
+        if value:
+            data_list = [value[0], value[1:]] if value[0].isdigit() else ["", value]
+
+        return data_list
+
+
 class OutputWidget(forms.Widget):
     def __init__(self):
         self.template_name = "output.html"
         super().__init__()
+
+
+class SeasonWidget(forms.MultiWidget):
+    def __init__(self, choices, attrs=None):
+        self.template_name = "season.html"
+        widgets = [forms.Select(choices=choices)] * 4
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return [None] * 4

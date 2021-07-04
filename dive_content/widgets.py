@@ -87,3 +87,9 @@ class IndicatorWidget(forms.MultiWidget):
                 data_list.insert(2, True if "=" in value else False)
 
         return data_list
+
+
+class OutputWidget(forms.Widget):
+    def __init__(self):
+        self.template_name = "output.html"
+        super().__init__()

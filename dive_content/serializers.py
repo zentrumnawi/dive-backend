@@ -69,6 +69,16 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
+class ExcludeEmptyFieldsModelSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+
+        for key in [key for key, value in ret.items() if value is (None or "")]:
+            del ret[key]
+
+        return ret
+
+
 class LeafSerializer(DisplayNameModelSerializer):
     overview = serializers.SerializerMethodField(label="Überblick")
     attachment = serializers.SerializerMethodField(label="Anheftung")

@@ -69,10 +69,6 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
-def format_sentence(line):
-    return f"{line[0].capitalize()}{line[1:]}." if line else ""
-
-
 class LeafSerializer(DisplayNameModelSerializer):
     overview = serializers.SerializerMethodField(label="Überblick")
     attachment = serializers.SerializerMethodField(label="Anheftung")

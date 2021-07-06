@@ -10,6 +10,7 @@ from .widgets import (
     IndicatorWidget,
     NumberRangeCharWidget_to_be_deleted,
     NumericPrefixTermWidget,
+    OutputWidget,
     SeasonWidget,
 )
 
@@ -129,6 +130,17 @@ class SeasonField(forms.MultiValueField):
                 data_list[2] = None
 
         return data_list
+
+
+class OutputField(forms.Field):
+    def __init__(self, output=None):
+        super().__init__(
+            required=False,
+            widget=OutputWidget,
+            label="",
+            initial=output,
+            label_suffix="",
+        )
 
 
 class SubsectionTitleField(forms.Field):

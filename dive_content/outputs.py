@@ -85,3 +85,50 @@ def format_subject_text(pre_subject_text, subject, post_subject_text, conjunctio
     text = f"{text}{conjunction}{post_subject_text}" if post_subject_text else text
 
     return text
+
+
+class LeafPoalesOutput:
+    def generate_overview(obj):
+        # Generate output "Überblick" according pattern:
+        # "[length] lange, [width] breite, [color], [shape]e, [hairiness]e,
+        # streifennervige Blätter mit [cross_section]em Querschnitt. Blätter sitzen
+        # [alignment] an [attachment_point]."
+        fields = [
+            obj.length,
+            obj.width,
+            obj.color,
+            obj.get_shape_display(),
+            obj.hairiness,
+            obj.cross_section,
+            obj.alignment,
+            obj.get_attachment_point_display(),
+        ]
+        fields[0] = format_FloatRangeTermCharField(fields[0])
+        fields[3] = add_suffix(fields[3], "e")
+        fields[4] = format_ArrayField(fields[4], HAIRINESS_CHOICES, "e")
+        fields[5] = format_ArrayField(fields[5], LEAFPOALES_CROSS_SECTION_CHOICES, "em")
+        fields[6] = get_NumericPrefixTermField_display(fields[6], ALIGNMENT_CHOICES)
+
+        text_parts = [
+            f"{fields[0]} lange" if fields[0] else "",
+            f"{fields[1]} breite" if fields[1] else "",
+            f"mit {fields[5]} Querschnitt" if fields[5] else "",
+            f"an {fields[7]}" if fields[7] else "",
+        ]
+        joined_text_parts = [
+            ", ".join(filter(None, text_parts[:2] + fields[2:5])),
+            " ".join(filter(None, [fields[6], text_parts[3]])),
+        ]
+        joined_text_parts[0] += "," if joined_text_parts[0] else ""
+
+        texts = [
+            format_subject_text(
+                joined_text_parts[0], "streifennervige Blätter", text_parts[2]
+            ),
+            format_subject_text("", "Blätter", joined_text_parts[1], " sitzen "),
+        ]
+        texts[0] = format_sentence(texts[0])
+        texts[1] = format_sentence(texts[1])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

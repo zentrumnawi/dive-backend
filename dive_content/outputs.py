@@ -132,3 +132,38 @@ class LeafPoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+    def generate_leaf_blade(obj):
+        # Generate output "Blattspreite" according pattern:
+        # "[blade_shape]e Spreite [blade_shape_feature]; Oberseite [blade_corrugation],
+        # [blade_double_groove]; Unterseite [blade_shine], [blade_keel]; Blattrand
+        # [blade_edge]; Knospenanlage [blade_bud_system]."
+        fields = [
+            obj.get_blade_shape_display(),
+            obj.blade_shape_feature,
+            obj.blade_corrugation,
+            obj.get_blade_double_groove_display(),
+            obj.get_blade_shine_display(),
+            obj.get_blade_keel_display(),
+            obj.get_blade_edge_display(),
+            obj.get_blade_bud_system_display(),
+        ]
+        fields[0] = add_suffix(fields[0], "e")
+        fields[2] = format_ArrayField(fields[2], BLADE_CORRUGATION_CHOICES)
+        joined_fields = [
+            ", ".join(filter(None, fields[2:4])),
+            ", ".join(filter(None, fields[4:6])),
+        ]
+
+        text_parts = [
+            format_subject_text(fields[0], "Spreite", fields[1]),
+            f"Oberseite {joined_fields[0]}" if joined_fields[0] else "",
+            f"Unterseite {joined_fields[1]}" if joined_fields[1] else "",
+            f"Blattrand {fields[6]}" if fields[6] else "",
+            f"Knospenanlage {fields[7]}" if fields[7] else "",
+        ]
+
+        text = "; ".join(filter(None, text_parts))
+        text = format_sentence(text)
+
+        return text

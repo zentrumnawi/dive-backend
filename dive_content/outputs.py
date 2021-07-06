@@ -188,3 +188,30 @@ class LeafPoalesOutput:
         text = format_sentence(text)
 
         return text
+
+    def generate_ligule(obj):
+        # Generate output "Blatthäutchen" according pattern:
+        # "[ligule_length]e, [ligule_color], [ligule_shape]e, [ligule_consistency]e,
+        # Blatthäutchen. [ligule_features]"
+        fields = [
+            obj.get_ligule_length_display(),
+            obj.ligule_color,
+            obj.get_ligule_shape_display(),
+            obj.get_ligule_consistency_display(),
+            obj.ligule_features,
+        ]
+        fields[0] = add_suffix(fields[0], "e")
+        fields[2] = add_suffix(fields[2], "e")
+        fields[3] = add_suffix(fields[3], "e")
+        joined_fields = ", ".join(filter(None, fields[0:4]))
+        if fields[2] == "fehlende":
+            joined_fields = "fehlende"
+
+        texts = [
+            format_subject_text(joined_fields, "Blatthäutchen", ""),
+            fields[4],
+        ]
+        texts[0] = format_sentence(texts[0])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

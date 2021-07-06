@@ -27,6 +27,49 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
         super().__init__(choices=choices, **kwargs)
 
 
+class IndicatorField(forms.MultiValueField):
+    def __init__(self, field_name, **kwargs):
+        choices = INDICATORS_CHOICES[INDICATORS.index(field_name)]
+        self.mode = field_name
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("label", Indicators._meta.get_field(field_name).verbose_name)
+        if not kwargs["required"] and not any(
+            key in (None, "") for key in dict(choices).keys()
+        ):
+            choices = (("", "---------"),) + choices
+
+        fields = [
+            forms.ChoiceField(choices=choices),
+            forms.BooleanField(),
+        ]
+        if self.mode == "light":
+            fields.append(forms.BooleanField())
+        if self.mode == "humidity":
+            fields.extend([forms.BooleanField()] * 2)
+        widget = IndicatorWidget(choices, self.mode)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        error_message = _("Non-numeric values must not have additional symbols.")
+        if data_list[0][1:2] in ("x", "?") and (
+            data_list[-1]
+            or (self.mode == "light" and data_list[1])
+            or (self.mode == "humidity" and (data_list[1] or data_list[2]))
+        ):
+            raise ValidationError(error_message)
+
+        value = f"{f'{data_list[0]}' if data_list[0] else ''}"
+        if self.mode == "light":
+            value = f"{f'{value}()' if value and data_list[1] else f'{value}'}"
+        if self.mode == "humidity":
+            value = f"{f'{value}~' if value and data_list[1] else f'{value}'}"
+            value = f"{f'{value}=' if value and data_list[2] else f'{value}'}"
+        value = f"{f'{value} (?)' if value and data_list[-1] else f'{value}'}"
+
+        return value
+
+
 class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
     def __init__(self, min=1, max=99, suffix=None, infinity=False, **kwargs):
         self.max = max
@@ -104,6 +147,17 @@ class NumericPrefixTermField(forms.MultiValueField):
         return value
 
 
+class OutputField(forms.Field):
+    def __init__(self, output=None):
+        super().__init__(
+            required=False,
+            widget=OutputWidget,
+            label="",
+            initial=output,
+            label_suffix="",
+        )
+
+
 class SeasonField(forms.MultiValueField):
     def __init__(self, **kwargs):
         kwargs.setdefault("required", False)
@@ -132,62 +186,8 @@ class SeasonField(forms.MultiValueField):
         return data_list
 
 
-class OutputField(forms.Field):
-    def __init__(self, output=None):
-        super().__init__(
-            required=False,
-            widget=OutputWidget,
-            label="",
-            initial=output,
-            label_suffix="",
-        )
-
-
 class SubsectionTitleField(forms.Field):
     def __init__(self, title, color="#2f7692"):
         label = format_html(f'<span style="color:{color};"><b>{title}</b></span>')
         super().__init__(required=False, label=label, label_suffix="")
         self.widget.attrs = {"style": "display:none;"}
-
-
-class IndicatorField(forms.MultiValueField):
-    def __init__(self, field_name, **kwargs):
-        choices = INDICATORS_CHOICES[INDICATORS.index(field_name)]
-        self.mode = field_name
-        kwargs.setdefault("required", False)
-        kwargs.setdefault("label", Indicators._meta.get_field(field_name).verbose_name)
-        if not kwargs["required"] and not any(
-            key in (None, "") for key in dict(choices).keys()
-        ):
-            choices = (("", "---------"),) + choices
-
-        fields = [
-            forms.ChoiceField(choices=choices),
-            forms.BooleanField(),
-        ]
-        if self.mode == "light":
-            fields.append(forms.BooleanField())
-        if self.mode == "humidity":
-            fields.extend([forms.BooleanField()] * 2)
-        widget = IndicatorWidget(choices, self.mode)
-
-        super().__init__(fields=fields, widget=widget, **kwargs)
-
-    def compress(self, data_list):
-        error_message = _("Non-numeric values must not have additional symbols.")
-        if data_list[0][1:2] in ("x", "?") and (
-            data_list[-1]
-            or (self.mode == "light" and data_list[1])
-            or (self.mode == "humidity" and (data_list[1] or data_list[2]))
-        ):
-            raise ValidationError(error_message)
-
-        value = f"{f'{data_list[0]}' if data_list[0] else ''}"
-        if self.mode == "light":
-            value = f"{f'{value}()' if value and data_list[1] else f'{value}'}"
-        if self.mode == "humidity":
-            value = f"{f'{value}~' if value and data_list[1] else f'{value}'}"
-            value = f"{f'{value}=' if value and data_list[2] else f'{value}'}"
-        value = f"{f'{value} (?)' if value and data_list[-1] else f'{value}'}"
-
-        return value

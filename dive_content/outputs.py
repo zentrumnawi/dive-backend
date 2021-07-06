@@ -215,3 +215,23 @@ class LeafPoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+    def generate_leaf_sheath(obj):
+        # Generate output "Blattscheide" according pattern:
+        # "[sheath_coloring], [sheath_connation]e Blattscheide. [sheath_features]"
+        fields = [
+            obj.sheath_coloring,
+            obj.get_sheath_connation_display(),
+            obj.sheath_features,
+        ]
+        fields[1] = add_suffix(fields[1], "e")
+        joined_fields = ", ".join(filter(None, fields[0:2]))
+
+        texts = [
+            format_subject_text(joined_fields, "Blattscheide", ""),
+            fields[2],
+        ]
+        texts[0] = format_sentence(texts[0])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

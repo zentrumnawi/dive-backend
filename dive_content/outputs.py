@@ -167,3 +167,24 @@ class LeafPoalesOutput:
         text = format_sentence(text)
 
         return text
+
+    def generate_leaf_base(obj):
+        # Generate output "Blattgrund" according pattern:
+        # "[base_edge] Blattgrund [[base_auricle_feature] base_auricle]."
+        fields = [
+            obj.get_base_edge_display(),
+            obj.get_base_auricle_display(),
+            obj.base_auricle_feature,
+        ]
+        if fields[0] == "behaart (< 3 mm)":
+            fields[0] = "behaarter (< 3 mm)"
+        else:
+            fields[0] = add_suffix(fields[0], "er")
+        if fields[1] == "mit Öhrchen" and fields[2]:
+            splited_field = fields[1].split(" ", 1)
+            fields[1] = f"{splited_field[0]} {fields[2]} {splited_field[1]}"
+
+        text = format_subject_text(fields[0], "Blattgrund", fields[1])
+        text = format_sentence(text)
+
+        return text

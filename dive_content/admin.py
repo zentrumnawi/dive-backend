@@ -264,6 +264,15 @@ stemrhizomepoales_fieldsets = (
         },
     ),
 )
+stemrhizomepoales_radio_fields = {
+    "stem_hairiness": admin.VERTICAL,
+    "stem_pith": admin.HORIZONTAL,
+    "stem_nodes": admin.VERTICAL,
+    "stem_nodes_hairiness": admin.VERTICAL,
+    "stem_transverse_walls": admin.HORIZONTAL,
+    "rhizome_length": admin.HORIZONTAL,
+    "rhizome_branching": admin.HORIZONTAL,
+}
 
 indicators_fieldsets = (
     (None, {"fields": ("plant", "not_specified")}),

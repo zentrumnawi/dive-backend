@@ -463,3 +463,19 @@ class StemRhizomePoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+    def generate_rhizome(obj):
+        # Generate output "Rhizom" according pattern:
+        # "[rhizome_length]es, [rhizome_branching]es Rhizom."
+        fields = [
+            obj.get_rhizome_length_display(),
+            obj.get_rhizome_branching_display(),
+        ]
+        fields[0] = add_suffix(fields[0], "es")
+        fields[1] = add_suffix(fields[1], "es")
+        joined_fields = ", ".join(filter(None, fields))
+
+        text = format_subject_text(joined_fields, "Rhizom", "")
+        text = format_sentence(text)
+
+        return text

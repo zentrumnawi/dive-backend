@@ -653,6 +653,48 @@ PRIMARY_ROOT_CHOICES = (
 )
 
 
+# StemRhizomePoales choices
+
+# growth_form --------------------------------------------------------------------------
+TUFT_STOLON_CHOICES = (
+    ("loH", _("lockerer Horst")),
+    ("auH", _("ausgebreiteter Horst")),
+    ("dfH", _("dichter, fester Horst")),
+    ("obA", _("oberirdische Ausläufer (Stolone)")),
+    ("unA", _("unterirdische Ausläufer (Rhizome)")),
+)
+# stem ---------------------------------------------------------------------------------
+STEM_HAIRINESS_CHOICES = (("g", _("glatt")), ("k", _("kahl")), ("b", _("behaart")))
+STEM_CROSS_SECTION_CHOICES = (
+    ("sti", _("stilrund")),
+    ("fla", _("flachgedrückt")),
+    ("std", _("stumpf dreikantig")),
+    ("scd", _("scharf dreikantig")),
+    ("dre", _("dreikantig")),
+)
+STEM_PITH_CHOICES = (
+    ("h", _("hohl")),
+    ("n", _("hohl; nur Knoten markig")),
+    ("m", _("markig")),
+)
+STEM_NODES_CHOICES = (("m", _("mit Knoten")), ("o", _("ohne Knoten")))
+STEM_NODES_HAIRINESS_CHOICES = (("k", _("kahl")), ("b", _("behaart")))
+STEM_TRANSVERSE_WALLS_CHOICES = (("m", _("mit Querwänden")), ("o", _("ohne Querwände")))
+STEM_SURFACE_CHOICES = (
+    ("", "---------"),
+    ("gla", _("glatt")),
+    ("ung", _("ungerieft")),
+    ("ger", _("gerieft")),
+    ("lae", _("längsgerippt")),
+    ("feg", _("fein gestreift")),
+)
+STEM_SURFACE_DICT = dict(STEM_SURFACE_CHOICES[1:])
+# rhizome ------------------------------------------------------------------------------
+RHIZOME_LENGTH_CHOICES = (("k", _("kurz")), ("m", _("mittellang")), ("l", _("lang")))
+RHIZOME_BRANCHING_CHOICES = (("g", _("gering verzweigt")), ("s", _("stark verzweigt")))
+# --------------------------------------------------------------------------------------
+
+
 # Indicators Choices
 
 LIGHT_CHOICES = (

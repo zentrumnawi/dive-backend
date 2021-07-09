@@ -1000,6 +1000,87 @@ class StemRoot(models.Model):
         verbose_name_plural = _("Sprosse und Wurzeln")
 
 
+class StemRhizomePoales(models.Model):
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="stemrhizomepoales",
+        verbose_name=_("Pflanze"),
+    )
+    # growth_form ----------------------------------------------------------------------
+    tuft_stolon = models.CharField(
+        max_length=3,
+        choices=TUFT_STOLON_CHOICES,
+        blank=True,
+        verbose_name=_("Horst/Ausläufer"),
+    )
+    # stem -----------------------------------------------------------------------------
+    stem_color = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name=_("Farbe"),
+        help_text=_("Grammatikalisch anpassen."),
+    )
+    stem_hairiness = models.CharField(
+        max_length=1,
+        choices=STEM_HAIRINESS_CHOICES,
+        blank=True,
+        verbose_name=_("Behaarung"),
+    )
+    stem_cross_section = ArrayField(
+        base_field=models.CharField(max_length=3, choices=STEM_CROSS_SECTION_CHOICES),
+        size=2,
+        blank=True,
+        default=list,
+        verbose_name=_("Querschnitt"),
+    )
+    stem_pith = models.CharField(
+        max_length=1, choices=STEM_PITH_CHOICES, blank=True, verbose_name=_("Mark"),
+    )
+    stem_nodes = models.CharField(
+        max_length=1, choices=STEM_NODES_CHOICES, blank=True, verbose_name=_("Knoten"),
+    )
+    stem_nodes_hairiness = models.CharField(
+        max_length=1,
+        choices=STEM_NODES_HAIRINESS_CHOICES,
+        blank=True,
+        verbose_name=_("Behaarung (Knoten)"),
+    )
+    stem_transverse_walls = models.CharField(
+        max_length=1,
+        choices=STEM_TRANSVERSE_WALLS_CHOICES,
+        blank=True,
+        verbose_name=_("Querwände"),
+    )
+    stem_surface = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Oberfläche"),
+    )
+    stem_features = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Besonderheiten"),
+        help_text=_("Als eigenständigen Satz ausformulieren."),
+    )
+    # rhizome --------------------------------------------------------------------------
+    rhizome_length = models.CharField(
+        max_length=1,
+        choices=RHIZOME_LENGTH_CHOICES,
+        blank=True,
+        verbose_name=_("Länge"),
+    )
+    rhizome_branching = models.CharField(
+        max_length=1,
+        choices=RHIZOME_BRANCHING_CHOICES,
+        blank=True,
+        verbose_name=_("Verzweigung"),
+    )
+    # ----------------------------------------------------------------------------------
+
+    class Meta:
+        verbose_name = _("Halm und Rhizom (Poales)")
+        verbose_name_plural = _("Halme und Rhizome (Poales)")
+
+
 class Indicators(models.Model):
     plant = models.OneToOneField(
         Plant,

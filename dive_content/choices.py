@@ -663,6 +663,13 @@ TUFT_STOLON_CHOICES = (
     ("obA", _("oberirdische Ausläufer (Stolone)")),
     ("unA", _("unterirdische Ausläufer (Rhizome)")),
 )
+TUFT_STOLON_EDIT_DICT = {
+    "loH": _("lockerem Horst"),
+    "auH": _("ausgebreitetem Horst"),
+    "dfH": _("dichtem, festem Horst"),
+    "obA": _("oberirdischen Ausläufern (Stolone)"),
+    "unA": _("unterirdischen Ausläufern (Rhizome)"),
+}
 # stem ---------------------------------------------------------------------------------
 STEM_HAIRINESS_CHOICES = (("g", _("glatt")), ("k", _("kahl")), ("b", _("behaart")))
 STEM_CROSS_SECTION_CHOICES = (

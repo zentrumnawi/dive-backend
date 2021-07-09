@@ -398,3 +398,18 @@ class BlossomPoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+
+class StemRhizomePoalesOutput:
+    def generate_growth_form(obj):
+        # Generate output "Wuchsform" according pattern:
+        # "Pflanze mit [tuft_stolon]."
+        field = obj.tuft_stolon
+        field = TUFT_STOLON_EDIT_DICT.get(field)
+
+        text_part = f"mit {field}" if field else ""
+
+        text = format_subject_text("", "Pflanze", text_part)
+        text = format_sentence(text)
+
+        return text

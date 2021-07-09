@@ -14,10 +14,20 @@ from .fields import (
     NumericPrefixTermField,
     OutputField,
     SeasonField,
+    StemSurfaceField,
     SubsectionTitleField,
 )
-from .models import Blossom, BlossomPoales, Fruit, Leaf, LeafPoales, Plant, StemRoot
-from .outputs import BlossomPoalesOutput, LeafPoalesOutput
+from .models import (
+    Blossom,
+    BlossomPoales,
+    Fruit,
+    Leaf,
+    LeafPoales,
+    Plant,
+    StemRhizomePoales,
+    StemRoot,
+)
+from .outputs import BlossomPoalesOutput, LeafPoalesOutput, StemRhizomePoalesOutput
 
 
 TEXTINPUT_ATTRS = {"size": 60, "class": False}
@@ -324,6 +334,58 @@ class StemRootAdminForm(forms.ModelForm):
     surface = ArrayMultipleChoiceField(
         SURFACE_CHOICES, label=get_label(StemRoot, "surface")
     )
+
+
+class StemRhizomePoalesAdminForm(forms.ModelForm):
+    subsection_title_growth_form = SubsectionTitleField("Wuchsform")
+    subsection_title_stem = SubsectionTitleField("Stängel")
+    subsection_title_rhizome = SubsectionTitleField("Rhizom")
+
+    stem_surface = StemSurfaceField(1, 99, STEM_SURFACE_CHOICES)
+
+    output_growth_form = OutputField()
+    output_stem = OutputField()
+    output_rhizome = OutputField()
+
+    class Meta:
+        model = StemRhizomePoales
+        fields = []
+        field_classes = {
+            "stem_cross_section": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "stem_cross_section": forms.CheckboxSelectMultiple(
+                choices=STEM_CROSS_SECTION_CHOICES
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["stem_surface"].label = get_label(obj, "stem_surface")
+        self.fields["stem_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+
+        self.initial.update(
+            {
+                "output_growth_form": StemRhizomePoalesOutput.generate_growth_form(obj),
+                "output_stem": StemRhizomePoalesOutput.generate_stem(obj),
+                "output_rhizome": StemRhizomePoalesOutput.generate_rhizome(obj),
+            }
+        )
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if self.cleaned_data.get("stem_pith", "") == "n":
+            instance.stem_nodes = "m"
+        if instance.stem_nodes != "m":
+            instance.stem_nodes_hairiness = ""
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class IndicatorsAdminForm(forms.ModelForm):

@@ -238,6 +238,33 @@ stemroot_radio_fields = {
     "primary_root": admin.HORIZONTAL,
 }
 
+stemrhizomepoales_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                "subsection_title_growth_form",
+                "tuft_stolon",
+                "output_growth_form",
+                "subsection_title_stem",
+                "stem_color",
+                ("stem_hairiness", "stem_cross_section"),
+                "stem_pith",
+                ("stem_nodes", "stem_nodes_hairiness"),
+                "stem_transverse_walls",
+                "stem_surface",
+                "stem_features",
+                "output_stem",
+                "subsection_title_rhizome",
+                "rhizome_length",
+                "rhizome_branching",
+                "output_rhizome",
+            )
+        },
+    ),
+)
+
 indicators_fieldsets = (
     (None, {"fields": ("plant", "not_specified")}),
     (None, {"fields": ("light", "temperature", "humidity", "reaction", "nitrogen")}),

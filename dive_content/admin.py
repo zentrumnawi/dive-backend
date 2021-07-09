@@ -331,6 +331,14 @@ class StemRootInline(admin.StackedInline):
     classes = ("collapse",)
 
 
+class StemRhizomePoalesInline(admin.StackedInline):
+    model = StemRhizomePoales
+    fieldsets = stemrhizomepoales_fieldsets
+    form = StemRhizomePoalesAdminForm
+    radio_fields = stemrhizomepoales_radio_fields
+    classes = ("collapse",)
+
+
 class IndicatorsInline(admin.StackedInline):
     model = Indicators
     fieldsets = indicators_fieldsets
@@ -364,6 +372,7 @@ class PlantAdmin(admin.ModelAdmin):
         BlossomPoalesInline,
         FruitInline,
         StemRootInline,
+        StemRhizomePoalesInline,
         IndicatorsInline,
         PhotographInline,
     ]

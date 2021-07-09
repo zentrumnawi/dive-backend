@@ -9,6 +9,7 @@ from .models import (
     Leaf,
     LeafPoales,
     Plant,
+    StemRhizomePoales,
     StemRoot,
 )
 from .outputs import *
@@ -750,6 +751,26 @@ class StemRootSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
+class StemRhizomePoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    growth_form = serializers.SerializerMethodField(label="Wuchsform")
+    stem = serializers.SerializerMethodField(label="Stängel")
+    rhizome = serializers.SerializerMethodField(label="Rhizome")
+
+    class Meta:
+        model = StemRhizomePoales
+        fields = ("growth_form", "stem", "rhizome")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_growth_form(self, obj):
+        return StemRhizomePoalesOutput.generate_growth_form(obj)
+
+    def get_stem(self, obj):
+        return StemRhizomePoalesOutput.generate_stem(obj)
+
+    def get_rhizome(self, obj):
+        return StemRhizomePoalesOutput.generate_rhizome(obj)
+
+
 class IndicatorsSerializer(serializers.ModelSerializer):
     not_specified = serializers.CharField(label="", read_only=True)
     key = serializers.CharField(source="get_key", label="", read_only=True)
@@ -823,6 +844,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     blossompoales = BlossomPoalesSerializer(required=False)
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)
+    stemrhizomepoales = StemRhizomePoalesSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 

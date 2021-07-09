@@ -9,6 +9,7 @@ from .forms import (
     LeafAdminForm,
     LeafPoalesAdminForm,
     PlantAdminForm,
+    StemRhizomePoalesAdminForm,
     StemRootAdminForm,
 )
 from .models import (
@@ -19,6 +20,7 @@ from .models import (
     Leaf,
     LeafPoales,
     Plant,
+    StemRhizomePoales,
     StemRoot,
 )
 
@@ -427,6 +429,16 @@ class StemRootAdmin(admin.ModelAdmin):
 
 
 admin.site.register(StemRoot, StemRootAdmin)
+
+
+class StemRhizomePoalesAdmin(admin.ModelAdmin):
+    model = StemRhizomePoales
+    fieldsets = stemrhizomepoales_fieldsets
+    form = StemRhizomePoalesAdminForm
+    radio_fields = stemrhizomepoales_radio_fields
+
+
+admin.site.register(StemRhizomePoales, StemRhizomePoalesAdmin)
 
 
 class IndicatorsAdmin(admin.ModelAdmin):

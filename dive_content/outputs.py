@@ -413,3 +413,53 @@ class StemRhizomePoalesOutput:
         text = format_sentence(text)
 
         return text
+
+    def generate_stem(obj):
+        # Generate output "Stängel" according pattern:
+        # "[stem_color], [stem_hairiness]er, [stem_cross_section]er, [stem_pith]er
+        # Stängel [[stem_nodes_hairiness]en, [stem_pith]en stem_nodes]; im Inneren
+        # [stem_transverse_walls]; Oberfläche [stem_surface]. [stem_features]"
+        fields = [
+            obj.stem_color,
+            obj.get_stem_hairiness_display(),
+            obj.stem_cross_section,
+            obj.get_stem_pith_display(),
+            obj.get_stem_nodes_display(),
+            obj.get_stem_nodes_hairiness_display(),
+            obj.get_stem_transverse_walls_display(),
+            obj.stem_surface,
+            obj.stem_features,
+        ]
+        fields[1] = add_suffix(fields[1], "er")
+        fields[2] = format_ArrayField(fields[2], STEM_CROSS_SECTION_CHOICES, "er")
+        fields[3] = add_suffix(fields[3], "er")
+        fields[5] = add_suffix(fields[5], "en")
+        if fields[3] == "hohl; nur Knoten markiger":
+            fields[3] = "hohler"
+            fields[5] = ", ".join(filter(None, (fields[5], "markigen")))
+        if fields[4] and fields[5]:
+            splited_field = fields[4].split(" ", 1)
+            fields[4] = f"{splited_field[0]} {fields[5]} {splited_field[1]}"
+        if fields[7]:
+            splited_field = fields[7].split(" ", 1)
+            splited_field[-1] = f"{STEM_SURFACE_DICT.get(splited_field[-1])}"
+            if len(splited_field) == 1:
+                fields[7] = splited_field[0]
+            else:
+                fields[7] = f"{splited_field[0]}-fach {splited_field[1]}"
+        joined_fields = ", ".join(filter(None, fields[0:4]))
+
+        text_parts = [
+            format_subject_text(joined_fields, "Stängel", fields[4]),
+            f"im Inneren {fields[6]}" if fields[6] else "",
+            f"Oberfläche {fields[7]}" if fields[7] else "",
+        ]
+        joined_text_parts = "; ".join(filter(None, text_parts))
+
+        texts = [
+            format_sentence(joined_text_parts),
+            fields[8],
+        ]
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

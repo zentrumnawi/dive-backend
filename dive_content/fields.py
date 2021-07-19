@@ -14,6 +14,7 @@ from .widgets import (
     NumericPrefixTermWidget,
     OutputWidget,
     SeasonWidget,
+    StemSurfaceWidget,
 )
 
 
@@ -274,6 +275,17 @@ class SeasonField(forms.MultiValueField):
                 data_list[2] = None
 
         return data_list
+
+
+class StemSurfaceField(IntegerRangeTermCharField):
+    widget = StemSurfaceWidget
+
+    def compress(self, data_list):
+        if data_list[1] not in ["ger", "lae", "feg"]:
+            data_list[0] = ""
+        value = " ".join(filter(None, data_list))
+
+        return value
 
 
 class SubsectionTitleField(forms.Field):

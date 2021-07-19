@@ -161,8 +161,8 @@ class BlossomAdminForm(forms.ModelForm):
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = NumberRangeCharField_to_be_replaced(
-        max=100, infinity=True, label=get_label(Fruit, "seed_num")
+    seed_num = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Fruit, "seed_num")
     )
 
 

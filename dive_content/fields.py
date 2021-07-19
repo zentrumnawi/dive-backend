@@ -8,6 +8,7 @@ from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
 from .models import Indicators
 from .widgets import (
     IndicatorWidget,
+    NumberRangeCharWidget,
     NumberRangeCharWidget_to_be_deleted,
     NumericPrefixTermWidget,
     OutputWidget,
@@ -68,6 +69,58 @@ class IndicatorField(forms.MultiValueField):
         value = f"{f'{value} (?)' if value and data_list[-1] else f'{value}'}"
 
         return value
+
+
+class IntegerRangeCharField(forms.MultiValueField):
+    help_text = "Einzelwert oder Wertebereich"
+    field = forms.IntegerField
+    widget = NumberRangeCharWidget
+
+    def __init__(self, min, max, substitutes={}, **kwargs):
+        self.substitutes = substitutes
+        reversed_substitutes = {}
+        if substitutes:
+            reversed_substitutes = {v: k for k, v in substitutes.items()}
+            for k, v in substitutes.items():
+                self.help_text += f', {k}="{v}"'
+
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("help_text", self.help_text)
+
+        def error_messages(position):
+            return {
+                "min_value": f"Ensure {position} value is greater than or equal to %(limit_value)s.",
+                "max_value": f"Ensure {position} value is less than or equal to %(limit_value)s.",
+            }
+
+        field_1_kwargs = {
+            "min_value": min,
+            "max_value": max,
+            "error_messages": error_messages("first"),
+        }
+        field_2_kwargs = dict(field_1_kwargs)
+        field_2_kwargs.update({"error_messages": error_messages("second")})
+
+        fields = (self.field(**field_1_kwargs), self.field(**field_2_kwargs))
+        widget = self.widget(min, max, reversed_substitutes)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        if len(data_list) > 1 and all(data_list):
+            if data_list[0] > data_list[1]:
+                raise ValidationError(_("First value must not exceed second value."))
+            if data_list[0] == data_list[1]:
+                data_list[1] = None
+
+        for i, data in enumerate(data_list):
+            if data is not None:
+                data_list[i] = str(data)
+                if self.substitutes:
+                    if data in self.substitutes:
+                        data_list[i] = self.substitutes[data]
+
+        return "–".join(filter(None, data_list))
 
 
 class NumberRangeCharField_to_be_replaced(forms.MultiValueField):

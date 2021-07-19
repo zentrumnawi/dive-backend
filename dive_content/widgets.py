@@ -142,3 +142,14 @@ class SeasonWidget(forms.MultiWidget):
 
     def decompress(self, value):
         return [None] * 4
+
+
+class StemSurfaceWidget(NumberRangeTermCharWidget):
+    def decompress(self, value):
+        data_list = ["", ""]
+        if value:
+            data_list = value.split(" ", 1)
+            if len(data_list) == 1:
+                data_list.insert(0, "")
+
+        return data_list

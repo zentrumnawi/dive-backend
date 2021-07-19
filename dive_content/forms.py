@@ -7,6 +7,7 @@ from .choices import *
 from .fields import (
     ArrayMultipleChoiceField,
     IndicatorField,
+    IntegerRangeCharField,
     NumberRangeCharField_to_be_replaced,
     NumericPrefixTermField,
     SeasonField,
@@ -63,20 +64,18 @@ class LeafAdminForm(forms.ModelForm):
         STIPULE_EDGE_CHOICES, label=get_label(Leaf, "stipule_edge")
     )
 
-    leaf_comp_num = NumberRangeCharField_to_be_replaced(
-        label=get_label(Leaf, "leaf_comp_num")
+    leaf_comp_num = IntegerRangeCharField(1, 99, label=get_label(Leaf, "leaf_comp_num"))
+    leaf_comp_incision_num = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "leaf_comp_incision_num")
     )
-    leaf_comp_incision_num = NumberRangeCharField_to_be_replaced(
-        label=get_label(Leaf, "leaf_comp_incision_num")
+    leaflet_incision_num = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "leaflet_incision_num")
     )
-    leaflet_incision_num = NumberRangeCharField_to_be_replaced(
-        label=get_label(Leaf, "leaflet_incision_num")
+    leaf_simple_num = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "leaf_simple_num")
     )
-    leaf_simple_num = NumberRangeCharField_to_be_replaced(
-        label=get_label(Leaf, "leaf_simple_num")
-    )
-    leaf_simple_incision_num = NumberRangeCharField_to_be_replaced(
-        label=get_label(Leaf, "leaf_simple_incision_num")
+    leaf_simple_incision_num = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "leaf_simple_incision_num")
     )
 
 

@@ -81,11 +81,11 @@ class LeafAdminForm(forms.ModelForm):
 
 class BlossomAdminForm(forms.ModelForm):
     season = SeasonField(label=get_label(Blossom, "season"))
-    inflorescence_num = NumberRangeCharField_to_be_replaced(
-        max=100, infinity=True, label=get_label(Blossom, "inflorescence_num")
+    inflorescence_num = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_num")
     )
-    blossom_num = NumberRangeCharField_to_be_replaced(
-        max=100, infinity=True, label=get_label(Blossom, "blossom_num")
+    blossom_num = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Blossom, "blossom_num")
     )
     bract_blade = ArrayMultipleChoiceField(
         BRACT_BLADE_CHOICES, label=get_label(Blossom, "bract_blade")
@@ -93,15 +93,15 @@ class BlossomAdminForm(forms.ModelForm):
     diameter = NumberRangeCharField_to_be_replaced(
         0.1, 100, "cm", label=get_label(Blossom, "diameter")
     )
-    sepal_num = NumberRangeCharField_to_be_replaced(
-        max=11, infinity=True, label=get_label(Blossom, "sepal_num")
+    sepal_num = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "sepal_num")
     )
     sepal_connation_type = NumericPrefixTermField(
         (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "sepal_connation_type"),
     )
-    petal_num = NumberRangeCharField_to_be_replaced(
-        max=11, infinity=True, label=get_label(Blossom, "petal_num")
+    petal_num = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "petal_num")
     )
     petal_len = NumberRangeCharField_to_be_replaced(
         0.1, 100, "cm", label=get_label(Blossom, "petal_len")
@@ -110,17 +110,17 @@ class BlossomAdminForm(forms.ModelForm):
         (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "petal_connation_type"),
     )
-    stamen_num = NumberRangeCharField_to_be_replaced(
-        max=11, infinity=True, label=get_label(Blossom, "stamen_num")
+    stamen_num = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "stamen_num")
     )
     stamen_len = NumberRangeCharField_to_be_replaced(
         0.1, 100, "cm", label=get_label(Blossom, "stamen_len")
     )
-    carpel_num = NumberRangeCharField_to_be_replaced(
-        max=11, infinity=True, label=get_label(Blossom, "carpel_num")
+    carpel_num = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "carpel_num")
     )
-    stigma_num = NumberRangeCharField_to_be_replaced(
-        max=11, infinity=True, label=get_label(Blossom, "stigma_num")
+    stigma_num = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "stigma_num")
     )
 
     def clean_bract_blade(self):

@@ -64,6 +64,33 @@ class NumberRangeCharWidget(forms.MultiWidget):
         return data_list
 
 
+class NumberRangeTermCharWidget(forms.MultiWidget):
+    template_name = "rangeterm.html"
+
+    def __init__(self, min, max, term, attrs=None):
+        self.term = None if isinstance(term, (tuple, list)) else term
+
+        widgets = (NumberRangeCharWidget(min, max),)
+        if self.term is None:
+            widgets += (forms.Select(choices=term),)
+
+        super().__init__(widgets, attrs)
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["widget"]["term"] = self.term
+
+        return context
+
+    def decompress(self, value):
+        if self.term is None:
+            data_list = value.split(" ", 1) if value else ["", ""]
+        else:
+            data_list = [value.split(" ", 1)[0]] if value else [""]
+
+        return data_list
+
+
 class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
     def __init__(self, min, max, step=1, suffix=None, attrs=None):
         self.max = max

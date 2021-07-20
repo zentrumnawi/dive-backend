@@ -123,6 +123,10 @@ class IntegerRangeCharField(forms.MultiValueField):
         return "–".join(filter(None, data_list))
 
 
+class FloatRangeCharField(IntegerRangeCharField):
+    field = forms.FloatField
+
+
 class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
     def __init__(self, min=1, max=99, suffix=None, infinity=False, **kwargs):
         self.max = max

@@ -10,6 +10,7 @@ from .widgets import (
     IndicatorWidget,
     NumberRangeCharWidget,
     NumberRangeCharWidget_to_be_deleted,
+    NumberRangeTermCharWidget,
     NumericPrefixTermWidget,
     OutputWidget,
     SeasonWidget,
@@ -125,6 +126,34 @@ class IntegerRangeCharField(forms.MultiValueField):
 
 class FloatRangeCharField(IntegerRangeCharField):
     field = forms.FloatField
+
+
+class IntegerRangeTermCharField(forms.MultiValueField):
+    field = IntegerRangeCharField
+    widget = NumberRangeTermCharWidget
+
+    def __init__(self, min=1, max=99, term="", **kwargs):
+        self.term = None if isinstance(term, (tuple, list)) else term
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("help_text", self.field.help_text)
+
+        fields = (self.field(min, max),)
+        if self.term is None:
+            fields += (forms.ChoiceField(choices=term),)
+        widget = self.widget(min, max, term)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        value = ""
+        if data_list[0]:
+            value = (
+                f"{data_list[0]} {data_list[1]}"
+                if self.term is None
+                else f"{data_list[0]} {self.term}"
+            )
+
+        return value
 
 
 class NumberRangeCharField_to_be_replaced(forms.MultiValueField):

@@ -42,6 +42,28 @@ class IndicatorWidget(forms.MultiWidget):
         return data_list
 
 
+class NumberRangeCharWidget(forms.MultiWidget):
+    def __init__(self, min, max, reversed_substitutes={}, attrs=None):
+        self.reversed_substitutes = reversed_substitutes
+        widgets = (
+            forms.NumberInput(attrs={"min": min, "max": max}),
+            forms.NumberInput(attrs={"min": min, "max": max}),
+        )
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        data_list = [None, None]
+        if value:
+            data_list = value.split("–", 1)
+            if self.reversed_substitutes:
+                for i, data in enumerate(data_list):
+                    if data in self.reversed_substitutes:
+                        data_list[i] = self.reversed_substitutes[data]
+
+        return data_list
+
+
 class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
     def __init__(self, min, max, step=1, suffix=None, attrs=None):
         self.max = max

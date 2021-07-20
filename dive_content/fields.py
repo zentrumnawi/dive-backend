@@ -156,6 +156,10 @@ class IntegerRangeTermCharField(forms.MultiValueField):
         return value
 
 
+class FloatRangeTermCharField(IntegerRangeTermCharField):
+    field = FloatRangeCharField
+
+
 class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
     def __init__(self, min=1, max=99, suffix=None, infinity=False, **kwargs):
         self.max = max

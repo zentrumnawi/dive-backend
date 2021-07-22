@@ -1,7 +1,16 @@
 from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
-from .models import Blossom, Fruit, Indicators, Leaf, LeafPoales, Plant, StemRoot
+from .models import (
+    Blossom,
+    BlossomPoales,
+    Fruit,
+    Indicators,
+    Leaf,
+    LeafPoales,
+    Plant,
+    StemRoot,
+)
 from .outputs import *
 
 
@@ -560,6 +569,34 @@ class BlossomSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
+class BlossomPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    season = serializers.SerializerMethodField(label="Blütezeit")
+    inflorescence = serializers.SerializerMethodField(label="Blütenstand")
+    blossom_perianth = serializers.SerializerMethodField(label="Blüte und Blütenhülle")
+    spikelet = serializers.SerializerMethodField(label="Ährchen")
+    husks = serializers.SerializerMethodField(label="Spelzen")
+
+    class Meta:
+        model = BlossomPoales
+        fields = ("season", "inflorescence", "blossom_perianth", "spikelet", "husks")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_season(self, obj):
+        return BlossomPoalesOutput.generate_season(obj)
+
+    def get_inflorescence(self, obj):
+        return BlossomPoalesOutput.generate_inflorescence(obj)
+
+    def get_blossom_perianth(self, obj):
+        return BlossomPoalesOutput.generate_blossom_perianth(obj)
+
+    def get_spikelet(self, obj):
+        return BlossomPoalesOutput.generate_spikelet(obj)
+
+    def get_husks(self, obj):
+        return BlossomPoalesOutput.generate_husks(obj)
+
+
 class FruitSerializer(DisplayNameModelSerializer):
     fruit = serializers.SerializerMethodField(label="Frucht")
     ovule = serializers.SerializerMethodField(label="Samenanlage")
@@ -783,6 +820,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     leaf = LeafSerializer(required=False)
     leafpoales = LeafPoalesSerializer(required=False)
     blossom = BlossomSerializer(required=False)
+    blossompoales = BlossomPoalesSerializer(required=False)
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)

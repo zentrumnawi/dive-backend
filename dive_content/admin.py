@@ -3,6 +3,7 @@ from solid_backend.photograph.admin import PhotographInline
 
 from .forms import (
     BlossomAdminForm,
+    BlossomPoalesAdminForm,
     FruitAdminForm,
     IndicatorsAdminForm,
     LeafAdminForm,
@@ -10,7 +11,16 @@ from .forms import (
     PlantAdminForm,
     StemRootAdminForm,
 )
-from .models import Blossom, Fruit, Indicators, Leaf, LeafPoales, Plant, StemRoot
+from .models import (
+    Blossom,
+    BlossomPoales,
+    Fruit,
+    Indicators,
+    Leaf,
+    LeafPoales,
+    Plant,
+    StemRoot,
+)
 
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
@@ -342,6 +352,16 @@ class BlossomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Blossom, BlossomAdmin)
+
+
+class BlossomPoalesAdmin(admin.ModelAdmin):
+    model = BlossomPoales
+    fieldsets = blossompoales_fieldsets
+    form = BlossomPoalesAdminForm
+    radio_fields = blossompoales_radio_fields
+
+
+admin.site.register(BlossomPoales, BlossomPoalesAdmin)
 
 
 class FruitAdmin(admin.ModelAdmin):

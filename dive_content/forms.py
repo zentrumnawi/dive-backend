@@ -16,8 +16,8 @@ from .fields import (
     SeasonField,
     SubsectionTitleField,
 )
-from .models import Blossom, Fruit, Leaf, LeafPoales, Plant, StemRoot
-from .outputs import LeafPoalesOutput
+from .models import Blossom, BlossomPoales, Fruit, Leaf, LeafPoales, Plant, StemRoot
+from .outputs import BlossomPoalesOutput, LeafPoalesOutput
 
 
 TEXTINPUT_ATTRS = {"size": 60, "class": False}
@@ -221,6 +221,86 @@ class BlossomAdminForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class BlossomPoalesAdminForm(forms.ModelForm):
+    subsection_title_season = SubsectionTitleField("Blütezeit")
+    subsection_title_inflorescence = SubsectionTitleField("Blütenstand")
+    subsection_title_blossom_perianth = SubsectionTitleField("Blüte und Blütenhülle")
+    subsection_title_spikelet = SubsectionTitleField("Ährchen")
+    subsection_title_husks = SubsectionTitleField("Spelzen")
+
+    season = SeasonField()
+    inflorescence_blossom_number = IntegerRangeCharField(1, 12, {11: "viel", 12: "∞"})
+    inflorescence_bract_length = FloatRangeTermCharField(0, 99, "cm")
+    spikelet_length = FloatRangeTermCharField(0, 99, "cm")
+    spikelet_blossom_number = IntegerRangeCharField(2, 11, {11: "∞"})
+
+    output_season = OutputField()
+    output_inflorescence = OutputField()
+    output_blossom_perianth = OutputField()
+    output_spikelet = OutputField()
+    output_husks = OutputField()
+
+    class Meta:
+        model = BlossomPoales
+        fields = []
+        field_classes = {
+            "husks_cross_section": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "husks_cross_section": forms.CheckboxSelectMultiple(
+                choices=HUSKS_CROSS_SECTION_CHOICES
+            )
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["season"].label = obj._meta.get_field("season").verbose_name
+        self.fields["inflorescence_blossom_number"].label = get_label(
+            obj, "inflorescence_blossom_number"
+        )
+        self.fields["inflorescence_bract_length"].label = get_label(
+            obj, "inflorescence_bract_length"
+        )
+        self.fields["blossom_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["perianth_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["spikelet_length"].label = get_label(obj, "spikelet_length")
+        self.fields["spikelet_blossom_number"].label = get_label(
+            obj, "spikelet_blossom_number"
+        )
+        self.fields["spikelet_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+        self.fields["husks_description"].widget.attrs.update(TEXTAREA_ATTRS)
+
+        self.initial.update(
+            {
+                "output_season": BlossomPoalesOutput.generate_season(obj),
+                "output_inflorescence": BlossomPoalesOutput.generate_inflorescence(obj),
+                "output_blossom_perianth": BlossomPoalesOutput.generate_blossom_perianth(
+                    obj
+                ),
+                "output_spikelet": BlossomPoalesOutput.generate_spikelet(obj),
+                "output_husks": BlossomPoalesOutput.generate_husks(obj),
+            }
+        )
+
+    def clean(self):
+        super().clean()
+        fields = (
+            "inflorescence_blossom_number",
+            "inflorescence_density",
+            "inflorescence_position",
+            "inflorescence_features",
+        )
+        cleaned_fields = (self.cleaned_data.get(field) for field in fields)
+
+        if not self.cleaned_data.get("inflorescence_type") and any(cleaned_fields):
+            self.add_error(
+                "inflorescence_type",
+                "In combination with others this field must be provided.",
+            )
 
 
 class FruitAdminForm(forms.ModelForm):

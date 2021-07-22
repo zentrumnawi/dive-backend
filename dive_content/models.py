@@ -701,6 +701,159 @@ class Blossom(models.Model):
         verbose_name_plural = _("Blüten")
 
 
+class BlossomPoales(models.Model):
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="blossompoales",
+        verbose_name=_("Pflanze"),
+    )
+    # season ---------------------------------------------------------------------------
+    season = ArrayField(
+        base_field=models.IntegerField(blank=True, null=True),
+        size=4,
+        blank=True,
+        default=list,
+        verbose_name=_("Blütezeit"),
+    )
+    # inflorescence --------------------------------------------------------------------
+    inflorescence_blossom_number = models.CharField(
+        max_length=20, blank=True, verbose_name=_("Blütenanzahl")
+    )
+    inflorescence_density = models.CharField(
+        max_length=1,
+        choices=INFLORESCENCE_DENSITY_CHOICES,
+        blank=True,
+        verbose_name=_("Dichte"),
+    )
+    inflorescence_position = models.CharField(
+        max_length=1,
+        choices=INFLORESCENCE_POSITION_CHOICES,
+        blank=True,
+        verbose_name=_("Stellung"),
+    )
+    inflorescence_type = models.CharField(
+        max_length=1,
+        choices=BP_INFLORESCENCE_TYPE_CHOICES,
+        blank=True,
+        verbose_name=_("Typ"),
+    )
+    inflorescence_features = models.CharField(
+        max_length=50, blank=True, verbose_name=_("Besonderheiten")
+    )
+    inflorescence_bract_length = models.CharField(
+        max_length=20, blank=True, verbose_name=_("Tragblattlänge")
+    )
+    inflorescence_bract_feature = models.CharField(
+        max_length=50, blank=True, verbose_name=_("Besonderheit (Tragblatt)")
+    )
+    # blossom_perianth -----------------------------------------------------------------
+    blossom_sex = models.CharField(
+        max_length=1,
+        choices=BLOSSOM_SEX_CHOICES,
+        blank=True,
+        verbose_name=_("Geschlecht"),
+    )
+    perianth = models.CharField(
+        max_length=1,
+        choices=BP_PERIANTH_CHOICES,
+        blank=True,
+        verbose_name=_("Blütenhülle"),
+    )
+    blossom_description = models.TextField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Blüte (Beschreibung)"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
+    perianth_description = models.TextField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Blütenhülle (Beschreibung)"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
+    # spikelet -------------------------------------------------------------------------
+    spikelet_length = models.CharField(
+        max_length=20, blank=True, verbose_name=_("Länge")
+    )
+    spikelet_shape = models.CharField(
+        max_length=3,
+        choices=SPIKELET_SHAPE_CHOICES,
+        blank=True,
+        verbose_name=_("Form"),
+    )
+    spikelet_attachment = models.CharField(
+        max_length=3,
+        choices=SPIKELET_ATTACHMENT_CHOICES,
+        blank=True,
+        verbose_name=_("Ansatz"),
+    )
+    spikelet_sex = models.CharField(
+        max_length=1,
+        choices=SPIKELET_SEX_CHOICES,
+        blank=True,
+        verbose_name=_("Geschlecht"),
+    )
+    spikelet_blossom_number = models.CharField(
+        max_length=20, blank=True, verbose_name=_("Blütenanzahl")
+    )
+    spikelet_max_width = models.CharField(
+        max_length=2,
+        choices=SPIKELET_MAX_WIDTH_CHOICES,
+        blank=True,
+        verbose_name=_("Breitenmaxium"),
+    )
+    spikelet_rachilla = models.CharField(
+        max_length=3,
+        choices=SPIKELET_RACHILLA_CHOICES,
+        blank=True,
+        verbose_name=_("Achse"),
+    )
+    spikelet_stalk = models.CharField(
+        max_length=3,
+        choices=SPIKELET_STALK_CHOICES,
+        blank=True,
+        verbose_name=_("Stiel"),
+    )
+    spikelet_spindle = models.CharField(
+        max_length=1,
+        choices=SPIKELET_SPINDLE_CHOICES,
+        blank=True,
+        verbose_name=_("Spindel"),
+    )
+    spikelet_features = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Besonderheiten"),
+        help_text=_("Als eigenständigen Satz ausformulieren."),
+    )
+    # husks ----------------------------------------------------------------------------
+    husks_form = models.CharField(
+        max_length=1, choices=HUSKS_FORM_CHOICES, blank=True, verbose_name=_("Form"),
+    )
+    husks_keel = models.CharField(
+        max_length=1, choices=HUSKS_KEEL_CHOICES, blank=True, verbose_name=_("Kiel"),
+    )
+    husks_cross_section = ArrayField(
+        base_field=models.CharField(max_length=1, choices=HUSKS_CROSS_SECTION_CHOICES),
+        size=2,
+        blank=True,
+        default=list,
+        verbose_name=_("Querschnitt"),
+    )
+    husks_description = models.TextField(
+        max_length=400,
+        blank=True,
+        verbose_name=_("Beschreibung"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
+    # ----------------------------------------------------------------------------------
+
+    class Meta:
+        verbose_name = _("Blüte (Poales)")
+        verbose_name_plural = _("Blüten (Poales)")
+
+
 class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")

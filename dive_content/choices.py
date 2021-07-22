@@ -475,6 +475,84 @@ GROUND_CHOICES = (
 # ------------------------------------------------------------------------------------ #
 
 
+# BlossomPoales choices
+
+# inflorescence ------------------------------------------------------------------------
+INFLORESCENCE_DENSITY_CHOICES = (
+    ("l", _("locker")),
+    ("d", _("in dichten Kopf zusammengezogen")),
+)
+INFLORESCENCE_POSITION_CHOICES = (
+    ("a", _("aufrecht")),
+    ("s", _("scheinbar seitenständig")),
+)
+BP_INFLORESCENCE_TYPE_CHOICES = (
+    ("A", _("Ähre")),
+    ("R", _("Rispe")),
+    ("S", _("Spirre")),
+)
+# blossom_perianth ---------------------------------------------------------------------
+BLOSSOM_SEX_CHOICES = (
+    ("z", _("zwittrig")),
+    ("s", _("zwittrig, selten einige weiblich")),
+    ("e", _("eingeschlechtig")),
+)
+BP_PERIANTH_CHOICES = (
+    ("m", _("mit Blütenhülle")),
+    ("S", _("Blüte von Spelzen umgeben")),
+)
+# spikelet -----------------------------------------------------------------------------
+SPIKELET_SHAPE_CHOICES = (
+    ("zSv", _("zur Spitze hin verbreitert")),
+    ("zus", _("zusammengedrückt")),
+    ("sez", _("seitlich zusammengedrückt")),
+    ("niz", _("nicht zusammengedrückt")),
+)
+SPIKELET_ATTACHMENT_CHOICES = (
+    ("ges", _("gestielt")),
+    ("bog", _("borstenlos gestielt")),
+    ("vou", _("völlig ungestielt")),
+    ("sit", _("sitzend")),
+)
+SPIKELET_SEX_CHOICES = (("z", _("zwittrig")), ("e", _("eingeschlechtig")))
+SPIKELET_MAX_WIDTH_CHOICES = (
+    ("un", _("unter der Mitte")),
+    ("in", _("in der Mitte")),
+    ("ue", _("über der Mitte")),
+)
+SPIKELET_RACHILLA_CHOICES = (
+    ("gBa", _("glatt, zur Blütezeit abstehend")),
+    ("sic", _("sichtbar")),
+    ("zRs", _("zur Reife sichtbar")),
+    ("nis", _("nicht sichtbar")),
+)
+SPIKELET_STALK_CHOICES = (
+    ("lau", _("lang, unverzweigt")),
+    ("lav", _("lang, verzweigt")),
+    ("kur", _("kurz")),
+    ("skv", _("sehr kurz, verzweigt")),
+    ("vkA", _("viel kürzer als Ährchen")),
+)
+SPIKELET_SPINDLE_CHOICES = (
+    ("z", _("zerbrechlich")),
+    ("B", _("nach der Blütezeit zerbrechlich")),
+    ("n", _("nicht zerbrechlich")),
+)
+# husks --------------------------------------------------------------------------------
+HUSKS_FORM_CHOICES = (
+    ("a", _("abgerundet")),
+    ("R", _("auf dem Rücken abgerundet")),
+    ("n", _("nicht abgerundet")),
+)
+HUSKS_KEEL_CHOICES = (("g", _("gekielt")), ("n", _("nicht gekielt")))
+HUSKS_CROSS_SECTION_CHOICES = (
+    ("o", _("oval")),
+    ("r", _("rundlich")),
+    ("s", _("2-schneidig")),
+)
+# --------------------------------------------------------------------------------------
+
+
 # Fruit choices
 
 FRUIT_TYPE_CHOICES = (

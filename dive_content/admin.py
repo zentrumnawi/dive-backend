@@ -129,6 +129,45 @@ blossom_fieldsets = (
     ),
 )
 
+blossompoales_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                "subsection_title_season",
+                "season",
+                "output_season",
+                "subsection_title_inflorescence",
+                (
+                    "inflorescence_blossom_number",
+                    "inflorescence_density",
+                    "inflorescence_position",
+                ),
+                ("inflorescence_type", "inflorescence_features"),
+                ("inflorescence_bract_length", "inflorescence_bract_feature"),
+                "output_inflorescence",
+                "subsection_title_blossom_perianth",
+                ("blossom_sex", "perianth"),
+                "blossom_description",
+                "perianth_description",
+                "output_blossom_perianth",
+                "subsection_title_spikelet",
+                ("spikelet_length", "spikelet_shape", "spikelet_attachment"),
+                ("spikelet_sex", "spikelet_blossom_number"),
+                "spikelet_max_width",
+                ("spikelet_rachilla", "spikelet_stalk", "spikelet_spindle"),
+                "spikelet_features",
+                "output_spikelet",
+                "subsection_title_husks",
+                ("husks_form", "husks_keel", "husks_cross_section"),
+                "husks_description",
+                "output_husks",
+            )
+        },
+    ),
+)
+
 fruit_fieldsets = (
     (None, {"fields": ("plant",)}),
     (

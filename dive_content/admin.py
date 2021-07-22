@@ -167,6 +167,17 @@ blossompoales_fieldsets = (
         },
     ),
 )
+blossompoales_radio_fields = {
+    "inflorescence_density": admin.VERTICAL,
+    "inflorescence_position": admin.VERTICAL,
+    "inflorescence_type": admin.HORIZONTAL,
+    "blossom_sex": admin.VERTICAL,
+    "perianth": admin.VERTICAL,
+    "spikelet_sex": admin.HORIZONTAL,
+    "spikelet_max_width": admin.HORIZONTAL,
+    "husks_form": admin.VERTICAL,
+    "husks_keel": admin.VERTICAL,
+}
 
 fruit_fieldsets = (
     (None, {"fields": ("plant",)}),

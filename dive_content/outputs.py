@@ -256,3 +256,37 @@ class BlossomPoalesOutput:
         text = format_sentence(text)
 
         return text
+
+    def generate_inflorescence(obj):
+        # Generate output "Blütenstand" according pattern:
+        # "[inflorescence_blossom_number]-blütige, [inflorescence_density]e,
+        # [inflorescence_position]e [inflorescence_type] [inflorescence_features].
+        # [inflorescence_bract_length] langes Tragblatt [inflorescence_bract_feature]."
+        fields = [
+            obj.inflorescence_blossom_number,
+            obj.get_inflorescence_density_display(),
+            obj.get_inflorescence_position_display(),
+            obj.get_inflorescence_type_display(),
+            obj.inflorescence_features,
+            obj.inflorescence_bract_length,
+            obj.inflorescence_bract_feature,
+        ]
+        fields[1] = add_suffix(fields[1], "e")
+        fields[2] = add_suffix(fields[2], "e")
+        fields[5] = format_FloatRangeTermCharField(fields[5])
+
+        text_parts = [
+            f"{fields[0]}-blütige" if fields[0] else "",
+            f"{fields[5]} langes" if fields[5] else "",
+        ]
+        joined_text_parts = ", ".join(filter(None, [text_parts[0]] + fields[1:3]))
+
+        texts = [
+            format_subject_text(joined_text_parts, fields[3], fields[4]),
+            format_subject_text(text_parts[1], "Tragblatt", fields[6]),
+        ]
+        texts[0] = format_sentence(texts[0])
+        texts[1] = format_sentence(texts[1])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

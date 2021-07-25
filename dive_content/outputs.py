@@ -66,3 +66,14 @@ def get_NumericPrefixTermField_display(field, choices):
 
 def format_sentence(text):
     return f"{text[0].capitalize()}{text[1:]}." if text else ""
+
+
+def format_FloatRangeTermCharField(field):
+    string = ""
+    if field:
+        splited_field = field.split(" ", 1)
+        splited_field[0] = remove_empty_decimal_places(splited_field[0])
+        splited_field[0] = convert_decimal_separator(splited_field[0])
+        string = " ".join(splited_field)
+
+    return string

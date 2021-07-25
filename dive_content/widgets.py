@@ -1,7 +1,7 @@
 from django import forms
 
 
-class NumberRangeCharWidget(forms.MultiWidget):
+class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
     def __init__(self, min, max, step=1, suffix=None, attrs=None):
         self.max = max
         if suffix == "cm":

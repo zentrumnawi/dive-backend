@@ -76,7 +76,9 @@ class BlossomAdminForm(forms.ModelForm):
         Blossom, "inflorescence_num", max=100, infinity=True
     )
     blossom_num = NumberRangeCharField(Blossom, "blossom_num", max=100, infinity=True)
-    bract_blade = ArrayMultipleChoiceField(BRACT_BLADE_CHOICES, Blossom, "bract_blade")
+    bract_blade = ArrayMultipleChoiceField(
+        BRACT_BLADE_CHOICES, label=get_label(Blossom, "bract_blade")
+    )
     diameter = NumberRangeCharField(Blossom, "diameter", 0.1, 100, "cm")
     sepal_num = NumberRangeCharField(Blossom, "sepal_num", max=11, infinity=True)
     sepal_connation_type = ConnationTypeField("sepal_connation_type")

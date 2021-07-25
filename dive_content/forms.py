@@ -132,14 +132,20 @@ class FruitAdminForm(forms.ModelForm):
 
 
 class StemRootAdminForm(forms.ModelForm):
-    orientation = ArrayMultipleChoiceField(ORIENTATION_CHOICES, StemRoot, "orientation")
+    orientation = ArrayMultipleChoiceField(
+        ORIENTATION_CHOICES, label=get_label(StemRoot, "orientation")
+    )
     appearance = ArrayMultipleChoiceField(
-        APPEARANCE_CHOICES, StemRoot, "appearance", widget=forms.CheckboxSelectMultiple
+        APPEARANCE_CHOICES,
+        label=get_label(StemRoot, "appearance"),
+        widget=forms.CheckboxSelectMultiple,
     )
     cross_section = ArrayMultipleChoiceField(
-        SR_CROSS_SECTION_CHOICES, StemRoot, "cross_section"
+        SR_CROSS_SECTION_CHOICES, label=get_label(StemRoot, "cross_section")
     )
-    surface = ArrayMultipleChoiceField(SURFACE_CHOICES, StemRoot, "surface")
+    surface = ArrayMultipleChoiceField(
+        SURFACE_CHOICES, label=get_label(StemRoot, "surface")
+    )
 
 
 class IndicatorsAdminForm(forms.ModelForm):

@@ -42,3 +42,12 @@ def format_ArrayField(field, choices, suffix="", separator=None, conjunction="bi
 
 def convert_decimal_separator(string):
     return string.replace(".", ",")
+
+
+def remove_empty_decimal_places(string):
+    if string:
+        numbers = string.split("–", 1)
+        if all(float(n).is_integer() for n in numbers):
+            string = "–".join(n[: n.index(".")] for n in numbers)
+
+    return string

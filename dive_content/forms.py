@@ -34,25 +34,34 @@ class PlantAdminForm(forms.ModelForm):
 
 
 class LeafAdminForm(forms.ModelForm):
-    attachment = ArrayMultipleChoiceField(ATTACHMENT_CHOICES, Leaf, "attachment")
+    attachment = ArrayMultipleChoiceField(
+        ATTACHMENT_CHOICES, label=get_label(Leaf, "attachment")
+    )
     leaf_comp_blade_shape = ArrayMultipleChoiceField(
-        LEAF_COMP_BLADE_SHAPE_CHOICES, Leaf, "leaf_comp_blade_shape"
+        LEAF_COMP_BLADE_SHAPE_CHOICES, label=get_label(Leaf, "leaf_comp_blade_shape")
     )
     leaf_comp_incision_depth = ArrayMultipleChoiceField(
-        LEAF_COMP_INCISION_DEPTH_CHOICES, Leaf, "leaf_comp_incision_depth"
+        LEAF_COMP_INCISION_DEPTH_CHOICES,
+        label=get_label(Leaf, "leaf_comp_incision_depth"),
     )
     leaflet_incision_depth = ArrayMultipleChoiceField(
-        LEAFLET_INCISION_DEPTH_CHOICES, Leaf, "leaflet_incision_depth"
+        LEAFLET_INCISION_DEPTH_CHOICES, label=get_label(Leaf, "leaflet_incision_depth")
     )
     leaf_simple_blade_shape = ArrayMultipleChoiceField(
-        LEAF_SIMPLE_BLADE_SHAPE_CHOICES, Leaf, "leaf_simple_blade_shape"
+        LEAF_SIMPLE_BLADE_SHAPE_CHOICES,
+        label=get_label(Leaf, "leaf_simple_blade_shape"),
     )
     leaf_simple_incision_depth = ArrayMultipleChoiceField(
-        LEAF_SIMPLE_INCISION_DEPTH_CHOICES, Leaf, "leaf_simple_incision_depth"
+        LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+        label=get_label(Leaf, "leaf_simple_incision_depth"),
     )
-    edge = ArrayMultipleChoiceField(EDGE_CHOICES, Leaf, "edge")
-    surface = ArrayMultipleChoiceField(SURFACE_CHOICES, Leaf, "surface")
-    stipule_edge = ArrayMultipleChoiceField(STIPULE_EDGE_CHOICES, Leaf, "stipule_edge")
+    edge = ArrayMultipleChoiceField(EDGE_CHOICES, label=get_label(Leaf, "edge"))
+    surface = ArrayMultipleChoiceField(
+        SURFACE_CHOICES, label=get_label(Leaf, "surface")
+    )
+    stipule_edge = ArrayMultipleChoiceField(
+        STIPULE_EDGE_CHOICES, label=get_label(Leaf, "stipule_edge")
+    )
 
     leaf_comp_num = NumberRangeCharField(Leaf, "leaf_comp_num")
     leaf_comp_incision_num = NumberRangeCharField(Leaf, "leaf_comp_incision_num")

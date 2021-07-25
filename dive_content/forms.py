@@ -8,7 +8,7 @@ from .fields import (
     ArrayMultipleChoiceField,
     ConnationTypeField,
     IndicatorField,
-    NumberRangeCharField,
+    NumberRangeCharField_to_be_replaced,
     SeasonField,
 )
 from .models import Blossom, Fruit, Leaf, Plant, StemRoot
@@ -63,11 +63,21 @@ class LeafAdminForm(forms.ModelForm):
         STIPULE_EDGE_CHOICES, label=get_label(Leaf, "stipule_edge")
     )
 
-    leaf_comp_num = NumberRangeCharField(Leaf, "leaf_comp_num")
-    leaf_comp_incision_num = NumberRangeCharField(Leaf, "leaf_comp_incision_num")
-    leaflet_incision_num = NumberRangeCharField(Leaf, "leaflet_incision_num")
-    leaf_simple_num = NumberRangeCharField(Leaf, "leaf_simple_num")
-    leaf_simple_incision_num = NumberRangeCharField(Leaf, "leaf_simple_incision_num")
+    leaf_comp_num = NumberRangeCharField_to_be_replaced(
+        label=get_label(Leaf, "leaf_comp_num")
+    )
+    leaf_comp_incision_num = NumberRangeCharField_to_be_replaced(
+        label=get_label(Leaf, "leaf_comp_incision_num")
+    )
+    leaflet_incision_num = NumberRangeCharField_to_be_replaced(
+        label=get_label(Leaf, "leaflet_incision_num")
+    )
+    leaf_simple_num = NumberRangeCharField_to_be_replaced(
+        label=get_label(Leaf, "leaf_simple_num")
+    )
+    leaf_simple_incision_num = NumberRangeCharField_to_be_replaced(
+        label=get_label(Leaf, "leaf_simple_incision_num")
+    )
 
 
 class BlossomAdminForm(forms.ModelForm):

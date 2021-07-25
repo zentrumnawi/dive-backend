@@ -31,7 +31,7 @@ class ArrayMultipleChoiceField(forms.MultipleChoiceField):
         super().__init__(choices=choices, **kwargs)
 
 
-class NumberRangeCharField(forms.MultiValueField):
+class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
     def __init__(self, min=1, max=99, suffix=None, infinity=False, **kwargs):
         self.max = max
         self.infinity = infinity

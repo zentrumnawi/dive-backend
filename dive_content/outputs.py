@@ -290,3 +290,36 @@ class BlossomPoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+    def generate_blossom_perianth(obj):
+        # Generate output "Blüte und Blütenhülle" according pattern:
+        # "[blossom_sex]e, [perianth]e Blüte [perianth]. [blossom_description]
+        # [perianth_description]"
+        fields = [
+            obj.get_blossom_sex_display(),
+            obj.get_perianth_display(),
+            obj.blossom_description,
+            obj.perianth_description,
+        ]
+        fields[0] = add_suffix(fields[0], "e", ", ")
+
+        text_parts = [
+            ", ".join(filter(None, [fields[0], "von Spelzen umgebene"]))
+            if fields[1] == "Blüte von Spelzen umgeben"
+            else fields[0],
+            "",
+            "",
+        ]
+        if fields[1] == "mit Blütenhülle":
+            text_parts[1] = fields[1]
+            text_parts[2] = fields[3]
+
+        texts = [
+            format_subject_text(text_parts[0], "Blüten", text_parts[1]),
+            fields[2],
+            text_parts[2],
+        ]
+        texts[0] = format_sentence(texts[0])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

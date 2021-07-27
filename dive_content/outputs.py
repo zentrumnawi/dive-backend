@@ -323,3 +323,50 @@ class BlossomPoalesOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+    def generate_spikelet(obj):
+        # Generate output "Ährchen" according pattern:
+        # "[spikelet_length] lange, [spikelet_shape]e, [spikelet_attachment]e,
+        # [spikelet_sex]e Ährchen mit [spikelet_blossom_number] Blüten; Breitenmaximum
+        # [spikelet_max_width]; Ährchenachse [spikelet_rachilla]; Ährchenstiel
+        # [spikelet_stalk]; Ährchenspindel [spikelet_spindle]. [spikelet_features]"
+        fields = [
+            obj.spikelet_length,
+            obj.get_spikelet_shape_display(),
+            obj.get_spikelet_attachment_display(),
+            obj.get_spikelet_sex_display(),
+            obj.spikelet_blossom_number,
+            obj.get_spikelet_max_width_display(),
+            obj.get_spikelet_rachilla_display(),
+            obj.get_spikelet_stalk_display(),
+            obj.get_spikelet_spindle_display(),
+            obj.spikelet_features,
+        ]
+        fields[0] = format_FloatRangeTermCharField(fields[0])
+        fields[1] = add_suffix(fields[1], "e")
+        fields[2] = add_suffix(fields[2], "e")
+        fields[3] = add_suffix(fields[3], "e")
+
+        text_parts = [
+            f"{fields[0]} lange" if fields[0] else "",
+            f"mit {fields[4]} Blüten" if fields[4] else "",
+            f"Breitenmaximum {fields[5]}" if fields[5] else "",
+            f"Ährchenache {fields[6]}" if fields[6] else "",
+            f"Ährchenstiel {fields[7]}" if fields[7] else "",
+            f"Ährchenspindel {fields[8]}" if fields[8] else "",
+        ]
+        joined_text_parts = [
+            ", ".join(filter(None, [text_parts[0]] + fields[1:4])),
+            "; ".join(filter(None, text_parts[2:])),
+        ]
+
+        texts = [
+            format_subject_text(joined_text_parts[0], "Ährchen", text_parts[1]),
+            joined_text_parts[1],
+            fields[9],
+        ]
+        texts[1] = format_sentence(texts[1])
+        joined_texts = "; ".join(filter(None, texts[:2]))
+        joined_texts = " ".join(filter(None, [joined_texts, texts[2]]))
+
+        return joined_texts

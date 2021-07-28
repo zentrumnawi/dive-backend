@@ -16,6 +16,7 @@ from .models import Blossom, Fruit, Leaf, Plant, StemRoot
 
 
 TEXTINPUT_ATTRS = {"size": 60, "class": False}
+TEXTAREA_ATTRS = {"cols": 60, "rows": 4, "class": False}
 
 
 def get_label(model, field_name):

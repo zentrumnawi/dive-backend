@@ -15,6 +15,9 @@ from .fields import (
 from .models import Blossom, Fruit, Leaf, Plant, StemRoot
 
 
+TEXTINPUT_ATTRS = {"size": 60, "class": False}
+
+
 def get_label(model, field_name):
     label = model._meta.get_field(field_name).verbose_name
     if isinstance(model._meta.get_field(field_name), ArrayField):

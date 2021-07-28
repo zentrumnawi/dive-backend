@@ -77,3 +77,11 @@ def format_FloatRangeTermCharField(field):
         string = " ".join(splited_field)
 
     return string
+
+
+def format_subject_text(pre_subject_text, subject, post_subject_text, conjunction=" "):
+    text = f"{pre_subject_text} {subject}" if pre_subject_text else ""
+    text = f"{subject}" if not text and post_subject_text else text
+    text = f"{text}{conjunction}{post_subject_text}" if post_subject_text else text
+
+    return text

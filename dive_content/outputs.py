@@ -370,3 +370,31 @@ class BlossomPoalesOutput:
         joined_texts = " ".join(filter(None, [joined_texts, texts[2]]))
 
         return joined_texts
+
+    def generate_husks(obj):
+        # Generate output "Spelzen" according pattern:
+        # "[husks_form]e, [husks_keel]e Spelzen mit [husks_cross_section]em Querschnitt.
+        # [husks_description]"
+        fields = [
+            obj.get_husks_form_display(),
+            obj.get_husks_keel_display(),
+            obj.husks_cross_section,
+            obj.husks_description,
+        ]
+        fields[0] = add_suffix(fields[0], "e")
+        fields[1] = add_suffix(fields[1], "e")
+        fields[2] = format_ArrayField(fields[2], HUSKS_CROSS_SECTION_CHOICES, "em")
+
+        text_parts = [
+            ", ".join(filter(None, fields[0:2])),
+            f"mit {fields[2]} Querschnitt" if fields[2] else "",
+        ]
+
+        texts = [
+            format_subject_text(text_parts[0], "Spelzen", text_parts[1]),
+            fields[3],
+        ]
+        texts[0] = format_sentence(texts[0])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts

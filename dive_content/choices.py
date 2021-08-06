@@ -4,6 +4,39 @@ from django.utils.translation import ugettext_lazy as _
 
 # general ------------------------------------------------------------------------------
 ARTICLE_CHOICES = (("der", _("Der")), ("die", _("Die")), ("das", _("Das")))
+GROWTH_FORM_CHOICES = (
+    ("bau", _("Baum")),
+    ("str", _("Strauch")),
+    ("stb", _("Strauchbaum")),
+    ("zwe", _("Zwergstrauch")),
+    ("hal", _("Halbstrauch")),
+    ("spa", _("Spalierstrauch")),
+    ("scs", _("Scheinstrauch")),
+    ("sta", _("Staudenstrauch")),
+    ("kra", _("Kraut")),
+    ("krc", _("krautiger Chemaephyt")),
+    ("lia", _("Liane")),
+    ("kle", _("Kletterpflanze")),
+    ("tau", _("Tauchpflanze")),
+    ("sch", _("Schwimmpflanze")),
+)
+INTERACTION_CHOICES = (
+    ("par", _("parasitisch")),
+    ("nip", _("nicht parasitisch")),
+    ("obl", _("obligate Mykorrhiza")),
+    ("fak", _("fakultative Mykorrhiza")),
+)
+DISPERSAL_CHOICES = (
+    ("na", _("Nacktsamer")),
+    ("be", _("Bedecktsamer")),
+    ("sp", _("Sporenpflanze")),
+)
+GROUND_CHOICES = (
+    ("leh", _("lehmig")),
+    ("tor", _("torfig")),
+    ("san", _("sandig")),
+    ("ste", _("steinig/felsig")),
+)
 HABITAT_CHOICES = (
     ("sch", _("Schlammflure")),
     ("roe", _("Röhrichte")),
@@ -38,23 +71,6 @@ HABITAT_CHOICES = (
     ("que", _("Quellen")),
     ("scl", _("Schläge")),
 )
-STATUS_CHOICES = (
-    ("e", _("einheimisch")),
-    ("a", _("Archaeophyt")),
-    ("n", _("Neophyt")),
-)
-INTERACTION_CHOICES = (
-    ("par", _("parasitisch")),
-    ("nip", _("nicht parasitisch")),
-    ("obl", _("obligate Mykorrhiza")),
-    ("fak", _("fakultative Mykorrhiza")),
-)
-GROUND_CHOICES = (
-    ("leh", _("lehmig")),
-    ("tor", _("torfig")),
-    ("san", _("sandig")),
-    ("ste", _("steinig/felsig")),
-)
 LIFE_FORM_CHOICES = (
     ("pha", _("Phanerophyt")),
     ("cha", _("Chamaephyt")),
@@ -65,26 +81,10 @@ LIFE_FORM_CHOICES = (
     ("hel", _("Helophyt (Sumpfpflanze)")),
     ("hyd", _("Hydrophyt (Wasserpflanze)")),
 )
-GROWTH_FORM_CHOICES = (
-    ("bau", _("Baum")),
-    ("str", _("Strauch")),
-    ("stb", _("Strauchbaum")),
-    ("zwe", _("Zwergstrauch")),
-    ("hal", _("Halbstrauch")),
-    ("spa", _("Spalierstrauch")),
-    ("scs", _("Scheinstrauch")),
-    ("sta", _("Staudenstrauch")),
-    ("kra", _("Kraut")),
-    ("krc", _("krautiger Chemaephyt")),
-    ("lia", _("Liane")),
-    ("kle", _("Kletterpflanze")),
-    ("tau", _("Tauchpflanze")),
-    ("sch", _("Schwimmpflanze")),
-)
-DISPERSAL_CHOICES = (
-    ("na", _("Nacktsamer")),
-    ("be", _("Bedecktsamer")),
-    ("sp", _("Sporenpflanze")),
+STATUS_CHOICES = (
+    ("e", _("einheimisch")),
+    ("a", _("Archaeophyt")),
+    ("n", _("Neophyt")),
 )
 
 

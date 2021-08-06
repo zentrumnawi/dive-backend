@@ -14,47 +14,19 @@ from .choices import *
 
 class Plant(BaseProfile):
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
+    short_description = models.TextField(
+        default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
+    )
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     article = models.CharField(
         max_length=3, choices=ARTICLE_CHOICES, blank=True, verbose_name=_("Artikel")
     )
     trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
-    short_description = models.TextField(
-        default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
-    )
     alt_trivial_name = models.CharField(
         default="",
         max_length=500,
         blank=True,
         verbose_name=_("Liste alternativer Trivialnamen"),
-    )
-    habitat = ArrayField(
-        base_field=models.CharField(
-            max_length=3, choices=HABITAT_CHOICES, verbose_name=_("Habitat")
-        ),
-        blank=True,
-    )
-    ground = ArrayField(
-        base_field=models.CharField(
-            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
-        ),
-        size=2,
-        blank=True,
-    )
-    status = models.CharField(
-        max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
-    )
-    interaction = models.CharField(
-        max_length=3,
-        choices=INTERACTION_CHOICES,
-        blank=True,
-        verbose_name=_("Interaktionen"),
-    )
-    life_form = models.CharField(
-        max_length=3,
-        choices=LIFE_FORM_CHOICES,
-        blank=True,
-        verbose_name=_("Lebensform"),
     )
     growth_form = models.CharField(
         max_length=3,
@@ -68,11 +40,39 @@ class Plant(BaseProfile):
         verbose_name=_("Wuchshöhe"),
         help_text="Bsp. 10-15 cm",
     )
+    interaction = models.CharField(
+        max_length=3,
+        choices=INTERACTION_CHOICES,
+        blank=True,
+        verbose_name=_("Interaktionen"),
+    )
     dispersal = models.CharField(
         max_length=2,
         choices=DISPERSAL_CHOICES,
         blank=True,
         verbose_name=_("Ausbreitungsform"),
+    )
+    ground = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
+        ),
+        size=2,
+        blank=True,
+    )
+    habitat = ArrayField(
+        base_field=models.CharField(
+            max_length=3, choices=HABITAT_CHOICES, verbose_name=_("Habitat")
+        ),
+        blank=True,
+    )
+    life_form = models.CharField(
+        max_length=3,
+        choices=LIFE_FORM_CHOICES,
+        blank=True,
+        verbose_name=_("Lebensform"),
+    )
+    status = models.CharField(
+        max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
     )
     other_features = models.CharField(
         max_length=200,

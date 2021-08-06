@@ -44,12 +44,10 @@ def get_label(model, field_name):
 
 class PlantAdminForm(forms.ModelForm):
     habitat = forms.MultipleChoiceField(
-        choices=Plant.HABITAT_CHOICES,
-        required=False,
-        label=get_label(Plant, "habitat"),
+        choices=HABITAT_CHOICES, required=False, label=get_label(Plant, "habitat"),
     )
     ground = forms.MultipleChoiceField(
-        choices=Plant.GROUND_CHOICES, required=False, label=get_label(Plant, "ground")
+        choices=GROUND_CHOICES, required=False, label=get_label(Plant, "ground")
     )
 
 

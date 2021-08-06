@@ -13,90 +13,6 @@ from .choices import *
 
 
 class Plant(BaseProfile):
-    ARTICLE_CHOICES = (("der", _("Der")), ("die", _("Die")), ("das", _("Das")))
-    HABITAT_CHOICES = (
-        ("sch", _("Schlammflure")),
-        ("roe", _("Röhrichte")),
-        ("sae", _("Säume")),
-        ("sta", _("Staudenflure")),
-        ("gru", _("Grünland")),
-        ("zwe", _("Zwergstrauchheiden")),
-        ("rud", _("Ruderalvegetationen")),
-        ("aec", _("Äcker")),
-        ("wei", _("Weinberge")),
-        ("int", _("Intensivgrünland")),
-        ("par", _("Parks")),
-        ("gae", _("Gärten")),
-        ("tri", _("Trittpflanzengesellschaften")),
-        ("fel", _("Felsbiotope")),
-        ("aue", _("Auenwälder")),
-        ("geb", _("Gebüsche")),
-        ("ger", _("Gerölle")),
-        ("ext", _("Extensivgrünland")),
-        ("nar", _("natürliche Rasen")),
-        ("wae", _("Wälder")),
-        ("ufe", _("Ufer")),
-        ("wed", _("Weiden")),
-        ("wie", _("Wiesen")),
-        ("hec", _("Hecken")),
-        ("gra", _("Gräben")),
-        ("weg", _("Weg-/Straßenränder")),
-        ("bah", _("Bahndämme")),
-        ("bae", _("Bäche")),
-        ("sct", _("Schutt")),
-        ("brw", _("Bruchwälder")),
-        ("que", _("Quellen")),
-        ("scl", _("Schläge")),
-    )
-    STATUS_CHOICES = (
-        ("e", _("einheimisch")),
-        ("a", _("Archaeophyt")),
-        ("n", _("Neophyt")),
-    )
-    INTERACTION_CHOICES = (
-        ("par", _("parasitisch")),
-        ("nip", _("nicht parasitisch")),
-        ("obl", _("obligate Mykorrhiza")),
-        ("fak", _("fakultative Mykorrhiza")),
-    )
-    GROUND_CHOICES = (
-        ("leh", _("lehmig")),
-        ("tor", _("torfig")),
-        ("san", _("sandig")),
-        ("ste", _("steinig/felsig")),
-    )
-    LIFE_FORM_CHOICES = (
-        ("pha", _("Phanerophyt")),
-        ("cha", _("Chamaephyt")),
-        ("hem", _("Hemikryptophyt")),
-        ("kry", _("Kryptophyt")),
-        ("the", _("Therophyt")),
-        ("geo", _("Geophyt")),
-        ("hel", _("Helophyt (Sumpfpflanze)")),
-        ("hyd", _("Hydrophyt (Wasserpflanze)")),
-    )
-    GROWTH_FORM_CHOICES = (
-        ("bau", _("Baum")),
-        ("str", _("Strauch")),
-        ("stb", _("Strauchbaum")),
-        ("zwe", _("Zwergstrauch")),
-        ("hal", _("Halbstrauch")),
-        ("spa", _("Spalierstrauch")),
-        ("scs", _("Scheinstrauch")),
-        ("sta", _("Staudenstrauch")),
-        ("kra", _("Kraut")),
-        ("krc", _("krautiger Chemaephyt")),
-        ("lia", _("Liane")),
-        ("kle", _("Kletterpflanze")),
-        ("tau", _("Tauchpflanze")),
-        ("sch", _("Schwimmpflanze")),
-    )
-    DISPERSAL_CHOICES = (
-        ("na", _("Nacktsamer")),
-        ("be", _("Bedecktsamer")),
-        ("sp", _("Sporenpflanze")),
-    )
-
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     article = models.CharField(
@@ -682,7 +598,7 @@ class Blossom(models.Model):
     )
     straw_ground = models.CharField(
         max_length=2,
-        choices=GROUND_CHOICES,
+        choices=B_GROUND_CHOICES,
         blank=True,
         verbose_name=_("Ansatz an Halm"),
     )

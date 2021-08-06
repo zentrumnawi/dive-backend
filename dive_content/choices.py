@@ -20,6 +20,7 @@ GROWTH_FORM_CHOICES = (
     ("tau", _("Tauchpflanze")),
     ("sch", _("Schwimmpflanze")),
 )
+GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
 INTERACTION_CHOICES = (
     ("par", _("parasitisch")),
     ("nip", _("nicht parasitisch")),

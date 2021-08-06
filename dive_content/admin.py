@@ -24,6 +24,29 @@ from .models import (
     StemRoot,
 )
 
+plant_fieldsets = (
+    (None, {"fields": (("tree_node", "taxonomy"),)}),
+    (
+        None,
+        {
+            "fields": (
+                "short_description",
+                "subsection_title_general",
+                "name",
+                "article_trivial_name",
+                "alternative_trivial_names",
+                ("growth_form", "growth_height"),
+                ("interaction", "dispersal"),
+                "ground",
+                ("habitats", "ruderal_sites"),
+                ("life_form", "status"),
+                "other_features",
+                "output_general",
+            )
+        },
+    ),
+)
+
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
     (

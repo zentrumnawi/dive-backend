@@ -99,6 +99,123 @@ def format_subject_text(pre_subject_text, subject, post_subject_text, conjunctio
     return text
 
 
+class PlantOutput:
+    def generate_general(obj):
+        # Generate output "Allgemeines" according pattern:
+        # "[article] [trivial_name] ([name]), auch [alternative_trivial_names] genannt,
+        # ist ein/e [growth_form] mit einer Wuchshöhe von [growth_height]. Es handelt
+        # sich um eine/n [interaction]e/en [dispersal], welche/r auf [ground]em
+        # Untergrund in/an/auf [habitats]n sowie an Ruderalstandorten ([ruderal_sites]n)
+        # vorkommt. Die Pflanze ist ein [life_form] und gilt als [status].
+        # [other_features]
+        def adapt_grammar_add_n(words, condition):
+            for i, word in enumerate(words):
+                if word[-1] in condition:
+                    words[i] = f"{word}n"
+
+        fields = [
+            obj.article,
+            obj.trivial_name,
+            obj.name,
+            obj.alternative_trivial_names,
+            obj.get_growth_form_display(),
+            obj.growth_height,
+            obj.get_interaction_display(),
+            obj.get_dispersal_display(),
+            obj.get_ground_display(),
+            obj.habitats,
+            obj.ruderal_sites,
+            obj.get_life_form_display(),
+            obj.get_status_display(),
+            obj.other_features,
+        ]
+        fields[3] = format_enumeration(fields[3], "oder")
+        fields[5] = format_FloatRangeTermCharField(fields[5])
+        if fields[7] == "Sporenpflanze":
+            article, suffix, relative_pronoun = "eine", "e", "welche"
+        else:
+            article, suffix, relative_pronoun = "einen", "en", "welcher"
+        fields[6] = add_suffix(fields[6], suffix)
+        fields[8] = add_suffix(fields[8], "em", (", ", " und ", " bis "))
+        if fields[9]:
+            sublists = [[]] * 3
+            for i, sublist in enumerate(HABITATS_SUBCHOICES):
+                sublists[i] = list(filter(lambda x: x in dict(sublist), fields[9]))
+                sublists[i] = get_ArrayField_display(sublists[i], HABITATS_CHOICES)
+                adapt_grammar_add_n(sublists[i], ("e", "l", "r"))
+            fields[9] = sublists
+        else:
+            fields[9] = [[]] * 3
+        fields[10] = get_ArrayField_display(fields[10], RUDERAL_SITES_CHOICES)
+        if fields[10]:
+            adapt_grammar_add_n(fields[10], ("e", "r"))
+        joined_fields = [
+            " ".join(filter(None, fields[0:3])),
+            " ".join(filter(None, fields[6:8])),
+        ]
+
+        text_parts = [
+            f" {'' if fields[4] or fields[5] else 'wird '}auch {fields[3]} genannt"
+            if fields[3]
+            else "",
+            f" ist {'eine' if fields[4] in (items[1] for items in GROWTH_FORM_SUBCHOICES[1]) else 'ein'} {fields[4]}"
+            if fields[4]
+            else "",
+            f" {'mit einer' if fields[4] else 'hat eine'} Wuchshöhe von {'' if '–' in fields[5] else 'bis zu '}{fields[5]}"
+            if fields[5]
+            else "",
+            f"Es handelt sich um {article} {joined_fields[1]}"
+            if joined_fields[1]
+            else "",
+            f"auf {fields[8]} Untergrund" if fields[8] else "",
+            format_enumeration(
+                list(
+                    filter(
+                        None,
+                        (
+                            f"an {format_enumeration(fields[9][0])}"
+                            if fields[9][0]
+                            else "",
+                            f"in {format_enumeration(fields[9][1])}"
+                            if fields[9][1]
+                            else "",
+                            f"auf {format_enumeration(fields[9][2])}"
+                            if fields[9][2]
+                            else "",
+                        ),
+                    )
+                )
+            ),
+            f"{'sowie ' if any(fields[9]) else ''}an Ruderalstandorten ({', '.join(fields[10])})"
+            if fields[10]
+            else "",
+            f"ist ein {fields[11]}" if fields[11] else "",
+            f"gilt als {fields[12]}" if fields[12] else "",
+        ]
+        if text_parts[0] and (text_parts[1] or text_parts[2]):
+            text_parts[0] = f",{text_parts[0]},"
+
+        joined_text_parts = [
+            " ".join(filter(None, text_parts[4:7])),
+            " und ".join(filter(None, text_parts[7:])),
+        ]
+        if joined_text_parts[0]:
+            joined_text_parts[0] = f"{relative_pronoun} {joined_text_parts[0]} vorkommt"
+
+        texts = [
+            "".join(filter(None, [joined_fields[0]] + text_parts[0:3])),
+            ", ".join(filter(None, [text_parts[3], joined_text_parts[0]])),
+            f"Die Pflanze {joined_text_parts[1]}" if joined_text_parts[1] else "",
+            fields[13],
+        ]
+        texts[0] = format_sentence(texts[0])
+        texts[1] = format_sentence(texts[1])
+        texts[2] = format_sentence(texts[2])
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts
+
+
 class LeafPoalesOutput:
     def generate_overview(obj):
         # Generate output "Überblick" according pattern:

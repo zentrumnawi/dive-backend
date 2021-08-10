@@ -222,6 +222,30 @@ HABITAT_CHOICES = (
     ("que", _("Quellen")),
     ("scl", _("Schläge")),
 )
+RUDERAL_SITES_CHOICES = (
+    _("Bahnanlagen"),
+    _("Bahndämme"),
+    _("Böschungen"),
+    _("Bruchwälder"),
+    _("Dämme"),
+    _("Geröllstände"),
+    _("Gleitschotter"),
+    _("Gräben"),
+    _("Kiesgruben"),
+    _("an Mauern"),
+    _("Pflasterfugen"),
+    _("Schutt"),
+    _("Steinbrüche"),
+    _("Straßenböschungen"),
+    _("Tagebaue"),
+    _("Trittstellen"),
+    _("Waldränder"),
+    _("Waldschläge"),
+    _("Wegränder"),
+    _("Xerothermrasen"),
+    _("an Zäunen"),
+)
+RUDERAL_SITES_CHOICES = tuple(zip(range(1, 99), RUDERAL_SITES_CHOICES))
 LIFE_FORM_CHOICES = (
     ("pha", _("Phanerophyt")),
     ("cha", _("Chamaephyt")),

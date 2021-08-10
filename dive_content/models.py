@@ -83,6 +83,12 @@ class Plant(BaseProfile):
         ),
         blank=True,
     )
+    ruderal_sites = ArrayField(
+        base_field=models.PositiveSmallIntegerField(choices=RUDERAL_SITES_CHOICES),
+        blank=True,
+        default=list,
+        verbose_name=_("Ruderalstandorte"),
+    )
     life_form = models.CharField(
         max_length=3,
         choices=LIFE_FORM_CHOICES,

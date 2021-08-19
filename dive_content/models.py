@@ -107,7 +107,7 @@ class Plant(BaseProfile):
         max_length=200,
         blank=True,
         verbose_name=_("Weitere Merkmale"),
-        help_text="Bsp. Geruch",
+        help_text=_("Als eigenständigen Satz ausformulieren."),
     )
 
     class Meta:

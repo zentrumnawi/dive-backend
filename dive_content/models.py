@@ -27,7 +27,7 @@ class Plant(BaseProfile):
     article = models.CharField(
         max_length=3, choices=ARTICLE_CHOICES, blank=True, verbose_name=_("Artikel")
     )
-    trivial_name = models.CharField(max_length=100, verbose_name=_("Trivialname"))
+    trivial_name = models.CharField(max_length=50, verbose_name=_("Trivialname"))
     alternative_trivial_names = ArrayField(
         base_field=models.CharField(max_length=50),
         size=4,

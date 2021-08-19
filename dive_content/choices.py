@@ -22,7 +22,7 @@ def normalize_choices_term(item):
 # Plant choices
 
 # general ------------------------------------------------------------------------------
-ARTICLE_CHOICES = (("der", _("Der")), ("die", _("Die")), ("das", _("Das")))
+ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
 GROWTH_FORM_CHOICES = (
     ("bau", _("Baum")),
     ("str", _("Strauch")),

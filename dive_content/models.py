@@ -48,10 +48,7 @@ class Plant(BaseProfile):
         verbose_name=_("Wuchsform"),
     )
     growth_height = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Wuchshöhe"),
-        help_text="Bsp. 10-15 cm",
+        max_length=20, blank=True, verbose_name=_("Wuchshöhe")
     )
     interaction = models.CharField(
         max_length=3,

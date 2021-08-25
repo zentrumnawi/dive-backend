@@ -1,5 +1,24 @@
 from django.utils.translation import ugettext_lazy as _
 
+
+def normalize_choices_term(item):
+    # Normalize term to support sortring according to DIN 5007-1
+    term = f"{item[1]}"
+    term = term.lower()
+    for char, replacement_char in (
+        ("ä", "a"),
+        ("ö", "o"),
+        ("ü", "u"),
+        ("ß", "ss"),
+        (" ", ""),
+        ("-", ""),
+        ("/", ""),
+    ):
+        term = term.replace(char, replacement_char)
+
+    return term
+
+
 # Plant choices
 
 # general ------------------------------------------------------------------------------

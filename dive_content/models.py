@@ -71,6 +71,12 @@ class Plant(BaseProfile):
         size=2,
         blank=True,
     )
+    habitats = ArrayField(
+        base_field=models.PositiveSmallIntegerField(choices=HABITATS_CHOICES),
+        blank=True,
+        default=list,
+        verbose_name=_("Habitate"),
+    )
     habitat = ArrayField(
         base_field=models.CharField(
             max_length=3, choices=HABITAT_CHOICES, verbose_name=_("Habitat")

@@ -43,9 +43,7 @@ def get_label(model, field_name):
 
 
 class PlantAdminForm(forms.ModelForm):
-    habitat = forms.MultipleChoiceField(
-        choices=HABITAT_CHOICES, required=False, label=get_label(Plant, "habitat"),
-    )
+    pass
 
 
 class LeafAdminForm(forms.ModelForm):

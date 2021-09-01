@@ -71,12 +71,6 @@ GROUND_CHOICES = (
     (8, _("nährstoff(stickstoff)reich")),
     (9, _("nährstoffreich")),
 )
-GROUND_CHOICES_to_be_removed = (
-    ("leh", _("lehmig")),
-    ("tor", _("torfig")),
-    ("san", _("sandig")),
-    ("ste", _("steinig/felsig")),
-)
 HABITATS_SUBCHOICES = [()] * 3
 HABITATS_SUBCHOICES[0] = (  # an
     _("Auengebüschsäume"),

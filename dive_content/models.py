@@ -59,16 +59,6 @@ class Plant(BaseProfile):
     ground = models.PositiveSmallIntegerField(
         choices=GROUND_CHOICES, blank=True, null=True, verbose_name=_("Untergrund")
     )
-    ground_to_be_removed = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=GROUND_CHOICES_to_be_removed,
-            verbose_name=_("Untergrund"),
-        ),
-        size=2,
-        blank=True,
-        default=list,
-    )
     habitats = ArrayField(
         base_field=models.PositiveSmallIntegerField(choices=HABITATS_CHOICES),
         blank=True,

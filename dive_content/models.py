@@ -52,9 +52,11 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Ausbreitungsform"),
     )
-    ground = ArrayField(
+    ground_to_be_removed = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=GROUND_CHOICES, verbose_name=_("Untergrund")
+            max_length=3,
+            choices=GROUND_CHOICES_to_be_removed,
+            verbose_name=_("Untergrund"),
         ),
         size=2,
         blank=True,

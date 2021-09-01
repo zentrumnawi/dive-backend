@@ -46,8 +46,10 @@ class PlantAdminForm(forms.ModelForm):
     habitat = forms.MultipleChoiceField(
         choices=HABITAT_CHOICES, required=False, label=get_label(Plant, "habitat"),
     )
-    ground = forms.MultipleChoiceField(
-        choices=GROUND_CHOICES, required=False, label=get_label(Plant, "ground")
+    ground_to_be_removed = forms.MultipleChoiceField(
+        choices=GROUND_CHOICES_to_be_removed,
+        required=False,
+        label=get_label(Plant, "ground_to_be_removed"),
     )
 
 

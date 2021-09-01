@@ -51,7 +51,7 @@ DISPERSAL_CHOICES = (
     ("be", _("Bedecktsamer")),
     ("sp", _("Sporenpflanze")),
 )
-GROUND_CHOICES = (
+GROUND_CHOICES_to_be_removed = (
     ("leh", _("lehmig")),
     ("tor", _("torfig")),
     ("san", _("sandig")),

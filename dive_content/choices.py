@@ -51,6 +51,17 @@ DISPERSAL_CHOICES = (
     ("be", _("Bedecktsamer")),
     ("sp", _("Sporenpflanze")),
 )
+GROUND_CHOICES = (
+    (1, _("kalkfrei, basisch")),
+    (2, _("kalkarm")),
+    (3, _("feucht, zum Teil periodisch überschwemmt")),
+    (4, _("frisch bis feucht, meist nährstoffreich")),
+    (5, _("frisch und nährstoffreich")),
+    (6, _("lehmig bis tonig")),
+    (7, _("mäßig nährstoffreich")),
+    (8, _("nährstoff(stickstoff)reich")),
+    (9, _("nährstoffreich")),
+)
 GROUND_CHOICES_to_be_removed = (
     ("leh", _("lehmig")),
     ("tor", _("torfig")),

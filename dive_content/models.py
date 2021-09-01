@@ -54,7 +54,7 @@ class Plant(BaseProfile):
         max_length=3,
         choices=INTERACTION_CHOICES,
         blank=True,
-        verbose_name=_("Interaktionen"),
+        verbose_name=_("Interaktion"),
     )
     dispersal = models.CharField(
         max_length=2,

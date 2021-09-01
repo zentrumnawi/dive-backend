@@ -52,8 +52,8 @@ GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
 INTERACTION_CHOICES = (
     ("par", _("parasitisch")),
     ("nip", _("nicht parasitisch")),
-    ("obl", _("obligate Mykorrhiza")),
-    ("fak", _("fakultative Mykorrhiza")),
+    ("obl", _("obligat Mykorrhiza-bildend")),
+    ("fak", _("fakultativ Mykorrhiza-bildend")),
 )
 DISPERSAL_CHOICES = (
     ("na", _("Nacktsamer")),

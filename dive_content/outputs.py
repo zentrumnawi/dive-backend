@@ -1,13 +1,25 @@
 from .choices import *
 
 
-def add_suffix(term, suffix, separator=None):
+def add_suffix(term, suffix, separators=None):
     if term:
-        if separator:
-            splited_term = term.split(separator)
-            for i, st in enumerate(splited_term):
-                splited_term[i] = f"{st}{suffix}"
-            term = separator.join(splited_term)
+        if isinstance(separators, str):
+            separators = (separators,)
+        if separators:
+            if not any(separator in term for separator in separators):
+                term = f"{term}{suffix}"
+            else:
+                i = 0
+                terms = [term]
+                while i < len(separators):
+                    sublist = []
+                    for j in range(0, len(terms)):
+                        sublist.append(terms[j].split(separators[i]))
+                    terms = [y for x in sublist for y in x]
+                    i += 1
+                terms = set(terms)
+                for z in terms:
+                    term = term.replace(z, f"{z}{suffix}")
         else:
             term = f"{term}{suffix}"
 

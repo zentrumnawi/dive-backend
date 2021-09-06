@@ -86,6 +86,7 @@ class Plant(BaseProfile):
             max_length=3, choices=HABITAT_CHOICES, verbose_name=_("Habitat")
         ),
         blank=True,
+        default=list,
     )
     ruderal_sites = ArrayField(
         base_field=models.PositiveSmallIntegerField(choices=RUDERAL_SITES_CHOICES),

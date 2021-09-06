@@ -21,6 +21,7 @@ class Plant(BaseProfile):
         verbose_name=_("Kurzbeschreibung"),
         help_text=_("Markdown"),
     )
+    # general (sentence 1) -------------------------------------------------------------
     name = models.CharField(
         max_length=100, verbose_name=_("Art"), help_text=_("Markdown")
     )
@@ -44,6 +45,7 @@ class Plant(BaseProfile):
     growth_height = models.CharField(
         max_length=20, blank=True, verbose_name=_("Wuchshöhe")
     )
+    # general (sentence 2) -------------------------------------------------------------
     interaction = models.CharField(
         max_length=3,
         choices=INTERACTION_CHOICES,
@@ -71,6 +73,7 @@ class Plant(BaseProfile):
         default=list,
         verbose_name=_("Ruderalstandorte"),
     )
+    # general (sentence 3) -------------------------------------------------------------
     life_form = models.CharField(
         max_length=3,
         choices=LIFE_FORM_CHOICES,
@@ -80,6 +83,7 @@ class Plant(BaseProfile):
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, blank=True, verbose_name=_("Status")
     )
+    # ----------------------------------------------------------------------------------
     other_features = models.CharField(
         max_length=200,
         blank=True,

@@ -21,7 +21,7 @@ def normalize_choices_term(item):
 
 # Plant choices
 
-# general ------------------------------------------------------------------------------
+# general (sentence 1) -----------------------------------------------------------------
 ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
 GROWTH_FORM_SUBCHOICES = [()] * 2
 GROWTH_FORM_SUBCHOICES[0] = (  # ein
@@ -49,6 +49,7 @@ GROWTH_FORM_CHOICES = [
 ]
 GROWTH_FORM_CHOICES.sort(key=normalize_choices_term)
 GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
+# general (sentence 2) -----------------------------------------------------------------
 INTERACTION_CHOICES = (
     ("par", _("parasitisch")),
     ("nip", _("nicht parasitisch")),
@@ -215,6 +216,7 @@ RUDERAL_SITES_CHOICES = (
     _("an Zäunen"),
 )
 RUDERAL_SITES_CHOICES = tuple(zip(range(1, 99), RUDERAL_SITES_CHOICES))
+# general (sentence 3) -----------------------------------------------------------------
 LIFE_FORM_CHOICES = (
     ("pha", _("Phanerophyt")),
     ("cha", _("Chamaephyt")),
@@ -230,6 +232,7 @@ STATUS_CHOICES = (
     ("a", _("Archaeophyt")),
     ("n", _("Neophyt")),
 )
+# --------------------------------------------------------------------------------------
 
 
 # Leaf choices

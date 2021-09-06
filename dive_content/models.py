@@ -73,6 +73,7 @@ class Plant(BaseProfile):
         ),
         size=2,
         blank=True,
+        default=list,
     )
     habitats = ArrayField(
         base_field=models.PositiveSmallIntegerField(choices=HABITATS_CHOICES),

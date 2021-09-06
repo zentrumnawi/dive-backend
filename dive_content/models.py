@@ -35,12 +35,6 @@ class Plant(BaseProfile):
         default=list,
         verbose_name=_("Alternative Trivialnamen"),
     )
-    alt_trivial_name = models.CharField(
-        default="",
-        max_length=500,
-        blank=True,
-        verbose_name=_("Liste alternativer Trivialnamen"),
-    )
     growth_form = models.CharField(
         max_length=3,
         choices=GROWTH_FORM_CHOICES,

@@ -21,7 +21,9 @@ class Plant(BaseProfile):
         verbose_name=_("Kurzbeschreibung"),
         help_text=_("Markdown"),
     )
-    name = models.CharField(max_length=100, verbose_name=_("Art"))
+    name = models.CharField(
+        max_length=100, verbose_name=_("Art"), help_text=_("Markdown")
+    )
     article = models.CharField(
         max_length=3, choices=ARTICLE_CHOICES, blank=True, verbose_name=_("Artikel")
     )
@@ -125,8 +127,13 @@ class Plant(BaseProfile):
 
     taxonomy.short_description = _("Taxonomie")
 
+    def name_without_markdown_symbols(self):
+        return str(self)
+
+    name_without_markdown_symbols.short_description = name.verbose_name
+
     def __str__(self):
-        return self.name
+        return self.name.replace("*", "").replace("_", "")
 
 
 class Leaf(models.Model):

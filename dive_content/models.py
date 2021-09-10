@@ -15,7 +15,11 @@ from .choices import *
 class Plant(BaseProfile):
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
     short_description = models.TextField(
-        default="", max_length=600, blank=True, verbose_name=_("Kurzbeschreibung")
+        default="",
+        max_length=600,
+        blank=True,
+        verbose_name=_("Kurzbeschreibung"),
+        help_text=_("Markdown"),
     )
     name = models.CharField(max_length=100, verbose_name=_("Art"))
     article = models.CharField(

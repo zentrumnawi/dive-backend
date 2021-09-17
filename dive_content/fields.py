@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.postgres.forms import SimpleArrayField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,6 +17,11 @@ from .widgets import (
     NumberRangeCharWidget,
     SeasonWidget,
 )
+
+
+class AdaptedSimpleArrayField(SimpleArrayField):
+    def prepare_value(self, value):
+        return value
 
 
 class ArrayMultipleChoiceField(forms.MultipleChoiceField):

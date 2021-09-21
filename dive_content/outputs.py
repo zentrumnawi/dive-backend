@@ -16,3 +16,16 @@ def add_suffix(term, suffix, separator=None):
 
 def get_ArrayField_display(field, choices):
     return [f"{dict(choices).get(f)}" for f in field]
+
+
+def format_enumeration(enumeration, conjunction="und"):
+    number = len(enumeration)
+    string = ""
+    if number == 1:
+        string = enumeration[0]
+    elif number == 2:
+        string = f"{enumeration[0]} {conjunction} {enumeration[1]}"
+    elif number > 2:
+        string = f"{', '.join(enumeration[:-1])} {conjunction} {enumeration[-1]}"
+
+    return string

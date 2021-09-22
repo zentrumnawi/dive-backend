@@ -51,3 +51,14 @@ def remove_empty_decimal_places(string):
             string = "–".join(n[: n.index(".")] for n in numbers)
 
     return string
+
+
+def get_NumericPrefixTermField_display(field, choices):
+    terms = dict(choices)
+    if field:
+        if field[0].isdigit():
+            field = f"{field[0]}{terms[field[1:]]}"
+        else:
+            field = f"{terms[field]}"
+
+    return field

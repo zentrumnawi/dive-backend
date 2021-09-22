@@ -64,5 +64,5 @@ def get_NumericPrefixTermField_display(field, choices):
     return field
 
 
-def format_sentence(line):
-    return f"{line[0].capitalize()}{line[1:]}." if line else ""
+def format_sentence(text):
+    return f"{text[0].capitalize()}{text[1:]}." if text else ""

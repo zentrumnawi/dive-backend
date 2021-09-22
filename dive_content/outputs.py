@@ -29,3 +29,12 @@ def format_enumeration(enumeration, conjunction="und"):
         string = f"{', '.join(enumeration[:-1])} {conjunction} {enumeration[-1]}"
 
     return string
+
+
+def format_ArrayField(field, choices, suffix="", separator=None, conjunction="bis"):
+    field = get_ArrayField_display(field, choices)
+    if suffix:
+        field = [add_suffix(item, suffix, separator) for item in field]
+    string = format_enumeration(field, conjunction)
+
+    return string

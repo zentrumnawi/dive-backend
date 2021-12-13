@@ -23,22 +23,31 @@ def normalize_choices_term(item):
 
 # general ------------------------------------------------------------------------------
 ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
-GROWTH_FORM_CHOICES = (
+GROWTH_FORM_SUBCHOICES = [()] * 2
+GROWTH_FORM_SUBCHOICES[0] = (  # ein
     ("bau", _("Baum")),
+    ("hal", _("Halbstrauch")),
+    ("kra", _("Kraut")),
+    ("krc", _("krautiger Chemaephyt")),
+    ("scs", _("Scheinstrauch")),
+    ("spa", _("Spalierstrauch")),
+    ("spr", _("Spreizklimmer")),
+    ("sta", _("Staudenstrauch")),
     ("str", _("Strauch")),
     ("stb", _("Strauchbaum")),
     ("zwe", _("Zwergstrauch")),
-    ("hal", _("Halbstrauch")),
-    ("spa", _("Spalierstrauch")),
-    ("scs", _("Scheinstrauch")),
-    ("sta", _("Staudenstrauch")),
-    ("kra", _("Kraut")),
-    ("krc", _("krautiger Chemaephyt")),
-    ("lia", _("Liane")),
-    ("kle", _("Kletterpflanze")),
-    ("tau", _("Tauchpflanze")),
-    ("sch", _("Schwimmpflanze")),
 )
+GROWTH_FORM_SUBCHOICES[1] = (  # eine
+    ("kle", _("Kletterpflanze")),
+    ("lia", _("Liane")),
+    ("sch", _("Schwimmpflanze")),
+    ("tau", _("Tauchpflanze")),
+)
+GROWTH_FORM_CHOICES = [
+    *GROWTH_FORM_SUBCHOICES[0],
+    *GROWTH_FORM_SUBCHOICES[1],
+]
+GROWTH_FORM_CHOICES.sort(key=normalize_choices_term)
 GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
 INTERACTION_CHOICES = (
     ("par", _("parasitisch")),

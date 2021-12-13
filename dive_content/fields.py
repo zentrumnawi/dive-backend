@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
-from .choices import INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
+from .choices import ARTICLE_CHOICES, INDICATORS, INDICATORS_CHOICES, SEASON_CHOICES
 from .models import Indicators
 from .widgets import (
     IndicatorWidget,
@@ -15,6 +15,7 @@ from .widgets import (
     OutputWidget,
     SeasonWidget,
     StemSurfaceWidget,
+    TrivialNameWidget,
 )
 
 
@@ -293,3 +294,18 @@ class SubsectionTitleField(forms.Field):
         label = format_html(f'<span style="color:{color};"><b>{title}</b></span>')
         super().__init__(required=False, label=label, label_suffix="")
         self.widget.attrs = {"style": "display:none;"}
+
+
+class TrivialNameField(forms.MultiValueField):
+    def __init__(self, **kwargs):
+        choices = ARTICLE_CHOICES
+        fields = [
+            forms.ChoiceField(choices=choices),
+            forms.CharField(max_length=50),
+        ]
+        widget = TrivialNameWidget(choices)
+
+        super().__init__(fields=fields, widget=widget, **kwargs)
+
+    def compress(self, data_list):
+        return data_list if data_list else ["", ""]

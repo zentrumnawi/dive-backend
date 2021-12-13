@@ -153,3 +153,47 @@ class StemSurfaceWidget(NumberRangeTermCharWidget):
                 data_list.insert(0, "")
 
         return data_list
+
+
+class TrivialNameWidget(forms.MultiWidget):
+    template_name = "multiwidget.html"
+
+    def __init__(self, choices, attrs=None):
+        widgets = [
+            forms.Select(choices=choices),
+            forms.TextInput(
+                attrs={"size": 25, "maxlength": 50, "placeholder": "Trivialname"}
+            ),
+        ]
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return value.split(",") if value else []
+
+
+class TrivialNamesWidget(forms.MultiWidget):
+    template_name = "multiwidget.html"
+
+    def __init__(self, attrs=None):
+        widgets = [
+            forms.TextInput(
+                attrs={
+                    "size": 25,
+                    "maxlength": 50,
+                    "placeholder": "Trivialname",
+                    "required": False,
+                }
+            )
+        ] * 4
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        return value.split(",") if value else []
+
+    def value_from_datadict(self, data, files, name):
+        value = super().value_from_datadict(data, files, name)
+        value = list(filter(None, value))
+
+        return value

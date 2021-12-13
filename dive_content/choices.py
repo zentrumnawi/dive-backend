@@ -1,5 +1,240 @@
 from django.utils.translation import ugettext_lazy as _
 
+
+def normalize_choices_term(item):
+    # Normalize term to support sortring according to DIN 5007-1
+    term = f"{item[1]}"
+    term = term.lower()
+    for char, replacement_char in (
+        ("ä", "a"),
+        ("ö", "o"),
+        ("ü", "u"),
+        ("ß", "ss"),
+        (" ", ""),
+        ("-", ""),
+        ("/", ""),
+    ):
+        term = term.replace(char, replacement_char)
+
+    return term
+
+
+# Plant choices
+
+# general (sentence 1) -----------------------------------------------------------------
+ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
+GROWTH_FORM_SUBCHOICES = [()] * 2
+GROWTH_FORM_SUBCHOICES[0] = (  # ein
+    ("bau", _("Baum")),
+    ("hal", _("Halbstrauch")),
+    ("kra", _("Kraut")),
+    ("krc", _("krautiger Chemaephyt")),
+    ("scs", _("Scheinstrauch")),
+    ("spa", _("Spalierstrauch")),
+    ("spr", _("Spreizklimmer")),
+    ("sta", _("Staudenstrauch")),
+    ("str", _("Strauch")),
+    ("stb", _("Strauchbaum")),
+    ("zwe", _("Zwergstrauch")),
+)
+GROWTH_FORM_SUBCHOICES[1] = (  # eine
+    ("kle", _("Kletterpflanze")),
+    ("lia", _("Liane")),
+    ("sch", _("Schwimmpflanze")),
+    ("tau", _("Tauchpflanze")),
+)
+GROWTH_FORM_CHOICES = [
+    *GROWTH_FORM_SUBCHOICES[0],
+    *GROWTH_FORM_SUBCHOICES[1],
+]
+GROWTH_FORM_CHOICES.sort(key=normalize_choices_term)
+GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
+# general (sentence 2) -----------------------------------------------------------------
+INTERACTION_CHOICES = (
+    ("par", _("parasitisch")),
+    ("nip", _("nicht parasitisch")),
+    ("obl", _("obligat Mykorrhiza-bildend")),
+    ("fak", _("fakultativ Mykorrhiza-bildend")),
+)
+DISPERSAL_CHOICES = (
+    ("na", _("Nacktsamer")),
+    ("be", _("Bedecktsamer")),
+    ("sp", _("Sporenpflanze")),
+)
+GROUND_CHOICES = (
+    (1, _("kalkfrei, basisch")),
+    (2, _("kalkarm")),
+    (3, _("feucht, zum Teil periodisch überschwemmt")),
+    (4, _("frisch bis feucht, meist nährstoffreich")),
+    (5, _("frisch und nährstoffreich")),
+    (6, _("lehmig bis tonig")),
+    (7, _("mäßig nährstoffreich")),
+    (8, _("nährstoff(stickstoff)reich")),
+    (9, _("nährstoffreich")),
+)
+HABITATS_SUBCHOICES = [()] * 3
+HABITATS_SUBCHOICES[0] = (  # an
+    _("Auengebüschsäume"),
+    _("Auenwaldsäume"),
+    _("Bäche"),
+    _("Bachränder"),
+    _("Felsen"),
+    _("Grabenränder"),
+    _("Hänge"),
+    _("Heckenränder"),
+    _("Laubmischwaldsäume"),
+    _("Mauern"),
+    _("Quellen"),
+    _("Säume"),
+    _("Talhänge"),
+    _("Trockengebüschsäume"),
+    _("Trockenwaldsäume"),
+    _("Ufer"),
+    _("Waldquellen"),
+    _("Waldränder"),
+    _("Waldsäume"),
+    _("Waldwegränder"),
+    _("Wegränder"),
+)
+HABITATS_SUBCHOICES[1] = (  # in
+    _("Ansaaten"),
+    _("Auengebüsche"),
+    _("Auenwälder"),
+    _("Bruchwälder"),
+    _("Buchenwälder"),
+    _("Eichen-Hainbuchen-Wälder"),
+    _("Ephemerenfluren"),
+    _("Erlenwälder"),
+    _("Flussuferstaudenfluren"),
+    _("Forste"),
+    _("Gärten"),
+    _("Gebüsche"),
+    _("Gebüschsäume"),
+    _("Gräben"),
+    _("Hackkulturen"),
+    _("Hangwälder"),
+    _("Hecken"),
+    _("Heiden"),
+    _("Hochgrasfluren"),
+    _("Hochstaudenfluren"),
+    _("Kalkfelsenfluren"),
+    _("Kiesgruben"),
+    _("Laubmischwälder"),
+    _("Laubwälder"),
+    _("Mischwälder"),
+    _("Moorwälder"),
+    _("Nadelholzforste"),
+    _("Nadelwälder"),
+    _("Parkanlagen"),
+    _("Parks"),
+    _("Pioniergehölze"),
+    _("Quellmoore"),
+    _("Rasenansaaten"),
+    _("Robinienforste"),
+    _("Röhrichte"),
+    _("Schläge"),
+    _("Schlaggehölze"),
+    _("Schlammfluren"),
+    _("Schluchtwälder"),
+    _("Staudenfluren"),
+    _("Steinbrüche"),
+    _("Steinschuttfluren"),
+    _("Uferstaudenfluren"),
+    _("Vorwälder"),
+    _("Vorwaldgehölze"),
+    _("Wälder"),
+    _("Waldschläge"),
+    _("Waldverlichtungen"),
+    _("Weinberge"),
+)
+HABITATS_SUBCHOICES[2] = (  # auf
+    _("Äcker"),
+    _("Bahnanlagen"),
+    _("Brachen"),
+    _("Dämme"),
+    _("Fettwiesen"),
+    _("Friedhöfe"),
+    _("Frischwiesen"),
+    _("Grünlandbrachen"),
+    _("Halbtrockenrasen"),
+    _("Intensivgrünländer"),
+    _("Kalktrockenrasen"),
+    _("Kleeäcker"),
+    _("Magerrasen"),
+    _("Magerweiden"),
+    _("Obstwiesen"),
+    _("Parkrasen"),
+    _("Rasen"),
+    _("Ruderalflächen"),
+    _("Sandtrockenrasen (Küstendünen)"),
+    _("Schutt"),
+    _("Schutthalden"),
+    _("Silikatmagerrasen"),
+    _("Steinriegel"),
+    _("Sumpfwiesen"),
+    _("Trittrasen"),
+    _("Trittstellen"),
+    _("Trockenrasen"),
+    _("Verlichtungen"),
+    _("Viehläger"),
+    _("Waldlichtungen"),
+    _("Waldwege"),
+    _("Weiden"),
+    _("Wiesen"),
+    _("Xerothermrasen"),
+)
+HABITATS_SUBCHOICES[0] = tuple(zip(range(100, 199), HABITATS_SUBCHOICES[0]))
+HABITATS_SUBCHOICES[1] = tuple(zip(range(200, 299), HABITATS_SUBCHOICES[1]))
+HABITATS_SUBCHOICES[2] = tuple(zip(range(300, 399), HABITATS_SUBCHOICES[2]))
+HABITATS_CHOICES = [
+    *HABITATS_SUBCHOICES[0],
+    *HABITATS_SUBCHOICES[1],
+    *HABITATS_SUBCHOICES[2],
+]
+HABITATS_CHOICES.sort(key=normalize_choices_term)
+RUDERAL_SITES_CHOICES = (
+    _("Bahnanlagen"),
+    _("Bahndämme"),
+    _("Böschungen"),
+    _("Bruchwälder"),
+    _("Dämme"),
+    _("Geröllstände"),
+    _("Gleitschotter"),
+    _("Gräben"),
+    _("Kiesgruben"),
+    _("an Mauern"),
+    _("Pflasterfugen"),
+    _("Schutt"),
+    _("Steinbrüche"),
+    _("Straßenböschungen"),
+    _("Tagebaue"),
+    _("Trittstellen"),
+    _("Waldränder"),
+    _("Waldschläge"),
+    _("Wegränder"),
+    _("Xerothermrasen"),
+    _("an Zäunen"),
+)
+RUDERAL_SITES_CHOICES = tuple(zip(range(1, 99), RUDERAL_SITES_CHOICES))
+# general (sentence 3) -----------------------------------------------------------------
+LIFE_FORM_CHOICES = (
+    ("pha", _("Phanerophyt")),
+    ("cha", _("Chamaephyt")),
+    ("hem", _("Hemikryptophyt")),
+    ("kry", _("Kryptophyt")),
+    ("the", _("Therophyt")),
+    ("geo", _("Geophyt")),
+    ("hel", _("Helophyt (Sumpfpflanze)")),
+    ("hyd", _("Hydrophyt (Wasserpflanze)")),
+)
+STATUS_CHOICES = (
+    ("e", _("einheimisch")),
+    ("a", _("Archaeophyt")),
+    ("n", _("Neophyt")),
+)
+# --------------------------------------------------------------------------------------
+
+
 # Leaf choices
 
 VEINS_CHOICES = (
@@ -460,7 +695,7 @@ PISTIL_POS_CHOICES = (
 # ---------------------------------- TO BE MODIFIED ---------------------------------- #
 GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
 GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
-GROUND_CHOICES = (
+B_GROUND_CHOICES = (
     ("ge", _("gestielt")),
     ("si", _("sitzend / ungestielt")),
     ("st", _("stengelumfassend")),

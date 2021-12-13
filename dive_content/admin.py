@@ -24,6 +24,29 @@ from .models import (
     StemRoot,
 )
 
+plant_fieldsets = (
+    (None, {"fields": (("tree_node", "taxonomy"),)}),
+    (
+        None,
+        {
+            "fields": (
+                "short_description",
+                "subsection_title_general",
+                "name",
+                "article_trivial_name",
+                "alternative_trivial_names",
+                ("growth_form", "growth_height"),
+                ("interaction", "dispersal"),
+                "ground",
+                ("habitats", "ruderal_sites"),
+                ("life_form", "status"),
+                "other_features",
+                "output_general",
+            )
+        },
+    ),
+)
+
 leaf_fieldsets = (
     (None, {"fields": ("plant",)}),
     (
@@ -348,23 +371,11 @@ class IndicatorsInline(admin.StackedInline):
 
 
 class PlantAdmin(admin.ModelAdmin):
-    fields = (
-        ("tree_node", "taxonomy"),
-        "name",
-        ("article", "trivial_name"),
-        "short_description",
-        "alt_trivial_name",
-        ("habitat", "ground"),
-        "status",
-        "interaction",
-        ("life_form", "growth_form", "growth_height"),
-        "dispersal",
-        "other_features",
-    )
+    fieldsets = plant_fieldsets
     form = PlantAdminForm
     readonly_fields = ("taxonomy",)
-    list_display = ("id", "name", "trivial_name")
-    list_display_links = ("name",)
+    list_display = ("id", "name_without_markdown_symbols", "trivial_name")
+    list_display_links = ("name_without_markdown_symbols",)
     inlines = [
         LeafInline,
         LeafPoalesInline,

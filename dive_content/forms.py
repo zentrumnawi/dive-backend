@@ -16,6 +16,7 @@ from .fields import (
     SeasonField,
     StemSurfaceField,
     SubsectionTitleField,
+    TrivialNameField,
 )
 from .models import (
     Blossom,
@@ -27,7 +28,13 @@ from .models import (
     StemRhizomePoales,
     StemRoot,
 )
-from .outputs import BlossomPoalesOutput, LeafPoalesOutput, StemRhizomePoalesOutput
+from .outputs import (
+    BlossomPoalesOutput,
+    LeafPoalesOutput,
+    PlantOutput,
+    StemRhizomePoalesOutput,
+)
+from .widgets import TrivialNamesWidget
 
 
 TEXTINPUT_ATTRS = {"size": 60, "class": False}
@@ -43,14 +50,85 @@ def get_label(model, field_name):
 
 
 class PlantAdminForm(forms.ModelForm):
-    habitat = forms.MultipleChoiceField(
-        choices=Plant.HABITAT_CHOICES,
-        required=False,
-        label=get_label(Plant, "habitat"),
-    )
-    ground = forms.MultipleChoiceField(
-        choices=Plant.GROUND_CHOICES, required=False, label=get_label(Plant, "ground")
-    )
+    subsection_title_general = SubsectionTitleField("Allgemeines")
+
+    article_trivial_name = TrivialNameField()
+    growth_height = FloatRangeTermCharField(0, 200, GROWTH_HEIGHT_UNITS)
+
+    output_general = OutputField()
+
+    class Meta:
+        model = Plant
+        fields = []
+        field_classes = {
+            "alternative_trivial_names": AdaptedSimpleArrayField,
+            "habitats": AdaptedSimpleArrayField,
+            "ruderal_sites": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "alternative_trivial_names": TrivialNamesWidget,
+            "habitats": forms.SelectMultiple(choices=HABITATS_CHOICES),
+            "ruderal_sites": forms.SelectMultiple(choices=RUDERAL_SITES_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        TEXTINPUT_ATTRS = {"size": 80, "class": False}
+        TEXTAREA_ATTRS = {"cols": 80, "rows": 7, "class": False}
+
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["short_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["article_trivial_name"].label = get_label(obj, "trivial_name")
+        self.fields["growth_height"].label = get_label(obj, "growth_height")
+        self.fields["other_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+
+        self.initial.update(
+            {
+                "article_trivial_name": [obj.article, obj.trivial_name],
+                "output_general": PlantOutput.generate_general(obj),
+            }
+        )
+
+    def clean(self):
+        super().clean()
+        fields = (
+            "alternative_trivial_names",
+            "growth_form",
+            "growth_height",
+        )
+        cleaned_fields = (self.cleaned_data.get(field) for field in fields)
+
+        if not any(cleaned_fields):
+            for field in fields:
+                self.add_error(field, "At least one of these fields must be provided")
+
+        fields = (
+            "interaction",
+            "ground",
+            "habitats",
+            "ruderal_sites",
+        )
+        cleaned_fields = (self.cleaned_data.get(field) for field in fields)
+
+        if not self.cleaned_data.get("dispersal") and any(cleaned_fields):
+            self.add_error(
+                "dispersal", "In combination with others this field must be provided."
+            )
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        initial = [instance.article, instance.trivial_name]
+        data = self.cleaned_data["article_trivial_name"]
+        if self.fields["article_trivial_name"].has_changed(initial, data):
+            instance.article = data[0]
+            instance.trivial_name = data[1]
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class LeafAdminForm(forms.ModelForm):

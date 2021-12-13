@@ -837,6 +837,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True
     )
+    general = serializers.SerializerMethodField(label="Allgemeines")
 
     leaf = LeafSerializer(required=False)
     leafpoales = LeafPoalesSerializer(required=False)
@@ -850,6 +851,26 @@ class PlantSerializer(DisplayNameModelSerializer):
 
     class Meta:
         model = Plant
-        exclude = ["article"]
+        fields = (
+            "id",
+            "tree_node",
+            "taxonomy",
+            "short_description",
+            "name",
+            "trivial_name",
+            "general",
+            "leaf",
+            "leafpoales",
+            "blossom",
+            "blossompoales",
+            "fruit",
+            "stemroot",
+            "stemrhizomepoales",
+            "indicators",
+            "photographs",
+        )
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_general(self, obj):
+        return PlantOutput.generate_general(obj)

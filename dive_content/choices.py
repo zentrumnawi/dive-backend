@@ -19,8 +19,7 @@ def normalize_choices_term(item):
     return term
 
 
-# Plant choices
-
+# Plant choices ------------------------------------------------------------------------
 # general (sentence 1) -----------------------------------------------------------------
 ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
 GROWTH_FORM_SUBCHOICES = [()] * 2
@@ -235,8 +234,7 @@ STATUS_CHOICES = (
 # --------------------------------------------------------------------------------------
 
 
-# Leaf choices
-
+# Leaf choices -------------------------------------------------------------------------
 VEINS_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
@@ -436,10 +434,10 @@ APEX_CHOICES = (
     ("aus", _("ausgerandet")),
 )
 SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
+# --------------------------------------------------------------------------------------
 
 
-# LeafPoales choices
-
+# LeafPoales choices -------------------------------------------------------------------
 # overview -----------------------------------------------------------------------------
 LEAFPOALES_SHAPE_CHOICES = (("f", _("flach")), ("r", _("röhrig")))
 HAIRINESS_CHOICES = (
@@ -537,8 +535,7 @@ SHEATH_CONNATION_CHOICES = (
 # --------------------------------------------------------------------------------------
 
 
-# Blossom choices
-
+# Blossom choices ----------------------------------------------------------------------
 SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
 SEASON_DICT = {
     None: "",
@@ -708,10 +705,10 @@ B_GROUND_CHOICES = (
     ("hi", _("hinfällig")),
 )
 # ------------------------------------------------------------------------------------ #
+# --------------------------------------------------------------------------------------
 
 
-# BlossomPoales choices
-
+# BlossomPoales choices ----------------------------------------------------------------
 # inflorescence ------------------------------------------------------------------------
 INFLORESCENCE_DENSITY_CHOICES = (
     ("l", _("locker")),
@@ -788,8 +785,7 @@ HUSKS_CROSS_SECTION_CHOICES = (
 # --------------------------------------------------------------------------------------
 
 
-# Fruit choices
-
+# Fruit choices ------------------------------------------------------------------------
 FRUIT_TYPE_CHOICES = (
     ("apf", _("Apfelfrucht")),
     ("nus", _("Nuss")),
@@ -819,10 +815,10 @@ OVULE_POS_CHOICES = (
     ("fr", _("Fruchtknoten (Angiospermen)")),
     ("za", _("Zapfenschuppe (Gymnospermen)")),
 )
+# --------------------------------------------------------------------------------------
 
 
-# StemRoot choices
-
+# StemRoot choices ---------------------------------------------------------------------
 ORIENTATION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
@@ -886,10 +882,10 @@ PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )
+# --------------------------------------------------------------------------------------
 
 
-# StemRhizomePoales choices
-
+# StemRhizomePoales choices ------------------------------------------------------------
 # growth_form --------------------------------------------------------------------------
 TUFT_STOLON_CHOICES = (
     ("loH", _("lockerer Horst")),
@@ -937,8 +933,7 @@ RHIZOME_BRANCHING_CHOICES = (("g", _("gering verzweigt")), ("s", _("stark verzwe
 # --------------------------------------------------------------------------------------
 
 
-# Indicators Choices
-
+# Indicators choices -------------------------------------------------------------------
 LIGHT_CHOICES = (
     ("L1", _("L1 – Tiefschattenpflanze")),
     ("L2", _("L2 – zwischen Tiefschatten- und Schattenpflanze")),
@@ -1035,3 +1030,4 @@ INDICATORS_DICT = dict(
         (dict((x, y.split(" – ")[-1]) for x, y in z) for z in INDICATORS_CHOICES),
     )
 )
+# --------------------------------------------------------------------------------------

@@ -111,9 +111,10 @@ class PlantAdminForm(forms.ModelForm):
         )
         cleaned_fields = (self.cleaned_data.get(field) for field in fields)
 
-        if not self.cleaned_data.get("dispersal") and any(cleaned_fields):
+        if not self.cleaned_data.get("dispersal_form") and any(cleaned_fields):
             self.add_error(
-                "dispersal", "In combination with others this field must be provided."
+                "dispersal_form",
+                "In combination with others this field must be provided.",
             )
 
     def save(self, commit=True):

@@ -36,7 +36,7 @@ plant_fieldsets = (
                 "article_trivial_name",
                 "alternative_trivial_names",
                 ("growth_form", "growth_height"),
-                ("interaction", "dispersal"),
+                ("interaction", "dispersal_form"),
                 "ground",
                 ("habitats", "ruderal_sites"),
                 ("life_form", "status"),

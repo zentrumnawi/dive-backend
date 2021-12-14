@@ -52,9 +52,9 @@ class Plant(BaseProfile):
         blank=True,
         verbose_name=_("Interaktion"),
     )
-    dispersal = models.CharField(
+    dispersal_form = models.CharField(
         max_length=2,
-        choices=DISPERSAL_CHOICES,
+        choices=DISPERSAL_FORM_CHOICES,
         blank=True,
         verbose_name=_("Ausbreitungsform"),
     )

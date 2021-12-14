@@ -56,7 +56,7 @@ INTERACTION_CHOICES = (
     ("obl", _("obligat Mykorrhiza-bildend")),
     ("fak", _("fakultativ Mykorrhiza-bildend")),
 )
-DISPERSAL_CHOICES = (
+DISPERSAL_FORM_CHOICES = (
     ("na", _("Nacktsamer")),
     ("be", _("Bedecktsamer")),
     ("sp", _("Sporenpflanze")),

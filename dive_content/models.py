@@ -1026,16 +1026,16 @@ class Indicators(models.Model):
     )
     light = models.CharField(max_length=10, blank=True, verbose_name=_("Lichtzahl"))
     temperature = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Temperaturzahl"),
+        max_length=10, blank=True, verbose_name=_("Temperaturzahl")
     )
     humidity = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Feuchtezahl"),
+        max_length=10, blank=True, verbose_name=_("Feuchtezahl")
     )
     reaction = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Reaktionszahl"),
+        max_length=10, blank=True, verbose_name=_("Reaktionszahl")
     )
     nitrogen = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Stickstoffzahl"),
+        max_length=10, blank=True, verbose_name=_("Stickstoffzahl")
     )
     key = ArrayField(
         base_field=models.CharField(max_length=3), default=list, editable=False

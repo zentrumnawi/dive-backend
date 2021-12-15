@@ -608,3 +608,22 @@ class StemRhizomePoalesOutput:
         text = format_sentence(text)
 
         return text
+
+
+class InterestingFactsOutput:
+    def generate_pollination(obj):
+        # Generate output "Bestäubung" according pattern:
+        # "[pollination ([insects])]."
+        fields = [
+            obj.pollination,
+            obj.insects,
+        ]
+        if fields[0]:
+            fields[0] = get_ArrayField_display(fields[0], POLLINATION_CHOICES)
+            if POLLINATION_CHOICES[0][1] in fields[0] and fields[1]:
+                fields[0][0] = f"{fields[0][0]} ({fields[1]})"
+
+        text = format_enumeration(fields[0])
+        text = format_sentence(text)
+
+        return text

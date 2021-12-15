@@ -6,6 +6,7 @@ from .models import (
     BlossomPoales,
     Fruit,
     Indicators,
+    InterestingFacts,
     Leaf,
     LeafPoales,
     Plant,
@@ -833,6 +834,22 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
 # ------------------------------------------------------------------------------------ #
 
 
+class InterestingFactsSerializer(ExcludeEmptyFieldsModelSerializer):
+    pollination = serializers.SerializerMethodField(label="Bestäubung")
+    dispersal = serializers.SerializerMethodField(label="Ausbreitung")
+
+    class Meta:
+        model = InterestingFacts
+        fields = ("pollination", "dispersal", "detail_features", "usage", "trivia")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_pollination(self, obj):
+        return InterestingFactsOutput.generate_pollination(obj)
+
+    def get_dispersal(self, obj):
+        return InterestingFactsOutput.generate_dispersal(obj)
+
+
 class PlantSerializer(DisplayNameModelSerializer):
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True
@@ -847,6 +864,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     stemroot = StemRootSerializer(required=False)
     stemrhizomepoales = StemRhizomePoalesSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)
+    interestingfacts = InterestingFactsSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 
     class Meta:
@@ -867,6 +885,7 @@ class PlantSerializer(DisplayNameModelSerializer):
             "stemroot",
             "stemrhizomepoales",
             "indicators",
+            "interestingfacts",
             "photographs",
         )
         depth = 1

@@ -6,6 +6,7 @@ from .forms import (
     BlossomPoalesAdminForm,
     FruitAdminForm,
     IndicatorsAdminForm,
+    InterestingFactsAdminForm,
     LeafAdminForm,
     LeafPoalesAdminForm,
     PlantAdminForm,
@@ -17,6 +18,7 @@ from .models import (
     BlossomPoales,
     Fruit,
     Indicators,
+    InterestingFacts,
     Leaf,
     LeafPoales,
     Plant,
@@ -487,3 +489,12 @@ class IndicatorsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Indicators, IndicatorsAdmin)
+
+
+class InterestingFactsAdmin(admin.ModelAdmin):
+    model = InterestingFacts
+    fieldsets = interestingfacts_fieldsets
+    form = InterestingFactsAdminForm
+
+
+admin.site.register(InterestingFacts, InterestingFactsAdmin)

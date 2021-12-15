@@ -22,6 +22,7 @@ from .models import (
     Blossom,
     BlossomPoales,
     Fruit,
+    InterestingFacts,
     Leaf,
     LeafPoales,
     Plant,
@@ -30,6 +31,7 @@ from .models import (
 )
 from .outputs import (
     BlossomPoalesOutput,
+    InterestingFactsOutput,
     LeafPoalesOutput,
     PlantOutput,
     StemRhizomePoalesOutput,
@@ -498,3 +500,35 @@ class IndicatorsAdminForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class InterestingFactsAdminForm(forms.ModelForm):
+    output_pollination = OutputField()
+    output_dispersal = OutputField()
+
+    class Meta:
+        model = InterestingFacts
+        fields = []
+        field_classes = {
+            "pollination": AdaptedSimpleArrayField,
+            "dispersal": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "pollination": forms.CheckboxSelectMultiple(choices=POLLINATION_CHOICES),
+            "dispersal": forms.CheckboxSelectMultiple(choices=DISPERSAL_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["detail_features"].widget.attrs.update(TEXTINPUT_ATTRS_80)
+        self.fields["usage"].widget.attrs.update(TEXTINPUT_ATTRS_80)
+        self.fields["trivia"].widget.attrs.update(TEXTAREA_ATTRS_80_7)
+
+        self.initial.update(
+            {
+                "output_pollination": InterestingFactsOutput.generate_pollination(obj),
+                "output_dispersal": InterestingFactsOutput.generate_dispersal(obj),
+            }
+        )

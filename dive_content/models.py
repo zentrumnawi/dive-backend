@@ -1049,3 +1049,52 @@ class Indicators(models.Model):
         return ", ".join(f"{dict(KEY_CHOICES).get(key)}" for key in self.key)
 
     get_key.short_description = _("Zeichenerklärung")
+
+
+class InterestingFacts(models.Model):
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.CASCADE,
+        related_name="interestingfacts",
+        verbose_name=_("Pflanze"),
+    )
+    pollination = ArrayField(
+        base_field=models.CharField(max_length=3, choices=POLLINATION_CHOICES),
+        blank=True,
+        default=list,
+        verbose_name=_("Bestäubung"),
+    )
+    insects = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Insekten"),
+        help_text=_("Zusatzangabe zur Insektenbestäubung"),
+    )
+    dispersal = ArrayField(
+        base_field=models.CharField(max_length=3, choices=DISPERSAL_CHOICES),
+        blank=True,
+        default=list,
+        verbose_name=_("Ausbreitung"),
+    )
+    detail_features = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Detailierte Merkmale"),
+        help_text=_("Als eigenständigen Satz ausformulieren."),
+    )
+    usage = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Verwendung"),
+        help_text=_("Als eigenständigen Satz ausformulieren. Markdown"),
+    )
+    trivia = models.TextField(
+        max_length=600,
+        blank=True,
+        verbose_name=_("Trivia"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren. Markdown"),
+    )
+
+    class Meta:
+        verbose_name = _("Wissenswertes")
+        verbose_name_plural = _("Wissenswertes")

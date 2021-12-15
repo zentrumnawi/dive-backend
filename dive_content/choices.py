@@ -1031,3 +1031,22 @@ INDICATORS_DICT = dict(
     )
 )
 # --------------------------------------------------------------------------------------
+
+
+# InterestingFacts Choices -------------------------------------------------------------
+POLLINATION_CHOICES = (
+    ("Ins", _("Insektenbestäubung")),
+    ("Sel", _("Selbstbestäubung")),
+    ("Was", _("Wasserbestäubung")),
+    ("Win", _("Windbestäubung")),
+)
+DISPERSAL_CHOICES = (
+    ("Men", _("Menschenausbreitung")),
+    ("Sel", _("Selbstausbreitung")),
+    ("Sto", _("Stoß-/Schüttelausbreitung")),
+    ("Ved", _("Verdauungsausbreitung")),
+    ("Ves", _("Versteck- u. Verlustausbreitung")),
+    ("Was", _("Wasserausbreitung")),
+    ("Win", _("Windausbreitung")),
+)
+# --------------------------------------------------------------------------------------

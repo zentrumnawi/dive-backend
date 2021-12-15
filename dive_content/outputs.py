@@ -627,3 +627,13 @@ class InterestingFactsOutput:
         text = format_sentence(text)
 
         return text
+
+    def generate_dispersal(obj):
+        # Generate output "Ausbreitung" according pattern:
+        # "[dispersal]."
+        field = obj.dispersal
+
+        text = format_ArrayField(field, DISPERSAL_CHOICES, conjunction="und")
+        text = format_sentence(text)
+
+        return text

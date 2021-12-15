@@ -390,6 +390,13 @@ class IndicatorsInline(admin.StackedInline):
     classes = ("collapse",)
 
 
+class InterestingFactsInline(admin.StackedInline):
+    model = InterestingFacts
+    fieldsets = interestingfacts_fieldsets
+    form = InterestingFactsAdminForm
+    classes = ("collapse",)
+
+
 class PlantAdmin(admin.ModelAdmin):
     fieldsets = plant_fieldsets
     form = PlantAdminForm
@@ -405,6 +412,7 @@ class PlantAdmin(admin.ModelAdmin):
         StemRootInline,
         StemRhizomePoalesInline,
         IndicatorsInline,
+        InterestingFactsInline,
         PhotographInline,
     ]
 

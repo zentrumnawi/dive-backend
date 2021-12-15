@@ -306,6 +306,24 @@ indicators_fieldsets = (
 )
 indicators_readonly_fields = ("get_key",)
 
+interestingfacts_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                ("pollination", "insects"),
+                "output_pollination",
+                "dispersal",
+                "output_dispersal",
+                "detail_features",
+                "usage",
+                "trivia",
+            )
+        },
+    ),
+)
+
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf

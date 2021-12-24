@@ -22,6 +22,7 @@ from .models import (
     Blossom,
     BlossomPoales,
     Fruit,
+    InterestingFacts,
     Leaf,
     LeafPoales,
     Plant,
@@ -30,6 +31,7 @@ from .models import (
 )
 from .outputs import (
     BlossomPoalesOutput,
+    InterestingFactsOutput,
     LeafPoalesOutput,
     PlantOutput,
     StemRhizomePoalesOutput,
@@ -37,8 +39,10 @@ from .outputs import (
 from .widgets import TrivialNamesWidget
 
 
-TEXTINPUT_ATTRS = {"size": 60, "class": False}
-TEXTAREA_ATTRS = {"cols": 60, "rows": 4, "class": False}
+TEXTAREA_ATTRS_60_4 = {"cols": 60, "rows": 4, "class": False}
+TEXTAREA_ATTRS_80_7 = {"cols": 80, "rows": 7, "class": False}
+TEXTINPUT_ATTRS_60 = {"size": 60, "class": False}
+TEXTINPUT_ATTRS_80 = {"size": 80, "class": False}
 
 
 def get_label(model, field_name):
@@ -72,16 +76,13 @@ class PlantAdminForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        TEXTINPUT_ATTRS = {"size": 80, "class": False}
-        TEXTAREA_ATTRS = {"cols": 80, "rows": 7, "class": False}
-
         super().__init__(*args, **kwargs)
         obj = self.instance
 
-        self.fields["short_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["short_description"].widget.attrs.update(TEXTAREA_ATTRS_80_7)
         self.fields["article_trivial_name"].label = get_label(obj, "trivial_name")
         self.fields["growth_height"].label = get_label(obj, "growth_height")
-        self.fields["other_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+        self.fields["other_features"].widget.attrs.update(TEXTINPUT_ATTRS_80)
 
         self.initial.update(
             {
@@ -111,9 +112,10 @@ class PlantAdminForm(forms.ModelForm):
         )
         cleaned_fields = (self.cleaned_data.get(field) for field in fields)
 
-        if not self.cleaned_data.get("dispersal") and any(cleaned_fields):
+        if not self.cleaned_data.get("dispersal_form") and any(cleaned_fields):
             self.add_error(
-                "dispersal", "In combination with others this field must be provided."
+                "dispersal_form",
+                "In combination with others this field must be provided.",
             )
 
     def save(self, commit=True):
@@ -216,8 +218,8 @@ class LeafPoalesAdminForm(forms.ModelForm):
 
         self.fields["length"].label = get_label(obj, "length")
         self.fields["alignment"].label = get_label(obj, "alignment",)
-        self.fields["ligule_features"].widget.attrs.update(TEXTINPUT_ATTRS)
-        self.fields["sheath_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+        self.fields["ligule_features"].widget.attrs.update(TEXTINPUT_ATTRS_60)
+        self.fields["sheath_features"].widget.attrs.update(TEXTINPUT_ATTRS_60)
 
         self.initial.update(
             {
@@ -353,14 +355,14 @@ class BlossomPoalesAdminForm(forms.ModelForm):
         self.fields["inflorescence_bract_length"].label = get_label(
             obj, "inflorescence_bract_length"
         )
-        self.fields["blossom_description"].widget.attrs.update(TEXTAREA_ATTRS)
-        self.fields["perianth_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["blossom_description"].widget.attrs.update(TEXTAREA_ATTRS_60_4)
+        self.fields["perianth_description"].widget.attrs.update(TEXTAREA_ATTRS_60_4)
         self.fields["spikelet_length"].label = get_label(obj, "spikelet_length")
         self.fields["spikelet_blossom_number"].label = get_label(
             obj, "spikelet_blossom_number"
         )
-        self.fields["spikelet_features"].widget.attrs.update(TEXTINPUT_ATTRS)
-        self.fields["husks_description"].widget.attrs.update(TEXTAREA_ATTRS)
+        self.fields["spikelet_features"].widget.attrs.update(TEXTINPUT_ATTRS_60)
+        self.fields["husks_description"].widget.attrs.update(TEXTAREA_ATTRS_60_4)
 
         self.initial.update(
             {
@@ -442,7 +444,7 @@ class StemRhizomePoalesAdminForm(forms.ModelForm):
         obj = self.instance
 
         self.fields["stem_surface"].label = get_label(obj, "stem_surface")
-        self.fields["stem_features"].widget.attrs.update(TEXTINPUT_ATTRS)
+        self.fields["stem_features"].widget.attrs.update(TEXTINPUT_ATTRS_60)
 
         self.initial.update(
             {
@@ -498,3 +500,35 @@ class IndicatorsAdminForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class InterestingFactsAdminForm(forms.ModelForm):
+    output_pollination = OutputField()
+    output_dispersal = OutputField()
+
+    class Meta:
+        model = InterestingFacts
+        fields = []
+        field_classes = {
+            "pollination": AdaptedSimpleArrayField,
+            "dispersal": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "pollination": forms.CheckboxSelectMultiple(choices=POLLINATION_CHOICES),
+            "dispersal": forms.CheckboxSelectMultiple(choices=DISPERSAL_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["detail_features"].widget.attrs.update(TEXTINPUT_ATTRS_80)
+        self.fields["usage"].widget.attrs.update(TEXTINPUT_ATTRS_80)
+        self.fields["trivia"].widget.attrs.update(TEXTAREA_ATTRS_80_7)
+
+        self.initial.update(
+            {
+                "output_pollination": InterestingFactsOutput.generate_pollination(obj),
+                "output_dispersal": InterestingFactsOutput.generate_dispersal(obj),
+            }
+        )

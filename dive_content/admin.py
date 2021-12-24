@@ -6,6 +6,7 @@ from .forms import (
     BlossomPoalesAdminForm,
     FruitAdminForm,
     IndicatorsAdminForm,
+    InterestingFactsAdminForm,
     LeafAdminForm,
     LeafPoalesAdminForm,
     PlantAdminForm,
@@ -17,6 +18,7 @@ from .models import (
     BlossomPoales,
     Fruit,
     Indicators,
+    InterestingFacts,
     Leaf,
     LeafPoales,
     Plant,
@@ -36,7 +38,7 @@ plant_fieldsets = (
                 "article_trivial_name",
                 "alternative_trivial_names",
                 ("growth_form", "growth_height"),
-                ("interaction", "dispersal"),
+                ("interaction", "dispersal_form"),
                 "ground",
                 ("habitats", "ruderal_sites"),
                 ("life_form", "status"),
@@ -306,6 +308,24 @@ indicators_fieldsets = (
 )
 indicators_readonly_fields = ("get_key",)
 
+interestingfacts_fieldsets = (
+    (None, {"fields": ("plant",)}),
+    (
+        None,
+        {
+            "fields": (
+                ("pollination", "insects"),
+                "output_pollination",
+                "dispersal",
+                "output_dispersal",
+                "detail_features",
+                "usage",
+                "trivia",
+            )
+        },
+    ),
+)
+
 # Inlines
 class LeafInline(admin.StackedInline):
     model = Leaf
@@ -370,6 +390,13 @@ class IndicatorsInline(admin.StackedInline):
     classes = ("collapse",)
 
 
+class InterestingFactsInline(admin.StackedInline):
+    model = InterestingFacts
+    fieldsets = interestingfacts_fieldsets
+    form = InterestingFactsAdminForm
+    classes = ("collapse",)
+
+
 class PlantAdmin(admin.ModelAdmin):
     fieldsets = plant_fieldsets
     form = PlantAdminForm
@@ -385,6 +412,7 @@ class PlantAdmin(admin.ModelAdmin):
         StemRootInline,
         StemRhizomePoalesInline,
         IndicatorsInline,
+        InterestingFactsInline,
         PhotographInline,
     ]
 
@@ -469,3 +497,12 @@ class IndicatorsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Indicators, IndicatorsAdmin)
+
+
+class InterestingFactsAdmin(admin.ModelAdmin):
+    model = InterestingFacts
+    fieldsets = interestingfacts_fieldsets
+    form = InterestingFactsAdminForm
+
+
+admin.site.register(InterestingFacts, InterestingFactsAdmin)

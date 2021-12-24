@@ -104,7 +104,7 @@ class PlantOutput:
         # Generate output "Allgemeines" according pattern:
         # "[article] [trivial_name] ([name]), auch [alternative_trivial_names] genannt,
         # ist ein/e [growth_form] mit einer Wuchshöhe von [growth_height]. Es handelt
-        # sich um eine/n [interaction]e/en [dispersal], welche/r auf [ground]em
+        # sich um eine/n [interaction]e/en [dispersal_form], welche/r auf [ground]em
         # Untergrund in/an/auf [habitats]n sowie an Ruderalstandorten ([ruderal_sites]n)
         # vorkommt. Die Pflanze ist ein [life_form] und gilt als [status].
         # [other_features]
@@ -121,7 +121,7 @@ class PlantOutput:
             obj.get_growth_form_display(),
             obj.growth_height,
             obj.get_interaction_display(),
-            obj.get_dispersal_display(),
+            obj.get_dispersal_form_display(),
             obj.get_ground_display(),
             obj.habitats,
             obj.ruderal_sites,
@@ -605,6 +605,35 @@ class StemRhizomePoalesOutput:
         joined_fields = ", ".join(filter(None, fields))
 
         text = format_subject_text(joined_fields, "Rhizom", "")
+        text = format_sentence(text)
+
+        return text
+
+
+class InterestingFactsOutput:
+    def generate_pollination(obj):
+        # Generate output "Bestäubung" according pattern:
+        # "[pollination ([insects])]."
+        fields = [
+            obj.pollination,
+            obj.insects,
+        ]
+        if fields[0]:
+            fields[0] = get_ArrayField_display(fields[0], POLLINATION_CHOICES)
+            if POLLINATION_CHOICES[0][1] in fields[0] and fields[1]:
+                fields[0][0] = f"{fields[0][0]} ({fields[1]})"
+
+        text = format_enumeration(fields[0])
+        text = format_sentence(text)
+
+        return text
+
+    def generate_dispersal(obj):
+        # Generate output "Ausbreitung" according pattern:
+        # "[dispersal]."
+        field = obj.dispersal
+
+        text = format_ArrayField(field, DISPERSAL_CHOICES, conjunction="und")
         text = format_sentence(text)
 
         return text

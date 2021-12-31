@@ -1,8 +1,19 @@
 from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
 
-from .choices import *
-from .models import Blossom, Fruit, Indicators, Leaf, Plant, StemRoot
+from .models import (
+    Blossom,
+    BlossomPoales,
+    Fruit,
+    Indicators,
+    InterestingFacts,
+    Leaf,
+    LeafPoales,
+    Plant,
+    StemRhizomePoales,
+    StemRoot,
+)
+from .outputs import *
 
 
 class HumanReadableChoiceField(serializers.ChoiceField):
@@ -69,28 +80,14 @@ class DisplayNameModelSerializer(serializers.ModelSerializer):
         return serializers.OrderedDict(filter(lambda x: not x[1] is None, ret.items()))
 
 
-def concatenate(field, choices=None, app=""):
-    output = ""
-    if field:
-        if choices:
-            if isinstance(field, list):
-                output = " bis ".join(f"{dict(choices).get(x)}{app}" for x in field)
-            else:
-                output = f"{dict(choices).get(field)}{app}"
+class ExcludeEmptyFieldsModelSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
 
-            if app and ("/" in output):
-                output = output.split("/")
-                for i, x in enumerate(output[:-1]):
-                    output[i] = f"{x}{app}"
-                output = "/".join(output)
-        else:
-            output = f"{field}{app}"
+        for key in [key for key, value in ret.items() if value is (None or "")]:
+            del ret[key]
 
-    return output
-
-
-def format_sentence(line):
-    return f"{line[0].capitalize()}{line[1:]}." if line else ""
+        return ret
 
 
 class LeafSerializer(DisplayNameModelSerializer):
@@ -125,11 +122,11 @@ class LeafSerializer(DisplayNameModelSerializer):
         # section]em Querschnitt."
         fields = [
             obj.color,
-            concatenate(obj.veins, VEINS_CHOICES, "e"),
-            concatenate(obj.division, DIVISION_CHOICES, "e"),
-            concatenate(obj.succulence, SUCCULENCE_CHOICES, "e"),
-            concatenate(obj.texture, TEXTURE_CHOICES, "e"),
-            concatenate(obj.cross_section, CROSS_SECTION_CHOICES, "em"),
+            add_suffix(obj.get_veins_display(), "e"),
+            add_suffix(obj.get_division_display(), "e"),
+            add_suffix(obj.get_succulence_display(), "e"),
+            add_suffix(obj.get_texture_display(), "e", "/"),
+            add_suffix(obj.get_cross_section_display(), "em", "/"),
         ]
 
         text = ", ".join(filter(None, fields[:5]))
@@ -143,10 +140,13 @@ class LeafSerializer(DisplayNameModelSerializer):
         # Generate sentence "Anheftung" according pattern:
         # "Blätter sitzen [attachment], stehen [arrangement]; [rosette]."
         fields = [
-            concatenate(obj.attachment, ATTACHMENT_CHOICES),
-            concatenate(obj.arrangement, ARRANGMENT_CHOICES),
-            concatenate(obj.rosette, ROSETTE_CHOICES),
+            obj.attachment,
+            obj.get_arrangement_display(),
+            obj.get_rosette_display(),
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], ATTACHMENT_CHOICES)
+
         fields[0] = f"sitzen {fields[0]}" if fields[0] else ""
         fields[1] = f"stehen {fields[1]}" if fields[1] else ""
 
@@ -167,19 +167,26 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.leaf_comp_num,
-            concatenate(
-                obj.leaf_comp_blade_shape, LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
-            ),
+            obj.leaf_comp_blade_shape,
             obj.leaf_comp_incision_num,
-            concatenate(
-                obj.leaf_comp_incision_depth, LEAF_COMP_INCISION_DEPTH_CHOICES, app[3]
-            ),
+            obj.leaf_comp_incision_depth,
             obj.leaflet_incision_num,
             obj.leaflet_incision_add,
-            concatenate(
-                obj.leaflet_incision_depth, LEAFLET_INCISION_DEPTH_CHOICES, app[6]
-            ),
+            obj.leaflet_incision_depth,
         ]
+        if fields[1]:
+            fields[1] = format_ArrayField(
+                fields[1], LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
+            )
+        if fields[3]:
+            fields[3] = format_ArrayField(
+                fields[3], LEAF_COMP_INCISION_DEPTH_CHOICES, app[3], "/"
+            )
+        if fields[6]:
+            fields[6] = format_ArrayField(
+                fields[6], LEAFLET_INCISION_DEPTH_CHOICES, app[6], "/"
+            )
+
         for i in (2, 4, 5):
             fields[i] = f"{fields[i]}-" if fields[i] else ""
         if fields[2] and " bis " in fields[3]:
@@ -213,16 +220,19 @@ class LeafSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.leaf_simple_num,
-            concatenate(
-                obj.leaf_simple_blade_shape, LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1]
-            ),
+            obj.leaf_simple_blade_shape,
             obj.leaf_simple_incision_num,
-            concatenate(
-                obj.leaf_simple_incision_depth,
-                LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
-                app[3],
-            ),
+            obj.leaf_simple_incision_depth,
         ]
+        if fields[1]:
+            fields[1] = format_ArrayField(
+                fields[1], LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1], "/"
+            )
+        if fields[3]:
+            fields[3] = format_ArrayField(
+                fields[3], LEAF_SIMPLE_INCISION_DEPTH_CHOICES, app[3], "/"
+            )
+
         fields[2] = f"{fields[2]}-" if fields[2] else ""
         if fields[2] and " bis " in fields[3]:
             fields[3] = fields[3].split(" bis ", 1)
@@ -242,12 +252,19 @@ class LeafSerializer(DisplayNameModelSerializer):
         # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
         # Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
         fields = [
-            concatenate(obj.edge, EDGE_CHOICES),
-            concatenate(obj.surface, SURFACE_CHOICES, "e"),
-            concatenate(obj.stipule_edge, STIPULE_EDGE_CHOICES, "e"),
-            concatenate(obj.base, BASE_CHOICES),
-            concatenate(obj.apex, APEX_CHOICES),
+            obj.edge,
+            obj.surface,
+            obj.stipule_edge,
+            obj.get_base_display(),
+            obj.get_apex_display(),
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], EDGE_CHOICES)
+        if fields[1]:
+            fields[1] = format_ArrayField(fields[1], SURFACE_CHOICES, "e", "/")
+        if fields[2]:
+            fields[2] = format_ArrayField(fields[2], EDGE_CHOICES, "e")
+
         fields[0] = f"Blattränder {fields[0]}" if fields[0] else ""
         fields[1] = f"{fields[1]} Blattoberfläche" if fields[1] else ""
         fields[2] = f"{fields[2]} Nebenblattränder" if fields[2] else ""
@@ -286,6 +303,34 @@ class LeafSerializer(DisplayNameModelSerializer):
             text = f"{fields} {'Keimblatt' if fields == 1 else 'Keimblätter'}"
 
         return format_sentence(text)
+
+
+class LeafPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    overview = serializers.SerializerMethodField(label="Überblick")
+    leaf_blade = serializers.SerializerMethodField(label="Blattspreite")
+    leaf_base = serializers.SerializerMethodField(label="Blattgrund")
+    ligule = serializers.SerializerMethodField(label="Blatthäutchen")
+    leaf_sheath = serializers.SerializerMethodField(label="Blattscheide")
+
+    class Meta:
+        model = LeafPoales
+        fields = ("overview", "leaf_blade", "leaf_base", "ligule", "leaf_sheath")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_overview(self, obj):
+        return LeafPoalesOutput.generate_overview(obj)
+
+    def get_leaf_blade(self, obj):
+        return LeafPoalesOutput.generate_leaf_blade(obj)
+
+    def get_leaf_base(self, obj):
+        return LeafPoalesOutput.generate_leaf_base(obj)
+
+    def get_ligule(self, obj):
+        return LeafPoalesOutput.generate_ligule(obj)
+
+    def get_leaf_sheath(self, obj):
+        return LeafPoalesOutput.generate_leaf_sheath(obj)
 
 
 class BlossomSerializer(DisplayNameModelSerializer):
@@ -332,25 +377,30 @@ class BlossomSerializer(DisplayNameModelSerializer):
     def get_inflorescence(self, obj):
         # Generate sentence "Blütenstand" according pattern:
         # "[inflorescence_num] [inflorescence_type] mit [blossom_num] Blüte|Blüten."
+        app = {1: "Blütenstände", 2: "Blüten"}
+        if obj.inflorescence_num == "1":
+            app[1] = "Bütenstand"
+        if obj.blossom_num == "1":
+            app[2] = "Blüte"
+
         fields = [
             obj.inflorescence_num,
             obj.inflorescence_type,
             obj.blossom_num,
         ]
-        if fields[0] not in ("", "1"):
-            if fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3).keys():
-                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES_2_3, "n")
-            elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3).keys():
-                fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
-            else:
-                fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+        if fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES_2_3)[fields[1]]}"
+            fields[1] = add_suffix(fields[1], "n")
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3):
+            fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
+        elif not any(fields):
+            pass
         else:
-            fields[1] = concatenate(fields[1], INFLORESCENCE_TYPE_CHOICES)
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES).get(fields[1], app[1])}"
+        fields[2] = add_suffix(fields[2], f" {app[2]}")
 
         text = " ".join(filter(None, fields[:2]))
         text = " mit ".join(filter(None, (text, fields[2])))
-        if fields[2]:
-            text = f"{text} Blüte" if text[-1] == "1" else f"{text} Blüten"
 
         return format_sentence(text)
 
@@ -359,12 +409,14 @@ class BlossomSerializer(DisplayNameModelSerializer):
         # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
         # Blütenform, [bract_blade]es Tragblatt."
         fields = [
-            concatenate(obj.merosity, MEROSITY_CHOICES, "-zählige"),
-            concatenate(obj.symmetry, SYMMETRY_CHOICES, "e"),
-            concatenate(obj.perianth, PERIANTH_CHOICES),
-            concatenate(obj.perianth_form, PERIANTH_FORM_CHOICES, "e"),
-            concatenate(obj.bract_blade, BRACT_BLADE_CHOICES, "es"),
+            add_suffix(f"{MEROSITY_CHOICES_DICT[obj.merosity]}", "-zählige"),
+            add_suffix(obj.get_symmetry_display(), "e"),
+            obj.get_perianth_display(),
+            add_suffix(obj.get_perianth_form_display(), "e"),
+            obj.bract_blade,
         ]
+        if fields[4]:
+            fields[4] = format_ArrayField(fields[4], BRACT_BLADE_CHOICES, "es", "/")
 
         text = [
             " ".join(filter(None, fields[:3])),
@@ -381,7 +433,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
     def get_diameter(self, obj):
         # Generate sentence "Durchmesser" according pattern:
         # "[diameter] cm."
-        fields = ",".join(obj.diameter.split("."))
+        fields = convert_decimal_separator(remove_empty_decimal_places(obj.diameter))
 
         text = f"{fields} cm" if fields else ""
 
@@ -398,15 +450,12 @@ class BlossomSerializer(DisplayNameModelSerializer):
         fields = [
             obj.sepal_num,
             obj.sepal_color_form,
-            obj.sepal_connation_type,
-            concatenate(obj.sepal_connation, SEPAL_CONNATION_CHOICES),
+            get_NumericPrefixTermField_display(
+                obj.sepal_connation_type, CONNATION_TYPE_CHOICES
+            ),
+            obj.get_sepal_connation_display(),
             obj.epicalyx,
         ]
-        fields[2] = (
-            f"{fields[2][0]}{concatenate(fields[2][1:], CONNATION_TYPE_CHOICES)}"
-            if fields[2][0:1].isdigit()
-            else concatenate(fields[2], CONNATION_TYPE_CHOICES)
-        )
 
         text = [
             " ".join(filter(None, fields[:2])),
@@ -429,17 +478,17 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.petal_num,
-            concatenate(",".join(obj.petal_len.split(".")), app=app[1]),
+            add_suffix(
+                convert_decimal_separator(remove_empty_decimal_places(obj.petal_len)),
+                app[1],
+            ),
             obj.petal_color_form,
-            obj.petal_connation_type,
-            concatenate(obj.petal_connation, PETAL_CONNATION_CHOICES),
+            get_NumericPrefixTermField_display(
+                obj.petal_connation_type, CONNATION_TYPE_CHOICES
+            ),
+            obj.get_petal_connation_display(),
             obj.nectary,
         ]
-        fields[3] = (
-            f"{fields[3][0]}{concatenate(fields[3][1:], CONNATION_TYPE_CHOICES)}"
-            if fields[3][0:1].isdigit()
-            else concatenate(fields[3], CONNATION_TYPE_CHOICES)
-        )
 
         text = [
             ", ".join(filter(None, fields[1:3])),
@@ -463,9 +512,12 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.stamen_num,
-            concatenate(",".join(obj.stamen_len.split(".")), app=app[1]),
+            add_suffix(
+                convert_decimal_separator(remove_empty_decimal_places(obj.stamen_len)),
+                app[1],
+            ),
             obj.stamen_color_form,
-            concatenate(obj.stamen_connation_type, STAMEN_CONNATION_TYPE_CHOICES),
+            obj.get_stamen_connation_type_display(),
             obj.stamen_connation_type_add,
         ]
 
@@ -494,9 +546,9 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         fields = [
             obj.carpel_num,
-            concatenate(obj.carpel_connation_type, CARPEL_CONNATION_TYPE_CHOICES),
-            concatenate(obj.ovary_pos, OVARY_POS_CHOICES, "er"),
-            concatenate(obj.pistil_pos, PISTIL_POS_CHOICES, "er"),
+            obj.get_carpel_connation_type_display(),
+            add_suffix(obj.get_ovary_pos_display(), "er"),
+            add_suffix(obj.get_pistil_pos_display(), "er"),
             obj.stigma_num,
             obj.stylopodium,
         ]
@@ -519,6 +571,34 @@ class BlossomSerializer(DisplayNameModelSerializer):
         return format_sentence(text)
 
 
+class BlossomPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    season = serializers.SerializerMethodField(label="Blütezeit")
+    inflorescence = serializers.SerializerMethodField(label="Blütenstand")
+    blossom_perianth = serializers.SerializerMethodField(label="Blüte und Blütenhülle")
+    spikelet = serializers.SerializerMethodField(label="Ährchen")
+    husks = serializers.SerializerMethodField(label="Spelzen")
+
+    class Meta:
+        model = BlossomPoales
+        fields = ("season", "inflorescence", "blossom_perianth", "spikelet", "husks")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_season(self, obj):
+        return BlossomPoalesOutput.generate_season(obj)
+
+    def get_inflorescence(self, obj):
+        return BlossomPoalesOutput.generate_inflorescence(obj)
+
+    def get_blossom_perianth(self, obj):
+        return BlossomPoalesOutput.generate_blossom_perianth(obj)
+
+    def get_spikelet(self, obj):
+        return BlossomPoalesOutput.generate_spikelet(obj)
+
+    def get_husks(self, obj):
+        return BlossomPoalesOutput.generate_husks(obj)
+
+
 class FruitSerializer(DisplayNameModelSerializer):
     fruit = serializers.SerializerMethodField(label="Frucht")
     ovule = serializers.SerializerMethodField(label="Samenanlage")
@@ -534,7 +614,7 @@ class FruitSerializer(DisplayNameModelSerializer):
         # "[fruit_form] [fruit_type]."
         fields = [
             obj.fruit_form,
-            concatenate(obj.fruit_type, FRUIT_TYPE_CHOICES),
+            obj.get_fruit_type_display(),
         ]
 
         text = " ".join(filter(None, fields))
@@ -544,7 +624,7 @@ class FruitSerializer(DisplayNameModelSerializer):
     def get_ovule(self, obj):
         # Generate sentence "Samenanlage" according pattern:
         # "Samenanlage in [ovule_pos]."
-        fields = concatenate(obj.ovule_pos, OVULE_POS_CHOICES)
+        fields = obj.get_ovule_pos_display()
 
         text = f"Samenanlage in {fields}" if fields else ""
 
@@ -596,13 +676,24 @@ class StemRootSerializer(DisplayNameModelSerializer):
         if not obj.cross_section:
             app = "e"
         fields = [
-            concatenate(obj.orientation, ORIENTATION_CHOICES, "er"),
-            concatenate(obj.appearance, APPEARANCE_CHOICES, "er"),
-            concatenate(obj.succulence, SUCCULENCE_CHOICES, "er"),
-            concatenate(obj.pith, PITH_CHOICES, "er"),
-            concatenate(obj.cross_section, SR_CROSS_SECTION_CHOICES, "er"),
-            concatenate(obj.surface, SURFACE_CHOICES, app),
+            obj.orientation,
+            obj.appearance,
+            add_suffix(obj.get_succulence_display(), "er"),
+            add_suffix(obj.get_pith_display(), "er"),
+            obj.cross_section,
+            obj.surface,
         ]
+        if fields[0]:
+            fields[0] = format_ArrayField(fields[0], ORIENTATION_CHOICES, "er", "/")
+        if fields[1]:
+            fields[1] = format_ArrayField(fields[1], APPEARANCE_CHOICES, "er")
+        if fields[4]:
+            fields[4] = format_ArrayField(
+                fields[4], SR_CROSS_SECTION_CHOICES, "er", "/"
+            )
+        if fields[5]:
+            fields[5] = format_ArrayField(fields[5], SURFACE_CHOICES, app, "/")
+
         fields[4] = f"{fields[4]} Querschnitt" if fields[4] else ""
         fields[5] = f"{fields[5]} Oberfläche" if fields[5] else ""
 
@@ -619,8 +710,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # Generate sentence "Auswüchse" according pattern:
         # "[creep_lay_shoots]; [runners]."
         fields = [
-            concatenate(obj.creep_lay_shoots, CREEP_LAY_SHOOTS_CHOICES),
-            concatenate(obj.runners, RUNNERS_CHOICES),
+            obj.get_creep_lay_shoots_display(),
+            obj.get_runners_display(),
         ]
 
         text = "; ".join(filter(None, fields))
@@ -630,7 +721,7 @@ class StemRootSerializer(DisplayNameModelSerializer):
     def get_bracts(self, obj):
         # Generate sentence "Beblätterung" according pattern:
         # "[bracts] beblättert."
-        fields = concatenate(obj.bracts, BRACTS_CHOICES)
+        fields = obj.get_bracts_display()
 
         text = f"{fields} beblättert" if fields else ""
 
@@ -650,8 +741,8 @@ class StemRootSerializer(DisplayNameModelSerializer):
         # "[organ_features] [organs]; Primärwurzel [primary_root]."
         fields = [
             obj.organ_features,
-            concatenate(obj.organs, ORGANS_CHOICES),
-            concatenate(obj.primary_root, PRIMARY_ROOT_CHOICES),
+            obj.get_organs_display(),
+            obj.get_primary_root_display(),
         ]
         fields[2] = f"Primärwurzel {fields[2]}" if fields[2] else ""
 
@@ -659,6 +750,26 @@ class StemRootSerializer(DisplayNameModelSerializer):
         text = "; ".join(filter(None, (text, fields[2])))
 
         return format_sentence(text)
+
+
+class StemRhizomePoalesSerializer(ExcludeEmptyFieldsModelSerializer):
+    growth_form = serializers.SerializerMethodField(label="Wuchsform")
+    stem = serializers.SerializerMethodField(label="Stängel")
+    rhizome = serializers.SerializerMethodField(label="Rhizome")
+
+    class Meta:
+        model = StemRhizomePoales
+        fields = ("growth_form", "stem", "rhizome")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_growth_form(self, obj):
+        return StemRhizomePoalesOutput.generate_growth_form(obj)
+
+    def get_stem(self, obj):
+        return StemRhizomePoalesOutput.generate_stem(obj)
+
+    def get_rhizome(self, obj):
+        return StemRhizomePoalesOutput.generate_rhizome(obj)
 
 
 class IndicatorsSerializer(serializers.ModelSerializer):
@@ -723,20 +834,62 @@ class ZeigerNumberSerializer(DisplayNameModelSerializer):
 # ------------------------------------------------------------------------------------ #
 
 
+class InterestingFactsSerializer(ExcludeEmptyFieldsModelSerializer):
+    pollination = serializers.SerializerMethodField(label="Bestäubung")
+    dispersal = serializers.SerializerMethodField(label="Ausbreitung")
+
+    class Meta:
+        model = InterestingFacts
+        fields = ("pollination", "dispersal", "detail_features", "usage", "trivia")
+        swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_pollination(self, obj):
+        return InterestingFactsOutput.generate_pollination(obj)
+
+    def get_dispersal(self, obj):
+        return InterestingFactsOutput.generate_dispersal(obj)
+
+
 class PlantSerializer(DisplayNameModelSerializer):
     taxonomy = serializers.CharField(
         label=Plant.taxonomy.short_description, read_only=True
     )
+    general = serializers.SerializerMethodField(label="Allgemeines")
 
     leaf = LeafSerializer(required=False)
+    leafpoales = LeafPoalesSerializer(required=False)
     blossom = BlossomSerializer(required=False)
+    blossompoales = BlossomPoalesSerializer(required=False)
     fruit = FruitSerializer(required=False)
     stemroot = StemRootSerializer(required=False)
+    stemrhizomepoales = StemRhizomePoalesSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)
+    interestingfacts = InterestingFactsSerializer(required=False)
     photographs = PhotographSerializer(many=True, required=False)
 
     class Meta:
         model = Plant
-        exclude = ["article"]
+        fields = (
+            "id",
+            "tree_node",
+            "taxonomy",
+            "short_description",
+            "name",
+            "trivial_name",
+            "general",
+            "leaf",
+            "leafpoales",
+            "blossom",
+            "blossompoales",
+            "fruit",
+            "stemroot",
+            "stemrhizomepoales",
+            "indicators",
+            "interestingfacts",
+            "photographs",
+        )
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
+
+    def get_general(self, obj):
+        return PlantOutput.generate_general(obj)

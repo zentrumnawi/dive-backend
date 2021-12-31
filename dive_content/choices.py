@@ -1,7 +1,240 @@
 from django.utils.translation import ugettext_lazy as _
 
-# Leaf choices
 
+def normalize_choices_term(item):
+    # Normalize term to support sortring according to DIN 5007-1
+    term = f"{item[1]}"
+    term = term.lower()
+    for char, replacement_char in (
+        ("ä", "a"),
+        ("ö", "o"),
+        ("ü", "u"),
+        ("ß", "ss"),
+        (" ", ""),
+        ("-", ""),
+        ("/", ""),
+    ):
+        term = term.replace(char, replacement_char)
+
+    return term
+
+
+# Plant choices ------------------------------------------------------------------------
+# general (sentence 1) -----------------------------------------------------------------
+ARTICLE_CHOICES = (("", "-"), ("der", _("der")), ("die", _("die")), ("das", _("das")))
+GROWTH_FORM_SUBCHOICES = [()] * 2
+GROWTH_FORM_SUBCHOICES[0] = (  # ein
+    ("bau", _("Baum")),
+    ("hal", _("Halbstrauch")),
+    ("kra", _("Kraut")),
+    ("krc", _("krautiger Chemaephyt")),
+    ("scs", _("Scheinstrauch")),
+    ("spa", _("Spalierstrauch")),
+    ("spr", _("Spreizklimmer")),
+    ("sta", _("Staudenstrauch")),
+    ("str", _("Strauch")),
+    ("stb", _("Strauchbaum")),
+    ("zwe", _("Zwergstrauch")),
+)
+GROWTH_FORM_SUBCHOICES[1] = (  # eine
+    ("kle", _("Kletterpflanze")),
+    ("lia", _("Liane")),
+    ("sch", _("Schwimmpflanze")),
+    ("tau", _("Tauchpflanze")),
+)
+GROWTH_FORM_CHOICES = [
+    *GROWTH_FORM_SUBCHOICES[0],
+    *GROWTH_FORM_SUBCHOICES[1],
+]
+GROWTH_FORM_CHOICES.sort(key=normalize_choices_term)
+GROWTH_HEIGHT_UNITS = (("m", "m"), ("cm", "cm"))
+# general (sentence 2) -----------------------------------------------------------------
+INTERACTION_CHOICES = (
+    ("par", _("parasitisch")),
+    ("nip", _("nicht parasitisch")),
+    ("obl", _("obligat Mykorrhiza-bildend")),
+    ("fak", _("fakultativ Mykorrhiza-bildend")),
+)
+DISPERSAL_FORM_CHOICES = (
+    ("na", _("Nacktsamer")),
+    ("be", _("Bedecktsamer")),
+    ("sp", _("Sporenpflanze")),
+)
+GROUND_CHOICES = (
+    (1, _("kalkfrei, basisch")),
+    (2, _("kalkarm")),
+    (3, _("feucht, zum Teil periodisch überschwemmt")),
+    (4, _("frisch bis feucht, meist nährstoffreich")),
+    (5, _("frisch und nährstoffreich")),
+    (6, _("lehmig bis tonig")),
+    (7, _("mäßig nährstoffreich")),
+    (8, _("nährstoff(stickstoff)reich")),
+    (9, _("nährstoffreich")),
+)
+HABITATS_SUBCHOICES = [()] * 3
+HABITATS_SUBCHOICES[0] = (  # an
+    _("Auengebüschsäume"),
+    _("Auenwaldsäume"),
+    _("Bäche"),
+    _("Bachränder"),
+    _("Felsen"),
+    _("Grabenränder"),
+    _("Hänge"),
+    _("Heckenränder"),
+    _("Laubmischwaldsäume"),
+    _("Mauern"),
+    _("Quellen"),
+    _("Säume"),
+    _("Talhänge"),
+    _("Trockengebüschsäume"),
+    _("Trockenwaldsäume"),
+    _("Ufer"),
+    _("Waldquellen"),
+    _("Waldränder"),
+    _("Waldsäume"),
+    _("Waldwegränder"),
+    _("Wegränder"),
+)
+HABITATS_SUBCHOICES[1] = (  # in
+    _("Ansaaten"),
+    _("Auengebüsche"),
+    _("Auenwälder"),
+    _("Bruchwälder"),
+    _("Buchenwälder"),
+    _("Eichen-Hainbuchen-Wälder"),
+    _("Ephemerenfluren"),
+    _("Erlenwälder"),
+    _("Flussuferstaudenfluren"),
+    _("Forste"),
+    _("Gärten"),
+    _("Gebüsche"),
+    _("Gebüschsäume"),
+    _("Gräben"),
+    _("Hackkulturen"),
+    _("Hangwälder"),
+    _("Hecken"),
+    _("Heiden"),
+    _("Hochgrasfluren"),
+    _("Hochstaudenfluren"),
+    _("Kalkfelsenfluren"),
+    _("Kiesgruben"),
+    _("Laubmischwälder"),
+    _("Laubwälder"),
+    _("Mischwälder"),
+    _("Moorwälder"),
+    _("Nadelholzforste"),
+    _("Nadelwälder"),
+    _("Parkanlagen"),
+    _("Parks"),
+    _("Pioniergehölze"),
+    _("Quellmoore"),
+    _("Rasenansaaten"),
+    _("Robinienforste"),
+    _("Röhrichte"),
+    _("Schläge"),
+    _("Schlaggehölze"),
+    _("Schlammfluren"),
+    _("Schluchtwälder"),
+    _("Staudenfluren"),
+    _("Steinbrüche"),
+    _("Steinschuttfluren"),
+    _("Uferstaudenfluren"),
+    _("Vorwälder"),
+    _("Vorwaldgehölze"),
+    _("Wälder"),
+    _("Waldschläge"),
+    _("Waldverlichtungen"),
+    _("Weinberge"),
+)
+HABITATS_SUBCHOICES[2] = (  # auf
+    _("Äcker"),
+    _("Bahnanlagen"),
+    _("Brachen"),
+    _("Dämme"),
+    _("Fettwiesen"),
+    _("Friedhöfe"),
+    _("Frischwiesen"),
+    _("Grünlandbrachen"),
+    _("Halbtrockenrasen"),
+    _("Intensivgrünländer"),
+    _("Kalktrockenrasen"),
+    _("Kleeäcker"),
+    _("Magerrasen"),
+    _("Magerweiden"),
+    _("Obstwiesen"),
+    _("Parkrasen"),
+    _("Rasen"),
+    _("Ruderalflächen"),
+    _("Sandtrockenrasen (Küstendünen)"),
+    _("Schutt"),
+    _("Schutthalden"),
+    _("Silikatmagerrasen"),
+    _("Steinriegel"),
+    _("Sumpfwiesen"),
+    _("Trittrasen"),
+    _("Trittstellen"),
+    _("Trockenrasen"),
+    _("Verlichtungen"),
+    _("Viehläger"),
+    _("Waldlichtungen"),
+    _("Waldwege"),
+    _("Weiden"),
+    _("Wiesen"),
+    _("Xerothermrasen"),
+)
+HABITATS_SUBCHOICES[0] = tuple(zip(range(100, 199), HABITATS_SUBCHOICES[0]))
+HABITATS_SUBCHOICES[1] = tuple(zip(range(200, 299), HABITATS_SUBCHOICES[1]))
+HABITATS_SUBCHOICES[2] = tuple(zip(range(300, 399), HABITATS_SUBCHOICES[2]))
+HABITATS_CHOICES = [
+    *HABITATS_SUBCHOICES[0],
+    *HABITATS_SUBCHOICES[1],
+    *HABITATS_SUBCHOICES[2],
+]
+HABITATS_CHOICES.sort(key=normalize_choices_term)
+RUDERAL_SITES_CHOICES = (
+    _("Bahnanlagen"),
+    _("Bahndämme"),
+    _("Böschungen"),
+    _("Bruchwälder"),
+    _("Dämme"),
+    _("Geröllstände"),
+    _("Gleitschotter"),
+    _("Gräben"),
+    _("Kiesgruben"),
+    _("an Mauern"),
+    _("Pflasterfugen"),
+    _("Schutt"),
+    _("Steinbrüche"),
+    _("Straßenböschungen"),
+    _("Tagebaue"),
+    _("Trittstellen"),
+    _("Waldränder"),
+    _("Waldschläge"),
+    _("Wegränder"),
+    _("Xerothermrasen"),
+    _("an Zäunen"),
+)
+RUDERAL_SITES_CHOICES = tuple(zip(range(1, 99), RUDERAL_SITES_CHOICES))
+# general (sentence 3) -----------------------------------------------------------------
+LIFE_FORM_CHOICES = (
+    ("pha", _("Phanerophyt")),
+    ("cha", _("Chamaephyt")),
+    ("hem", _("Hemikryptophyt")),
+    ("kry", _("Kryptophyt")),
+    ("the", _("Therophyt")),
+    ("geo", _("Geophyt")),
+    ("hel", _("Helophyt (Sumpfpflanze)")),
+    ("hyd", _("Hydrophyt (Wasserpflanze)")),
+)
+STATUS_CHOICES = (
+    ("e", _("einheimisch")),
+    ("a", _("Archaeophyt")),
+    ("n", _("Neophyt")),
+)
+# --------------------------------------------------------------------------------------
+
+
+# Leaf choices -------------------------------------------------------------------------
 VEINS_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
@@ -201,10 +434,108 @@ APEX_CHOICES = (
     ("aus", _("ausgerandet")),
 )
 SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
+# --------------------------------------------------------------------------------------
 
 
-# Blossom choices
+# LeafPoales choices -------------------------------------------------------------------
+# overview -----------------------------------------------------------------------------
+LEAFPOALES_SHAPE_CHOICES = (("f", _("flach")), ("r", _("röhrig")))
+HAIRINESS_CHOICES = (
+    ("kah", _("kahl")),
+    ("sam", _("samtig")),
+    ("lob", _("locker behaart")),
+    ("beh", _("behaart")),
+    ("dib", _("dicht behaart")),
+    ("wol", _("wollig")),
+)
+LEAFPOALES_CROSS_SECTION_CHOICES = (
+    ("Voa", _("Vogelflug-artig")),
+    ("VPa", _("V-Profil-artig")),
+    ("UPa", _("U-Profil-artig")),
+    ("roe", _("röhrig")),
+    ("run", _("rund")),
+    ("abg", _("abgeflacht")),
+    ("fla", _("flach")),
+    ("bor", _("borstig")),
+)
+ALIGNMENT_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"))
+ALIGNMENT_CHOICES = (
+    ("", "---------"),
+    ("-w", _("-wirtelig")),
+    ("-z", _("-zeilig")),
+)
+ATTACHMENT_POINT_CHOICES = (("K", _("Knoten")), ("T", _("Triebgrund")))
+# leaf_blade ---------------------------------------------------------------------------
+BLADE_SHAPE_CHOICES = (
+    ("bor", _("borstenförmig")),
+    ("lan", _("lanzettlich")),
+    ("lin", _("linealisch")),
+    ("par", _("parallelrandig")),
+    ("pfr", _("pfriemlich")),
+)
+BLADE_CORRUGATION_CHOICES = (
+    ("gla", _("glatt")),
+    ("gmS", _("glatt mit Skispur")),
+    ("ung", _("undeutlich gerieft")),
+    ("deg", _("deutlich gerieft")),
+    ("ssg", _("sehr stark gerieft")),
+)
+BLADE_DOUBLE_GROOVE = (("m", _("mit Doppelrille")), ("o", _("ohne Doppelrille")))
+BLADE_SHINE_CHOICES = (
+    ("gla", _("glanzlos")),
+    ("mag", _("matt glänzend")),
+    ("seg", _("seidig glänzend")),
+    ("stg", _("stark glänzend")),
+)
+BLADE_KEEL_CHOICES = (("m", _("mit auffälligem Kiel")), ("o", _("ohne Kiel")))
+BLADE_EDGE_CHOICES = (
+    ("gla", _("glatt")),
+    ("vor", _("vorwärts rau")),
+    ("rur", _("rückwärts rau")),
+    ("bew", _("bewimpert")),
+    ("bor", _("borstig")),
+    ("gez", _("gezähnt")),
+)
+BLADE_BUD_SYSTEM_CHOICES = (("f", _("gefaltet")), ("r", _("gerollt")))
+# leaf_base ----------------------------------------------------------------------------
+BASE_EDGE_CHOICES = (("k", _("kahl")), ("b", _("behaart (< 3 mm)")))
+BASE_AURICLE_CHOICES = (("m", _("mit Öhrchen")), ("o", _("ohne Öhrchen")))
+# ligule -------------------------------------------------------------------------------
+LIGULE_LENGTH_CHOICES = (
+    ("kur", _("kurz")),
+    ("mit", _("mittellang")),
+    ("lan", _("lang")),
+    ("sel", _("sehr lang")),
+)
+LIGULE_SHAPE_CHOICES = (
+    ("abg", _("abgerundet")),
+    ("aHa", _("als Haarkranz ausgebildet")),
+    ("bew", _("bewimpert")),
+    ("feh", _("fehlend")),
+    ("ges", _("geschlitzt")),
+    ("man", _("manschettenförmig")),
+    ("roe", _("röhrenförmig")),
+    ("sau", _("saumartig")),
+    ("spi", _("spitz")),
+    ("stu", _("stumpf")),
+    ("zer", _("zerschlitzt")),
+)
+LIGULE_CONSISTENCY_CHOICES = (
+    ("der", _("derb")),
+    ("hae", _("häutig")),
+    ("zar", _("zart")),
+)
+# leaf_sheath --------------------------------------------------------------------------
+SHEATH_CONNATION_CHOICES = (
+    ("off", _("offen")),
+    ("iTv", _("in Teilen verwachsen")),
+    ("fbo", _("fast bis oben geschlossen")),
+    ("ges", _("geschlossen")),
+)
+# --------------------------------------------------------------------------------------
 
+
+# Blossom choices ----------------------------------------------------------------------
 SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
 SEASON_DICT = {
     None: "",
@@ -274,6 +605,7 @@ INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )
+MEROSITY_CHOICES_DICT = {**dict({None: ""}), **dict(MEROSITY_CHOICES[1:])}
 SYMMETRY_CHOICES = (
     ("r", _("radiärsymmetrisch")),
     ("d", _("disymmetrisch")),
@@ -360,7 +692,7 @@ PISTIL_POS_CHOICES = (
 # ---------------------------------- TO BE MODIFIED ---------------------------------- #
 GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
 GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
-GROUND_CHOICES = (
+B_GROUND_CHOICES = (
     ("ge", _("gestielt")),
     ("si", _("sitzend / ungestielt")),
     ("st", _("stengelumfassend")),
@@ -373,10 +705,87 @@ GROUND_CHOICES = (
     ("hi", _("hinfällig")),
 )
 # ------------------------------------------------------------------------------------ #
+# --------------------------------------------------------------------------------------
 
 
-# Fruit choices
+# BlossomPoales choices ----------------------------------------------------------------
+# inflorescence ------------------------------------------------------------------------
+INFLORESCENCE_DENSITY_CHOICES = (
+    ("l", _("locker")),
+    ("d", _("in dichten Kopf zusammengezogen")),
+)
+INFLORESCENCE_POSITION_CHOICES = (
+    ("a", _("aufrecht")),
+    ("s", _("scheinbar seitenständig")),
+)
+BP_INFLORESCENCE_TYPE_CHOICES = (
+    ("A", _("Ähre")),
+    ("R", _("Rispe")),
+    ("S", _("Spirre")),
+)
+# blossom_perianth ---------------------------------------------------------------------
+BLOSSOM_SEX_CHOICES = (
+    ("z", _("zwittrig")),
+    ("s", _("zwittrig, selten einige weiblich")),
+    ("e", _("eingeschlechtig")),
+)
+BP_PERIANTH_CHOICES = (
+    ("m", _("mit Blütenhülle")),
+    ("S", _("Blüte von Spelzen umgeben")),
+)
+# spikelet -----------------------------------------------------------------------------
+SPIKELET_SHAPE_CHOICES = (
+    ("zSv", _("zur Spitze hin verbreitert")),
+    ("zus", _("zusammengedrückt")),
+    ("sez", _("seitlich zusammengedrückt")),
+    ("niz", _("nicht zusammengedrückt")),
+)
+SPIKELET_ATTACHMENT_CHOICES = (
+    ("ges", _("gestielt")),
+    ("bog", _("borstenlos gestielt")),
+    ("vou", _("völlig ungestielt")),
+    ("sit", _("sitzend")),
+)
+SPIKELET_SEX_CHOICES = (("z", _("zwittrig")), ("e", _("eingeschlechtig")))
+SPIKELET_MAX_WIDTH_CHOICES = (
+    ("un", _("unter der Mitte")),
+    ("in", _("in der Mitte")),
+    ("ue", _("über der Mitte")),
+)
+SPIKELET_RACHILLA_CHOICES = (
+    ("gBa", _("glatt, zur Blütezeit abstehend")),
+    ("sic", _("sichtbar")),
+    ("zRs", _("zur Reife sichtbar")),
+    ("nis", _("nicht sichtbar")),
+)
+SPIKELET_STALK_CHOICES = (
+    ("lau", _("lang, unverzweigt")),
+    ("lav", _("lang, verzweigt")),
+    ("kur", _("kurz")),
+    ("skv", _("sehr kurz, verzweigt")),
+    ("vkA", _("viel kürzer als Ährchen")),
+)
+SPIKELET_SPINDLE_CHOICES = (
+    ("z", _("zerbrechlich")),
+    ("B", _("nach der Blütezeit zerbrechlich")),
+    ("n", _("nicht zerbrechlich")),
+)
+# husks --------------------------------------------------------------------------------
+HUSKS_FORM_CHOICES = (
+    ("a", _("abgerundet")),
+    ("R", _("auf dem Rücken abgerundet")),
+    ("n", _("nicht abgerundet")),
+)
+HUSKS_KEEL_CHOICES = (("g", _("gekielt")), ("n", _("nicht gekielt")))
+HUSKS_CROSS_SECTION_CHOICES = (
+    ("o", _("oval")),
+    ("r", _("rundlich")),
+    ("s", _("2-schneidig")),
+)
+# --------------------------------------------------------------------------------------
 
+
+# Fruit choices ------------------------------------------------------------------------
 FRUIT_TYPE_CHOICES = (
     ("apf", _("Apfelfrucht")),
     ("nus", _("Nuss")),
@@ -406,10 +815,10 @@ OVULE_POS_CHOICES = (
     ("fr", _("Fruchtknoten (Angiospermen)")),
     ("za", _("Zapfenschuppe (Gymnospermen)")),
 )
+# --------------------------------------------------------------------------------------
 
 
-# StemRoot choices
-
+# StemRoot choices ---------------------------------------------------------------------
 ORIENTATION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
@@ -473,10 +882,58 @@ PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )
+# --------------------------------------------------------------------------------------
 
 
-# Indicators Choices
+# StemRhizomePoales choices ------------------------------------------------------------
+# growth_form --------------------------------------------------------------------------
+TUFT_STOLON_CHOICES = (
+    ("loH", _("lockerer Horst")),
+    ("auH", _("ausgebreiteter Horst")),
+    ("dfH", _("dichter, fester Horst")),
+    ("obA", _("oberirdische Ausläufer (Stolone)")),
+    ("unA", _("unterirdische Ausläufer (Rhizome)")),
+)
+TUFT_STOLON_EDIT_DICT = {
+    "loH": _("lockerem Horst"),
+    "auH": _("ausgebreitetem Horst"),
+    "dfH": _("dichtem, festem Horst"),
+    "obA": _("oberirdischen Ausläufern (Stolone)"),
+    "unA": _("unterirdischen Ausläufern (Rhizome)"),
+}
+# stem ---------------------------------------------------------------------------------
+STEM_HAIRINESS_CHOICES = (("g", _("glatt")), ("k", _("kahl")), ("b", _("behaart")))
+STEM_CROSS_SECTION_CHOICES = (
+    ("sti", _("stilrund")),
+    ("fla", _("flachgedrückt")),
+    ("std", _("stumpf dreikantig")),
+    ("scd", _("scharf dreikantig")),
+    ("dre", _("dreikantig")),
+)
+STEM_PITH_CHOICES = (
+    ("h", _("hohl")),
+    ("n", _("hohl; nur Knoten markig")),
+    ("m", _("markig")),
+)
+STEM_NODES_CHOICES = (("m", _("mit Knoten")), ("o", _("ohne Knoten")))
+STEM_NODES_HAIRINESS_CHOICES = (("k", _("kahl")), ("b", _("behaart")))
+STEM_TRANSVERSE_WALLS_CHOICES = (("m", _("mit Querwänden")), ("o", _("ohne Querwände")))
+STEM_SURFACE_CHOICES = (
+    ("", "---------"),
+    ("gla", _("glatt")),
+    ("ung", _("ungerieft")),
+    ("ger", _("gerieft")),
+    ("lae", _("längsgerippt")),
+    ("feg", _("fein gestreift")),
+)
+STEM_SURFACE_DICT = dict(STEM_SURFACE_CHOICES[1:])
+# rhizome ------------------------------------------------------------------------------
+RHIZOME_LENGTH_CHOICES = (("k", _("kurz")), ("m", _("mittellang")), ("l", _("lang")))
+RHIZOME_BRANCHING_CHOICES = (("g", _("gering verzweigt")), ("s", _("stark verzweigt")))
+# --------------------------------------------------------------------------------------
 
+
+# Indicators choices -------------------------------------------------------------------
 LIGHT_CHOICES = (
     ("L1", _("L1 – Tiefschattenpflanze")),
     ("L2", _("L2 – zwischen Tiefschatten- und Schattenpflanze")),
@@ -573,3 +1030,23 @@ INDICATORS_DICT = dict(
         (dict((x, y.split(" – ")[-1]) for x, y in z) for z in INDICATORS_CHOICES),
     )
 )
+# --------------------------------------------------------------------------------------
+
+
+# InterestingFacts Choices -------------------------------------------------------------
+POLLINATION_CHOICES = (
+    ("Ins", _("Insektenbestäubung")),
+    ("Sel", _("Selbstbestäubung")),
+    ("Was", _("Wasserbestäubung")),
+    ("Win", _("Windbestäubung")),
+)
+DISPERSAL_CHOICES = (
+    ("Men", _("Menschenausbreitung")),
+    ("Sel", _("Selbstausbreitung")),
+    ("Sto", _("Stoß-/Schüttelausbreitung")),
+    ("Ved", _("Verdauungsausbreitung")),
+    ("Ves", _("Versteck- u. Verlustausbreitung")),
+    ("Was", _("Wasserausbreitung")),
+    ("Win", _("Windausbreitung")),
+)
+# --------------------------------------------------------------------------------------

@@ -30,6 +30,7 @@ from .models import (
     StemRoot,
 )
 from .outputs import (
+    BlossomOutput,
     BlossomPoalesOutput,
     InterestingFactsOutput,
     LeafPoalesOutput,
@@ -233,48 +234,107 @@ class LeafPoalesAdminForm(forms.ModelForm):
 
 
 class BlossomAdminForm(forms.ModelForm):
-    season = SeasonField(label=get_label(Blossom, "season"))
-    inflorescence_number = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_number")
-    )
-    inflorescence_blossom_number = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_blossom_number")
-    )
-    bract_shape = ArrayMultipleChoiceField(
-        BRACT_SHAPE_CHOICES, label=get_label(Blossom, "bract_shape")
-    )
-    diameter = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "diameter")
-    )
-    sepal_number = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "sepal_number")
-    )
+    subsection_title_season = SubsectionTitleField("Blütezeit")
+    subsection_title_inflorescence = SubsectionTitleField("Blütenstand")
+    subsection_title_general = SubsectionTitleField("Allgemeines")
+    subsection_title_diameter = SubsectionTitleField("Durchmesser")
+    subsection_title_sepal = SubsectionTitleField("Kelchblatt")
+    subsection_title_petal = SubsectionTitleField("Kronblatt")
+    subsection_title_tepal = SubsectionTitleField("Perigonblatt")
+    subsection_title_stamen = SubsectionTitleField("Staubblatt")
+    subsection_title_carpel = SubsectionTitleField("Fruchtblatt")
+    subsection_title_specifications = SubsectionTitleField("Spezifikationen")
+
+    season = SeasonField()
+    inflorescence_number = IntegerRangeCharField(1, 100, {100: "∞"})
+    inflorescence_blossom_number = IntegerRangeCharField(1, 100, {100: "∞"})
+
+    diameter = FloatRangeTermCharField(0, 100, "cm")
+    sepal_number = IntegerRangeCharField(1, 11, {11: "∞"})
     sepal_connation_type = NumericPrefixTermField(
         (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "sepal_connation_type"),
     )
-    petal_number = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "petal_number")
-    )
-    petal_length = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "petal_length")
-    )
+    petal_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    petal_length = FloatRangeTermCharField(0, 100, "cm")
     petal_connation_type = NumericPrefixTermField(
         (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "petal_connation_type"),
     )
-    stamen_number = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stamen_number")
+    tepal_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    tepal_connation_type = NumericPrefixTermField(
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
+        label=get_label(Blossom, "tepal_connation_type"),
     )
-    stamen_length = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "stamen_length")
-    )
-    carpel_number = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "carpel_number")
-    )
-    stigma_number = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stigma_number")
-    )
+    stamen_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    stamen_length = FloatRangeTermCharField(0, 100, "cm")
+    carpel_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    ovary_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    pistil_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    stigma_number = IntegerRangeCharField(1, 11, {11: "∞"})
+
+    output_season = OutputField()
+    output_inflorescence = OutputField()
+    output_general = OutputField()
+    output_diameter = OutputField()
+    output_sepal = OutputField()
+    output_petal = OutputField()
+    output_tepal = OutputField()
+    output_stamen = OutputField()
+    output_carpel = OutputField()
+
+    class Meta:
+        model = Blossom
+        fields = []
+        field_classes = {
+            "bract_shape": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "bract_shape": forms.SelectMultiple(choices=BRACT_SHAPE_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+        help_text = _("Anfängliches Satzzeichen setzen.")
+
+        self.fields["season"].label = obj._meta.get_field("season").verbose_name
+        self.fields["inflorescence_number"].label = get_label(
+            obj, "inflorescence_number"
+        )
+        self.fields["inflorescence_blossom_number"].label = get_label(
+            obj, "inflorescence_blossom_number"
+        )
+        self.fields["blossom_sex_distribution_addition"].strip = False
+        self.fields["blossom_sex_distribution_addition"].help_text = help_text
+        self.fields["diameter"].label = get_label(obj, "diameter")
+        self.fields["sepal_number"].label = get_label(obj, "sepal_number")
+        self.fields["petal_number"].label = get_label(obj, "petal_number")
+        self.fields["petal_length"].label = get_label(obj, "petal_length")
+        self.fields["tepal_number"].label = get_label(obj, "tepal_number")
+        self.fields["stamen_number"].label = get_label(obj, "stamen_number")
+        self.fields["stamen_length"].label = get_label(obj, "stamen_length")
+        self.fields["stamen_connation_type_addition"].strip = False
+        self.fields["stamen_connation_type_addition"].help_text = help_text
+        self.fields["carpel_number"].label = get_label(obj, "carpel_number")
+        self.fields["ovary_number"].label = get_label(obj, "ovary_number")
+        self.fields["pistil_number"].label = get_label(obj, "pistil_number")
+        self.fields["stigma_number"].label = get_label(obj, "stigma_number")
+        self.fields["specifications"].widget.attrs.update(TEXTAREA_ATTRS_80_7)
+
+        self.initial.update(
+            {
+                "output_season": BlossomOutput.generate_season(obj),
+                "output_inflorescence": BlossomOutput.generate_inflorescence(obj),
+                "output_general": BlossomOutput.generate_general(obj),
+                "output_diameter": BlossomOutput.generate_diameter(obj),
+                "output_sepal": BlossomOutput.generate_sepal(obj),
+                "output_petal": BlossomOutput.generate_petal(obj),
+                "output_tepal": BlossomOutput.generate_tepal(obj),
+                "output_stamen": BlossomOutput.generate_stamen(obj),
+                "output_carpel": BlossomOutput.generate_carpel(obj),
+            }
+        )
 
     def clean_bract_shape(self):
         value = self.cleaned_data.get("bract_shape")

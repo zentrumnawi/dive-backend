@@ -333,13 +333,14 @@ class LeafPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
         return LeafPoalesOutput.generate_leaf_sheath(obj)
 
 
-class BlossomSerializer(DisplayNameModelSerializer):
+class BlossomSerializer(ExcludeEmptyFieldsModelSerializer):
     season = serializers.SerializerMethodField(label="Blütezeit")
     inflorescence = serializers.SerializerMethodField(label="Blütenstand")
     general = serializers.SerializerMethodField(label="Allgemeines")
     diameter = serializers.SerializerMethodField(label="Durchmesser")
     sepal = serializers.SerializerMethodField(label="Kelchblatt")
     petal = serializers.SerializerMethodField(label="Kronblatt")
+    tepal = serializers.SerializerMethodField(label="Perigonblatt")
     stamen = serializers.SerializerMethodField(label="Staubblatt")
     carpel = serializers.SerializerMethodField(label="Fruchtblatt")
 
@@ -352,223 +353,39 @@ class BlossomSerializer(DisplayNameModelSerializer):
             "diameter",
             "sepal",
             "petal",
+            "tepal",
             "stamen",
             "carpel",
+            "specifications",
         ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_season(self, obj):
-        # Generate sentence "Blütezeit" according pattern:
-        # "([season[0]]) [season[1]] bis [season[2] ([season[3]])."
-        fields = obj.season
-        if fields:
-            fields = [f"{SEASON_DICT.get(x, '')}" for x in fields]
-            fields[0] = f"({fields[0]})" if fields[0] else ""
-            fields[3] = f"({fields[3]})" if fields[3] else ""
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            " ".join(filter(None, fields[2:])),
-        ]
-        text = " bis ".join(filter(None, text))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_season(obj)
 
     def get_inflorescence(self, obj):
-        # Generate sentence "Blütenstand" according pattern:
-        # "[inflorescence_num] [inflorescence_type] mit [blossom_num] Blüte|Blüten."
-        app = {1: "Blütenstände", 2: "Blüten"}
-        if obj.inflorescence_num == "1":
-            app[1] = "Bütenstand"
-        if obj.blossom_num == "1":
-            app[2] = "Blüte"
-
-        fields = [
-            obj.inflorescence_num,
-            obj.inflorescence_type,
-            obj.blossom_num,
-        ]
-        if fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_2_3):
-            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES_2_3)[fields[1]]}"
-            fields[1] = add_suffix(fields[1], "n")
-        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_CHOICES_3_3):
-            fields[1] = f"{INFLORESCENCE_TYPE_DICT_3_3_PLURAL[fields[1]]}"
-        elif not any(fields):
-            pass
-        else:
-            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES).get(fields[1], app[1])}"
-        fields[2] = add_suffix(fields[2], f" {app[2]}")
-
-        text = " ".join(filter(None, fields[:2]))
-        text = " mit ".join(filter(None, (text, fields[2])))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_inflorescence(obj)
 
     def get_general(self, obj):
-        # Generate sentence "Blütenstand" according pattern:
-        # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
-        # Blütenform, [bract_blade]es Tragblatt."
-        fields = [
-            add_suffix(f"{MEROSITY_CHOICES_DICT[obj.merosity]}", "-zählige"),
-            add_suffix(obj.get_symmetry_display(), "e"),
-            obj.get_perianth_display(),
-            add_suffix(obj.get_perianth_form_display(), "e"),
-            obj.bract_blade,
-        ]
-        if fields[4]:
-            fields[4] = format_ArrayField(fields[4], BRACT_BLADE_CHOICES, "es", "/")
-
-        text = [
-            " ".join(filter(None, fields[:3])),
-            f"{fields[3]} Blütenform" if fields[3] else "",
-            f"{fields[4]} Tragblatt" if fields[4] else "",
-        ]
-        if text[0] and not fields[2]:
-            text[0] = f"{text[0]} Blütenhülle"
-        text[1:3] = [", ".join(filter(None, text[1:3]))]
-        text = "; ".join(filter(None, text))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_general(obj)
 
     def get_diameter(self, obj):
-        # Generate sentence "Durchmesser" according pattern:
-        # "[diameter] cm."
-        fields = convert_decimal_separator(remove_empty_decimal_places(obj.diameter))
-
-        text = f"{fields} cm" if fields else ""
-
-        return format_sentence(text)
+        return BlossomOutput.generate_diameter(obj)
 
     def get_sepal(self, obj):
-        # Generate sentence "Kelchblatt" according pattern:
-        # "[sepal_num] [sepal_color_form] Kelchblatt|Kelchblätter, [sepal_connation_
-        # type] [sepal_connation]; [epicalyx]."
-        app = "Kelchblätter"
-        if obj.sepal_num == "1":
-            app = "Kelchblatt"
-
-        fields = [
-            obj.sepal_num,
-            obj.sepal_color_form,
-            get_NumericPrefixTermField_display(
-                obj.sepal_connation_type, CONNATION_TYPE_CHOICES
-            ),
-            obj.get_sepal_connation_display(),
-            obj.epicalyx,
-        ]
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            " ".join(filter(None, fields[2:4])),
-        ]
-        text[0] = f"{text[0]} {app}" if text[0] else ""
-        text[1] = f"{app} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
-        text = ", ".join(filter(None, text))
-        text = "; ".join(filter(None, (text, fields[4])))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_sepal(obj)
 
     def get_petal(self, obj):
-        # Generate sentence "Kronblatt" according pattern:
-        # "[petal_num] [petal_len] cm lange|-s, [petal_color_form] Kronblätter|-blatt,
-        # [petal_connation_type] [petal_connation]; [nectary]."
-        app = {1: " cm lange", 10: "Kronblätter"}
-        if obj.petal_num == "1":
-            app = {1: " cm langes", 10: "Kronblatt"}
+        return BlossomOutput.generate_petal(obj)
 
-        fields = [
-            obj.petal_num,
-            add_suffix(
-                convert_decimal_separator(remove_empty_decimal_places(obj.petal_len)),
-                app[1],
-            ),
-            obj.petal_color_form,
-            get_NumericPrefixTermField_display(
-                obj.petal_connation_type, CONNATION_TYPE_CHOICES
-            ),
-            obj.get_petal_connation_display(),
-            obj.nectary,
-        ]
-
-        text = [
-            ", ".join(filter(None, fields[1:3])),
-            " ".join(filter(None, fields[3:5])),
-        ]
-        text[0] = " ".join(filter(None, (fields[0], text[0])))
-        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
-        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
-        text = ", ".join(filter(None, text))
-        text = "; ".join(filter(None, (text, fields[5])))
-
-        return format_sentence(text)
+    def get_tepal(self, obj):
+        return BlossomOutput.generate_tepal(obj)
 
     def get_stamen(self, obj):
-        # Generate sentence "Staubblatt" according pattern:
-        # "[stamen_num] [stamen_len] cm lange|-s, [stamen_color_form]
-        # Staubblätter|-blatt, [stamen_connation_type] [stamen_connation]."
-        app = {1: " cm lange", 10: "Staubblätter"}
-        if obj.stamen_num == "1":
-            app = {1: " cm langes", 10: "Staubblatt"}
-
-        fields = [
-            obj.stamen_num,
-            add_suffix(
-                convert_decimal_separator(remove_empty_decimal_places(obj.stamen_len)),
-                app[1],
-            ),
-            obj.stamen_color_form,
-            obj.get_stamen_connation_type_display(),
-            obj.stamen_connation_type_add,
-        ]
-
-        text = [
-            ", ".join(filter(None, fields[1:3])),
-            " ".join(filter(None, fields[3:5])),
-        ]
-        text[0] = " ".join(filter(None, (fields[0], text[0])))
-        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
-        text[1] = f"{app[10]} {text[1]}" if text[1] and not text[0] else f"{text[1]}"
-        text = ", ".join(filter(None, text))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_stamen(obj)
 
     def get_carpel(self, obj):
-        # Generate sentence "Fruchtblatt" according pattern:
-        # "[carpel_num] [carpel_connation_type] verwachsene|-s Fruchtblätter|-blatt,
-        # [ovary_pos]er Fruchtkonten, [pistil_pos]er Griffel mit [stigma_num] Narbe|-n;
-        # [stylopodium]."
-        app = {1: "e", 10: "Fruchtblätter", 11: "Narben"}
-        if obj.carpel_num == "1":
-            app[1] = "es"
-            app[10] = "Fruchtblatt"
-        if obj.stigma_num == "1":
-            app[11] = "Narbe"
-
-        fields = [
-            obj.carpel_num,
-            obj.get_carpel_connation_type_display(),
-            add_suffix(obj.get_ovary_pos_display(), "er"),
-            add_suffix(obj.get_pistil_pos_display(), "er"),
-            obj.stigma_num,
-            obj.stylopodium,
-        ]
-        if fields[1]:
-            fields[1] = fields[1].split(" (", 1)
-            fields[1][0] = f"{fields[1][0]}{app[1]}"
-            fields[1] = " (".join(fields[1])
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            f"{fields[2]} Fruchtknoten" if fields[2] else "",
-            f"{fields[3]} Griffel" if fields[3] else "",
-            f"{fields[4]} {app[11]}" if fields[4] else "",
-        ]
-        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
-        text[2:4] = [" mit ".join(filter(None, text[2:4]))]
-        text = ", ".join(filter(None, text))
-        text = "; ".join(filter(None, (text, fields[5])))
-
-        return format_sentence(text)
+        return BlossomOutput.generate_carpel(obj)
 
 
 class BlossomPoalesSerializer(ExcludeEmptyFieldsModelSerializer):

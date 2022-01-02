@@ -536,6 +536,7 @@ SHEATH_CONNATION_CHOICES = (
 
 
 # Blossom choices ----------------------------------------------------------------------
+# season -------------------------------------------------------------------------------
 SEASON_CHOICES = ((None, "-"),) + tuple((x, x) for x in range(1, 13))
 SEASON_DICT = {
     None: "",
@@ -552,6 +553,7 @@ SEASON_DICT = {
     11: _("November"),
     12: _("Dezember"),
 }
+# inflorescence ------------------------------------------------------------------------
 INFLORESCENCE_TYPE_CHOICES_1_3 = (
     ("kol", _("Kolben")),
     ("kae", _("Kätzchen")),
@@ -602,6 +604,7 @@ INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
     "scq": _("Scheinquirle"),
     "scb": _("Scheinblüten/Pseudanthien"),
 }
+# overview -----------------------------------------------------------------------------
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )
@@ -644,6 +647,7 @@ BRACT_BLADE_CHOICES = (
     + LEAF_SIMPLE_BLADE_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )
+# sepal/petal --------------------------------------------------------------------------
 CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (
     ("", "---------"),
@@ -655,16 +659,20 @@ CONNATION_TYPE_CHOICES = (
     ("ver", _("verwachsenblättrig")),
     ("zwe", _("zweilippig")),
 )
+# sepal --------------------------------------------------------------------------------
 SEPAL_CONNATION_CHOICES = (
     ("v", _("verwachsen")),
     ("u", _("unverwachsen")),
     ("a", _("am Grund verwachsen")),
 )
+# petal --------------------------------------------------------------------------------
 PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
+# stamen -------------------------------------------------------------------------------
 STAMEN_CONNATION_TYPE_CHOICES = (
     ("s", _("Staubfadenröhre")),
     ("v", _("verwachsen mit Kronblättern")),
 )
+# carpel -------------------------------------------------------------------------------
 CARPEL_CONNATION_TYPE_CHOICES = (
     ("ap", _("apokarp (chorikarp, unverwachsen)")),
     ("mo", _("monokarp")),

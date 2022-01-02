@@ -454,6 +454,7 @@ class Blossom(models.Model):
         related_name="blossom",
         verbose_name=_("Pflanze"),
     )
+    # season ---------------------------------------------------------------------------
     season = ArrayField(
         base_field=models.IntegerField(
             blank=True, null=True, verbose_name=_("Blütezeit")
@@ -462,6 +463,7 @@ class Blossom(models.Model):
         blank=True,
         default=list,
     )
+    # inflorescence --------------------------------------------------------------------
     inflorescence_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blütenstandsanzahl")
     )
@@ -474,6 +476,7 @@ class Blossom(models.Model):
     blossom_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blütenanzahl (pro Stand)")
     )
+    # overview -------------------------------------------------------------------------
     merosity = models.IntegerField(
         choices=MEROSITY_CHOICES, blank=True, null=True, verbose_name=_("Zähligkeit")
     )
@@ -502,9 +505,11 @@ class Blossom(models.Model):
         blank=True,
         default=list,
     )
+    # diameter -------------------------------------------------------------------------
     diameter = models.CharField(
         max_length=10, blank=True, verbose_name=_("Durchmesser")
     )
+    # sepal ----------------------------------------------------------------------------
     sepal_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Kelchblattanzahl")
     )
@@ -523,6 +528,7 @@ class Blossom(models.Model):
     epicalyx = models.CharField(
         max_length=100, blank=True, verbose_name=_("Außenkelch")
     )
+    # petal ----------------------------------------------------------------------------
     petal_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Kronblattanzahl")
     )
@@ -544,6 +550,7 @@ class Blossom(models.Model):
     nectary = models.CharField(
         max_length=100, blank=True, verbose_name=_("Nektarium/Honigdrüse")
     )
+    # stamen ---------------------------------------------------------------------------
     stamen_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Staubblattanzahl")
     )
@@ -562,6 +569,7 @@ class Blossom(models.Model):
     stamen_connation_type_add = models.CharField(
         max_length=100, blank=True, verbose_name=_("Verwachsungstypzusatz")
     )
+    # carpel ---------------------------------------------------------------------------
     carpel_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Fruchtblattanzahl")
     )
@@ -589,6 +597,7 @@ class Blossom(models.Model):
     stylopodium = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")
     )
+    # ----------------------------------------------------------------------------------
 
     class Meta:
         verbose_name = _("Blüte")

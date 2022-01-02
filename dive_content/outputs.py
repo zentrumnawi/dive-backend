@@ -389,6 +389,36 @@ class BlossomOutput:
 
         return text
 
+    def generate_inflorescence(obj):
+        # Generate output "Blütenstand" according pattern:
+        # "[inflorescence_number] [inflorescence_type] mit [inflorescence_blossom_
+        # number] Blüte|Blüten."
+        fields = [
+            obj.inflorescence_number,
+            obj.inflorescence_type,
+            obj.inflorescence_blossom_number,
+        ]
+        if not any(fields):
+            pass
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_SUBCHOICES[1]):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_SUBCHOICES[1])[fields[1]]}n"
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_SUBCHOICES[2]):
+            fields[1] = f"{INFLORESCENCE_TYPE_PLURAL_DICT[fields[1]]}"
+        elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES)[fields[1]]}"
+        else:
+            fields[1] = f"Blüten{'stand' if fields[0] == '1' else 'stände'}"
+
+        text_parts = [
+            " ".join(filter(None, fields[0:2])),
+            f"{fields[2]} Blüte{'' if fields[2] == '1' else 'n'}" if fields[2] else "",
+        ]
+
+        text = " mit ".join(filter(None, text_parts))
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

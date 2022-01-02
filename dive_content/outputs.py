@@ -609,6 +609,54 @@ class BlossomOutput:
 
         return text
 
+    def generate_carpel(obj):
+        # Generate output "Fruchtblatt" according pattern:
+        # "[carpel_number] [carpel_connation_type]es|e Fruchtblatt|-blätter, [ovary_
+        # number] [ovary_position]er|e Fruchtkonten, [pistil_number] [pistil_
+        # position]er|e Griffel mit [stigma_number] Narbe|-n; [stylopodium]."
+        fields = [
+            obj.carpel_number,
+            obj.get_carpel_connation_type_display(),
+            obj.ovary_number,
+            obj.get_ovary_position_display(),
+            obj.pistil_number,
+            obj.get_pistil_position_display(),
+            obj.stigma_number,
+            obj.stylopodium,
+        ]
+        fields[1] = add_suffix(fields[1], "es" if fields[0] == "1" else "e")
+        fields[3] = add_suffix(fields[3], "er" if fields[2] == "1" else "e")
+        fields[5] = add_suffix(fields[5], "er" if fields[4] == "1" else "e")
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+            " ".join(filter(None, fields[4:6])),
+        ]
+
+        text_parts = [
+            format_subject_text(
+                joined_fields[0],
+                "Fruchtblatt" if fields[0] == "1" else "Fruchtblätter",
+                "",
+            ),
+            format_subject_text(joined_fields[1], "Fruchtknoten", ""),
+            format_subject_text(
+                joined_fields[2],
+                "Griffel",
+                f"{fields[6]} Narbe{'' if fields[6] == '1' else 'n'}"
+                if fields[6]
+                else "",
+                " mit ",
+            ),
+        ]
+
+        text = ", ".join(filter(None, text_parts))
+        text = "; ".join(filter(None, (text, fields[7])))
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

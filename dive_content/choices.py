@@ -689,22 +689,6 @@ PISTIL_POS_CHOICES = (
     ("sgr", _("subgrundständig")),
     ("sgy", _("subgynobasisch")),
 )
-# ---------------------------------- TO BE MODIFIED ---------------------------------- #
-GRANN_TOP_CHOICES = (("sp", _("Spitzengranne")), ("un", _("unbegrannt")))
-GRANN_FORM_CHOICES = (("gr", _("gerade")), ("gk", _("gekniet")), ("gd", _("gedreht")))
-B_GROUND_CHOICES = (
-    ("ge", _("gestielt")),
-    ("si", _("sitzend / ungestielt")),
-    ("st", _("stengelumfassend")),
-    ("ha", _("halbstengelumfassend")),
-    ("du", _("durchwachsen")),
-    ("ve", _("verwachsen")),
-    ("sc", _("scheidig verwachsen")),
-    ("he", _("herablaufend")),
-    ("re", _("reitend")),
-    ("hi", _("hinfällig")),
-)
-# ------------------------------------------------------------------------------------ #
 # --------------------------------------------------------------------------------------
 
 

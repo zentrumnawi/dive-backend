@@ -589,44 +589,7 @@ class Blossom(models.Model):
     stylopodium = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")
     )
-    # -------------------------------- TO BE MODIFIED -------------------------------- #
-    grann_top = models.CharField(
-        max_length=2,
-        choices=GRANN_TOP_CHOICES,
-        blank=True,
-        verbose_name=_("Granne der Deckspelze"),
-    )
-    grann_form = models.CharField(
-        max_length=2,
-        choices=GRANN_FORM_CHOICES,
-        blank=True,
-        verbose_name=_("Form der Granne"),
-    )
-    cons_top = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Konsistenz der Deckspelze")
-    )
-    gull_spel = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Hüllspelzen")
-    )
-    blos = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Blütigkeit des Ährchens")
-    )
-    straw_ground = models.CharField(
-        max_length=2,
-        choices=B_GROUND_CHOICES,
-        blank=True,
-        verbose_name=_("Ansatz an Halm"),
-    )
-    order = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Ährchen pro Ähre")
-    )
-    aer_per_aer = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Anordnung der Ährchen")
-    )
-    aer_per_ab = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Ährchen pro Absatz der Ährenachse")
-    )
-    # -------------------------------------------------------------------------------- #
+
     class Meta:
         verbose_name = _("Blüte")
         verbose_name_plural = _("Blüten")

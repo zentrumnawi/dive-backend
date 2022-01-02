@@ -482,6 +482,37 @@ class BlossomOutput:
 
         return text
 
+    def generate_sepal(obj):
+        # Generate output "Kelchblatt" according pattern:
+        # "[sepal_number] [sepal_color_shape] Kelchblatt|-blätter, [sepal_connation_
+        # type] [sepal_connation]; [epicalyx]."
+        fields = [
+            obj.sepal_number,
+            obj.sepal_color_shape,
+            obj.sepal_connation_type,
+            obj.get_sepal_connation_display(),
+            obj.epicalyx,
+        ]
+        fields[2] = get_NumericPrefixTermField_display(
+            fields[2], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+
+        text = format_subject_text(
+            joined_fields[0],
+            "Kelchblatt" if fields[0] == "1" else "Kelchblätter",
+            joined_fields[1],
+            ", " if joined_fields[0] else " ",
+        )
+        text = "; ".join(filter(None, (text, fields[4])))
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

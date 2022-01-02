@@ -368,6 +368,28 @@ class LeafPoalesOutput:
         return joined_texts
 
 
+class BlossomOutput:
+    def generate_season(obj):
+        # Generate output "Blütezeit" according pattern:
+        # "([season[0]]) [season[1]] bis [season[2] ([season[3]])."
+        field = obj.season
+
+        months = [None] * 4
+        months = [f"{SEASON_DICT.get(month)}" for month in field] if field else months
+        months[0] = f"({months[0]})" if months[0] else None
+        months[3] = f"({months[3]})" if months[3] else None
+
+        joined_months = [
+            " ".join(filter(None, months[:2])),
+            " ".join(filter(None, months[2:])),
+        ]
+
+        text = " bis ".join(filter(None, joined_months))
+        text = format_sentence(text)
+
+        return text
+
+
 class BlossomPoalesOutput:
     def generate_season(obj):
         # Generate output "Blütezeit" according pattern:

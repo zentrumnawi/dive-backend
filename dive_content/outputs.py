@@ -472,6 +472,16 @@ class BlossomOutput:
 
         return joined_texts
 
+    def generate_diameter(obj):
+        # Generate output "Durchmesser" according pattern:
+        # "[diameter]."
+        field = obj.diameter
+        field = format_FloatRangeTermCharField(field)
+
+        text = format_sentence(field)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

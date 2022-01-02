@@ -513,6 +513,42 @@ class BlossomOutput:
 
         return text
 
+    def generate_petal(obj):
+        # Generate output "Kronblatt" according pattern:
+        # "[petal_number] [petal_length] langes|lange, [petal_color_shape] Kronblatt|
+        # -blätter, [petal_connation_type] [petal_connation]; [nectary]."
+        fields = [
+            obj.petal_number,
+            obj.petal_length,
+            obj.petal_color_shape,
+            obj.petal_connation_type,
+            obj.get_petal_connation_display(),
+            obj.nectary,
+        ]
+        fields[1] = format_FloatRangeTermCharField(fields[1])
+        fields[3] = get_NumericPrefixTermField_display(
+            fields[3], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = " ".join(filter(None, fields[3:5]))
+
+        text_part = (
+            f"{fields[1]} lange{'s' if fields[0] == '1' else ''}" if fields[1] else ""
+        )
+        text_part = ", ".join(filter(None, (text_part, fields[2])))
+        text_part = " ".join(filter(None, (fields[0], text_part)))
+
+        text = format_subject_text(
+            text_part,
+            "Kronblatt" if fields[0] == "1" else "Kronblätter",
+            joined_fields,
+            ", " if text_part else " ",
+        )
+        text = "; ".join(filter(None, (text, fields[5])))
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

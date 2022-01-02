@@ -419,6 +419,59 @@ class BlossomOutput:
 
         return text
 
+    def generate_general(obj):
+        # Generate output "Allgemeines" according pattern:
+        # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_shape]e
+        # Blütenform, [bract_shape]es Tragblatt. Die Blüten sind [blossom_sex_
+        # distribution][blossom_sex_distribution_addition]; die Planze ist [plant_sex_
+        # distribution]."
+        fields = [
+            obj.merosity,
+            obj.get_symmetry_display(),
+            obj.get_perianth_display(),
+            obj.get_perianth_shape_display(),
+            obj.bract_shape,
+            obj.get_blossom_sex_distribution_display(),
+            obj.blossom_sex_distribution_addition,
+            obj.get_plant_sex_distribution_display(),
+        ]
+        fields[0] = (
+            f"{MEROSITY_CHOICES_DICT[obj.merosity]}-zählige" if fields[0] else ""
+        )
+        fields[1] = add_suffix(fields[1], "e")
+        fields[3] = add_suffix(fields[3], "e")
+        fields[4] = format_ArrayField(fields[4], BRACT_SHAPE_CHOICES, "es", "/")
+
+        joined_fields = [
+            ", ".join(filter(None, fields[:2])),
+            "".join(filter(None, fields[5:7])),
+        ]
+
+        text_parts = [
+            (", " if " " in fields[2] else " ").join(
+                filter(None, (joined_fields[0], fields[2]))
+            ),
+            f"{fields[3]} Blütenform" if fields[3] else "",
+            f"{fields[4]} Tragblatt" if fields[4] else "",
+            f"die Blüten sind {joined_fields[1]}" if joined_fields[1] else "",
+            f"die Pflanze ist {fields[7]}" if fields[7] else "",
+        ]
+        if text_parts[0] and not fields[2]:
+            text_parts[0] = f"{text_parts[0]} Blütenhülle"
+
+        joined_text_parts = ", ".join(filter(None, text_parts[1:3]))
+
+        texts = [
+            "; ".join(filter(None, (text_parts[0], joined_text_parts))),
+            "; ".join(filter(None, text_parts[3:5])),
+        ]
+        texts[0] = format_sentence(texts[0])
+        texts[1] = format_sentence(texts[1])
+
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

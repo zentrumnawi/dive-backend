@@ -578,6 +578,37 @@ class BlossomOutput:
 
         return text
 
+    def generate_stamen(obj):
+        # Generate output "Staubblatt" according pattern:
+        # "[stamen_number] [stamen_length] langes|lange, [stamen_color_shape]
+        # Staubblatt|-blätter; [stamen_connation_type][stamen_connation_type_addition]."
+        fields = [
+            obj.stamen_number,
+            obj.stamen_length,
+            obj.stamen_color_shape,
+            obj.get_stamen_connation_type_display(),
+            obj.stamen_connation_type_addition,
+        ]
+        fields[1] = format_FloatRangeTermCharField(fields[1])
+
+        joined_fields = "".join(filter(None, fields[3:5]))
+
+        text_part = (
+            f"{fields[1]} lange{'s' if fields[0] == '1' else ''}" if fields[1] else ""
+        )
+        text_part = ", ".join(filter(None, (text_part, fields[2])))
+        text_part = " ".join(filter(None, (fields[0], text_part)))
+
+        text = format_subject_text(
+            text_part,
+            "Staubblatt" if fields[0] == "1" else "Staubblätter",
+            joined_fields,
+            "; ",
+        )
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

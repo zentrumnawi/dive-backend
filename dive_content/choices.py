@@ -554,56 +554,58 @@ SEASON_DICT = {
     12: _("Dezember"),
 }
 # inflorescence ------------------------------------------------------------------------
-INFLORESCENCE_TYPE_CHOICES_1_3 = (
-    ("kol", _("Kolben")),
+INFLORESCENCE_TYPE_SUBCHOICES = [()] * 3
+INFLORESCENCE_TYPE_SUBCHOICES[0] = (  # plural = singular
+    ("bue", _("Büschel")),
     ("kae", _("Kätzchen")),
-    ("zap", _("Zapfen")),
+    ("kna", _("Knäuel")),
+    ("kol", _("Kolben")),
     ("koc", _("Köpfchen")),
     ("krc", _("Körbchen")),
-    ("bue", _("Büschel")),
-    ("kna", _("Knäuel")),
+    ("zap", _("Zapfen")),
 )
-INFLORESCENCE_TYPE_CHOICES_2_3 = (
-    ("ein", _("Einzelblüte")),
-    ("tra", _("Traube")),
-    ("ris", _("Rispe")),
-    ("sct", _("Schirmtraube")),
-    ("scr", _("Schirmrispe")),
-    ("spi", _("Spirre/Trichterrispe")),
+INFLORESCENCE_TYPE_SUBCHOICES[1] = (  # plural = singular + "n"
     ("aer", _("Ähre")),
     ("dol", _("Dolde")),
     ("dod", _("Doppeldolde")),
-    ("zym", _("Zyme")),
-    ("wic", _("Wickel")),
     ("dow", _("Doppelwickel")),
-    ("thy", _("Thyrse")),
+    ("ein", _("Einzelblüte")),
+    ("ris", _("Rispe")),
     ("scd", _("Scheindolde/Trugdolde")),
+    ("scr", _("Schirmrispe")),
+    ("sct", _("Schirmtraube")),
+    ("spi", _("Spirre/Trichterrispe")),
+    ("thy", _("Thyrse")),
+    ("tra", _("Traube")),
+    ("wic", _("Wickel")),
+    ("zym", _("Zyme")),
 )
-INFLORESCENCE_TYPE_CHOICES_3_3 = (
+INFLORESCENCE_TYPE_SUBCHOICES[2] = (  # pluaral -> PLURAL_DICT
     ("ebe", _("Ebenstrauß/Corymbus")),
+    ("dic", _("Dichasium")),
     ("kop", _("Kopf")),
     ("kor", _("Korb")),
-    ("ple", _("Pleiochasium")),
-    ("dic", _("Dichasium")),
     ("mon", _("Monochasium")),
-    ("scq", _("Scheinquirl")),
+    ("ple", _("Pleiochasium")),
     ("scb", _("Scheinblüte/Pseudanthium")),
+    ("scq", _("Scheinquirl")),
 )
-INFLORESCENCE_TYPE_CHOICES = (
-    INFLORESCENCE_TYPE_CHOICES_1_3
-    + INFLORESCENCE_TYPE_CHOICES_2_3
-    + INFLORESCENCE_TYPE_CHOICES_3_3
-)
-INFLORESCENCE_TYPE_DICT_3_3_PLURAL = {
+INFLORESCENCE_TYPE_PLURAL_DICT = {
     "ebe": _("Ebensträuße/Corymbusse"),
+    "dic": _("Dichasien"),
     "kop": _("Köpfe"),
     "kor": _("Körbe"),
-    "ple": _("Pleiochasien"),
-    "dic": _("Dichasien"),
     "mon": _("Monochasien"),
-    "scq": _("Scheinquirle"),
+    "ple": _("Pleiochasien"),
     "scb": _("Scheinblüten/Pseudanthien"),
+    "scq": _("Scheinquirle"),
 }
+INFLORESCENCE_TYPE_CHOICES = [
+    *INFLORESCENCE_TYPE_SUBCHOICES[0],
+    *INFLORESCENCE_TYPE_SUBCHOICES[1],
+    *INFLORESCENCE_TYPE_SUBCHOICES[2],
+]
+INFLORESCENCE_TYPE_CHOICES.sort(key=normalize_choices_term)
 # overview -----------------------------------------------------------------------------
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)

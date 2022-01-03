@@ -571,6 +571,7 @@ INFLORESCENCE_TYPE_SUBCHOICES[1] = (  # plural = singular + "n"
     ("dow", _("Doppelwickel")),
     ("ein", _("Einzelblüte")),
     ("ris", _("Rispe")),
+    ("sca", _("Scheinähre")),
     ("scd", _("Scheindolde/Trugdolde")),
     ("scr", _("Schirmrispe")),
     ("sct", _("Schirmtraube")),

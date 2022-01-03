@@ -645,11 +645,16 @@ PERIANTH_SHAPE_CHOICES = (
     ("tr", _("trichterförmig")),
     ("zu", _("zungenförmig")),
 )
-BRACT_SHAPE_CHOICES = (
-    LEAF_COMP_BLADE_SHAPE_CHOICES
-    + LEAF_SIMPLE_BLADE_SHAPE_CHOICES
-    + (("nvo", _("nicht vorhanden")),)
-)
+BRACT_SHAPE_SUBCHOICES = [()] * 3
+BRACT_SHAPE_SUBCHOICES[0] = LEAF_COMP_BLADE_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[1] = LEAF_SIMPLE_BLADE_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[2] = (("nvo", _("nicht vorhanden")),)
+BRACT_SHAPE_CHOICES = [
+    *BRACT_SHAPE_SUBCHOICES[0],
+    *BRACT_SHAPE_SUBCHOICES[1],
+    *BRACT_SHAPE_SUBCHOICES[2],
+]
+BRACT_SHAPE_CHOICES.sort(key=normalize_choices_term)
 # sepal/petal --------------------------------------------------------------------------
 CONNATION_NUMBER_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (

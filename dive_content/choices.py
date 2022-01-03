@@ -682,11 +682,11 @@ STAMEN_CONNATION_TYPE_CHOICES = (
 )
 # carpel -------------------------------------------------------------------------------
 CARPEL_CONNATION_TYPE_CHOICES = (
-    ("ap", _("apokarp (chorikarp, unverwachsen)")),
+    ("ap", _("apokarp")),
+    ("co", _("coenokarp")),
+    ("cp", _("coeno-parakarp")),
+    ("cs", _("coeno-synkarp")),
     ("mo", _("monokarp")),
-    ("co", _("coenocarp (verwachsen)")),
-    ("cs", _("coeno-synkarp verwachsen")),
-    ("cp", _("coeno-parakarp verwachsen")),
 )
 OVARY_POSITION_CHOICES = (
     ("ob", _("oberständig")),

@@ -623,10 +623,10 @@ PERIANTH_CHOICES = (
     ("ein", _("einfache Blütenhülle (Perigon)")),
     ("feh", _("fehlende Blütenhülle")),
     ("lip", _("Lippenblüte")),
-    ("sch", _("Schmetterlingsblüte")),
-    ("zun", _("Zungenblüte")),
     ("roe", _("Röhrenblüte")),
+    ("sch", _("Schmetterlingsblüte")),
     ("str", _("strahlende Randblüten")),
+    ("zun", _("Zungenblüte")),
 )
 PERIANTH_SHAPE_CHOICES = (
     ("ro", _("röhrig")),

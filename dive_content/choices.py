@@ -625,7 +625,7 @@ PERIANTH_CHOICES = (
     ("roe", _("Röhrenblüte")),
     ("str", _("strahlende Randblüten")),
 )
-PERIANTH_FORM_CHOICES = (
+PERIANTH_SHAPE_CHOICES = (
     ("ro", _("röhrig")),
     ("ke", _("keulig")),
     ("gl", _("glockig")),
@@ -642,13 +642,13 @@ PERIANTH_FORM_CHOICES = (
     ("as", _("ausgesackt")),
     ("gr", _("gespornt")),
 )
-BRACT_BLADE_CHOICES = (
+BRACT_SHAPE_CHOICES = (
     LEAF_COMP_BLADE_SHAPE_CHOICES
     + LEAF_SIMPLE_BLADE_SHAPE_CHOICES
     + (("nvo", _("nicht vorhanden")),)
 )
 # sepal/petal --------------------------------------------------------------------------
-CONNATION_NUM_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
+CONNATION_NUMBER_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (
     ("", "---------"),
     ("-z", _("-zähnig")),
@@ -680,14 +680,14 @@ CARPEL_CONNATION_TYPE_CHOICES = (
     ("cs", _("coeno-synkarp verwachsen")),
     ("cp", _("coeno-parakarp verwachsen")),
 )
-OVARY_POS_CHOICES = (
+OVARY_POSITION_CHOICES = (
     ("ob", _("oberständig")),
     ("ho", _("halboberständig")),
     ("mi", _("mittelständig")),
     ("hu", _("halbunterständig")),
     ("un", _("unterständig")),
 )
-PISTIL_POS_CHOICES = (
+PISTIL_POSITION_CHOICES = (
     ("end", _("endständig")),
     ("sei", _("seitenständig")),
     ("gru", _("grundständig")),

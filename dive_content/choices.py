@@ -613,10 +613,10 @@ MEROSITY_CHOICES = (
 )
 MEROSITY_CHOICES_DICT = {**dict({None: ""}), **dict(MEROSITY_CHOICES[1:])}
 SYMMETRY_CHOICES = (
-    ("r", _("radiärsymmetrisch")),
-    ("d", _("disymmetrisch")),
-    ("z", _("zygomorph")),
     ("a", _("asymmetrisch")),
+    ("d", _("disymmetrisch")),
+    ("r", _("radiärsymmetrisch")),
+    ("z", _("zygomorph")),
 )
 PERIANTH_CHOICES = (
     ("dop", _("doppelte Blütenhülle (Kalyx + Corolla)")),

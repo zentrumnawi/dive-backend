@@ -629,21 +629,21 @@ PERIANTH_CHOICES = (
     ("zun", _("Zungenblüte")),
 )
 PERIANTH_SHAPE_CHOICES = (
-    ("ro", _("röhrig")),
-    ("ke", _("keulig")),
-    ("gl", _("glockig")),
-    ("tr", _("trichterförmig")),
-    ("be", _("becherförmig")),
-    ("na", _("napfförmig")),
-    ("ku", _("kugelig")),
     ("au", _("aufgeblasen")),
-    ("kr", _("krugförmig")),
-    ("ra", _("radförmig")),
-    ("st", _("stielförmig")),
-    ("zu", _("zungenförmig")),
-    ("ba", _("bauchig")),
     ("as", _("ausgesackt")),
+    ("ba", _("bauchig")),
+    ("be", _("becherförmig")),
     ("gr", _("gespornt")),
+    ("gl", _("glockig")),
+    ("ke", _("keulig")),
+    ("kr", _("krugförmig")),
+    ("ku", _("kugelig")),
+    ("na", _("napfförmig")),
+    ("ra", _("radförmig")),
+    ("ro", _("röhrig")),
+    ("st", _("stielförmig")),
+    ("tr", _("trichterförmig")),
+    ("zu", _("zungenförmig")),
 )
 BRACT_SHAPE_CHOICES = (
     LEAF_COMP_BLADE_SHAPE_CHOICES

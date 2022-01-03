@@ -234,52 +234,52 @@ class LeafPoalesAdminForm(forms.ModelForm):
 
 class BlossomAdminForm(forms.ModelForm):
     season = SeasonField(label=get_label(Blossom, "season"))
-    inflorescence_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_num")
+    inflorescence_number = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_number")
     )
-    blossom_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "blossom_num")
+    inflorescence_blossom_number = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_blossom_number")
     )
-    bract_blade = ArrayMultipleChoiceField(
-        BRACT_BLADE_CHOICES, label=get_label(Blossom, "bract_blade")
+    bract_shape = ArrayMultipleChoiceField(
+        BRACT_SHAPE_CHOICES, label=get_label(Blossom, "bract_shape")
     )
     diameter = NumberRangeCharField_to_be_replaced(
         0.1, 100, "cm", label=get_label(Blossom, "diameter")
     )
-    sepal_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "sepal_num")
+    sepal_number = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "sepal_number")
     )
     sepal_connation_type = NumericPrefixTermField(
-        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "sepal_connation_type"),
     )
-    petal_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "petal_num")
+    petal_number = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "petal_number")
     )
-    petal_len = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "petal_len")
+    petal_length = NumberRangeCharField_to_be_replaced(
+        0.1, 100, "cm", label=get_label(Blossom, "petal_length")
     )
     petal_connation_type = NumericPrefixTermField(
-        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "petal_connation_type"),
     )
-    stamen_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stamen_num")
+    stamen_number = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "stamen_number")
     )
-    stamen_len = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "stamen_len")
+    stamen_length = NumberRangeCharField_to_be_replaced(
+        0.1, 100, "cm", label=get_label(Blossom, "stamen_length")
     )
-    carpel_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "carpel_num")
+    carpel_number = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "carpel_number")
     )
-    stigma_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stigma_num")
+    stigma_number = IntegerRangeCharField(
+        1, 11, {11: "∞"}, label=get_label(Blossom, "stigma_number")
     )
 
-    def clean_bract_blade(self):
-        choices = BRACT_BLADE_CHOICES
+    def clean_bract_shape(self):
+        choices = BRACT_SHAPE_CHOICES
         sublists = (LEAF_COMP_BLADE_SHAPE_CHOICES, LEAF_SIMPLE_BLADE_SHAPE_CHOICES)
-        value = self.cleaned_data.get("bract_blade")
+        value = self.cleaned_data.get("bract_shape")
 
         error_messages = {
             "invalid_choice": _(
@@ -299,13 +299,15 @@ class BlossomAdminForm(forms.ModelForm):
         return value
 
     def save(self, commit=True):
-        # Clear blossom_num if option "Einzelblüte" is selected as inflorescence_type.
+        # Clear inflorescence_blossom_number if option "Einzelblüte" is selected as inflorescence_type.
         instance = super().save(commit=False)
 
         inflorescence_type = self.cleaned_data.get("inflorescence_type", "")
-        blossom_num = self.cleaned_data.get("blossom_num", "")
-        if inflorescence_type == "ein" and blossom_num:
-            instance.blossom_num = ""
+        inflorescence_blossom_number = self.cleaned_data.get(
+            "inflorescence_blossom_number", ""
+        )
+        if inflorescence_type == "ein" and inflorescence_blossom_number:
+            instance.inflorescence_blossom_number = ""
 
         if commit:
             instance.save()

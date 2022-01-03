@@ -465,13 +465,13 @@ class Blossom(models.Model):
     )
     # inflorescence --------------------------------------------------------------------
     inflorescence_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blütenstandsanzahl")
+        max_length=10, blank=True, verbose_name=_("Anzahl")
     )
     inflorescence_type = models.CharField(
         max_length=3,
         choices=INFLORESCENCE_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Blütenstandstyp"),
+        verbose_name=_("Typ"),
     )
     inflorescence_blossom_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blütenanzahl (pro Stand)")
@@ -510,74 +510,77 @@ class Blossom(models.Model):
         max_length=10, blank=True, verbose_name=_("Durchmesser")
     )
     # sepal ----------------------------------------------------------------------------
-    sepal_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Kelchblattanzahl")
-    )
+    sepal_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))
     sepal_color_shape = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Kelchblatt)")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     sepal_connation_type = models.CharField(
-        max_length=3, blank=True, verbose_name=_("Verwachsungstyp (Kelchblatt)")
+        max_length=3, blank=True, verbose_name=_("Verwachsungstyp")
     )
     sepal_connation = models.CharField(
         max_length=1,
         choices=SEPAL_CONNATION_CHOICES,
         blank=True,
-        verbose_name=_("Verwachsung (Kelchblatt)"),
+        verbose_name=_("Verwachsung"),
     )
     epicalyx = models.CharField(
         max_length=100, blank=True, verbose_name=_("Außenkelch")
     )
     # petal ----------------------------------------------------------------------------
-    petal_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Kronblattanzahl")
-    )
+    petal_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))
     petal_length = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Kronblattlänge (Platte)")
+        max_length=10, blank=True, verbose_name=_("Länge (Platte)")
     )
     petal_color_shape = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Kronblatt)")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     petal_connation_type = models.CharField(
-        max_length=3, blank=True, verbose_name=_("Verwachsungstyp (Kronblatt)")
+        max_length=3, blank=True, verbose_name=_("Verwachsungstyp")
     )
     petal_connation = models.CharField(
         max_length=1,
         choices=PETAL_CONNATION_CHOICES,
         blank=True,
-        verbose_name=_("Verwachsung (Kronblatt)"),
+        verbose_name=_("Verwachsung"),
     )
     nectary = models.CharField(
         max_length=100, blank=True, verbose_name=_("Nektarium/Honigdrüse")
     )
     # stamen ---------------------------------------------------------------------------
     stamen_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Staubblattanzahl")
+        max_length=10, blank=True, verbose_name=_("Anzahl")
     )
-    stamen_length = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Staubblattlänge")
-    )
+    stamen_length = models.CharField(max_length=10, blank=True, verbose_name=_("Länge"))
     stamen_color_shape = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Farbe/Gestalt (Staubblatt)")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     stamen_connation_type = models.CharField(
         max_length=1,
         choices=STAMEN_CONNATION_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Verwachsungstyp (Staubblatt)"),
+        verbose_name=_("Verwachsungstyp"),
     )
     stamen_connation_type_addition = models.CharField(
         max_length=100, blank=True, verbose_name=_("Verwachsungstypzusatz")
     )
     # carpel ---------------------------------------------------------------------------
     carpel_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Fruchtblattanzahl")
+        max_length=10, blank=True, verbose_name=_("Anzahl")
     )
     carpel_connation_type = models.CharField(
         max_length=2,
         choices=CARPEL_CONNATION_TYPE_CHOICES,
         blank=True,
-        verbose_name=_("Verwachsungstyp (Fruchtblatt)"),
+        verbose_name=_("Verwachsungstyp"),
     )
     ovary_position = models.CharField(
         max_length=2,

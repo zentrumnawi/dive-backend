@@ -549,6 +549,35 @@ class BlossomOutput:
 
         return text
 
+    def generate_tepal(obj):
+        # Generate output "Perigonblatt" according pattern:
+        # "[tepal_number] [tepal_color_shape] Perigonblatt|-blätter, [tepal_connation_
+        # type] [tepal_connation]."
+        fields = [
+            obj.tepal_number,
+            obj.tepal_color_shape,
+            obj.tepal_connation_type,
+            obj.get_tepal_connation_display(),
+        ]
+        fields[2] = get_NumericPrefixTermField_display(
+            fields[2], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+
+        text = format_subject_text(
+            joined_fields[0],
+            "Perigonblatt" if fields[0] == "1" else "Perigonblätter",
+            joined_fields[1],
+            ", " if joined_fields[0] else " ",
+        )
+        text = format_sentence(text)
+
+        return text
+
 
 class BlossomPoalesOutput:
     def generate_season(obj):

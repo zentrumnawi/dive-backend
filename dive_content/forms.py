@@ -277,24 +277,14 @@ class BlossomAdminForm(forms.ModelForm):
     )
 
     def clean_bract_shape(self):
-        choices = BRACT_SHAPE_CHOICES
-        sublists = (LEAF_COMP_BLADE_SHAPE_CHOICES, LEAF_SIMPLE_BLADE_SHAPE_CHOICES)
         value = self.cleaned_data.get("bract_shape")
+        error_messages = {"invalid_choice": _(f"Selected combination not allowed.")}
 
-        error_messages = {
-            "invalid_choice": _(
-                f"Only first {len(sublists[0])} or following {len(sublists[1])} options may be selected together."
-            ),
-            "multiple_choice_not_allowed": _(
-                f'Option "{dict(choices).get("nvo")}" may only be selected alone.'
-            ),
-        }
-        if any(v in dict(sublists[0]).keys() for v in value) and any(
-            v in dict(sublists[1]).keys() for v in value
-        ):
+        if (
+            any(v in dict(BRACT_SHAPE_SUBCHOICES[0]).keys() for v in value)
+            and any(v in dict(BRACT_SHAPE_SUBCHOICES[1]).keys() for v in value)
+        ) or (BRACT_SHAPE_SUBCHOICES[2][0][0] in value and len(value) > 1):
             raise ValidationError(error_messages["invalid_choice"])
-        if choices[-1][0] in value and len(value) > 1:
-            raise ValidationError(error_messages["multiple_choice_not_allowed"])
 
         return value
 

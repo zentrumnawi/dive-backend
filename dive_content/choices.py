@@ -305,7 +305,7 @@ LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("unt", _("unterbrochen")),
     ("dop", _("doppelt")),
     ("meh", _("mehrfach")),
-    ("dre", _("dreizählig")),
+    ("drz", _("dreizählig")),
     ("dod", _("doppelt dreizählig")),
     ("lei", _("leierförmig")),
     ("sch", _("schrotsägeförmig")),

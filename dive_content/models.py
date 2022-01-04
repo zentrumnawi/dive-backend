@@ -610,6 +610,9 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Verwachsungstyp"),
     )
+    ovary_number = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Fruchtknotenanzahl")
+    )
     ovary_position = models.CharField(
         max_length=2,
         choices=OVARY_POSITION_CHOICES,

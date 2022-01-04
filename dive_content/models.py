@@ -528,7 +528,7 @@ class Blossom(models.Model):
     # petal ----------------------------------------------------------------------------
     petal_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))
     petal_length = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Länge (Platte)")
+        max_length=20, blank=True, verbose_name=_("Länge (Platte)")
     )
     petal_color_shape = models.CharField(
         max_length=100,

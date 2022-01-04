@@ -659,10 +659,10 @@ BRACT_SHAPE_CHOICES.sort(key=normalize_choices_term)
 CONNATION_NUMBER_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (
     ("", "---------"),
-    ("-z", _("-zähnig")),
     ("-l", _("-lappig")),
     ("-s", _("-spaltig")),
     ("-t", _("-teilig")),
+    ("-z", _("-zähnig")),
     ("fre", _("freiblättrig")),
     ("ver", _("verwachsenblättrig")),
     ("zwe", _("zweilippig")),

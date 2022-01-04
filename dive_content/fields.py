@@ -9,7 +9,6 @@ from .models import Indicators
 from .widgets import (
     IndicatorWidget,
     NumberRangeCharWidget,
-    NumberRangeCharWidget_to_be_deleted,
     NumberRangeTermCharWidget,
     NumericPrefixTermWidget,
     OutputWidget,

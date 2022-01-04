@@ -91,25 +91,6 @@ class NumberRangeTermCharWidget(forms.MultiWidget):
         return data_list
 
 
-class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
-    def __init__(self, min, max, step=1, suffix=None, attrs=None):
-        self.max = max
-        if suffix == "cm":
-            self.template_name = "centimeter.html"
-        widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-        )
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        data_list = [None, None]
-        if value:
-            data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
-
-        return data_list
-
-
 class NumericPrefixTermWidget(forms.MultiWidget):
     def __init__(self, choices, attrs=None):
         widgets = (

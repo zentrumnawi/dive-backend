@@ -552,7 +552,7 @@ class Blossom(models.Model):
     stamen_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Anzahl")
     )
-    stamen_length = models.CharField(max_length=10, blank=True, verbose_name=_("Länge"))
+    stamen_length = models.CharField(max_length=20, blank=True, verbose_name=_("Länge"))
     stamen_color_shape = models.CharField(
         max_length=100,
         blank=True,

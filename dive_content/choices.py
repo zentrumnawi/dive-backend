@@ -669,9 +669,9 @@ CONNATION_TYPE_CHOICES = (
 )
 # sepal --------------------------------------------------------------------------------
 SEPAL_CONNATION_CHOICES = (
-    ("v", _("verwachsen")),
-    ("u", _("unverwachsen")),
     ("a", _("am Grund verwachsen")),
+    ("u", _("unverwachsen")),
+    ("v", _("verwachsen")),
 )
 # petal --------------------------------------------------------------------------------
 PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES

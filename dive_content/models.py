@@ -619,6 +619,9 @@ class Blossom(models.Model):
         blank=True,
         verbose_name=_("Fruchtknotenstellung"),
     )
+    pistil_number = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Griffelanzahl")
+    )
     pistil_position = models.CharField(
         max_length=3,
         choices=PISTIL_POSITION_CHOICES,

@@ -503,7 +503,7 @@ class Blossom(models.Model):
     )
     # diameter -------------------------------------------------------------------------
     diameter = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Durchmesser")
+        max_length=20, blank=True, verbose_name=_("Durchmesser")
     )
     # sepal ----------------------------------------------------------------------------
     sepal_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))

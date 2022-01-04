@@ -697,13 +697,13 @@ OVARY_POSITION_CHOICES = (
 )
 PISTIL_POSITION_CHOICES = (
     ("end", _("endständig")),
-    ("sei", _("seitenständig")),
     ("gru", _("grundständig")),
     ("gyn", _("gynobasisch")),
+    ("sei", _("seitenständig")),
     ("sen", _("subendständig")),
-    ("sse", _("subseitenständig")),
     ("sgr", _("subgrundständig")),
     ("sgy", _("subgynobasisch")),
+    ("sse", _("subseitenständig")),
 )
 # --------------------------------------------------------------------------------------
 

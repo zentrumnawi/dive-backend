@@ -675,6 +675,8 @@ SEPAL_CONNATION_CHOICES = (
 )
 # petal --------------------------------------------------------------------------------
 PETAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
+# tepal --------------------------------------------------------------------------------
+TEPAL_CONNATION_CHOICES = SEPAL_CONNATION_CHOICES
 # stamen -------------------------------------------------------------------------------
 STAMEN_CONNATION_TYPE_CHOICES = (
     ("s", _("Staubfadenröhre")),

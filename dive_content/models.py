@@ -559,6 +559,12 @@ class Blossom(models.Model):
     tepal_connation_type = models.CharField(
         max_length=3, blank=True, verbose_name=_("Verwachsungstyp")
     )
+    tepal_connation = models.CharField(
+        max_length=1,
+        choices=TEPAL_CONNATION_CHOICES,
+        blank=True,
+        verbose_name=_("Verwachsung"),
+    )
     # stamen ---------------------------------------------------------------------------
     stamen_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Anzahl")

@@ -548,6 +548,8 @@ class Blossom(models.Model):
     nectary = models.CharField(
         max_length=100, blank=True, verbose_name=_("Nektarium/Honigdrüse")
     )
+    # tepal ----------------------------------------------------------------------------
+    tepal_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))
     # stamen ---------------------------------------------------------------------------
     stamen_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Anzahl")

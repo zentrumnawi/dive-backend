@@ -10,7 +10,6 @@ from .fields import (
     FloatRangeTermCharField,
     IndicatorField,
     IntegerRangeCharField,
-    NumberRangeCharField_to_be_replaced,
     NumericPrefixTermField,
     OutputField,
     SeasonField,

@@ -166,61 +166,6 @@ class FloatRangeTermCharField(IntegerRangeTermCharField):
     field = FloatRangeCharField
 
 
-class NumberRangeCharField_to_be_replaced(forms.MultiValueField):
-    def __init__(self, min=1, max=99, suffix=None, infinity=False, **kwargs):
-        self.max = max
-        self.infinity = infinity
-        help_text = "Einzelwert oder Wertebereich"
-        if infinity:
-            help_text += f", {max} wird als ∞ gespeichert."
-        kwargs.setdefault("required", False)
-        kwargs.setdefault("help_text", help_text)
-
-        def error_messages(pos):
-            position = {1: "first", 2: "second"}
-            return {
-                "min_value": f"Ensure {position[pos]} value is greater than or equal to %(limit_value)s.",
-                "max_value": f"Ensure {position[pos]} value is less than or equal to %(limit_value)s.",
-            }
-
-        fields = (
-            forms.IntegerField(
-                min_value=min, max_value=max, error_messages=error_messages(1)
-            ),
-            forms.IntegerField(
-                min_value=min, max_value=max, error_messages=error_messages(2)
-            ),
-        )
-        widget = NumberRangeCharWidget_to_be_deleted(min, max)
-        if suffix == "cm":
-            fields = (
-                forms.FloatField(
-                    min_value=min, max_value=max, error_messages=error_messages(1)
-                ),
-                forms.FloatField(
-                    min_value=min, max_value=max, error_messages=error_messages(2)
-                ),
-            )
-            widget = NumberRangeCharWidget_to_be_deleted(min, max, 0.1, "cm")
-
-        super().__init__(fields=fields, widget=widget, **kwargs)
-
-    def compress(self, data_list):
-        if len(data_list) > 1 and all(data_list):
-            if data_list[0] > data_list[1]:
-                raise ValidationError(_("First value must not exceed second value."))
-            if data_list[0] == data_list[1]:
-                data_list[1] = None
-
-        for i, data in enumerate(data_list):
-            if data:
-                data_list[i] = str(data)
-                if self.infinity and data == self.max:
-                    data_list[i] = "∞"
-
-        return "–".join(filter(None, data_list))
-
-
 class NumericPrefixTermField(forms.MultiValueField):
     def __init__(self, choices, **kwargs):
         kwargs.setdefault("required", False)

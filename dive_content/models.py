@@ -501,6 +501,12 @@ class Blossom(models.Model):
         default=list,
         verbose_name=_("Tragblattgestalt"),
     )
+    blossom_sex_distribution = models.CharField(
+        max_length=1,
+        choices=BLOSSOM_SEX_DISTRIBUTION_CHOICES,
+        blank=True,
+        verbose_name=_("Geschlechtigkeit"),
+    )
     # diameter -------------------------------------------------------------------------
     diameter = models.CharField(
         max_length=20, blank=True, verbose_name=_("Durchmesser")

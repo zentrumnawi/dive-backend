@@ -655,6 +655,11 @@ BRACT_SHAPE_CHOICES = [
     *BRACT_SHAPE_SUBCHOICES[2],
 ]
 BRACT_SHAPE_CHOICES.sort(key=normalize_choices_term)
+BLOSSOM_SEX_DISTRIBUTION_CHOICES = (
+    ("e", _("eingeschlechtig")),
+    ("s", _("steril")),
+    ("z", _("zwittrig")),
+)
 # sepal/petal --------------------------------------------------------------------------
 CONNATION_NUMBER_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (

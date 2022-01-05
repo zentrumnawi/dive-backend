@@ -607,7 +607,7 @@ INFLORESCENCE_TYPE_CHOICES = [
     *INFLORESCENCE_TYPE_SUBCHOICES[2],
 ]
 INFLORESCENCE_TYPE_CHOICES.sort(key=normalize_choices_term)
-# overview -----------------------------------------------------------------------------
+# general -----------------------------------------------------------------------------
 MEROSITY_CHOICES = (
     ((None, "-"),) + tuple((x, x) for x in range(1, 9)) + ((9, _("viel")),)
 )

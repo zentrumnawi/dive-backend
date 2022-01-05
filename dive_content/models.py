@@ -475,7 +475,7 @@ class Blossom(models.Model):
     inflorescence_blossom_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blütenanzahl (pro Stand)")
     )
-    # overview -------------------------------------------------------------------------
+    # general --------------------------------------------------------------------------
     merosity = models.IntegerField(
         choices=MEROSITY_CHOICES, blank=True, null=True, verbose_name=_("Zähligkeit")
     )

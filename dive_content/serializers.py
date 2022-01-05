@@ -336,7 +336,7 @@ class LeafPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
 class BlossomSerializer(DisplayNameModelSerializer):
     season = serializers.SerializerMethodField(label="Blütezeit")
     inflorescence = serializers.SerializerMethodField(label="Blütenstand")
-    overview = serializers.SerializerMethodField(label="Überblick")
+    general = serializers.SerializerMethodField(label="Allgemeines")
     diameter = serializers.SerializerMethodField(label="Durchmesser")
     sepal = serializers.SerializerMethodField(label="Kelchblatt")
     petal = serializers.SerializerMethodField(label="Kronblatt")
@@ -348,7 +348,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
         fields = [
             "season",
             "inflorescence",
-            "overview",
+            "general",
             "diameter",
             "sepal",
             "petal",
@@ -404,7 +404,7 @@ class BlossomSerializer(DisplayNameModelSerializer):
 
         return format_sentence(text)
 
-    def get_overview(self, obj):
+    def get_general(self, obj):
         # Generate sentence "Blütenstand" according pattern:
         # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_form]e
         # Blütenform, [bract_blade]es Tragblatt."

@@ -634,6 +634,13 @@ class Blossom(models.Model):
     stylopodium = models.CharField(
         max_length=100, blank=True, verbose_name=_("Griffelpolster")
     )
+    # specifications -------------------------------------------------------------------
+    specifications = models.TextField(
+        max_length=600,
+        blank=True,
+        verbose_name=_("Spezifikationen"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
     # ----------------------------------------------------------------------------------
 
     class Meta:

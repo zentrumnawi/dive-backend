@@ -510,6 +510,12 @@ class Blossom(models.Model):
     blossom_sex_distribution_addition = models.CharField(
         max_length=100, blank=True, verbose_name=_("Geschlechtigkeitzusatz")
     )
+    plant_sex_distribution = models.CharField(
+        max_length=1,
+        choices=PLANT_SEX_DISTRIBUTION_CHOICES,
+        blank=True,
+        verbose_name=_("Häusigkeit"),
+    )
     # diameter -------------------------------------------------------------------------
     diameter = models.CharField(
         max_length=20, blank=True, verbose_name=_("Durchmesser")

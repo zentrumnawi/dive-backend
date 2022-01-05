@@ -660,6 +660,11 @@ BLOSSOM_SEX_DISTRIBUTION_CHOICES = (
     ("s", _("steril")),
     ("z", _("zwittrig")),
 )
+PLANT_SEX_DISTRIBUTION_CHOICES = (
+    ("e", _("einhäusig")),
+    ("u", _("unvollständig zweihäusig")),
+    ("z", _("zweihäusig")),
+)
 # sepal/petal --------------------------------------------------------------------------
 CONNATION_NUMBER_CHOICES = (("", "-"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"))
 CONNATION_TYPE_CHOICES = (

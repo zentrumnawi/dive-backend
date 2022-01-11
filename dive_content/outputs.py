@@ -129,6 +129,8 @@ class PlantOutput:
             obj.get_status_display(),
             obj.other_features,
         ]
+        fields[1] = fields[1].replace("r ", " ", 1).replace("s ", " ", 1)
+        fields[2] = f"({fields[2]})" if fields[2] else ""
         fields[3] = format_enumeration(fields[3], "oder")
         fields[5] = format_FloatRangeTermCharField(fields[5])
         if fields[7] == "Sporenpflanze":

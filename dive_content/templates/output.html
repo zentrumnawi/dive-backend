@@ -1,5 +1,5 @@
-<div class="readonly" style="color: #000000;">
-    {% if widget.value != None %}<i>"{{ widget.value|stringformat:'s' }}"</i>
+<div class="readonly" style="color: #2f7692;">
+    {% if widget.value != None %}{{ widget.value|stringformat:'s' }}
     {% else %}<span style="color: #ff0000;">Keine Ausgabe</span>
     {% endif %}
 </div>

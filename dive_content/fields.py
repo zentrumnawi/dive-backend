@@ -20,6 +20,10 @@ from .widgets import (
 
 
 class AdaptedSimpleArrayField(SimpleArrayField):
+    def __init__(self, *args, **kwargs):
+        kwargs["show_hidden_initial"] = False
+        super().__init__(*args, **kwargs)
+
     def prepare_value(self, value):
         return value
 

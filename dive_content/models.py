@@ -495,14 +495,11 @@ class Blossom(models.Model):
         verbose_name=_("Blütenhüllenform (verwachsenblättrig)"),
     )
     bract_shape = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=BRACT_SHAPE_CHOICES,
-            verbose_name=_("Tragblattspreite"),
-        ),
+        base_field=models.CharField(max_length=3, choices=BRACT_SHAPE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Tragblattgestalt"),
     )
     # diameter -------------------------------------------------------------------------
     diameter = models.CharField(

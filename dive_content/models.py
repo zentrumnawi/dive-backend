@@ -456,12 +456,11 @@ class Blossom(models.Model):
     )
     # season ---------------------------------------------------------------------------
     season = ArrayField(
-        base_field=models.IntegerField(
-            blank=True, null=True, verbose_name=_("Blütezeit")
-        ),
+        base_field=models.IntegerField(blank=True, null=True),
         size=4,
         blank=True,
         default=list,
+        verbose_name=_("Blütezeit"),
     )
     # inflorescence --------------------------------------------------------------------
     inflorescence_number = models.CharField(

@@ -261,7 +261,7 @@ fruit_fieldsets = (
         },
     ),
 )
-fruit_radio_fields = {"ovule_pos": admin.HORIZONTAL}
+fruit_radio_fields = {"ovule_position": admin.HORIZONTAL}
 
 stemroot_fieldsets = (
     (None, {"fields": ("plant",)}),

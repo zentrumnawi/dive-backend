@@ -805,6 +805,7 @@ class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
+    # fruit ----------------------------------------------------------------------------
     fruit_form = models.CharField(
         max_length=100, blank=True, verbose_name=_("Fruchtform")
     )
@@ -814,12 +815,14 @@ class Fruit(models.Model):
         blank=True,
         verbose_name=_("Fruchttyp"),
     )
+    # ovule ----------------------------------------------------------------------------
     ovule_pos = models.CharField(
         max_length=2,
         choices=OVULE_POS_CHOICES,
         blank=True,
         verbose_name=_("Samenanlage (Lage)"),
     )
+    # seed -----------------------------------------------------------------------------
     seed_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Samenanzahl")
     )
@@ -841,6 +844,7 @@ class Fruit(models.Model):
         verbose_name=_("Besonderheit (Beflügelung)"),
         help_text="Alles ausschreiben.",
     )
+    # ----------------------------------------------------------------------------------
 
     class Meta:
         verbose_name = _("Frucht")

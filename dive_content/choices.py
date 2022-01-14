@@ -798,6 +798,7 @@ HUSKS_CROSS_SECTION_CHOICES = (
 
 
 # Fruit choices ------------------------------------------------------------------------
+# fruit --------------------------------------------------------------------------------
 FRUIT_TYPE_CHOICES = (
     ("apf", _("Apfelfrucht")),
     ("nus", _("Nuss")),
@@ -823,6 +824,7 @@ FRUIT_TYPE_CHOICES = (
     ("stc", _("Steinfrüchtchen")),
     ("bac", _("Balgfrüchtchen")),
 )
+# ovule --------------------------------------------------------------------------------
 OVULE_POS_CHOICES = (
     ("fr", _("Fruchtknoten (Angiospermen)")),
     ("za", _("Zapfenschuppe (Gymnospermen)")),

@@ -831,10 +831,7 @@ class Fruit(models.Model):
         help_text=_("Grammatikalisch anpassen."),
     )
     winging = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Beflügelung"),
-        help_text="Alles ausschreiben.",
+        max_length=100, blank=True, verbose_name=_("Beflügelung")
     )
     winging_feature = models.CharField(
         max_length=100,

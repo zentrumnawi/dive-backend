@@ -820,7 +820,7 @@ class Fruit(models.Model):
         max_length=2,
         choices=OVULE_POSITION_CHOICES,
         blank=True,
-        verbose_name=_("Samenanlage (Lage)"),
+        verbose_name=_("Lage"),
     )
     # seed -----------------------------------------------------------------------------
     seed_number = models.CharField(

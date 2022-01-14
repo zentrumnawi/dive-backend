@@ -836,6 +836,16 @@ class FruitOutput:
 
         return text
 
+    def generate_ovule(obj):
+        # Generate output "Samenanlage" according pattern:
+        # "Samenanlage in [ovule_position]."
+        field = obj.get_ovule_position_display()
+
+        text = f"Samenanlage in {field}" if field else ""
+        text = format_sentence(text)
+
+        return text
+
 
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):

@@ -445,8 +445,8 @@ class BlossomPoalesAdminForm(forms.ModelForm):
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Fruit, "seed_num")
+    seed_number = IntegerRangeCharField(
+        1, 100, {100: "∞"}, label=get_label(Fruit, "seed_number")
     )
 
 

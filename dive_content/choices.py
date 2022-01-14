@@ -825,7 +825,7 @@ FRUIT_TYPE_CHOICES = (
     ("bac", _("Balgfrüchtchen")),
 )
 # ovule --------------------------------------------------------------------------------
-OVULE_POS_CHOICES = (
+OVULE_POSITION_CHOICES = (
     ("fr", _("Fruchtknoten (Angiospermen)")),
     ("za", _("Zapfenschuppe (Gymnospermen)")),
 )

@@ -806,7 +806,7 @@ class Fruit(models.Model):
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
     # fruit ----------------------------------------------------------------------------
-    fruit_form = models.CharField(
+    fruit_color_shape = models.CharField(
         max_length=100, blank=True, verbose_name=_("Fruchtform")
     )
     fruit_type = models.CharField(
@@ -816,17 +816,17 @@ class Fruit(models.Model):
         verbose_name=_("Fruchttyp"),
     )
     # ovule ----------------------------------------------------------------------------
-    ovule_pos = models.CharField(
+    ovule_position = models.CharField(
         max_length=2,
-        choices=OVULE_POS_CHOICES,
+        choices=OVULE_POSITION_CHOICES,
         blank=True,
         verbose_name=_("Samenanlage (Lage)"),
     )
     # seed -----------------------------------------------------------------------------
-    seed_num = models.CharField(
+    seed_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Samenanzahl")
     )
-    seed_color_form = models.CharField(
+    seed_color_shape = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Farbe/Form (Samen)"),

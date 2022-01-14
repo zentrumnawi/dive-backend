@@ -821,6 +821,22 @@ class BlossomPoalesOutput:
         return joined_texts
 
 
+class FruitOutput:
+    def generate_fruit(obj):
+        # Generate output "Frucht" according pattern:
+        # "[fruit_color_shape] [fruit_type]."
+        fields = [
+            obj.fruit_color_shape,
+            obj.get_fruit_type_display(),
+        ]
+
+        joined_fields = " ".join(filter(None, fields))
+
+        text = format_sentence(joined_fields)
+
+        return text
+
+
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):
         # Generate output "Wuchsform" according pattern:

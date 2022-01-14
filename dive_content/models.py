@@ -813,10 +813,7 @@ class Fruit(models.Model):
         help_text=_("Grammatikalisch anpassen."),
     )
     fruit_type = models.CharField(
-        max_length=3,
-        choices=FRUIT_TYPE_CHOICES,
-        blank=True,
-        verbose_name=_("Fruchttyp"),
+        max_length=3, choices=FRUIT_TYPE_CHOICES, blank=True, verbose_name=_("Typ")
     )
     # ovule ----------------------------------------------------------------------------
     ovule_position = models.CharField(

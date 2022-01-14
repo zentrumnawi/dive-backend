@@ -833,12 +833,6 @@ class Fruit(models.Model):
     winging = models.CharField(
         max_length=100, blank=True, verbose_name=_("Beflügelung")
     )
-    winging_feature = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Besonderheit (Beflügelung)"),
-        help_text="Alles ausschreiben.",
-    )
     # ----------------------------------------------------------------------------------
 
     class Meta:

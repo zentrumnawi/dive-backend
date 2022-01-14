@@ -807,7 +807,10 @@ class Fruit(models.Model):
     )
     # fruit ----------------------------------------------------------------------------
     fruit_color_shape = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Fruchtform")
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     fruit_type = models.CharField(
         max_length=3,

@@ -907,6 +907,28 @@ class StemRootOutput:
 
         return text
 
+    def generate_outgrowths(obj):
+        # Generate output "Auswüchse" according pattern:
+        # "Bildet Kriech- und Legetriebe; bildet oberirdische Ausläufer."
+        fields = [
+            obj.creep_lay_shoots,
+            obj.runners,
+        ]
+
+        text_parts = [
+            f"bildet{' ' if fields[0] else ' keine '}Kriech- und Legetriebe"
+            if fields[0] != None
+            else "",
+            f"bildet {'oberirdische' if fields[1] else 'keine oberirdischen'} Ausläufer"
+            if fields[1] != None
+            else "",
+        ]
+
+        text = "; ".join(filter(None, text_parts))
+        text = format_sentence(text)
+
+        return text
+
 
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):

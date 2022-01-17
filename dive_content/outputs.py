@@ -929,6 +929,24 @@ class StemRootOutput:
 
         return text
 
+    def generate_root_morphology(obj):
+        # Generate output "Wurzelmorphologie" according pattern:
+        # "[root_organ_features] [root_organs]; Primärwurzel [root_primary_root]."
+        fields = [
+            obj.root_organ_features,
+            obj.get_root_organs_display(),
+            obj.get_root_primary_root_display(),
+        ]
+
+        joined_fields = " ".join(filter(None, fields[0:2]))
+
+        text_part = f"Primärwurzel {fields[2]}" if fields[2] else ""
+
+        text = "; ".join(filter(None, (joined_fields, text_part)))
+        text = format_sentence(text)
+
+        return text
+
 
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):

@@ -882,13 +882,12 @@ class StemRoot(models.Model):
     )
     stem_cross_section = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=SR_STEM_CROSS_SECTION_CHOICES,
-            verbose_name=_("Querschnitt"),
+            max_length=3, choices=SR_STEM_CROSS_SECTION_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Querschnitt"),
     )
     stem_surface = ArrayField(
         base_field=models.CharField(

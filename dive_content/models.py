@@ -932,7 +932,7 @@ class StemRoot(models.Model):
         max_length=100,
         blank=True,
         verbose_name=_("Milchsaft"),
-        help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
+        help_text=_('Als eigenständigen Satz ausformulieren. Bsp. "Gelber Milchsaft."'),
     )
     # root_morphology ------------------------------------------------------------------
     root_organ_features = models.CharField(

@@ -883,6 +883,7 @@ RUNNERS_CHOICES_to_be_replaced = (
     ("bil", _("bildet oberirdische Ausläufer")),
     ("kei", _("keine Angabe")),
 )
+RUNNERS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
 BRACTS_CHOICES = (
     ("nur", _("nur am Grund")),
     ("auc", _("auch über dem Grund")),

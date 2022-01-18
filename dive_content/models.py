@@ -923,6 +923,12 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Ausläufer (oberirdisch)"),
     )
+    runners = models.BooleanField(
+        choices=RUNNERS_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Ausläufer (oberirdisch)"),
+    )
     bracts = models.CharField(
         max_length=3,
         choices=BRACTS_CHOICES,

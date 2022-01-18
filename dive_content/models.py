@@ -847,6 +847,13 @@ class StemRoot(models.Model):
         related_name="stemroot",
         verbose_name=_("Pflanze"),
     )
+    # trunk_morphology -----------------------------------------------------------------
+    trunk_features = models.TextField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Stammmerkmale"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
     # stem_morphology ------------------------------------------------------------------
     stem_growth_orientation = ArrayField(
         base_field=models.CharField(

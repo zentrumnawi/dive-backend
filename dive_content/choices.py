@@ -859,18 +859,18 @@ STEM_APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 SR_STEM_SUCCULENCE_CHOICES = SUCCULENCE_CHOICES
 SR_STEM_PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
 SR_STEM_CROSS_SECTION_CHOICES = (
-    ("sti", _("stielrund")),
+    ("gfl", _("geflügelt")),
+    ("gef", _("gefurcht")),
+    ("ger", _("gerieft/gerillt")),
+    ("gri", _("gerippt")),
     ("hal", _("halbstielrund")),
+    ("kan", _("kantig")),
+    ("kgs", _("kantig gefurcht/scharfkantig")),
+    ("kno", _("knotig")),
+    ("sti", _("stielrund")),
+    ("stu", _("stumpfkantig")),
     ("zus", _("zusammengedrückt")),
     ("zwe", _("zweischneidig")),
-    ("kan", _("kantig")),
-    ("stu", _("stumpfkantig")),
-    ("ger", _("gerieft/gerillt")),
-    ("gef", _("gefurcht")),
-    ("kgs", _("kantig gefurcht/scharfkantig")),
-    ("gri", _("gerippt")),
-    ("gfl", _("geflügelt")),
-    ("kno", _("knotig")),
 )
 SR_STEM_SURFACE_CHOICES = SURFACE_CHOICES
 # outgrowths ---------------------------------------------------------------------------

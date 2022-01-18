@@ -890,12 +890,12 @@ BRACTS_CHOICES = (
 )
 # root_morphology ----------------------------------------------------------------------
 ROOT_ORGANS_CHOICES = (
-    ("Rhi", _("Rhizom")),
-    ("Zwi", _("Zwiebel")),
-    ("Aus", _("unterirdische Ausläufer")),
     ("Inn", _("Innovations-Wurzelknolle")),
-    ("Wuk", _("Wurzelknollen")),
+    ("Rhi", _("Rhizom")),
+    ("Aus", _("unterirdische Ausläufer")),
     ("Wur", _("Wurzeln")),
+    ("Wuk", _("Wurzelknollen")),
+    ("Zwi", _("Zwiebel")),
 )
 ROOT_PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),

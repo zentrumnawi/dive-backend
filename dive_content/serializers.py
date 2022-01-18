@@ -436,106 +436,30 @@ class FruitSerializer(ExcludeEmptyFieldsModelSerializer):
         return FruitOutput.generate_seed(obj)
 
 
-class StemRootSerializer(DisplayNameModelSerializer):
+class StemRootSerializer(ExcludeEmptyFieldsModelSerializer):
     stem_morphology = serializers.SerializerMethodField(label="Sprossmorphologie")
     outgrowths = serializers.SerializerMethodField(label="Auswüchse")
-    bracts = serializers.SerializerMethodField(label="Beblätterung")
-    milky_sap = serializers.SerializerMethodField(label="Milchsaft")
     root_morphology = serializers.SerializerMethodField(label="Wurzelmorphologie")
 
     class Meta:
         model = StemRoot
         fields = [
+            "trunk_features",
             "stem_morphology",
             "outgrowths",
-            "bracts",
             "milky_sap",
             "root_morphology",
         ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_stem_morphology(self, obj):
-        # Generate sentence "Sprossmorphologie" according pattern:
-        # "[orientation]er, [appearance]er, [succulence]er, [pith]er Spross; [cross_
-        # section]er Querschnitt mit [surface]er Oberfläche."
-        app = "er"
-        if not obj.cross_section:
-            app = "e"
-        fields = [
-            obj.orientation,
-            obj.appearance,
-            add_suffix(obj.get_succulence_display(), "er"),
-            add_suffix(obj.get_pith_display(), "er"),
-            obj.cross_section,
-            obj.surface,
-        ]
-        if fields[0]:
-            fields[0] = format_ArrayField(fields[0], ORIENTATION_CHOICES, "er", "/")
-        if fields[1]:
-            fields[1] = format_ArrayField(fields[1], APPEARANCE_CHOICES, "er")
-        if fields[4]:
-            fields[4] = format_ArrayField(
-                fields[4], SR_CROSS_SECTION_CHOICES, "er", "/"
-            )
-        if fields[5]:
-            fields[5] = format_ArrayField(fields[5], SURFACE_CHOICES, app, "/")
-
-        fields[4] = f"{fields[4]} Querschnitt" if fields[4] else ""
-        fields[5] = f"{fields[5]} Oberfläche" if fields[5] else ""
-
-        text = [
-            ", ".join(filter(None, fields[:4])),
-            " mit ".join(filter(None, fields[4:])),
-        ]
-        text[0] = f"{text[0]} Spross" if text[0] else ""
-        text = "; ".join(filter(None, text))
-
-        return format_sentence(text)
+        return StemRootOutput.generate_stem_morphology(obj)
 
     def get_outgrowths(self, obj):
-        # Generate sentence "Auswüchse" according pattern:
-        # "[creep_lay_shoots]; [runners]."
-        fields = [
-            obj.get_creep_lay_shoots_display(),
-            obj.get_runners_display(),
-        ]
-
-        text = "; ".join(filter(None, fields))
-
-        return format_sentence(text)
-
-    def get_bracts(self, obj):
-        # Generate sentence "Beblätterung" according pattern:
-        # "[bracts] beblättert."
-        fields = obj.get_bracts_display()
-
-        text = f"{fields} beblättert" if fields else ""
-
-        return format_sentence(text)
-
-    def get_milky_sap(self, obj):
-        # Generate sentence "Milchsaft" according pattern:
-        # "[milky_sap]."
-        fields = obj.milky_sap
-
-        text = f"{fields}" if fields else ""
-
-        return format_sentence(text)
+        return StemRootOutput.generate_outgrowths(obj)
 
     def get_root_morphology(self, obj):
-        # Generate sentence "Wurzelmorphologie" according pattern:
-        # "[organ_features] [organs]; Primärwurzel [primary_root]."
-        fields = [
-            obj.organ_features,
-            obj.get_organs_display(),
-            obj.get_primary_root_display(),
-        ]
-        fields[2] = f"Primärwurzel {fields[2]}" if fields[2] else ""
-
-        text = " ".join(filter(None, fields[:2]))
-        text = "; ".join(filter(None, (text, fields[2])))
-
-        return format_sentence(text)
+        return StemRootOutput.generate_root_morphology(obj)
 
 
 class StemRhizomePoalesSerializer(ExcludeEmptyFieldsModelSerializer):

@@ -294,12 +294,12 @@ stemroot_fieldsets = (
     ),
 )
 stemroot_radio_fields = {
-    "succulence": admin.HORIZONTAL,
-    "pith": admin.HORIZONTAL,
-    "creep_lay_shoots": admin.HORIZONTAL,
-    "runners": admin.HORIZONTAL,
+    "stem_succulence": admin.HORIZONTAL,
+    "stem_pith": admin.HORIZONTAL,
+    "creep_lay_shoots_to_be_replaced": admin.HORIZONTAL,
+    "runners_to_be_replaced": admin.HORIZONTAL,
     "bracts": admin.HORIZONTAL,
-    "primary_root": admin.HORIZONTAL,
+    "root_primary_root": admin.HORIZONTAL,
 }
 
 stemrhizomepoales_fieldsets = (

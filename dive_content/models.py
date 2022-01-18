@@ -848,61 +848,65 @@ class StemRoot(models.Model):
         verbose_name=_("Pflanze"),
     )
     # stem_morphology ------------------------------------------------------------------
-    orientation = ArrayField(
+    stem_growth_orientation = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=ORIENTATION_CHOICES,
+            choices=STEM_GROWTH_ORIENTATION_CHOICES,
             verbose_name=_("Wuchsorientierung"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    appearance = ArrayField(
+    stem_appearance = ArrayField(
         base_field=models.CharField(
-            max_length=1, choices=APPEARANCE_CHOICES, verbose_name=_("Erscheinung"),
+            max_length=1,
+            choices=STEM_APPEARANCE_CHOICES,
+            verbose_name=_("Erscheinung"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    succulence = models.CharField(
+    stem_succulence = models.CharField(
         max_length=3,
-        choices=SUCCULENCE_CHOICES,
+        choices=SR_STEM_SUCCULENCE_CHOICES,
         blank=True,
         verbose_name=_("Dickfleischigkeit"),
     )
-    pith = models.CharField(
-        max_length=1, choices=PITH_CHOICES, blank=True, verbose_name=_("Mark")
+    stem_pith = models.CharField(
+        max_length=1, choices=SR_STEM_PITH_CHOICES, blank=True, verbose_name=_("Mark")
     )
-    cross_section = ArrayField(
+    stem_cross_section = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=SR_CROSS_SECTION_CHOICES,
+            choices=SR_STEM_CROSS_SECTION_CHOICES,
             verbose_name=_("Querschnitt"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    surface = ArrayField(
+    stem_surface = ArrayField(
         base_field=models.CharField(
-            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Sprossoberfläche")
+            max_length=3,
+            choices=SR_STEM_SURFACE_CHOICES,
+            verbose_name=_("Sprossoberfläche"),
         ),
         size=2,
         blank=True,
         default=list,
     )
     # outgrowths -----------------------------------------------------------------------
-    creep_lay_shoots = models.CharField(
+    creep_lay_shoots_to_be_replaced = models.CharField(
         max_length=3,
-        choices=CREEP_LAY_SHOOTS_CHOICES,
+        choices=CREEP_LAY_SHOOTS_CHOICES_to_be_replaced,
         blank=True,
         verbose_name=_("Kriech- und Legetriebe"),
     )
-    runners = models.CharField(
+    runners_to_be_replaced = models.CharField(
         max_length=3,
-        choices=RUNNERS_CHOICES,
+        choices=RUNNERS_CHOICES_to_be_replaced,
         blank=True,
         verbose_name=_("Ausläufer (oberirdisch)"),
     )
@@ -920,21 +924,21 @@ class StemRoot(models.Model):
         help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
     )
     # root_morphology ------------------------------------------------------------------
-    organ_features = models.CharField(
+    root_organ_features = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Besonderheiten"),
         help_text="Besondere Ausprägungen der unterirdischen Organe.",
     )
-    organs = models.CharField(
+    root_organs = models.CharField(
         max_length=3,
-        choices=ORGANS_CHOICES,
+        choices=ROOT_ORGANS_CHOICES,
         blank=True,
         verbose_name=_("Organe (unterirdisch)"),
     )
-    primary_root = models.CharField(
+    root_primary_root = models.CharField(
         max_length=3,
-        choices=PRIMARY_ROOT_CHOICES,
+        choices=ROOT_PRIMARY_ROOT_CHOICES,
         blank=True,
         verbose_name=_("Primärwurzel"),
     )

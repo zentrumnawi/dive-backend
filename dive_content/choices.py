@@ -834,7 +834,7 @@ OVULE_POSITION_CHOICES = (
 
 # StemRoot choices ---------------------------------------------------------------------
 # stem_morphology ----------------------------------------------------------------------
-ORIENTATION_CHOICES = (
+STEM_GROWTH_ORIENTATION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
     ("abs", _("abstehend")),
@@ -855,10 +855,10 @@ ORIENTATION_CHOICES = (
     ("spr", _("spreizklimmig")),
     ("wur", _("wurzelkletternd")),
 )
-APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
-# SUCCULENCE_CHOICES  =>  Leaf choices
-PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
-SR_CROSS_SECTION_CHOICES = (
+STEM_APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
+SR_STEM_SUCCULENCE_CHOICES = SUCCULENCE_CHOICES
+SR_STEM_PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
+SR_STEM_CROSS_SECTION_CHOICES = (
     ("sti", _("stielrund")),
     ("hal", _("halbstielrund")),
     ("zus", _("zusammengedrückt")),
@@ -872,13 +872,13 @@ SR_CROSS_SECTION_CHOICES = (
     ("gfl", _("geflügelt")),
     ("kno", _("knotig")),
 )
-# SURFACE_CHOICES  =>  Leaf choices
+SR_STEM_SURFACE_CHOICES = SURFACE_CHOICES
 # outgrowths ---------------------------------------------------------------------------
-CREEP_LAY_SHOOTS_CHOICES = (
+CREEP_LAY_SHOOTS_CHOICES_to_be_replaced = (
     ("bil", _("bildet Kriech- und Legetriebe")),
     ("kei", _("keine Angabe")),
 )
-RUNNERS_CHOICES = (
+RUNNERS_CHOICES_to_be_replaced = (
     ("bil", _("bildet oberirdische Ausläufer")),
     ("kei", _("keine Angabe")),
 )
@@ -887,7 +887,7 @@ BRACTS_CHOICES = (
     ("auc", _("auch über dem Grund")),
 )
 # root_morphology ----------------------------------------------------------------------
-ORGANS_CHOICES = (
+ROOT_ORGANS_CHOICES = (
     ("Rhi", _("Rhizom")),
     ("Zwi", _("Zwiebel")),
     ("Aus", _("unterirdische Ausläufer")),
@@ -895,7 +895,7 @@ ORGANS_CHOICES = (
     ("Wuk", _("Wurzelknollen")),
     ("Wur", _("Wurzeln")),
 )
-PRIMARY_ROOT_CHOICES = (
+ROOT_PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )

@@ -301,8 +301,10 @@ stemroot_fieldsets = (
     ),
 )
 stemroot_radio_fields = {
-    "stem_succulence": admin.HORIZONTAL,
-    "stem_pith": admin.HORIZONTAL,
+    "stem_succulence": admin.VERTICAL,
+    "stem_pith": admin.VERTICAL,
+    "creep_lay_shoots": admin.HORIZONTAL,
+    "runners": admin.HORIZONTAL,
     "root_primary_root": admin.HORIZONTAL,
 }
 

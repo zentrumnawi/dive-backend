@@ -865,14 +865,11 @@ class StemRoot(models.Model):
         verbose_name=_("Wuchsorientierung"),
     )
     stem_appearance = ArrayField(
-        base_field=models.CharField(
-            max_length=1,
-            choices=STEM_APPEARANCE_CHOICES,
-            verbose_name=_("Erscheinung"),
-        ),
+        base_field=models.CharField(max_length=1, choices=STEM_APPEARANCE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Erscheinung"),
     )
     stem_succulence = models.CharField(
         max_length=3,

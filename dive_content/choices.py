@@ -833,6 +833,7 @@ OVULE_POSITION_CHOICES = (
 
 
 # StemRoot choices ---------------------------------------------------------------------
+# stem_morphology ----------------------------------------------------------------------
 ORIENTATION_CHOICES = (
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
@@ -872,6 +873,7 @@ SR_CROSS_SECTION_CHOICES = (
     ("kno", _("knotig")),
 )
 # SURFACE_CHOICES  =>  Leaf choices
+# outgrowths ---------------------------------------------------------------------------
 CREEP_LAY_SHOOTS_CHOICES = (
     ("bil", _("bildet Kriech- und Legetriebe")),
     ("kei", _("keine Angabe")),
@@ -884,6 +886,7 @@ BRACTS_CHOICES = (
     ("nur", _("nur am Grund")),
     ("auc", _("auch über dem Grund")),
 )
+# root_morphology ----------------------------------------------------------------------
 ORGANS_CHOICES = (
     ("Rhi", _("Rhizom")),
     ("Zwi", _("Zwiebel")),

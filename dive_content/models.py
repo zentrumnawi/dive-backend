@@ -847,6 +847,7 @@ class StemRoot(models.Model):
         related_name="stemroot",
         verbose_name=_("Pflanze"),
     )
+    # stem_morphology ------------------------------------------------------------------
     orientation = ArrayField(
         base_field=models.CharField(
             max_length=3,
@@ -892,6 +893,7 @@ class StemRoot(models.Model):
         blank=True,
         default=list,
     )
+    # outgrowths -----------------------------------------------------------------------
     creep_lay_shoots = models.CharField(
         max_length=3,
         choices=CREEP_LAY_SHOOTS_CHOICES,
@@ -910,12 +912,14 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Beblätterung"),
     )
+    # milky_sap ------------------------------------------------------------------------
     milky_sap = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Milchsaft"),
         help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
     )
+    # root_morphology ------------------------------------------------------------------
     organ_features = models.CharField(
         max_length=100,
         blank=True,
@@ -934,7 +938,7 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Primärwurzel"),
     )
-
+    # ----------------------------------------------------------------------------------
     class Meta:
         verbose_name = _("Spross und Wurzel")
         verbose_name_plural = _("Sprosse und Wurzeln")

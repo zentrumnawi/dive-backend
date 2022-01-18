@@ -835,25 +835,25 @@ OVULE_POSITION_CHOICES = (
 # StemRoot choices ---------------------------------------------------------------------
 # stem_morphology ----------------------------------------------------------------------
 STEM_GROWTH_ORIENTATION_CHOICES = (
+    ("abs", _("abstehend")),
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
-    ("abs", _("abstehend")),
-    ("spa", _("sparrig")),
-    ("zur", _("zurückgeschlagen")),
-    ("lie", _("liegend")),
-    ("kri", _("kriechend")),
     ("aus", _("aufsteigend/aufstrebend")),
-    ("gek", _("gekniet")),
-    ("ueb", _("übergebogen")),
-    ("nic", _("nickend")),
-    ("hae", _("hängend")),
     ("flu", _("flutend")),
+    ("gek", _("gekniet")),
+    ("hae", _("hängend")),
     ("hor", _("horstig")),
+    ("kri", _("kriechend")),
+    ("lie", _("liegend")),
     ("loc", _("lockerrasig")),
+    ("nic", _("nickend")),
     ("ran", _("rankenpflanzen")),
-    ("win", _("windepflanzen")),
+    ("spa", _("sparrig")),
     ("spr", _("spreizklimmig")),
+    ("ueb", _("übergebogen")),
+    ("win", _("windepflanzen")),
     ("wur", _("wurzelkletternd")),
+    ("zur", _("zurückgeschlagen")),
 )
 STEM_APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
 SR_STEM_SUCCULENCE_CHOICES = SUCCULENCE_CHOICES

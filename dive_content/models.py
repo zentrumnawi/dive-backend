@@ -897,35 +897,17 @@ class StemRoot(models.Model):
         verbose_name=_("Oberfläche"),
     )
     # outgrowths -----------------------------------------------------------------------
-    creep_lay_shoots_to_be_replaced = models.CharField(
-        max_length=3,
-        choices=CREEP_LAY_SHOOTS_CHOICES_to_be_replaced,
-        blank=True,
-        verbose_name=_("Kriech- und Legetriebe"),
-    )
     creep_lay_shoots = models.BooleanField(
         choices=CREEP_LAY_SHOOTS_CHOICES,
         blank=True,
         null=True,
         verbose_name=_("Kriech- und Legetriebe"),
     )
-    runners_to_be_replaced = models.CharField(
-        max_length=3,
-        choices=RUNNERS_CHOICES_to_be_replaced,
-        blank=True,
-        verbose_name=_("Ausläufer (oberirdisch)"),
-    )
     runners = models.BooleanField(
         choices=RUNNERS_CHOICES,
         blank=True,
         null=True,
         verbose_name=_("Ausläufer (oberirdisch)"),
-    )
-    bracts = models.CharField(
-        max_length=3,
-        choices=BRACTS_CHOICES,
-        blank=True,
-        verbose_name=_("Beblätterung"),
     )
     # milky_sap ------------------------------------------------------------------------
     milky_sap = models.CharField(

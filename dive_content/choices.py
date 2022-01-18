@@ -874,20 +874,8 @@ SR_STEM_CROSS_SECTION_CHOICES = (
 )
 SR_STEM_SURFACE_CHOICES = SURFACE_CHOICES
 # outgrowths ---------------------------------------------------------------------------
-CREEP_LAY_SHOOTS_CHOICES_to_be_replaced = (
-    ("bil", _("bildet Kriech- und Legetriebe")),
-    ("kei", _("keine Angabe")),
-)
 CREEP_LAY_SHOOTS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
-RUNNERS_CHOICES_to_be_replaced = (
-    ("bil", _("bildet oberirdische Ausläufer")),
-    ("kei", _("keine Angabe")),
-)
 RUNNERS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
-BRACTS_CHOICES = (
-    ("nur", _("nur am Grund")),
-    ("auc", _("auch über dem Grund")),
-)
 # root_morphology ----------------------------------------------------------------------
 ROOT_ORGANS_CHOICES = (
     ("Inn", _("Innovations-Wurzelknolle")),

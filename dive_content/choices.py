@@ -878,6 +878,7 @@ CREEP_LAY_SHOOTS_CHOICES_to_be_replaced = (
     ("bil", _("bildet Kriech- und Legetriebe")),
     ("kei", _("keine Angabe")),
 )
+CREEP_LAY_SHOOTS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
 RUNNERS_CHOICES_to_be_replaced = (
     ("bil", _("bildet oberirdische Ausläufer")),
     ("kei", _("keine Angabe")),

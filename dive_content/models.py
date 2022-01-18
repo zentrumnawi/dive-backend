@@ -911,6 +911,12 @@ class StemRoot(models.Model):
         blank=True,
         verbose_name=_("Kriech- und Legetriebe"),
     )
+    creep_lay_shoots = models.BooleanField(
+        choices=CREEP_LAY_SHOOTS_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_("Kriech- und Legetriebe"),
+    )
     runners_to_be_replaced = models.CharField(
         max_length=3,
         choices=RUNNERS_CHOICES_to_be_replaced,

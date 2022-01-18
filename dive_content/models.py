@@ -857,13 +857,12 @@ class StemRoot(models.Model):
     # stem_morphology ------------------------------------------------------------------
     stem_growth_orientation = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=STEM_GROWTH_ORIENTATION_CHOICES,
-            verbose_name=_("Wuchsorientierung"),
+            max_length=3, choices=STEM_GROWTH_ORIENTATION_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Wuchsorientierung"),
     )
     stem_appearance = ArrayField(
         base_field=models.CharField(

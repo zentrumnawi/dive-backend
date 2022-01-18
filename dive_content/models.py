@@ -890,14 +890,11 @@ class StemRoot(models.Model):
         verbose_name=_("Querschnitt"),
     )
     stem_surface = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=SR_STEM_SURFACE_CHOICES,
-            verbose_name=_("Sprossoberfläche"),
-        ),
+        base_field=models.CharField(max_length=3, choices=SR_STEM_SURFACE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Oberfläche"),
     )
     # outgrowths -----------------------------------------------------------------------
     creep_lay_shoots_to_be_replaced = models.CharField(

@@ -35,6 +35,7 @@ from .outputs import (
     InterestingFactsOutput,
     LeafPoalesOutput,
     PlantOutput,
+    StemRootOutput,
     StemRhizomePoalesOutput,
 )
 from .widgets import TrivialNamesWidget
@@ -478,21 +479,52 @@ class FruitAdminForm(forms.ModelForm):
 
 
 class StemRootAdminForm(forms.ModelForm):
-    stem_growth_orientation = ArrayMultipleChoiceField(
-        STEM_GROWTH_ORIENTATION_CHOICES,
-        label=get_label(StemRoot, "stem_growth_orientation"),
-    )
-    stem_appearance = ArrayMultipleChoiceField(
-        STEM_APPEARANCE_CHOICES,
-        label=get_label(StemRoot, "stem_appearance"),
-        widget=forms.CheckboxSelectMultiple,
-    )
-    stem_cross_section = ArrayMultipleChoiceField(
-        SR_STEM_CROSS_SECTION_CHOICES, label=get_label(StemRoot, "stem_cross_section")
-    )
-    stem_surface = ArrayMultipleChoiceField(
-        SR_STEM_SURFACE_CHOICES, label=get_label(StemRoot, "stem_surface")
-    )
+    subsection_title_trunk_morphology = SubsectionTitleField("Stammmorphologie")
+    subsection_title_stem_morphology = SubsectionTitleField("Sprossmorphologie")
+    subsection_title_outgrowths = SubsectionTitleField("Auswüchse")
+    subsection_title_milky_sap = SubsectionTitleField("Milchsaft")
+    subsection_title_root_morphology = SubsectionTitleField("Wurzelmorphologie")
+
+    output_stem_morphology = OutputField()
+    output_outgrowths = OutputField()
+    output_root_morphology = OutputField()
+
+    class Meta:
+        model = StemRoot
+        fields = []
+        field_classes = {
+            "stem_growth_orientation": AdaptedSimpleArrayField,
+            "stem_appearance": AdaptedSimpleArrayField,
+            "stem_cross_section": AdaptedSimpleArrayField,
+            "stem_surface": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "stem_growth_orientation": forms.SelectMultiple(
+                choices=STEM_GROWTH_ORIENTATION_CHOICES
+            ),
+            "stem_appearance": forms.CheckboxSelectMultiple(
+                choices=STEM_APPEARANCE_CHOICES
+            ),
+            "stem_cross_section": forms.SelectMultiple(
+                choices=SR_STEM_CROSS_SECTION_CHOICES
+            ),
+            "stem_surface": forms.SelectMultiple(choices=SR_STEM_SURFACE_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["trunk_features"].widget.attrs.update(TEXTAREA_ATTRS_60_4)
+        self.fields["milky_sap"].widget.attrs.update(TEXTINPUT_ATTRS_60)
+
+        self.initial.update(
+            {
+                "output_stem_morphology": StemRootOutput.generate_stem_morphology(obj),
+                "output_outgrowths": StemRootOutput.generate_outgrowths(obj),
+                "output_root_morphology": StemRootOutput.generate_root_morphology(obj),
+            }
+        )
 
 
 class StemRhizomePoalesAdminForm(forms.ModelForm):

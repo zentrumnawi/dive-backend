@@ -1,5 +1,6 @@
 from django.contrib import admin
 from solid_backend.photograph.admin import PhotographInline
+from solid_backend.media_object.admin import AudioVideoMediaObjectInline, ImageMediaObjectInline
 
 from .forms import (
     BlossomAdminForm,
@@ -463,6 +464,8 @@ class PlantAdmin(admin.ModelAdmin):
         IndicatorsInline,
         InterestingFactsInline,
         PhotographInline,
+        ImageMediaObjectInline,
+        AudioVideoMediaObjectInline
     ]
 
 

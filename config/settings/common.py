@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "mptt",
     "stdimage",
     "corsheaders",
+    "taggit",
     "dive_content.apps.DiveContentConfig",
     "solid_backend.content",
     "solid_backend.contact",

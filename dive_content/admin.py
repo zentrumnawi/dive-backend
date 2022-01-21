@@ -463,7 +463,6 @@ class PlantAdmin(admin.ModelAdmin):
         StemRhizomePoalesInline,
         IndicatorsInline,
         InterestingFactsInline,
-        PhotographInline,
         ImageMediaObjectInline,
         AudioVideoMediaObjectInline
     ]

@@ -149,6 +149,12 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Querschnitt"),
     )
+    rosette = models.CharField(
+        max_length=3,
+        choices=ROSETTE_CHOICES,
+        blank=True,
+        verbose_name=_("Grundblattrosette"),
+    )
     # attachment -----------------------------------------------------------------------
     attachment = ArrayField(
         base_field=models.CharField(
@@ -165,12 +171,6 @@ class Leaf(models.Model):
         choices=ARRANGMENT_CHOICES,
         blank=True,
         verbose_name=_("Anordnung (an Sprossachse)"),
-    )
-    rosette = models.CharField(
-        max_length=3,
-        choices=ROSETTE_CHOICES,
-        blank=True,
-        verbose_name=_("Grundblattrosette"),
     )
     # lamina_compound_leaf -------------------------------------------------------------
     leaf_comp_num = models.CharField(

@@ -263,6 +263,10 @@ CROSS_SECTION_CHOICES = (
     ("gek", _("gekielt")),
     ("dop", _("doppelrillig")),
 )
+ROSETTE_CHOICES = (
+    ("vor", _("Grundblattrossette vorhanden")),
+    ("kei", _("keine Grundblattrosette")),
+)
 # attachment ---------------------------------------------------------------------------
 ATTACHMENT_CHOICES = (
     ("ges", _("gestielt")),
@@ -289,10 +293,6 @@ ARRANGMENT_CHOICES = (
     ("dac", _("dachziegelig")),
     ("ein", _("einseitig")),
     ("ges", _("gescheitelt")),
-)
-ROSETTE_CHOICES = (
-    ("vor", _("Grundblattrossette vorhanden")),
-    ("kei", _("keine Grundblattrosette")),
 )
 # lamina_compound_leaf -----------------------------------------------------------------
 LEAF_COMP_BLADE_SHAPE_CHOICES = (

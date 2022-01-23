@@ -91,7 +91,10 @@ leaf_fieldsets = (
     ),
     ("Keimblattmerkmale", {"fields": ("seed_leaf_num",)}),
 )
-leaf_radio_fields = {"rosette": admin.HORIZONTAL, "seed_leaf_num": admin.HORIZONTAL}
+leaf_radio_fields = {
+    "basal_leaf_rosette": admin.HORIZONTAL,
+    "seed_leaf_number": admin.HORIZONTAL,
+}
 
 leafpoales_fieldsets = (
     (None, {"fields": ("plant",)}),

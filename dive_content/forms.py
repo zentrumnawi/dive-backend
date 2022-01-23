@@ -140,23 +140,22 @@ class LeafAdminForm(forms.ModelForm):
     attachment = ArrayMultipleChoiceField(
         ATTACHMENT_CHOICES, label=get_label(Leaf, "attachment")
     )
-    leaf_comp_blade_shape = ArrayMultipleChoiceField(
-        LEAF_COMP_BLADE_SHAPE_CHOICES, label=get_label(Leaf, "leaf_comp_blade_shape")
+    compound_leaf_shape = ArrayMultipleChoiceField(
+        COMPOUND_LEAF_SHAPE_CHOICES, label=get_label(Leaf, "compound_leaf_shape")
     )
-    leaf_comp_incision_depth = ArrayMultipleChoiceField(
-        LEAF_COMP_INCISION_DEPTH_CHOICES,
-        label=get_label(Leaf, "leaf_comp_incision_depth"),
+    compound_leaf_incision_depth = ArrayMultipleChoiceField(
+        COMPOUND_LEAF_INCISION_DEPTH_CHOICES,
+        label=get_label(Leaf, "compound_leaf_incision_depth"),
     )
     leaflet_incision_depth = ArrayMultipleChoiceField(
         LEAFLET_INCISION_DEPTH_CHOICES, label=get_label(Leaf, "leaflet_incision_depth")
     )
-    leaf_simple_blade_shape = ArrayMultipleChoiceField(
-        LEAF_SIMPLE_BLADE_SHAPE_CHOICES,
-        label=get_label(Leaf, "leaf_simple_blade_shape"),
+    simple_leaf_shape = ArrayMultipleChoiceField(
+        SIMPLE_LEAF_SHAPE_CHOICES, label=get_label(Leaf, "simple_leaf_shape")
     )
-    leaf_simple_incision_depth = ArrayMultipleChoiceField(
-        LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
-        label=get_label(Leaf, "leaf_simple_incision_depth"),
+    simple_leaf_incision_depth = ArrayMultipleChoiceField(
+        SIMPLE_LEAF_INCISION_DEPTH_CHOICES,
+        label=get_label(Leaf, "simple_leaf_incision_depth"),
     )
     edge = ArrayMultipleChoiceField(EDGE_CHOICES, label=get_label(Leaf, "edge"))
     surface = ArrayMultipleChoiceField(
@@ -166,18 +165,20 @@ class LeafAdminForm(forms.ModelForm):
         STIPULE_EDGE_CHOICES, label=get_label(Leaf, "stipule_edge")
     )
 
-    leaf_comp_num = IntegerRangeCharField(1, 99, label=get_label(Leaf, "leaf_comp_num"))
-    leaf_comp_incision_num = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "leaf_comp_incision_num")
+    compound_leaf_number = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "compound_leaf_number")
     )
-    leaflet_incision_num = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "leaflet_incision_num")
+    compound_leaf_incision_number = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "compound_leaf_incision_number")
     )
-    leaf_simple_num = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "leaf_simple_num")
+    leaflet_incision_number = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "leaflet_incision_number")
     )
-    leaf_simple_incision_num = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "leaf_simple_incision_num")
+    simple_leaf_number = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "simple_leaf_number")
+    )
+    simple_leaf_incision_number = IntegerRangeCharField(
+        1, 99, label=get_label(Leaf, "simple_leaf_incision_number")
     )
 
 

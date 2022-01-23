@@ -236,7 +236,7 @@ STATUS_CHOICES = (
 
 # Leaf choices -------------------------------------------------------------------------
 # general ------------------------------------------------------------------------------
-VEINS_CHOICES = (
+VENATION_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
     ("fie", _("fiedernervig")),
@@ -263,7 +263,7 @@ CROSS_SECTION_CHOICES = (
     ("gek", _("gekielt")),
     ("dop", _("doppelrillig")),
 )
-ROSETTE_CHOICES = (
+BASAL_LEAF_ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
     ("kei", _("keine Grundblattrosette")),
 )
@@ -295,7 +295,7 @@ ARRANGMENT_CHOICES = (
     ("ges", _("gescheitelt")),
 )
 # lamina_compound_leaf -----------------------------------------------------------------
-LEAF_COMP_BLADE_SHAPE_CHOICES = (
+COMPOUND_LEAF_SHAPE_CHOICES = (
     ("han", _("handförmig")),
     ("gef", _("gefingert")),
     ("fif", _("fiederförmig")),
@@ -315,7 +315,7 @@ LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("kam", _("kammförmig")),
     ("fus", _("fußförmig")),
 )
-LEAF_COMP_INCISION_DEPTH_CHOICES = (
+COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
     ("gep", _("gespalten")),
@@ -326,9 +326,9 @@ LEAF_COMP_INCISION_DEPTH_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("fie", _("gefiedert")),
 )
-LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
+LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
 # lamina_simple_leaf -------------------------------------------------------------------
-LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
+SIMPLE_LEAF_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
     ("ell", _("elliptisch")),
@@ -358,7 +358,7 @@ LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
     ("sup", _("schuppenförmig")),
     ("sil", _("schildförmig")),
 )
-LEAF_SIMPLE_INCISION_DEPTH_CHOICES = (
+SIMPLE_LEAF_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
     ("gep", _("gespalten")),
@@ -439,7 +439,7 @@ APEX_CHOICES = (
     ("aus", _("ausgerandet")),
 )
 # miscellaneous ------------------------------------------------------------------------
-SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
+SEED_LEAF_NUMBER_CHOICES = ((1, 1), (2, 2))
 # --------------------------------------------------------------------------------------
 
 
@@ -652,8 +652,8 @@ PERIANTH_SHAPE_CHOICES = (
     ("zu", _("zungenförmig")),
 )
 BRACT_SHAPE_SUBCHOICES = [()] * 3
-BRACT_SHAPE_SUBCHOICES[0] = LEAF_COMP_BLADE_SHAPE_CHOICES
-BRACT_SHAPE_SUBCHOICES[1] = LEAF_SIMPLE_BLADE_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[0] = COMPOUND_LEAF_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[1] = SIMPLE_LEAF_SHAPE_CHOICES
 BRACT_SHAPE_SUBCHOICES[2] = (("nvo", _("nicht vorhanden")),)
 BRACT_SHAPE_CHOICES = [
     *BRACT_SHAPE_SUBCHOICES[0],

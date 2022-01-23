@@ -122,8 +122,11 @@ class Leaf(models.Model):
     )
     # general --------------------------------------------------------------------------
     color = models.CharField(max_length=100, blank=True, verbose_name=_("Blattfarbe"))
-    veins = models.CharField(
-        max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
+    venation = models.CharField(
+        max_length=3,
+        choices=VENATION_CHOICES,
+        blank=True,
+        verbose_name=_("Blattnerven"),
     )
     division = models.CharField(
         max_length=3,
@@ -149,9 +152,9 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Querschnitt"),
     )
-    rosette = models.CharField(
+    basal_leaf_rosette = models.CharField(
         max_length=3,
-        choices=ROSETTE_CHOICES,
+        choices=BASAL_LEAF_ROSETTE_CHOICES,
         blank=True,
         verbose_name=_("Grundblattrosette"),
     )
@@ -173,36 +176,36 @@ class Leaf(models.Model):
         verbose_name=_("Anordnung (an Sprossachse)"),
     )
     # lamina_compound_leaf -------------------------------------------------------------
-    leaf_comp_num = models.CharField(
+    compound_leaf_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blatt)")
     )
-    leaf_comp_blade_shape = ArrayField(
+    compound_leaf_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=LEAF_COMP_BLADE_SHAPE_CHOICES,
+            choices=COMPOUND_LEAF_SHAPE_CHOICES,
             verbose_name=_("Spreitengestalt (zusg. Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    leaf_comp_incision_num = models.CharField(
+    compound_leaf_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (zusg. Blatt)")
     )
-    leaf_comp_incision_depth = ArrayField(
+    compound_leaf_incision_depth = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=LEAF_COMP_INCISION_DEPTH_CHOICES,
+            choices=COMPOUND_LEAF_INCISION_DEPTH_CHOICES,
             verbose_name=_("Einschnitttiefe (zusg. Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    leaflet_incision_num = models.CharField(
+    leaflet_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)")
     )
-    leaflet_incision_add = models.CharField(
+    leaflet_incision_addition = models.CharField(
         max_length=100, blank=True, verbose_name=_("Einschnittzusatz (Blättchen)")
     )
     leaflet_incision_depth = ArrayField(
@@ -216,26 +219,26 @@ class Leaf(models.Model):
         default=list,
     )
     # lamina_simple_leaf ---------------------------------------------------------------
-    leaf_simple_num = models.CharField(
+    simple_leaf_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blatt)")
     )
-    leaf_simple_blade_shape = ArrayField(
+    simple_leaf_shape = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=LEAF_SIMPLE_BLADE_SHAPE_CHOICES,
+            choices=SIMPLE_LEAF_SHAPE_CHOICES,
             verbose_name=_("Spreitengestalt (einf. Blatt)"),
         ),
         size=2,
         blank=True,
         default=list,
     )
-    leaf_simple_incision_num = models.CharField(
+    simple_leaf_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (einf. Blatt)")
     )
-    leaf_simple_incision_depth = ArrayField(
+    simple_leaf_incision_depth = ArrayField(
         base_field=models.CharField(
             max_length=3,
-            choices=LEAF_SIMPLE_INCISION_DEPTH_CHOICES,
+            choices=SIMPLE_LEAF_INCISION_DEPTH_CHOICES,
             verbose_name=_("Einschnitttiefe (einf. Blatt)"),
         ),
         size=2,
@@ -290,8 +293,8 @@ class Leaf(models.Model):
         verbose_name=_("Blattscheide"),
         help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
     )
-    seed_leaf_num = models.IntegerField(
-        choices=SEED_LEAF_NUM_CHOICES,
+    seed_leaf_number = models.IntegerField(
+        choices=SEED_LEAF_NUMBER_CHOICES,
         blank=True,
         null=True,
         verbose_name=_("Keimblattanzahl"),

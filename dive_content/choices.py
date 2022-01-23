@@ -235,6 +235,7 @@ STATUS_CHOICES = (
 
 
 # Leaf choices -------------------------------------------------------------------------
+# general ------------------------------------------------------------------------------
 VEINS_CHOICES = (
     ("str", _("streifennervig")),
     ("net", _("netznervig")),
@@ -262,6 +263,7 @@ CROSS_SECTION_CHOICES = (
     ("gek", _("gekielt")),
     ("dop", _("doppelrillig")),
 )
+# attachment ---------------------------------------------------------------------------
 ATTACHMENT_CHOICES = (
     ("ges", _("gestielt")),
     ("sit", _("sitzend/ungestielt")),
@@ -292,6 +294,7 @@ ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),
     ("kei", _("keine Grundblattrosette")),
 )
+# lamina_compound_leaf -----------------------------------------------------------------
 LEAF_COMP_BLADE_SHAPE_CHOICES = (
     ("han", _("handförmig")),
     ("gef", _("gefingert")),
@@ -324,6 +327,7 @@ LEAF_COMP_INCISION_DEPTH_CHOICES = (
     ("fie", _("gefiedert")),
 )
 LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
+# lamina_simple_leaf -------------------------------------------------------------------
 LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
     ("kre", _("kreisrund")),
     ("run", _("rundlich")),
@@ -361,6 +365,7 @@ LEAF_SIMPLE_INCISION_DEPTH_CHOICES = (
     ("get", _("geteilt")),
     ("ges", _("geschnitten")),
 )
+# lamina_general -----------------------------------------------------------------------
 EDGE_CHOICES = (
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),
@@ -433,6 +438,7 @@ APEX_CHOICES = (
     ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
 )
+# miscellaneous ------------------------------------------------------------------------
 SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
 # --------------------------------------------------------------------------------------
 

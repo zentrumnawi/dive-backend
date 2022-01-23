@@ -120,6 +120,7 @@ class Leaf(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
+    # general --------------------------------------------------------------------------
     color = models.CharField(max_length=100, blank=True, verbose_name=_("Blattfarbe"))
     veins = models.CharField(
         max_length=3, choices=VEINS_CHOICES, blank=True, verbose_name=_("Blattnerven")
@@ -148,6 +149,7 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Querschnitt"),
     )
+    # attachment -----------------------------------------------------------------------
     attachment = ArrayField(
         base_field=models.CharField(
             max_length=3,
@@ -170,6 +172,7 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Grundblattrosette"),
     )
+    # lamina_compound_leaf -------------------------------------------------------------
     leaf_comp_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blatt)")
     )
@@ -212,6 +215,7 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
+    # lamina_simple_leaf ---------------------------------------------------------------
     leaf_simple_num = models.CharField(
         max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blatt)")
     )
@@ -238,6 +242,7 @@ class Leaf(models.Model):
         blank=True,
         default=list,
     )
+    # lamina_general -------------------------------------------------------------------
     edge = ArrayField(
         base_field=models.CharField(
             max_length=3,
@@ -275,6 +280,7 @@ class Leaf(models.Model):
         blank=True,
         verbose_name=_("Spreitenspitze"),
     )
+    # miscellaneous --------------------------------------------------------------------
     special_features = models.CharField(
         max_length=200, blank=True, verbose_name=_("Besondere Merkmale")
     )
@@ -290,6 +296,7 @@ class Leaf(models.Model):
         null=True,
         verbose_name=_("Keimblattanzahl"),
     )
+    # ----------------------------------------------------------------------------------
 
     class Meta:
         verbose_name = _("Blatt")

@@ -259,6 +259,27 @@ class LeafOutput:
 
         return text
 
+    def generate_attachment(obj):
+        # Generate sentence "Anheftung" according pattern:
+        # "Blätter sitzen [attachment] und sind [arrangement] angeordnet."
+        fields = [
+            obj.attachment,
+            obj.get_arrangement_display(),
+        ]
+        fields[0] = format_ArrayField(fields[0], ATTACHMENT_CHOICES)
+
+        text_parts = [
+            f"sitzen {fields[0]}" if fields[0] else "",
+            f"sind {fields[1]} angeordnet" if fields[1] else "",
+        ]
+
+        joined_text_parts = " und ".join(filter(None, text_parts))
+
+        text = f"Blätter {joined_text_parts}" if joined_text_parts else ""
+        text = format_sentence(text)
+
+        return text
+
 
 class LeafPoalesOutput:
     def generate_overview(obj):

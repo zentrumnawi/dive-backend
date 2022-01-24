@@ -428,15 +428,15 @@ BASE_CHOICES = (
 )
 APEX_CHOICES = (
     ("abg", _("abgerundet")),
-    ("ges", _("gestutzt")),
-    ("stu", _("stumpf")),
-    ("spi", _("spitz")),
-    ("zug", _("zugespitzt")),
-    ("beg", _("begrannt")),
-    ("sta", _("stachelspitz")),
-    ("haa", _("haarspitzig")),
-    ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
+    ("beg", _("begrannt")),
+    ("bes", _("bespitzt")),
+    ("ges", _("gestutzt")),
+    ("haa", _("haarspitzig")),
+    ("spi", _("spitz")),
+    ("sta", _("stachelspitz")),
+    ("stu", _("stumpf")),
+    ("zug", _("zugespitzt")),
 )
 # miscellaneous ------------------------------------------------------------------------
 SEED_LEAF_NUMBER_CHOICES = ((1, 1), (2, 2))

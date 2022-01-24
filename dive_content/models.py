@@ -264,10 +264,7 @@ class Leaf(models.Model):
         max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Grund")
     )
     apex = models.CharField(
-        max_length=3,
-        choices=APEX_CHOICES,
-        blank=True,
-        verbose_name=_("Spreitenspitze"),
+        max_length=3, choices=APEX_CHOICES, blank=True, verbose_name=_("Spitze")
     )
     # miscellaneous --------------------------------------------------------------------
     special_features = models.CharField(

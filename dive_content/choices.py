@@ -264,8 +264,9 @@ CROSS_SECTION_CHOICES = (
     ("zus", _("zusammengerollt")),
 )
 BASAL_LEAF_ROSETTE_CHOICES = (
-    ("vor", _("Grundblattrossette vorhanden")),
-    ("kei", _("keine Grundblattrosette")),
+    ("E", _("Erosulat")),
+    ("H", _("Halbrosettenpflanze")),
+    ("R", _("Rosettenpflanze")),
 )
 # attachment ---------------------------------------------------------------------------
 ATTACHMENT_CHOICES = (

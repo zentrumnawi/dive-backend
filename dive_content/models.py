@@ -162,14 +162,11 @@ class Leaf(models.Model):
     )
     # attachment -----------------------------------------------------------------------
     attachment = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=ATTACHMENT_CHOICES,
-            verbose_name=_("Anheftung (an Sprossachse)"),
-        ),
+        base_field=models.CharField(max_length=3, choices=ATTACHMENT_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Anheftung (an Sprossachse)"),
     )
     arrangement = models.CharField(
         max_length=3,

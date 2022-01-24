@@ -263,12 +263,6 @@ class Leaf(models.Model):
         verbose_name=_("Besondere Merkmale"),
         help_text=_("Als eigenständigen Satz ausformulieren."),
     )
-    sheath = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Blattscheide"),
-        help_text='"Nicht vorhanden" eingeben, um hervorzuheben, dass kein ausgeprägtes Merkmal existiert.',
-    )
     seed_leaf_number = models.IntegerField(
         choices=SEED_LEAF_NUMBER_CHOICES,
         blank=True,

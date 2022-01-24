@@ -155,7 +155,7 @@ class Leaf(models.Model):
         verbose_name=_("Querschnitt"),
     )
     basal_leaf_rosette = models.CharField(
-        max_length=3,
+        max_length=1,
         choices=BASAL_LEAF_ROSETTE_CHOICES,
         blank=True,
         verbose_name=_("Grundblattrosette"),

@@ -205,13 +205,12 @@ class Leaf(models.Model):
     )
     leaflet_incision_depth = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=LEAFLET_INCISION_DEPTH_CHOICES,
-            verbose_name=_("Einschnitttiefe (Blättchen)"),
+            max_length=3, choices=LEAFLET_INCISION_DEPTH_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Einschnitttiefe (Blättchen)"),
     )
     # lamina_simple_leaf ---------------------------------------------------------------
     simple_leaf_number = models.CharField(

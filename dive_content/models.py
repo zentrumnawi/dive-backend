@@ -261,7 +261,7 @@ class Leaf(models.Model):
         default=list,
     )
     base = models.CharField(
-        max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Spreitengrund")
+        max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Grund")
     )
     apex = models.CharField(
         max_length=3,

@@ -90,219 +90,48 @@ class ExcludeEmptyFieldsModelSerializer(serializers.ModelSerializer):
         return ret
 
 
-class LeafSerializer(DisplayNameModelSerializer):
-    overview = serializers.SerializerMethodField(label="Überblick")
+class LeafSerializer(ExcludeEmptyFieldsModelSerializer):
+    general = serializers.SerializerMethodField(label="Allgemeines")
     attachment = serializers.SerializerMethodField(label="Anheftung")
-    leaf_compound = serializers.SerializerMethodField(
-        label="Blattfläche – zusammengesetztes Blatt"
+    lamina_compound_leaf = serializers.SerializerMethodField(
+        label="Blattfläche (zusammengesetztes Blatt)"
     )
-    leaf_simple = serializers.SerializerMethodField(
-        label="Blattfläche – einfaches Blatt"
+    lamina_simple_leaf = serializers.SerializerMethodField(
+        label="Blattfläche (einfaches Blatt)"
     )
-    leaf_general = serializers.SerializerMethodField(label="Blattfläche – allgemein")
+    lamina_general = serializers.SerializerMethodField(label="Blattfläche (allgemein)")
     miscellaneous = serializers.SerializerMethodField(label="Sonstiges")
-    seed_leaf = serializers.SerializerMethodField(label="Keimblatt")
 
     class Meta:
         model = Leaf
         fields = [
-            "overview",
+            "general",
             "attachment",
-            "leaf_compound",
-            "leaf_simple",
-            "leaf_general",
+            "lamina_compound_leaf",
+            "lamina_simple_leaf",
+            "lamina_general",
+            "stipule",
             "miscellaneous",
-            "seed_leaf",
         ]
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
-    def get_overview(self, obj):
-        # Generate sentence "Überblick" according pattern:
-        # "[color], [veins]e, [division]e, [succulence]e, [texture]e Blätter mit [cross_
-        # section]em Querschnitt."
-        fields = [
-            obj.color,
-            add_suffix(obj.get_veins_display(), "e"),
-            add_suffix(obj.get_division_display(), "e"),
-            add_suffix(obj.get_succulence_display(), "e"),
-            add_suffix(obj.get_texture_display(), "e", "/"),
-            add_suffix(obj.get_cross_section_display(), "em", "/"),
-        ]
-
-        text = ", ".join(filter(None, fields[:5]))
-        text = f"{text} Blätter" if text else ""
-        text = f"{text} mit {fields[5]} Querschnitt" if fields[5] else f"{text}"
-        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
-
-        return format_sentence(text)
+    def get_general(self, obj):
+        return LeafOutput.generate_general(obj)
 
     def get_attachment(self, obj):
-        # Generate sentence "Anheftung" according pattern:
-        # "Blätter sitzen [attachment], stehen [arrangement]; [rosette]."
-        fields = [
-            obj.attachment,
-            obj.get_arrangement_display(),
-            obj.get_rosette_display(),
-        ]
-        if fields[0]:
-            fields[0] = format_ArrayField(fields[0], ATTACHMENT_CHOICES)
+        return LeafOutput.generate_attachment(obj)
 
-        fields[0] = f"sitzen {fields[0]}" if fields[0] else ""
-        fields[1] = f"stehen {fields[1]}" if fields[1] else ""
+    def get_lamina_compound_leaf(self, obj):
+        return LeafOutput.generate_lamina_compound_leaf(obj)
 
-        text = ", ".join(filter(None, fields[:2]))
-        text = f"Blätter {text}" if text else ""
-        text = "; ".join(filter(None, (text, fields[2])))
+    def get_lamina_simple_leaf(self, obj):
+        return LeafOutput.generate_lamina_simple_leaf(obj)
 
-        return format_sentence(text)
-
-    def get_leaf_compound(self, obj):
-        # Generate sentence "Blattfläche – zusammengesetztes Blatt" according pattern:
-        # "[leaf_comp_num] [leaf_comp_blade_shape]es|e [leaf_comp_incision_num]-[leaf_
-        # comp_incision_depth]es|e Blatt|Blätter mit [leaflet_incision_num]-[leaflet_
-        # incision_add]-[leaflet_incision_depth]en Blättchen."
-        app = {1: "e", 3: "e", 6: "en", 10: "Blätter"}
-        if obj.leaf_comp_num == "1":
-            app = {1: "es", 3: "es", 6: "en", 10: "Blatt"}
-
-        fields = [
-            obj.leaf_comp_num,
-            obj.leaf_comp_blade_shape,
-            obj.leaf_comp_incision_num,
-            obj.leaf_comp_incision_depth,
-            obj.leaflet_incision_num,
-            obj.leaflet_incision_add,
-            obj.leaflet_incision_depth,
-        ]
-        if fields[1]:
-            fields[1] = format_ArrayField(
-                fields[1], LEAF_COMP_BLADE_SHAPE_CHOICES, app[1]
-            )
-        if fields[3]:
-            fields[3] = format_ArrayField(
-                fields[3], LEAF_COMP_INCISION_DEPTH_CHOICES, app[3], "/"
-            )
-        if fields[6]:
-            fields[6] = format_ArrayField(
-                fields[6], LEAFLET_INCISION_DEPTH_CHOICES, app[6], "/"
-            )
-
-        for i in (2, 4, 5):
-            fields[i] = f"{fields[i]}-" if fields[i] else ""
-        if fields[2] and " bis " in fields[3]:
-            fields[3] = fields[3].split(" bis ", 1)
-            fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
-        if (fields[4] or fields[5]) and " bis " in fields[6]:
-            fields[6] = fields[6].split(" bis ", 1)
-            fields[6] = f"{fields[6][0]} bis -{fields[6][1]}"
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            "".join(filter(None, fields[2:4])),
-        ]
-        text = [
-            " ".join(filter(None, text)),
-            "".join(filter(None, fields[4:7])),
-        ]
-        text[0] = f"{text[0]} {app[10]}" if text[0] else ""
-        text = f"{text[0]} mit {text[1]} Blättchen" if text[1] else f"{text[0]}"
-        text = f"Blätter{text}" if text[:4] == " mit" else f"{text}"
-
-        return format_sentence(text)
-
-    def get_leaf_simple(self, obj):
-        # Generate sentence "Blattfläche – einfaches Blatt" according pattern:
-        # "[leaf_simple_num] [leaf_simple_blade_shape]es|e [leaf_simple_incision_num]-
-        # [leaf_simple_incision_depth]es|e Blatt|Blätter."
-        app = {1: "e", 3: "e", 10: "Blätter"}
-        if obj.leaf_simple_num == "1":
-            app = {1: "es", 3: "es", 10: "Blatt"}
-
-        fields = [
-            obj.leaf_simple_num,
-            obj.leaf_simple_blade_shape,
-            obj.leaf_simple_incision_num,
-            obj.leaf_simple_incision_depth,
-        ]
-        if fields[1]:
-            fields[1] = format_ArrayField(
-                fields[1], LEAF_SIMPLE_BLADE_SHAPE_CHOICES, app[1], "/"
-            )
-        if fields[3]:
-            fields[3] = format_ArrayField(
-                fields[3], LEAF_SIMPLE_INCISION_DEPTH_CHOICES, app[3], "/"
-            )
-
-        fields[2] = f"{fields[2]}-" if fields[2] else ""
-        if fields[2] and " bis " in fields[3]:
-            fields[3] = fields[3].split(" bis ", 1)
-            fields[3] = f"{fields[3][0]} bis -{fields[3][1]}"
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            "".join(filter(None, fields[2:])),
-        ]
-        text = " ".join(filter(None, text))
-        text = f"{text} {app[10]}" if text else ""
-
-        return format_sentence(text)
-
-    def get_leaf_general(self, obj):
-        # Generate sentence "Blattfläche – allgemein" according pattern:
-        # "Blattränder [edge]; [surface] Blattoberfläche; [stipule_edge]
-        # Nebenblattränder; Spreite am Grund [base], an der Spitze [apex]."
-        fields = [
-            obj.edge,
-            obj.surface,
-            obj.stipule_edge,
-            obj.get_base_display(),
-            obj.get_apex_display(),
-        ]
-        if fields[0]:
-            fields[0] = format_ArrayField(fields[0], EDGE_CHOICES)
-        if fields[1]:
-            fields[1] = format_ArrayField(fields[1], SURFACE_CHOICES, "e", "/")
-        if fields[2]:
-            fields[2] = format_ArrayField(fields[2], EDGE_CHOICES, "e")
-
-        fields[0] = f"Blattränder {fields[0]}" if fields[0] else ""
-        fields[1] = f"{fields[1]} Blattoberfläche" if fields[1] else ""
-        fields[2] = f"{fields[2]} Nebenblattränder" if fields[2] else ""
-        fields[3] = f"am Grund {fields[3]}" if fields[3] else ""
-        fields[4] = f"an der Spitze {fields[4]}" if fields[4] else ""
-
-        text = [
-            "; ".join(filter(None, fields[:3])),
-            ", ".join(filter(None, fields[3:])),
-        ]
-        text[1] = f"Spreite {text[1]}" if text[1] else ""
-        text = "; ".join(filter(None, text))
-
-        return format_sentence(text)
+    def get_lamina_general(self, obj):
+        return LeafOutput.generate_lamina_general(obj)
 
     def get_miscellaneous(self, obj):
-        # Generate sentence "Sonstiges" according pattern:
-        # "[special_features]; Blattscheide [sheath]."
-        fields = [
-            obj.special_features,
-            obj.sheath,
-        ]
-        fields[1] = f"Blattscheide {fields[1]}" if fields[1] else ""
-
-        text = "; ".join(filter(None, fields))
-
-        return format_sentence(text)
-
-    def get_seed_leaf(self, obj):
-        # Generate sentence "Keimblatt" according pattern:
-        # "[seed_leaf_num] Keimblatt|Keimblätter."
-        fields = obj.seed_leaf_num
-
-        text = ""
-        if fields:
-            text = f"{fields} {'Keimblatt' if fields == 1 else 'Keimblätter'}"
-
-        return format_sentence(text)
+        return LeafOutput.generate_miscellaneous(obj)
 
 
 class LeafPoalesSerializer(ExcludeEmptyFieldsModelSerializer):

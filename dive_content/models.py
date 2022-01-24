@@ -228,13 +228,12 @@ class Leaf(models.Model):
     )
     simple_leaf_incision_depth = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=SIMPLE_LEAF_INCISION_DEPTH_CHOICES,
-            verbose_name=_("Einschnitttiefe (einf. Blatt)"),
+            max_length=3, choices=SIMPLE_LEAF_INCISION_DEPTH_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Einschnitttiefe"),
     )
     # lamina_general -------------------------------------------------------------------
     edge = ArrayField(

@@ -282,18 +282,18 @@ ATTACHMENT_CHOICES = (
     ("ver", _("verwachsen")),
 )
 ARRANGMENT_CHOICES = (
-    ("gru", _("grundständig")),
-    ("wec", _("wechselständig/spiralig")),
-    ("zwe", _("zweizeilig/distich")),
+    ("dac", _("dachziegelig")),
     ("dre", _("dreizeilig/tristich")),
+    ("ein", _("einseitig")),
     ("geg", _("gegenständig")),
-    ("kre", _("kreuzgegenständig/dekussiert")),
     ("gep", _("gepaart")),
+    ("ges", _("gescheitelt")),
+    ("gru", _("grundständig")),
+    ("kre", _("kreuzgegenständig/dekussiert")),
     ("qui", _("quirlig/wirtelig")),
     ("sch", _("scheinquirlig")),
-    ("dac", _("dachziegelig")),
-    ("ein", _("einseitig")),
-    ("ges", _("gescheitelt")),
+    ("wec", _("wechselständig/spiralig")),
+    ("zwe", _("zweizeilig/distich")),
 )
 # lamina_compound_leaf -----------------------------------------------------------------
 COMPOUND_LEAF_SHAPE_CHOICES = (

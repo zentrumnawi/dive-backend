@@ -317,15 +317,15 @@ COMPOUND_LEAF_SHAPE_CHOICES = (
     ("unt", _("unterbrochen")),
 )
 COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
+    ("fis", _("fiederschnittig")),
     ("gan", _("ganz/ungeteilt")),
+    ("fie", _("gefiedert")),
+    ("gef", _("gefingert")),
     ("gel", _("gelappt")),
+    ("ges", _("geschnitten")),
     ("gep", _("gespalten")),
     ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
-    ("gef", _("gefingert")),
     ("zus", _("zusammengesetzt")),
-    ("fis", _("fiederschnittig")),
-    ("fie", _("gefiedert")),
 )
 LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
 # lamina_simple_leaf -------------------------------------------------------------------

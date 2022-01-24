@@ -229,6 +229,37 @@ class PlantOutput:
         return joined_texts
 
 
+class LeafOutput:
+    def generate_general(obj):
+        # Generate sentence "Allgemeines" according pattern:
+        # "[color], [venation]e, [division]e, [succulence]e, [texture]e Blätter mit
+        # [cross_section]em Querschnitt; [basal_leaf_rosette]."
+        fields = [
+            obj.color,
+            obj.get_venation_display(),
+            obj.get_division_display(),
+            obj.get_succulence_display(),
+            obj.get_texture_display(),
+            obj.get_cross_section_display(),
+            obj.get_basal_leaf_rosette_display(),
+        ]
+        fields[1] = add_suffix(fields[1], "e")
+        fields[2] = add_suffix(fields[2], "e")
+        fields[3] = add_suffix(fields[3], "e")
+        fields[4] = add_suffix(fields[4], "e", "/")
+        fields[5] = add_suffix(fields[5], "em", "/")
+
+        joined_fields = ", ".join(filter(None, fields[:5]))
+
+        text_part = f"mit {fields[5]} Querschnitt" if fields[5] else ""
+
+        text = format_subject_text(joined_fields, "Blätter", text_part)
+        text = "; ".join(filter(None, (text, fields[6])))
+        text = format_sentence(text)
+
+        return text
+
+
 class LeafPoalesOutput:
     def generate_overview(obj):
         # Generate output "Überblick" according pattern:

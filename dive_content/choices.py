@@ -247,11 +247,11 @@ VENATION_CHOICES = (
 DIVISION_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
 SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
 TEXTURE_CHOICES = (
-    ("kra", _("krautig")),
     ("fle", _("fleischig")),
-    ("led", _("lederig")),
     ("hae", _("häutig/trockenhäutig")),
     ("imm", _("immergrün")),
+    ("kra", _("krautig")),
+    ("led", _("lederig")),
     ("sta", _("starr/steif")),
 )
 CROSS_SECTION_CHOICES = (

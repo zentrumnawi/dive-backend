@@ -362,9 +362,8 @@ SIMPLE_LEAF_SHAPE_CHOICES = (
 SIMPLE_LEAF_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
-    ("gep", _("gespalten")),
-    ("get", _("geteilt")),
     ("ges", _("geschnitten")),
+    ("gep", _("gespalten")),
 )
 # lamina_general -----------------------------------------------------------------------
 EDGE_CHOICES = (

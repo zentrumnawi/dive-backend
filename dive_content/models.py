@@ -237,14 +237,11 @@ class Leaf(models.Model):
     )
     # lamina_general -------------------------------------------------------------------
     edge = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=EDGE_CHOICES,
-            verbose_name=_("Spreiten-/Blättchenrand"),
-        ),
+        base_field=models.CharField(max_length=3, choices=EDGE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Rand"),
     )
     surface = ArrayField(
         base_field=models.CharField(

@@ -128,10 +128,7 @@ class Leaf(models.Model):
         help_text=_("Grammatikalisch anpassen."),
     )
     venation = models.CharField(
-        max_length=3,
-        choices=VENATION_CHOICES,
-        blank=True,
-        verbose_name=_("Blattnerven"),
+        max_length=3, choices=VENATION_CHOICES, blank=True, verbose_name=_("Nervatur")
     )
     division = models.CharField(
         max_length=3,

@@ -270,16 +270,16 @@ BASAL_LEAF_ROSETTE_CHOICES = (
 )
 # attachment ---------------------------------------------------------------------------
 ATTACHMENT_CHOICES = (
+    ("dur", _("durchwachsen")),
     ("ges", _("gestielt")),
+    ("hal", _("halbstengelumfassend")),
+    ("her", _("herablaufend")),
+    ("hin", _("hinfällig")),
+    ("rei", _("reitend")),
+    ("sch", _("scheidig verwachsen")),
     ("sit", _("sitzend/ungestielt")),
     ("ste", _("stengelumfassend")),
-    ("hal", _("halbstengelumfassend")),
-    ("dur", _("durchwachsen")),
     ("ver", _("verwachsen")),
-    ("sch", _("scheidig verwachsen")),
-    ("her", _("herablaufend")),
-    ("rei", _("reitend")),
-    ("hin", _("hinfällig")),
 )
 ARRANGMENT_CHOICES = (
     ("gru", _("grundständig")),

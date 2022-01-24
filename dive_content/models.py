@@ -134,7 +134,7 @@ class Leaf(models.Model):
         max_length=3,
         choices=DIVISION_CHOICES,
         blank=True,
-        verbose_name=_("Spreitengliederung"),
+        verbose_name=_("Gliederung"),
     )
     succulence = models.CharField(
         max_length=3,

@@ -179,14 +179,11 @@ class Leaf(models.Model):
         max_length=10, blank=True, verbose_name=_("Anzahl")
     )
     compound_leaf_shape = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=COMPOUND_LEAF_SHAPE_CHOICES,
-            verbose_name=_("Spreitengestalt (zusg. Blatt)"),
-        ),
+        base_field=models.CharField(max_length=3, choices=COMPOUND_LEAF_SHAPE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Gestalt"),
     )
     compound_leaf_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (zusg. Blatt)")

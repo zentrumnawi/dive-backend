@@ -121,7 +121,12 @@ class Leaf(models.Model):
         Plant, on_delete=models.CASCADE, related_name="leaf", verbose_name=_("Pflanze")
     )
     # general --------------------------------------------------------------------------
-    color = models.CharField(max_length=100, blank=True, verbose_name=_("Blattfarbe"))
+    color = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe"),
+        help_text=_("Grammatikalisch anpassen."),
+    )
     venation = models.CharField(
         max_length=3,
         choices=VENATION_CHOICES,

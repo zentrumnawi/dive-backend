@@ -176,7 +176,7 @@ class Leaf(models.Model):
     )
     # lamina_compound_leaf -------------------------------------------------------------
     compound_leaf_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (zusg. Blatt)")
+        max_length=10, blank=True, verbose_name=_("Anzahl")
     )
     compound_leaf_shape = ArrayField(
         base_field=models.CharField(

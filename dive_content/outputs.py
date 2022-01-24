@@ -350,6 +350,44 @@ class LeafOutput:
 
         return text
 
+    def generate_lamina_simple_leaf(obj):
+        # Generate sentence "Blattfläche (einfaches Blatt)" according pattern:
+        # "[simple_leaf_number] [simple_leaf_shape]es|e, [simple_leaf_incision
+        # _number] [simple_leaf_incision_depth]es|e Blatt|Blätter."
+        fields = [
+            obj.simple_leaf_number,
+            obj.simple_leaf_shape,
+            obj.simple_leaf_incision_number,
+            obj.simple_leaf_incision_depth,
+        ]
+
+        suffix = "es" if fields[0] == "1" else "e"
+
+        fields[1] = format_ArrayField(fields[1], SIMPLE_LEAF_SHAPE_CHOICES, suffix, "/")
+        fields[2] = format_IntegerRangeTermCharField(
+            fields[2], SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not fields[3]:
+            fields[2] = add_suffix(fields[2], suffix)
+        fields[3] = format_ArrayField(
+            fields[3], SIMPLE_LEAF_INCISION_DEPTH_CHOICES, suffix, "/"
+        )
+
+        joined_fields = " ".join(filter(None, fields[2:4]))
+
+        subject = "Blatt" if fields[0] == "1" else "Blätter"
+
+        text_part = " ".join(
+            filter(
+                None, (fields[0], ", ".join(filter(None, (fields[1], joined_fields))))
+            )
+        )
+
+        text = format_subject_text(text_part, subject, "")
+        text = format_sentence(text)
+
+        return text
+
 
 class LeafPoalesOutput:
     def generate_overview(obj):

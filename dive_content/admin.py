@@ -93,6 +93,8 @@ leaf_fieldsets = (
     ),
 )
 leaf_radio_fields = {
+    "division": admin.VERTICAL,
+    "succulence": admin.VERTICAL,
     "basal_leaf_rosette": admin.HORIZONTAL,
     "seed_leaf_number": admin.HORIZONTAL,
 }

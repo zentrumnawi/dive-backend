@@ -367,20 +367,20 @@ SIMPLE_LEAF_INCISION_DEPTH_CHOICES = (
 )
 # lamina_general -----------------------------------------------------------------------
 EDGE_CHOICES = (
+    ("bew", _("bewimpert")),
+    ("dop", _("doppelt gesägt")),
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),
-    ("ges", _("gesägt")),
-    ("dop", _("doppelt gesägt")),
-    ("rue", _("rückwärts gesägt")),
-    ("gez", _("gezähnt")),
-    ("gzt", _("gezähnelt")),
+    ("geb", _("gebuchtet")),
     ("gef", _("gefranst")),
     ("gek", _("gekerbt")),
-    ("geb", _("gebuchtet")),
+    ("ges", _("gesägt")),
     ("gew", _("geschweift")),
-    ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rau")),
+    ("gzt", _("gezähnelt")),
+    ("gez", _("gezähnt")),
+    ("rue", _("rückwärts gesägt")),
     ("rur", _("rückwärts rau")),
+    ("vor", _("vorwärts rau")),
 )
 SURFACE_CHOICES = (
     ("ach", _("achselbärtig")),

@@ -388,6 +388,38 @@ class LeafOutput:
 
         return text
 
+    def generate_lamina_general(obj):
+        # Generate sentence "Blattfläche (allgemein)" according pattern:
+        # "Blattränder [edge]; [surface] Blattoberfläche; Spreite am Grund [base] und an
+        # der Spitze [apex]."
+        fields = [
+            obj.edge,
+            obj.surface,
+            obj.get_base_display(),
+            obj.get_apex_display(),
+        ]
+        fields[0] = format_ArrayField(fields[0], EDGE_CHOICES)
+        fields[1] = format_ArrayField(fields[1], SURFACE_CHOICES, "e", "/")
+
+        text_parts = [
+            f"Blattränder {fields[0]}" if fields[0] else "",
+            f"{fields[1]} Blattoberfläche" if fields[1] else "",
+            f"am Grund {fields[2]}" if fields[2] else "",
+            f"an der Spitze {fields[3]}" if fields[3] else "",
+        ]
+
+        joined_text_parts = [
+            "; ".join(filter(None, text_parts[0:2])),
+            f"Spreite {' und '.join(filter(None, text_parts[2:4]))}"
+            if any(text_parts[2:4])
+            else "",
+        ]
+
+        text = "; ".join(filter(None, joined_text_parts))
+        text = format_sentence(text)
+
+        return text
+
 
 class LeafPoalesOutput:
     def generate_overview(obj):

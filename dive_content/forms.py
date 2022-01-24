@@ -161,9 +161,6 @@ class LeafAdminForm(forms.ModelForm):
     surface = ArrayMultipleChoiceField(
         SURFACE_CHOICES, label=get_label(Leaf, "surface")
     )
-    stipule_edge = ArrayMultipleChoiceField(
-        STIPULE_EDGE_CHOICES, label=get_label(Leaf, "stipule_edge")
-    )
 
     compound_leaf_number = IntegerRangeCharField(
         1, 99, label=get_label(Leaf, "compound_leaf_number")

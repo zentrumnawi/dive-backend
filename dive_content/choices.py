@@ -237,12 +237,12 @@ STATUS_CHOICES = (
 # Leaf choices -------------------------------------------------------------------------
 # general ------------------------------------------------------------------------------
 VENATION_CHOICES = (
-    ("str", _("streifennervig")),
-    ("net", _("netznervig")),
     ("fie", _("fiedernervig")),
     ("fin", _("fingernervig")),
     ("fus", _("fußnervig")),
     ("gab", _("gabelnervig")),
+    ("net", _("netznervig")),
+    ("str", _("streifennervig")),
 )
 DIVISION_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
 SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))

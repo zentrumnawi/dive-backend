@@ -420,6 +420,26 @@ class LeafOutput:
 
         return text
 
+    def generate_miscellaneous(obj):
+        # Generate sentence "Sonstiges" according pattern:
+        # "[special_features] [seed_leaf_number] Keimblatt|-blätter."
+        fields = [
+            obj.special_features,
+            obj.seed_leaf_number,
+        ]
+        fields[1] = "Mehr als 2" if fields[1] == 3 else fields[1]
+
+        text_part = (
+            f"{fields[1]} Keim{'blatt' if fields[1] == 1 else 'blätter'}"
+            if fields[1]
+            else ""
+        )
+        text_part = format_sentence(text_part)
+
+        text = " ".join(filter(None, (fields[0], text_part)))
+
+        return text
+
 
 class LeafPoalesOutput:
     def generate_overview(obj):

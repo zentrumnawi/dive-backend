@@ -280,6 +280,76 @@ class LeafOutput:
 
         return text
 
+    def generate_lamina_compound_leaf(obj):
+        # Generate sentence "Blattfläche (zusammengesetztes Blatt)" according pattern:
+        # "[compound_leaf_number] [compound_leaf_shape]es|e, [compound_leaf_incision
+        # _number] [compound_leaf_incision_depth]es|e Blatt|Blätter mit [leaflet_number]
+        # [leaflet_shape]em|en, [leaflet_incision_number] [leaflet_incision
+        # _addition][leaflet_incision_depth]em|en Blättchen."
+        fields = [
+            obj.compound_leaf_number,
+            obj.compound_leaf_shape,
+            obj.compound_leaf_incision_number,
+            obj.compound_leaf_incision_depth,
+            obj.leaflet_number,
+            obj.leaflet_shape,
+            obj.leaflet_incision_number,
+            obj.leaflet_incision_addition,
+            obj.leaflet_incision_depth,
+        ]
+
+        suffix = [
+            "es" if fields[0] == "1" else "e",
+            "en",
+        ]
+
+        fields[1] = format_ArrayField(fields[1], COMPOUND_LEAF_SHAPE_CHOICES, suffix[0])
+        fields[2] = format_IntegerRangeTermCharField(
+            fields[2], COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not fields[3]:
+            fields[2] = add_suffix(fields[2], suffix[0])
+        fields[3] = format_ArrayField(
+            fields[3], COMPOUND_LEAF_INCISION_DEPTH_CHOICES, suffix[0], "/"
+        )
+        fields[5] = format_ArrayField(fields[5], LEAFLET_SHAPE_CHOICES, suffix[1], "/")
+        fields[6] = format_IntegerRangeTermCharField(
+            fields[6], LEAFLET_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not (fields[7] or fields[8]):
+            fields[6] = add_suffix(fields[6], suffix[1])
+        fields[8] = format_ArrayField(
+            fields[8], LEAFLET_INCISION_DEPTH_CHOICES, suffix[1], "/"
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[2:4])),
+            " ".join(filter(None, (fields[6], f"{fields[7]}{fields[8]}"))),
+        ]
+
+        subject = "Blatt" if fields[0] == "1" else "Blätter"
+
+        text_parts = [
+            " ".join(
+                filter(
+                    None,
+                    (fields[0], ", ".join(filter(None, (fields[1], joined_fields[0])))),
+                )
+            ),
+            " ".join(
+                filter(
+                    None,
+                    (fields[4], ", ".join(filter(None, (fields[5], joined_fields[1])))),
+                )
+            ),
+        ]
+        text_parts[1] += " Blättchen" if text_parts[1] else ""
+
+        text = format_subject_text(text_parts[0], subject, text_parts[1], " mit ")
+        text = format_sentence(text)
+
+        return text
+
 
 class LeafPoalesOutput:
     def generate_overview(obj):

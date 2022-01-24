@@ -214,7 +214,7 @@ class Leaf(models.Model):
     )
     # lamina_simple_leaf ---------------------------------------------------------------
     simple_leaf_number = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Blattanzahl (einf. Blatt)")
+        max_length=10, blank=True, verbose_name=_("Anzahl")
     )
     simple_leaf_shape = ArrayField(
         base_field=models.CharField(

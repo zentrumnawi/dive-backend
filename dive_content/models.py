@@ -268,7 +268,10 @@ class Leaf(models.Model):
     )
     # miscellaneous --------------------------------------------------------------------
     special_features = models.CharField(
-        max_length=200, blank=True, verbose_name=_("Besondere Merkmale")
+        max_length=200,
+        blank=True,
+        verbose_name=_("Besondere Merkmale"),
+        help_text=_("Als eigenständigen Satz ausformulieren."),
     )
     sheath = models.CharField(
         max_length=100,

@@ -255,13 +255,13 @@ TEXTURE_CHOICES = (
     ("sta", _("starr/steif")),
 )
 CROSS_SECTION_CHOICES = (
-    ("zur", _("zurückgerollt/umgerollt")),
-    ("ein", _("eingerollt")),
-    ("zus", _("zusammengerollt")),
-    ("gef", _("gefalzt/gefaltet")),
-    ("rin", _("rinnig")),
-    ("gek", _("gekielt")),
     ("dop", _("doppelrillig")),
+    ("ein", _("eingerollt")),
+    ("gef", _("gefalzt/gefaltet")),
+    ("gek", _("gekielt")),
+    ("rin", _("rinnig")),
+    ("zur", _("zurückgerollt/umgerollt")),
+    ("zus", _("zusammengerollt")),
 )
 BASAL_LEAF_ROSETTE_CHOICES = (
     ("vor", _("Grundblattrossette vorhanden")),

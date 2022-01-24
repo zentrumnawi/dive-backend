@@ -10,6 +10,7 @@ from .fields import (
     FloatRangeTermCharField,
     IndicatorField,
     IntegerRangeCharField,
+    IntegerRangeTermCharField,
     NumericPrefixTermField,
     OutputField,
     SeasonField,
@@ -33,6 +34,7 @@ from .outputs import (
     BlossomPoalesOutput,
     FruitOutput,
     InterestingFactsOutput,
+    LeafOutput,
     LeafPoalesOutput,
     PlantOutput,
     StemRootOutput,
@@ -44,6 +46,7 @@ from .widgets import TrivialNamesWidget
 HELP_TEXT = _("Anfängliches Satzzeichen setzen.")
 TEXTAREA_ATTRS_60_4 = {"cols": 60, "rows": 4, "class": False}
 TEXTAREA_ATTRS_80_7 = {"cols": 80, "rows": 7, "class": False}
+TEXTINPUT_ATTRS_20 = {"size": 20, "class": False}
 TEXTINPUT_ATTRS_60 = {"size": 60, "class": False}
 TEXTINPUT_ATTRS_80 = {"size": 80, "class": False}
 
@@ -137,46 +140,112 @@ class PlantAdminForm(forms.ModelForm):
 
 
 class LeafAdminForm(forms.ModelForm):
-    attachment = ArrayMultipleChoiceField(
-        ATTACHMENT_CHOICES, label=get_label(Leaf, "attachment")
+    subsection_title_general = SubsectionTitleField("Allgemeines")
+    subsection_title_attachment = SubsectionTitleField("Anheftung")
+    subsection_title_lamina_compound_leaf = SubsectionTitleField(
+        "Blattfläche (zusammengesetztes Blatt)"
     )
-    compound_leaf_shape = ArrayMultipleChoiceField(
-        COMPOUND_LEAF_SHAPE_CHOICES, label=get_label(Leaf, "compound_leaf_shape")
+    subsection_title_lamina_simple_leaf = SubsectionTitleField(
+        "Blattfläche (einfaches Blatt)"
     )
-    compound_leaf_incision_depth = ArrayMultipleChoiceField(
-        COMPOUND_LEAF_INCISION_DEPTH_CHOICES,
-        label=get_label(Leaf, "compound_leaf_incision_depth"),
+    subsection_title_lamina_general = SubsectionTitleField("Blattfläche (allgemein)")
+    subsection_title_stipule = SubsectionTitleField("Nebenblatt")
+    subsection_title_miscellaneous = SubsectionTitleField("Sonstiges")
+
+    compound_leaf_number = IntegerRangeCharField(1, 99)
+    compound_leaf_incision_number = IntegerRangeTermCharField(
+        1, 99, COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
     )
-    leaflet_incision_depth = ArrayMultipleChoiceField(
-        LEAFLET_INCISION_DEPTH_CHOICES, label=get_label(Leaf, "leaflet_incision_depth")
+    leaflet_number = IntegerRangeCharField(1, 99)
+    leaflet_incision_number = IntegerRangeTermCharField(
+        1, 99, LEAFLET_INCISION_NUMBER_TERM_CHOICES, "-"
     )
-    simple_leaf_shape = ArrayMultipleChoiceField(
-        SIMPLE_LEAF_SHAPE_CHOICES, label=get_label(Leaf, "simple_leaf_shape")
-    )
-    simple_leaf_incision_depth = ArrayMultipleChoiceField(
-        SIMPLE_LEAF_INCISION_DEPTH_CHOICES,
-        label=get_label(Leaf, "simple_leaf_incision_depth"),
-    )
-    edge = ArrayMultipleChoiceField(EDGE_CHOICES, label=get_label(Leaf, "edge"))
-    surface = ArrayMultipleChoiceField(
-        SURFACE_CHOICES, label=get_label(Leaf, "surface")
+    simple_leaf_number = IntegerRangeCharField(1, 99)
+    simple_leaf_incision_number = IntegerRangeTermCharField(
+        1, 99, SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
     )
 
-    compound_leaf_number = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "compound_leaf_number")
-    )
-    compound_leaf_incision_number = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "compound_leaf_incision_number")
-    )
-    leaflet_incision_number = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "leaflet_incision_number")
-    )
-    simple_leaf_number = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "simple_leaf_number")
-    )
-    simple_leaf_incision_number = IntegerRangeCharField(
-        1, 99, label=get_label(Leaf, "simple_leaf_incision_number")
-    )
+    output_general = OutputField()
+    output_attachment = OutputField()
+    output_lamina_compound_leaf = OutputField()
+    output_lamina_simple_leaf = OutputField()
+    output_lamina_general = OutputField()
+    output_miscellaneous = OutputField()
+
+    class Meta:
+        model = Leaf
+        fields = []
+        field_classes = {
+            "attachment": AdaptedSimpleArrayField,
+            "compound_leaf_shape": AdaptedSimpleArrayField,
+            "compound_leaf_incision_depth": AdaptedSimpleArrayField,
+            "leaflet_shape": AdaptedSimpleArrayField,
+            "leaflet_incision_depth": AdaptedSimpleArrayField,
+            "simple_leaf_shape": AdaptedSimpleArrayField,
+            "simple_leaf_incision_depth": AdaptedSimpleArrayField,
+            "edge": AdaptedSimpleArrayField,
+            "surface": AdaptedSimpleArrayField,
+        }
+        widgets = {
+            "attachment": forms.SelectMultiple(choices=ATTACHMENT_CHOICES),
+            "compound_leaf_shape": forms.SelectMultiple(
+                choices=COMPOUND_LEAF_SHAPE_CHOICES
+            ),
+            "compound_leaf_incision_depth": forms.SelectMultiple(
+                choices=COMPOUND_LEAF_INCISION_DEPTH_CHOICES
+            ),
+            "leaflet_shape": forms.SelectMultiple(choices=LEAFLET_SHAPE_CHOICES),
+            "leaflet_incision_depth": forms.SelectMultiple(
+                choices=LEAFLET_INCISION_DEPTH_CHOICES
+            ),
+            "simple_leaf_shape": forms.SelectMultiple(
+                choices=SIMPLE_LEAF_SHAPE_CHOICES
+            ),
+            "simple_leaf_incision_depth": forms.SelectMultiple(
+                choices=SIMPLE_LEAF_INCISION_DEPTH_CHOICES
+            ),
+            "edge": forms.SelectMultiple(choices=EDGE_CHOICES),
+            "surface": forms.SelectMultiple(choices=SURFACE_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["compound_leaf_number"].label = get_label(
+            obj, "compound_leaf_number"
+        )
+        self.fields["compound_leaf_incision_number"].label = get_label(
+            obj, "compound_leaf_incision_number"
+        )
+        self.fields["leaflet_number"].label = get_label(obj, "leaflet_number")
+        self.fields["leaflet_incision_number"].label = get_label(
+            obj, "leaflet_incision_number"
+        )
+        self.fields["leaflet_incision_addition"].strip = False
+        self.fields["leaflet_incision_addition"].help_text = HELP_TEXT
+        self.fields["leaflet_incision_addition"].widget.attrs.update(TEXTINPUT_ATTRS_20)
+        self.fields["simple_leaf_number"].label = get_label(obj, "simple_leaf_number")
+        self.fields["simple_leaf_incision_number"].label = get_label(
+            obj, "simple_leaf_incision_number"
+        )
+        self.fields["stipule"].widget.attrs.update(TEXTAREA_ATTRS_60_4)
+        self.fields["special_features"].widget.attrs.update(TEXTINPUT_ATTRS_80)
+
+        self.initial.update(
+            {
+                "output_general": LeafOutput.generate_general(obj),
+                "output_attachment": LeafOutput.generate_attachment(obj),
+                "output_lamina_compound_leaf": LeafOutput.generate_lamina_compound_leaf(
+                    obj
+                ),
+                "output_lamina_simple_leaf": LeafOutput.generate_lamina_simple_leaf(
+                    obj
+                ),
+                "output_lamina_general": LeafOutput.generate_lamina_general(obj),
+                "output_miscellaneous": LeafOutput.generate_miscellaneous(obj),
+            }
+        )
 
 
 class LeafPoalesAdminForm(forms.ModelForm):

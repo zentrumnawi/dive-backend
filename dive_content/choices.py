@@ -417,14 +417,14 @@ SURFACE_CHOICES = (
 )
 STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
-    ("kei", _("keilig/keilförmig")),
-    ("ver", _("verschmälert")),
     ("abg", _("abgerundet")),
     ("ges", _("gestutzt")),
     ("her", _("herzförmig")),
+    ("kei", _("keilig/keilförmig")),
     ("nie", _("nierenförmig")),
     ("pfe", _("pfeilförmig")),
     ("spi", _("spießförmig")),
+    ("ver", _("verschmälert")),
 )
 APEX_CHOICES = (
     ("abg", _("abgerundet")),

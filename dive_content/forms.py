@@ -43,7 +43,7 @@ from .outputs import (
 from .widgets import TrivialNamesWidget
 
 
-HELP_TEXT = _("Anfängliches Satzzeichen setzen.")
+HELP_TEXT = _("Inklusive Satzzeichen angeben.")
 TEXTAREA_ATTRS_60_4 = {"cols": 60, "rows": 4, "class": False}
 TEXTAREA_ATTRS_80_7 = {"cols": 80, "rows": 7, "class": False}
 TEXTINPUT_ATTRS_20 = {"size": 20, "class": False}

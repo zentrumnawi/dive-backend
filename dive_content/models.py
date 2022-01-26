@@ -266,6 +266,13 @@ class Leaf(models.Model):
     apex = models.CharField(
         max_length=3, choices=APEX_CHOICES, blank=True, verbose_name=_("Spitze")
     )
+    # stipule --------------------------------------------------------------------------
+    stipule = models.TextField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Nebenblatt"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
     # miscellaneous --------------------------------------------------------------------
     special_features = models.CharField(
         max_length=200,

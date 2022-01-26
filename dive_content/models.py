@@ -250,16 +250,6 @@ class Leaf(models.Model):
         default=list,
         verbose_name=_("Oberfläche"),
     )
-    stipule_edge = ArrayField(
-        base_field=models.CharField(
-            max_length=3,
-            choices=STIPULE_EDGE_CHOICES,
-            verbose_name=_("Nebenblattrand"),
-        ),
-        size=2,
-        blank=True,
-        default=list,
-    )
     base = models.CharField(
         max_length=3, choices=BASE_CHOICES, blank=True, verbose_name=_("Grund")
     )

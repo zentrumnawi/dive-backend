@@ -422,7 +422,6 @@ SURFACE_CHOICES = (
     ("wol", _("wollig")),
     ("zot", _("zottig")),
 )
-STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
     ("abg", _("abgerundet")),
     ("ges", _("gestutzt")),

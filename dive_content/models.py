@@ -197,6 +197,9 @@ class Leaf(models.Model):
         default=list,
         verbose_name=_("Einschnitttiefe"),
     )
+    leaflet_number = models.CharField(
+        max_length=10, blank=True, verbose_name=_("Anzahl (Blättchen)")
+    )
     leaflet_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)")
     )

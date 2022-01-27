@@ -200,6 +200,13 @@ class Leaf(models.Model):
     leaflet_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Anzahl (Blättchen)")
     )
+    leaflet_shape = ArrayField(
+        base_field=models.CharField(max_length=3, choices=LEAFLET_SHAPE_CHOICES),
+        size=2,
+        blank=True,
+        default=list,
+        verbose_name=_("Gestalt (Blättchen)"),
+    )
     leaflet_incision_number = models.CharField(
         max_length=10, blank=True, verbose_name=_("Einschnittanzahl (Blättchen)")
     )

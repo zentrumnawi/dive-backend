@@ -328,10 +328,7 @@ COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
     ("get", _("geteilt")),
     ("zus", _("zusammengesetzt")),
 )
-LEAFLET_INCISION_NUMBER_TERM_CHOICES = COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES
-LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
-# lamina_simple_leaf -------------------------------------------------------------------
-SIMPLE_LEAF_SHAPE_CHOICES = (
+LEAFLET_SHAPE_CHOICES = (
     ("bin", _("binsenartig")),
     ("bor", _("borstenförmig/borstlich")),
     ("dre", _("dreieckig")),
@@ -361,6 +358,10 @@ SIMPLE_LEAF_SHAPE_CHOICES = (
     ("ver", _("verkehrteiförmig")),
     ("vhe", _("verkehrtherzförmig")),
 )
+LEAFLET_INCISION_NUMBER_TERM_CHOICES = COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES
+LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
+# lamina_simple_leaf -------------------------------------------------------------------
+SIMPLE_LEAF_SHAPE_CHOICES = LEAFLET_SHAPE_CHOICES
 SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES = (
     ("z", "zählig"),
     ("f", "fach"),

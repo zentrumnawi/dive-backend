@@ -316,6 +316,7 @@ COMPOUND_LEAF_SHAPE_CHOICES = (
     ("unp", _("unpaarig")),
     ("unt", _("unterbrochen")),
 )
+COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES = (("z", "zählig"), ("f", "fach"))
 COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
     ("fis", _("fiederschnittig")),
     ("gan", _("ganz/ungeteilt")),

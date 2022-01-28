@@ -137,26 +137,24 @@ class IntegerRangeTermCharField(forms.MultiValueField):
     field = IntegerRangeCharField
     widget = NumberRangeTermCharWidget
 
-    def __init__(self, min=1, max=99, term="", **kwargs):
+    def __init__(self, min, max, term="", separator=" ", **kwargs):
         self.term = None if isinstance(term, (tuple, list)) else term
+        self.separator = separator
         kwargs.setdefault("required", False)
         kwargs.setdefault("help_text", self.field.help_text)
 
         fields = (self.field(min, max),)
         if self.term is None:
             fields += (forms.ChoiceField(choices=term),)
-        widget = self.widget(min, max, term)
+        widget = self.widget(min, max, term, separator)
 
         super().__init__(fields=fields, widget=widget, **kwargs)
 
     def compress(self, data_list):
         value = ""
         if data_list[0]:
-            value = (
-                f"{data_list[0]} {data_list[1]}"
-                if self.term is None
-                else f"{data_list[0]} {self.term}"
-            )
+            value = f"{data_list[0]}{self.separator}"
+            value += f"{data_list[1]}" if self.term is None else f"{self.term}"
 
         return value
 

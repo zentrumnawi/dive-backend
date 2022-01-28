@@ -328,6 +328,7 @@ COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
     ("get", _("geteilt")),
     ("zus", _("zusammengesetzt")),
 )
+LEAFLET_INCISION_NUMBER_TERM_CHOICES = COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES
 LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
 # lamina_simple_leaf -------------------------------------------------------------------
 SIMPLE_LEAF_SHAPE_CHOICES = (

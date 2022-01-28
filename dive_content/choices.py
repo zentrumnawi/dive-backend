@@ -361,6 +361,11 @@ SIMPLE_LEAF_SHAPE_CHOICES = (
     ("ver", _("verkehrteiförmig")),
     ("vhe", _("verkehrtherzförmig")),
 )
+SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES = (
+    ("z", "zählig"),
+    ("f", "fach"),
+    ("e", "eckig"),
+)
 SIMPLE_LEAF_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),

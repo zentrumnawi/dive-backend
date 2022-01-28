@@ -80,6 +80,17 @@ def format_sentence(text):
     return f"{text[0].capitalize()}{text[1:]}." if text else ""
 
 
+def format_IntegerRangeTermCharField(field, choices, separator=" "):
+    string = ""
+    if field:
+        splited_field = field.split(separator, 1)
+        if len(splited_field) > 1:
+            splited_field[1] = dict(choices).get(splited_field[1], splited_field[1])
+        string = separator.join(splited_field)
+
+    return string
+
+
 def format_FloatRangeTermCharField(field):
     string = ""
     if field:

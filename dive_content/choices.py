@@ -235,147 +235,160 @@ STATUS_CHOICES = (
 
 
 # Leaf choices -------------------------------------------------------------------------
-VEINS_CHOICES = (
-    ("str", _("streifennervig")),
-    ("net", _("netznervig")),
+# general ------------------------------------------------------------------------------
+VENATION_CHOICES = (
     ("fie", _("fiedernervig")),
     ("fin", _("fingernervig")),
     ("fus", _("fußnervig")),
     ("gab", _("gabelnervig")),
+    ("net", _("netznervig")),
+    ("str", _("streifennervig")),
 )
 DIVISION_CHOICES = (("ein", _("einfach")), ("zus", _("zusammengesetzt")))
 SUCCULENCE_CHOICES = (("dic", _("dickfleischig")), (("ndi"), _("nicht dickfleischig")))
 TEXTURE_CHOICES = (
-    ("kra", _("krautig")),
     ("fle", _("fleischig")),
-    ("led", _("lederig")),
     ("hae", _("häutig/trockenhäutig")),
     ("imm", _("immergrün")),
+    ("kra", _("krautig")),
+    ("led", _("lederig")),
     ("sta", _("starr/steif")),
 )
 CROSS_SECTION_CHOICES = (
-    ("zur", _("zurückgerollt/umgerollt")),
-    ("ein", _("eingerollt")),
-    ("zus", _("zusammengerollt")),
-    ("gef", _("gefalzt/gefaltet")),
-    ("rin", _("rinnig")),
-    ("gek", _("gekielt")),
     ("dop", _("doppelrillig")),
+    ("ein", _("eingerollt")),
+    ("gef", _("gefalzt/gefaltet")),
+    ("gek", _("gekielt")),
+    ("rin", _("rinnig")),
+    ("zur", _("zurückgerollt/umgerollt")),
+    ("zus", _("zusammengerollt")),
 )
+BASAL_LEAF_ROSETTE_CHOICES = (
+    ("E", _("Erosulat")),
+    ("H", _("Halbrosettenpflanze")),
+    ("R", _("Rosettenpflanze")),
+)
+# attachment ---------------------------------------------------------------------------
 ATTACHMENT_CHOICES = (
+    ("dur", _("durchwachsen")),
     ("ges", _("gestielt")),
+    ("hal", _("halbstengelumfassend")),
+    ("her", _("herablaufend")),
+    ("hin", _("hinfällig")),
+    ("rei", _("reitend")),
+    ("sch", _("scheidig verwachsen")),
     ("sit", _("sitzend/ungestielt")),
     ("ste", _("stengelumfassend")),
-    ("hal", _("halbstengelumfassend")),
-    ("dur", _("durchwachsen")),
     ("ver", _("verwachsen")),
-    ("sch", _("scheidig verwachsen")),
-    ("her", _("herablaufend")),
-    ("rei", _("reitend")),
-    ("hin", _("hinfällig")),
 )
 ARRANGMENT_CHOICES = (
-    ("gru", _("grundständig")),
-    ("wec", _("wechselständig/spiralig")),
-    ("zwe", _("zweizeilig/distich")),
+    ("dac", _("dachziegelig")),
     ("dre", _("dreizeilig/tristich")),
+    ("ein", _("einseitig")),
     ("geg", _("gegenständig")),
-    ("kre", _("kreuzgegenständig/dekussiert")),
     ("gep", _("gepaart")),
+    ("ges", _("gescheitelt")),
+    ("gru", _("grundständig")),
+    ("kre", _("kreuzgegenständig/dekussiert")),
     ("qui", _("quirlig/wirtelig")),
     ("sch", _("scheinquirlig")),
-    ("dac", _("dachziegelig")),
-    ("ein", _("einseitig")),
-    ("ges", _("gescheitelt")),
+    ("wec", _("wechselständig/spiralig")),
+    ("zwe", _("zweizeilig/distich")),
 )
-ROSETTE_CHOICES = (
-    ("vor", _("Grundblattrossette vorhanden")),
-    ("kei", _("keine Grundblattrosette")),
-)
-LEAF_COMP_BLADE_SHAPE_CHOICES = (
-    ("han", _("handförmig")),
-    ("gef", _("gefingert")),
+# lamina_compound_leaf -----------------------------------------------------------------
+COMPOUND_LEAF_SHAPE_CHOICES = (
+    ("dop", _("doppelt")),
+    ("dod", _("doppelt dreizählig")),
+    ("drz", _("dreizählig")),
     ("fif", _("fiederförmig")),
     ("fil", _("fiederlappig")),
+    ("fis", _("fiederschnittig")),
     ("fip", _("fiederspaltig")),
     ("fit", _("fiederteilig")),
-    ("fis", _("fiederschnittig")),
+    ("fus", _("fußförmig")),
+    ("gef", _("gefingert")),
+    ("han", _("handförmig")),
+    ("kam", _("kammförmig")),
+    ("lei", _("leierförmig")),
+    ("meh", _("mehrfach")),
     ("paa", _("paarig")),
+    ("sch", _("schrotsägeförmig")),
     ("unp", _("unpaarig")),
     ("unt", _("unterbrochen")),
-    ("dop", _("doppelt")),
-    ("meh", _("mehrfach")),
-    ("drz", _("dreizählig")),
-    ("dod", _("doppelt dreizählig")),
-    ("lei", _("leierförmig")),
-    ("sch", _("schrotsägeförmig")),
-    ("kam", _("kammförmig")),
-    ("fus", _("fußförmig")),
 )
-LEAF_COMP_INCISION_DEPTH_CHOICES = (
+COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES = (("z", "zählig"), ("f", "fach"))
+COMPOUND_LEAF_INCISION_DEPTH_CHOICES = (
+    ("fis", _("fiederschnittig")),
     ("gan", _("ganz/ungeteilt")),
+    ("fie", _("gefiedert")),
+    ("gef", _("gefingert")),
     ("gel", _("gelappt")),
+    ("ges", _("geschnitten")),
     ("gep", _("gespalten")),
     ("get", _("geteilt")),
-    ("ges", _("geschnitten")),
-    ("gef", _("gefingert")),
     ("zus", _("zusammengesetzt")),
-    ("fis", _("fiederschnittig")),
-    ("fie", _("gefiedert")),
 )
-LEAFLET_INCISION_DEPTH_CHOICES = LEAF_COMP_INCISION_DEPTH_CHOICES
-LEAF_SIMPLE_BLADE_SHAPE_CHOICES = (
-    ("kre", _("kreisrund")),
-    ("run", _("rundlich")),
-    ("ell", _("elliptisch")),
+LEAFLET_SHAPE_CHOICES = (
+    ("bin", _("binsenartig")),
+    ("bor", _("borstenförmig/borstlich")),
+    ("dre", _("dreieckig")),
     ("eif", _("eiförmig")),
-    ("ver", _("verkehrteiförmig")),
-    ("spa", _("spatelförmig/spatelig")),
-    ("len", _("lanzettlich")),
     ("eil", _("eilanzettlich")),
+    ("ell", _("elliptisch")),
+    ("fad", _("fadenförmig/fädlich")),
+    ("gei", _("geigenförmig")),
+    ("her", _("herzförmig")),
+    ("kei", _("keilförmig")),
+    ("kre", _("kreisrund")),
     ("lae", _("länglich")),
+    ("len", _("lanzettlich")),
     ("lin", _("linealisch/lineal")),
     ("nad", _("nadelförmig")),
-    ("pfr", _("pfriemlich")),
-    ("bor", _("borstenförmig/borstlich")),
-    ("fad", _("fadenförmig/fädlich")),
-    ("bin", _("binsenartig")),
-    ("roe", _("röhrig")),
-    ("ser", _("schwertförmig")),
-    ("dre", _("dreieckig")),
-    ("kei", _("keilförmig")),
-    ("rau", _("rautenförmig/rhombisch")),
-    ("her", _("herzförmig")),
-    ("vhe", _("verkehrtherzförmig")),
     ("nie", _("nierenförmig")),
     ("pfe", _("pfeilförmig")),
-    ("spi", _("spießförmig")),
-    ("gei", _("geigenförmig")),
-    ("sup", _("schuppenförmig")),
+    ("pfr", _("pfriemlich")),
+    ("rau", _("rautenförmig/rhombisch")),
+    ("roe", _("röhrig")),
+    ("run", _("rundlich")),
     ("sil", _("schildförmig")),
+    ("sup", _("schuppenförmig")),
+    ("ser", _("schwertförmig")),
+    ("spa", _("spatelförmig/spatelig")),
+    ("spi", _("spießförmig")),
+    ("ver", _("verkehrteiförmig")),
+    ("vhe", _("verkehrtherzförmig")),
 )
-LEAF_SIMPLE_INCISION_DEPTH_CHOICES = (
+LEAFLET_INCISION_NUMBER_TERM_CHOICES = COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES
+LEAFLET_INCISION_DEPTH_CHOICES = COMPOUND_LEAF_INCISION_DEPTH_CHOICES
+# lamina_simple_leaf -------------------------------------------------------------------
+SIMPLE_LEAF_SHAPE_CHOICES = LEAFLET_SHAPE_CHOICES
+SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES = (
+    ("z", "zählig"),
+    ("f", "fach"),
+    ("e", "eckig"),
+)
+SIMPLE_LEAF_INCISION_DEPTH_CHOICES = (
     ("gan", _("ganz/ungeteilt")),
     ("gel", _("gelappt")),
-    ("gep", _("gespalten")),
-    ("get", _("geteilt")),
     ("ges", _("geschnitten")),
+    ("gep", _("gespalten")),
 )
+# lamina_general -----------------------------------------------------------------------
 EDGE_CHOICES = (
+    ("bew", _("bewimpert")),
+    ("dop", _("doppelt gesägt")),
     ("dor", _("dornig")),
     ("gan", _("ganzrandig")),
-    ("ges", _("gesägt")),
-    ("dop", _("doppelt gesägt")),
-    ("rue", _("rückwärts gesägt")),
-    ("gez", _("gezähnt")),
-    ("gzt", _("gezähnelt")),
+    ("geb", _("gebuchtet")),
     ("gef", _("gefranst")),
     ("gek", _("gekerbt")),
-    ("geb", _("gebuchtet")),
+    ("ges", _("gesägt")),
     ("gew", _("geschweift")),
-    ("bew", _("bewimpert")),
-    ("vor", _("vorwärts rau")),
+    ("gzt", _("gezähnelt")),
+    ("gez", _("gezähnt")),
+    ("rue", _("rückwärts gesägt")),
     ("rur", _("rückwärts rau")),
+    ("vor", _("vorwärts rau")),
 )
 SURFACE_CHOICES = (
     ("ach", _("achselbärtig")),
@@ -410,30 +423,30 @@ SURFACE_CHOICES = (
     ("wol", _("wollig")),
     ("zot", _("zottig")),
 )
-STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
-    ("kei", _("keilig/keilförmig")),
-    ("ver", _("verschmälert")),
     ("abg", _("abgerundet")),
     ("ges", _("gestutzt")),
     ("her", _("herzförmig")),
+    ("kei", _("keilig/keilförmig")),
     ("nie", _("nierenförmig")),
     ("pfe", _("pfeilförmig")),
     ("spi", _("spießförmig")),
+    ("ver", _("verschmälert")),
 )
 APEX_CHOICES = (
     ("abg", _("abgerundet")),
-    ("ges", _("gestutzt")),
-    ("stu", _("stumpf")),
-    ("spi", _("spitz")),
-    ("zug", _("zugespitzt")),
-    ("beg", _("begrannt")),
-    ("sta", _("stachelspitz")),
-    ("haa", _("haarspitzig")),
-    ("bes", _("bespitzt")),
     ("aus", _("ausgerandet")),
+    ("beg", _("begrannt")),
+    ("bes", _("bespitzt")),
+    ("ges", _("gestutzt")),
+    ("haa", _("haarspitzig")),
+    ("spi", _("spitz")),
+    ("sta", _("stachelspitz")),
+    ("stu", _("stumpf")),
+    ("zug", _("zugespitzt")),
 )
-SEED_LEAF_NUM_CHOICES = ((1, 1), (2, 2))
+# miscellaneous ------------------------------------------------------------------------
+SEED_LEAF_NUMBER_CHOICES = ((1, "1"), (2, "2"), (3, "> 2"))
 # --------------------------------------------------------------------------------------
 
 
@@ -646,8 +659,8 @@ PERIANTH_SHAPE_CHOICES = (
     ("zu", _("zungenförmig")),
 )
 BRACT_SHAPE_SUBCHOICES = [()] * 3
-BRACT_SHAPE_SUBCHOICES[0] = LEAF_COMP_BLADE_SHAPE_CHOICES
-BRACT_SHAPE_SUBCHOICES[1] = LEAF_SIMPLE_BLADE_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[0] = COMPOUND_LEAF_SHAPE_CHOICES
+BRACT_SHAPE_SUBCHOICES[1] = SIMPLE_LEAF_SHAPE_CHOICES
 BRACT_SHAPE_SUBCHOICES[2] = (("nvo", _("nicht vorhanden")),)
 BRACT_SHAPE_CHOICES = [
     *BRACT_SHAPE_SUBCHOICES[0],

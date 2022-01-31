@@ -80,6 +80,17 @@ def format_sentence(text):
     return f"{text[0].capitalize()}{text[1:]}." if text else ""
 
 
+def format_IntegerRangeTermCharField(field, choices, separator=" "):
+    string = ""
+    if field:
+        splited_field = field.split(separator, 1)
+        if len(splited_field) > 1:
+            splited_field[1] = dict(choices).get(splited_field[1], splited_field[1])
+        string = separator.join(splited_field)
+
+    return string
+
+
 def format_FloatRangeTermCharField(field):
     string = ""
     if field:
@@ -216,6 +227,218 @@ class PlantOutput:
         joined_texts = " ".join(filter(None, texts))
 
         return joined_texts
+
+
+class LeafOutput:
+    def generate_general(obj):
+        # Generate sentence "Allgemeines" according pattern:
+        # "[color], [venation]e, [division]e, [succulence]e, [texture]e Blätter mit
+        # [cross_section]em Querschnitt; [basal_leaf_rosette]."
+        fields = [
+            obj.color,
+            obj.get_venation_display(),
+            obj.get_division_display(),
+            obj.get_succulence_display(),
+            obj.get_texture_display(),
+            obj.get_cross_section_display(),
+            obj.get_basal_leaf_rosette_display(),
+        ]
+        fields[1] = add_suffix(fields[1], "e")
+        fields[2] = add_suffix(fields[2], "e")
+        fields[3] = add_suffix(fields[3], "e")
+        fields[4] = add_suffix(fields[4], "e", "/")
+        fields[5] = add_suffix(fields[5], "em", "/")
+
+        joined_fields = ", ".join(filter(None, fields[:5]))
+
+        text_part = f"mit {fields[5]} Querschnitt" if fields[5] else ""
+
+        text = format_subject_text(joined_fields, "Blätter", text_part)
+        text = "; ".join(filter(None, (text, fields[6])))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_attachment(obj):
+        # Generate sentence "Anheftung" according pattern:
+        # "Blätter sitzen [attachment] und sind [arrangement] angeordnet."
+        fields = [
+            obj.attachment,
+            obj.get_arrangement_display(),
+        ]
+        fields[0] = format_ArrayField(fields[0], ATTACHMENT_CHOICES)
+
+        text_parts = [
+            f"sitzen {fields[0]}" if fields[0] else "",
+            f"sind {fields[1]} angeordnet" if fields[1] else "",
+        ]
+
+        joined_text_parts = " und ".join(filter(None, text_parts))
+
+        text = f"Blätter {joined_text_parts}" if joined_text_parts else ""
+        text = format_sentence(text)
+
+        return text
+
+    def generate_lamina_compound_leaf(obj):
+        # Generate sentence "Blattfläche (zusammengesetztes Blatt)" according pattern:
+        # "[compound_leaf_number] [compound_leaf_shape]es|e, [compound_leaf_incision
+        # _number] [compound_leaf_incision_depth]es|e Blatt|Blätter mit [leaflet_number]
+        # [leaflet_shape]em|en, [leaflet_incision_number] [leaflet_incision
+        # _addition][leaflet_incision_depth]em|en Blättchen."
+        fields = [
+            obj.compound_leaf_number,
+            obj.compound_leaf_shape,
+            obj.compound_leaf_incision_number,
+            obj.compound_leaf_incision_depth,
+            obj.leaflet_number,
+            obj.leaflet_shape,
+            obj.leaflet_incision_number,
+            obj.leaflet_incision_addition,
+            obj.leaflet_incision_depth,
+        ]
+
+        suffix = [
+            "es" if fields[0] == "1" else "e",
+            "en",
+        ]
+
+        fields[1] = format_ArrayField(fields[1], COMPOUND_LEAF_SHAPE_CHOICES, suffix[0])
+        fields[2] = format_IntegerRangeTermCharField(
+            fields[2], COMPOUND_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not fields[3]:
+            fields[2] = add_suffix(fields[2], suffix[0])
+        fields[3] = format_ArrayField(
+            fields[3], COMPOUND_LEAF_INCISION_DEPTH_CHOICES, suffix[0], "/"
+        )
+        fields[5] = format_ArrayField(fields[5], LEAFLET_SHAPE_CHOICES, suffix[1], "/")
+        fields[6] = format_IntegerRangeTermCharField(
+            fields[6], LEAFLET_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not (fields[7] or fields[8]):
+            fields[6] = add_suffix(fields[6], suffix[1])
+        fields[8] = format_ArrayField(
+            fields[8], LEAFLET_INCISION_DEPTH_CHOICES, suffix[1], "/"
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[2:4])),
+            " ".join(filter(None, (fields[6], f"{fields[7]}{fields[8]}"))),
+        ]
+
+        subject = "Blatt" if fields[0] == "1" else "Blätter"
+
+        text_parts = [
+            " ".join(
+                filter(
+                    None,
+                    (fields[0], ", ".join(filter(None, (fields[1], joined_fields[0])))),
+                )
+            ),
+            " ".join(
+                filter(
+                    None,
+                    (fields[4], ", ".join(filter(None, (fields[5], joined_fields[1])))),
+                )
+            ),
+        ]
+        text_parts[1] += " Blättchen" if text_parts[1] else ""
+
+        text = format_subject_text(text_parts[0], subject, text_parts[1], " mit ")
+        text = format_sentence(text)
+
+        return text
+
+    def generate_lamina_simple_leaf(obj):
+        # Generate sentence "Blattfläche (einfaches Blatt)" according pattern:
+        # "[simple_leaf_number] [simple_leaf_shape]es|e, [simple_leaf_incision
+        # _number] [simple_leaf_incision_depth]es|e Blatt|Blätter."
+        fields = [
+            obj.simple_leaf_number,
+            obj.simple_leaf_shape,
+            obj.simple_leaf_incision_number,
+            obj.simple_leaf_incision_depth,
+        ]
+
+        suffix = "es" if fields[0] == "1" else "e"
+
+        fields[1] = format_ArrayField(fields[1], SIMPLE_LEAF_SHAPE_CHOICES, suffix, "/")
+        fields[2] = format_IntegerRangeTermCharField(
+            fields[2], SIMPLE_LEAF_INCISION_NUMBER_TERM_CHOICES, "-"
+        )
+        if not fields[3]:
+            fields[2] = add_suffix(fields[2], suffix)
+        fields[3] = format_ArrayField(
+            fields[3], SIMPLE_LEAF_INCISION_DEPTH_CHOICES, suffix, "/"
+        )
+
+        joined_fields = " ".join(filter(None, fields[2:4]))
+
+        subject = "Blatt" if fields[0] == "1" else "Blätter"
+
+        text_part = " ".join(
+            filter(
+                None, (fields[0], ", ".join(filter(None, (fields[1], joined_fields))))
+            )
+        )
+
+        text = format_subject_text(text_part, subject, "")
+        text = format_sentence(text)
+
+        return text
+
+    def generate_lamina_general(obj):
+        # Generate sentence "Blattfläche (allgemein)" according pattern:
+        # "Blattränder [edge]; [surface] Blattoberfläche; Spreite am Grund [base] und an
+        # der Spitze [apex]."
+        fields = [
+            obj.edge,
+            obj.surface,
+            obj.get_base_display(),
+            obj.get_apex_display(),
+        ]
+        fields[0] = format_ArrayField(fields[0], EDGE_CHOICES)
+        fields[1] = format_ArrayField(fields[1], SURFACE_CHOICES, "e", "/")
+
+        text_parts = [
+            f"Blattränder {fields[0]}" if fields[0] else "",
+            f"{fields[1]} Blattoberfläche" if fields[1] else "",
+            f"am Grund {fields[2]}" if fields[2] else "",
+            f"an der Spitze {fields[3]}" if fields[3] else "",
+        ]
+
+        joined_text_parts = [
+            "; ".join(filter(None, text_parts[0:2])),
+            f"Spreite {' und '.join(filter(None, text_parts[2:4]))}"
+            if any(text_parts[2:4])
+            else "",
+        ]
+
+        text = "; ".join(filter(None, joined_text_parts))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_miscellaneous(obj):
+        # Generate sentence "Sonstiges" according pattern:
+        # "[special_features] [seed_leaf_number] Keimblatt|-blätter."
+        fields = [
+            obj.special_features,
+            obj.seed_leaf_number,
+        ]
+        fields[1] = "Mehr als 2" if fields[1] == 3 else fields[1]
+
+        text_part = (
+            f"{fields[1]} Keim{'blatt' if fields[1] == 1 else 'blätter'}"
+            if fields[1]
+            else ""
+        )
+        text_part = format_sentence(text_part)
+
+        text = " ".join(filter(None, (fields[0], text_part)))
+
+        return text
 
 
 class LeafPoalesOutput:

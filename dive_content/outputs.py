@@ -368,6 +368,296 @@ class LeafPoalesOutput:
         return joined_texts
 
 
+class BlossomOutput:
+    def generate_season(obj):
+        # Generate output "Blütezeit" according pattern:
+        # "([season[0]]) [season[1]] bis [season[2] ([season[3]])."
+        field = obj.season
+
+        months = [None] * 4
+        months = [f"{SEASON_DICT.get(month)}" for month in field] if field else months
+        months[0] = f"({months[0]})" if months[0] else None
+        months[3] = f"({months[3]})" if months[3] else None
+
+        joined_months = [
+            " ".join(filter(None, months[:2])),
+            " ".join(filter(None, months[2:])),
+        ]
+
+        text = " bis ".join(filter(None, joined_months))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_inflorescence(obj):
+        # Generate output "Blütenstand" according pattern:
+        # "[inflorescence_number] [inflorescence_type] mit [inflorescence_blossom_
+        # number] Blüte|Blüten."
+        fields = [
+            obj.inflorescence_number,
+            obj.inflorescence_type,
+            obj.inflorescence_blossom_number,
+        ]
+        if not any(fields):
+            pass
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_SUBCHOICES[1]):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_SUBCHOICES[1])[fields[1]]}n"
+        elif fields[0] != "1" and fields[1] in dict(INFLORESCENCE_TYPE_SUBCHOICES[2]):
+            fields[1] = f"{INFLORESCENCE_TYPE_PLURAL_DICT[fields[1]]}"
+        elif fields[1] in dict(INFLORESCENCE_TYPE_CHOICES):
+            fields[1] = f"{dict(INFLORESCENCE_TYPE_CHOICES)[fields[1]]}"
+        else:
+            fields[1] = f"Blüten{'stand' if fields[0] == '1' else 'stände'}"
+
+        text_parts = [
+            " ".join(filter(None, fields[0:2])),
+            f"{fields[2]} Blüte{'' if fields[2] == '1' else 'n'}" if fields[2] else "",
+        ]
+
+        text = " mit ".join(filter(None, text_parts))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_general(obj):
+        # Generate output "Allgemeines" according pattern:
+        # "[merosity]-zählige, [symmetry]e, [perianth]|Blütenhülle; [perianth_shape]e
+        # Blütenform, [bract_shape]es Tragblatt. Die Blüten sind [blossom_sex_
+        # distribution][blossom_sex_distribution_addition]; die Planze ist [plant_sex_
+        # distribution]."
+        fields = [
+            obj.merosity,
+            obj.get_symmetry_display(),
+            obj.get_perianth_display(),
+            obj.get_perianth_shape_display(),
+            obj.bract_shape,
+            obj.get_blossom_sex_distribution_display(),
+            obj.blossom_sex_distribution_addition,
+            obj.get_plant_sex_distribution_display(),
+        ]
+        fields[0] = (
+            f"{MEROSITY_CHOICES_DICT[obj.merosity]}-zählige" if fields[0] else ""
+        )
+        fields[1] = add_suffix(fields[1], "e")
+        fields[3] = add_suffix(fields[3], "e")
+        fields[4] = format_ArrayField(fields[4], BRACT_SHAPE_CHOICES, "es", "/")
+
+        joined_fields = [
+            ", ".join(filter(None, fields[:2])),
+            "".join(filter(None, fields[5:7])),
+        ]
+
+        text_parts = [
+            (", " if " " in fields[2] else " ").join(
+                filter(None, (joined_fields[0], fields[2]))
+            ),
+            f"{fields[3]} Blütenform" if fields[3] else "",
+            f"{fields[4]} Tragblatt" if fields[4] else "",
+            f"die Blüten sind {joined_fields[1]}" if joined_fields[1] else "",
+            f"die Pflanze ist {fields[7]}" if fields[7] else "",
+        ]
+        if text_parts[0] and not fields[2]:
+            text_parts[0] = f"{text_parts[0]} Blütenhülle"
+
+        joined_text_parts = ", ".join(filter(None, text_parts[1:3]))
+
+        texts = [
+            "; ".join(filter(None, (text_parts[0], joined_text_parts))),
+            "; ".join(filter(None, text_parts[3:5])),
+        ]
+        texts[0] = format_sentence(texts[0])
+        texts[1] = format_sentence(texts[1])
+
+        joined_texts = " ".join(filter(None, texts))
+
+        return joined_texts
+
+    def generate_diameter(obj):
+        # Generate output "Durchmesser" according pattern:
+        # "[diameter]."
+        field = obj.diameter
+        field = format_FloatRangeTermCharField(field)
+
+        text = format_sentence(field)
+
+        return text
+
+    def generate_sepal(obj):
+        # Generate output "Kelchblatt" according pattern:
+        # "[sepal_number] [sepal_color_shape] Kelchblatt|-blätter, [sepal_connation_
+        # type] [sepal_connation]; [epicalyx]."
+        fields = [
+            obj.sepal_number,
+            obj.sepal_color_shape,
+            obj.sepal_connation_type,
+            obj.get_sepal_connation_display(),
+            obj.epicalyx,
+        ]
+        fields[2] = get_NumericPrefixTermField_display(
+            fields[2], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+
+        text = format_subject_text(
+            joined_fields[0],
+            "Kelchblatt" if fields[0] == "1" else "Kelchblätter",
+            joined_fields[1],
+            ", " if joined_fields[0] else " ",
+        )
+        text = "; ".join(filter(None, (text, fields[4])))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_petal(obj):
+        # Generate output "Kronblatt" according pattern:
+        # "[petal_number] [petal_length] langes|lange, [petal_color_shape] Kronblatt|
+        # -blätter, [petal_connation_type] [petal_connation]; [nectary]."
+        fields = [
+            obj.petal_number,
+            obj.petal_length,
+            obj.petal_color_shape,
+            obj.petal_connation_type,
+            obj.get_petal_connation_display(),
+            obj.nectary,
+        ]
+        fields[1] = format_FloatRangeTermCharField(fields[1])
+        fields[3] = get_NumericPrefixTermField_display(
+            fields[3], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = " ".join(filter(None, fields[3:5]))
+
+        text_part = (
+            f"{fields[1]} lange{'s' if fields[0] == '1' else ''}" if fields[1] else ""
+        )
+        text_part = ", ".join(filter(None, (text_part, fields[2])))
+        text_part = " ".join(filter(None, (fields[0], text_part)))
+
+        text = format_subject_text(
+            text_part,
+            "Kronblatt" if fields[0] == "1" else "Kronblätter",
+            joined_fields,
+            ", " if text_part else " ",
+        )
+        text = "; ".join(filter(None, (text, fields[5])))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_tepal(obj):
+        # Generate output "Perigonblatt" according pattern:
+        # "[tepal_number] [tepal_color_shape] Perigonblatt|-blätter, [tepal_connation_
+        # type] [tepal_connation]."
+        fields = [
+            obj.tepal_number,
+            obj.tepal_color_shape,
+            obj.tepal_connation_type,
+            obj.get_tepal_connation_display(),
+        ]
+        fields[2] = get_NumericPrefixTermField_display(
+            fields[2], CONNATION_TYPE_CHOICES
+        )
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+        ]
+
+        text = format_subject_text(
+            joined_fields[0],
+            "Perigonblatt" if fields[0] == "1" else "Perigonblätter",
+            joined_fields[1],
+            ", " if joined_fields[0] else " ",
+        )
+        text = format_sentence(text)
+
+        return text
+
+    def generate_stamen(obj):
+        # Generate output "Staubblatt" according pattern:
+        # "[stamen_number] [stamen_length] langes|lange, [stamen_color_shape]
+        # Staubblatt|-blätter; [stamen_connation_type][stamen_connation_type_addition]."
+        fields = [
+            obj.stamen_number,
+            obj.stamen_length,
+            obj.stamen_color_shape,
+            obj.get_stamen_connation_type_display(),
+            obj.stamen_connation_type_addition,
+        ]
+        fields[1] = format_FloatRangeTermCharField(fields[1])
+
+        joined_fields = "".join(filter(None, fields[3:5]))
+
+        text_part = (
+            f"{fields[1]} lange{'s' if fields[0] == '1' else ''}" if fields[1] else ""
+        )
+        text_part = ", ".join(filter(None, (text_part, fields[2])))
+        text_part = " ".join(filter(None, (fields[0], text_part)))
+
+        text = format_subject_text(
+            text_part,
+            "Staubblatt" if fields[0] == "1" else "Staubblätter",
+            joined_fields,
+            "; ",
+        )
+        text = format_sentence(text)
+
+        return text
+
+    def generate_carpel(obj):
+        # Generate output "Fruchtblatt" according pattern:
+        # "[carpel_number] [carpel_connation_type]es|e Fruchtblatt|-blätter, [ovary_
+        # number] [ovary_position]er|e Fruchtkonten, [pistil_number] [pistil_
+        # position]er|e Griffel mit [stigma_number] Narbe|-n; [stylopodium]."
+        fields = [
+            obj.carpel_number,
+            obj.get_carpel_connation_type_display(),
+            obj.ovary_number,
+            obj.get_ovary_position_display(),
+            obj.pistil_number,
+            obj.get_pistil_position_display(),
+            obj.stigma_number,
+            obj.stylopodium,
+        ]
+        fields[1] = add_suffix(fields[1], "es" if fields[0] == "1" else "e")
+        fields[3] = add_suffix(fields[3], "er" if fields[2] == "1" else "e")
+        fields[5] = add_suffix(fields[5], "er" if fields[4] == "1" else "e")
+
+        joined_fields = [
+            " ".join(filter(None, fields[0:2])),
+            " ".join(filter(None, fields[2:4])),
+            " ".join(filter(None, fields[4:6])),
+        ]
+
+        text_parts = [
+            format_subject_text(
+                joined_fields[0],
+                "Fruchtblatt" if fields[0] == "1" else "Fruchtblätter",
+                "",
+            ),
+            format_subject_text(joined_fields[1], "Fruchtknoten", ""),
+            format_subject_text(
+                joined_fields[2],
+                "Griffel",
+                f"{fields[6]} Narbe{'' if fields[6] == '1' else 'n'}"
+                if fields[6]
+                else "",
+                " mit ",
+            ),
+        ]
+
+        text = ", ".join(filter(None, text_parts))
+        text = "; ".join(filter(None, (text, fields[7])))
+        text = format_sentence(text)
+
+        return text
+
+
 class BlossomPoalesOutput:
     def generate_season(obj):
         # Generate output "Blütezeit" according pattern:

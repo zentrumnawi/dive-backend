@@ -10,7 +10,6 @@ from .fields import (
     FloatRangeTermCharField,
     IndicatorField,
     IntegerRangeCharField,
-    NumberRangeCharField_to_be_replaced,
     NumericPrefixTermField,
     OutputField,
     SeasonField,
@@ -30,6 +29,7 @@ from .models import (
     StemRoot,
 )
 from .outputs import (
+    BlossomOutput,
     BlossomPoalesOutput,
     InterestingFactsOutput,
     LeafPoalesOutput,
@@ -233,79 +233,130 @@ class LeafPoalesAdminForm(forms.ModelForm):
 
 
 class BlossomAdminForm(forms.ModelForm):
-    season = SeasonField(label=get_label(Blossom, "season"))
-    inflorescence_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "inflorescence_num")
-    )
-    blossom_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Blossom, "blossom_num")
-    )
-    bract_blade = ArrayMultipleChoiceField(
-        BRACT_BLADE_CHOICES, label=get_label(Blossom, "bract_blade")
-    )
-    diameter = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "diameter")
-    )
-    sepal_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "sepal_num")
-    )
+    subsection_title_season = SubsectionTitleField("Blütezeit")
+    subsection_title_inflorescence = SubsectionTitleField("Blütenstand")
+    subsection_title_general = SubsectionTitleField("Allgemeines")
+    subsection_title_diameter = SubsectionTitleField("Durchmesser")
+    subsection_title_sepal = SubsectionTitleField("Kelchblatt")
+    subsection_title_petal = SubsectionTitleField("Kronblatt")
+    subsection_title_tepal = SubsectionTitleField("Perigonblatt")
+    subsection_title_stamen = SubsectionTitleField("Staubblatt")
+    subsection_title_carpel = SubsectionTitleField("Fruchtblatt")
+    subsection_title_specifications = SubsectionTitleField("Spezifikationen")
+
+    season = SeasonField()
+    inflorescence_number = IntegerRangeCharField(1, 100, {100: "∞"})
+    inflorescence_blossom_number = IntegerRangeCharField(1, 100, {100: "∞"})
+
+    diameter = FloatRangeTermCharField(0, 100, "cm")
+    sepal_number = IntegerRangeCharField(1, 11, {11: "∞"})
     sepal_connation_type = NumericPrefixTermField(
-        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "sepal_connation_type"),
     )
-    petal_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "petal_num")
-    )
-    petal_len = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "petal_len")
-    )
+    petal_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    petal_length = FloatRangeTermCharField(0, 100, "cm")
     petal_connation_type = NumericPrefixTermField(
-        (CONNATION_NUM_CHOICES, CONNATION_TYPE_CHOICES),
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
         label=get_label(Blossom, "petal_connation_type"),
     )
-    stamen_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stamen_num")
+    tepal_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    tepal_connation_type = NumericPrefixTermField(
+        (CONNATION_NUMBER_CHOICES, CONNATION_TYPE_CHOICES),
+        label=get_label(Blossom, "tepal_connation_type"),
     )
-    stamen_len = NumberRangeCharField_to_be_replaced(
-        0.1, 100, "cm", label=get_label(Blossom, "stamen_len")
-    )
-    carpel_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "carpel_num")
-    )
-    stigma_num = IntegerRangeCharField(
-        1, 11, {11: "∞"}, label=get_label(Blossom, "stigma_num")
-    )
+    stamen_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    stamen_length = FloatRangeTermCharField(0, 100, "cm")
+    carpel_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    ovary_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    pistil_number = IntegerRangeCharField(1, 11, {11: "∞"})
+    stigma_number = IntegerRangeCharField(1, 11, {11: "∞"})
 
-    def clean_bract_blade(self):
-        choices = BRACT_BLADE_CHOICES
-        sublists = (LEAF_COMP_BLADE_SHAPE_CHOICES, LEAF_SIMPLE_BLADE_SHAPE_CHOICES)
-        value = self.cleaned_data.get("bract_blade")
+    output_season = OutputField()
+    output_inflorescence = OutputField()
+    output_general = OutputField()
+    output_diameter = OutputField()
+    output_sepal = OutputField()
+    output_petal = OutputField()
+    output_tepal = OutputField()
+    output_stamen = OutputField()
+    output_carpel = OutputField()
 
-        error_messages = {
-            "invalid_choice": _(
-                f"Only first {len(sublists[0])} or following {len(sublists[1])} options may be selected together."
-            ),
-            "multiple_choice_not_allowed": _(
-                f'Option "{dict(choices).get("nvo")}" may only be selected alone.'
-            ),
+    class Meta:
+        model = Blossom
+        fields = []
+        field_classes = {
+            "bract_shape": AdaptedSimpleArrayField,
         }
-        if any(v in dict(sublists[0]).keys() for v in value) and any(
-            v in dict(sublists[1]).keys() for v in value
-        ):
+        widgets = {
+            "bract_shape": forms.SelectMultiple(choices=BRACT_SHAPE_CHOICES),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+        help_text = _("Anfängliches Satzzeichen setzen.")
+
+        self.fields["season"].label = obj._meta.get_field("season").verbose_name
+        self.fields["inflorescence_number"].label = get_label(
+            obj, "inflorescence_number"
+        )
+        self.fields["inflorescence_blossom_number"].label = get_label(
+            obj, "inflorescence_blossom_number"
+        )
+        self.fields["blossom_sex_distribution_addition"].strip = False
+        self.fields["blossom_sex_distribution_addition"].help_text = help_text
+        self.fields["diameter"].label = get_label(obj, "diameter")
+        self.fields["sepal_number"].label = get_label(obj, "sepal_number")
+        self.fields["petal_number"].label = get_label(obj, "petal_number")
+        self.fields["petal_length"].label = get_label(obj, "petal_length")
+        self.fields["tepal_number"].label = get_label(obj, "tepal_number")
+        self.fields["stamen_number"].label = get_label(obj, "stamen_number")
+        self.fields["stamen_length"].label = get_label(obj, "stamen_length")
+        self.fields["stamen_connation_type_addition"].strip = False
+        self.fields["stamen_connation_type_addition"].help_text = help_text
+        self.fields["carpel_number"].label = get_label(obj, "carpel_number")
+        self.fields["ovary_number"].label = get_label(obj, "ovary_number")
+        self.fields["pistil_number"].label = get_label(obj, "pistil_number")
+        self.fields["stigma_number"].label = get_label(obj, "stigma_number")
+        self.fields["specifications"].widget.attrs.update(TEXTAREA_ATTRS_80_7)
+
+        self.initial.update(
+            {
+                "output_season": BlossomOutput.generate_season(obj),
+                "output_inflorescence": BlossomOutput.generate_inflorescence(obj),
+                "output_general": BlossomOutput.generate_general(obj),
+                "output_diameter": BlossomOutput.generate_diameter(obj),
+                "output_sepal": BlossomOutput.generate_sepal(obj),
+                "output_petal": BlossomOutput.generate_petal(obj),
+                "output_tepal": BlossomOutput.generate_tepal(obj),
+                "output_stamen": BlossomOutput.generate_stamen(obj),
+                "output_carpel": BlossomOutput.generate_carpel(obj),
+            }
+        )
+
+    def clean_bract_shape(self):
+        value = self.cleaned_data.get("bract_shape")
+        error_messages = {"invalid_choice": _(f"Selected combination not allowed.")}
+
+        if (
+            any(v in dict(BRACT_SHAPE_SUBCHOICES[0]).keys() for v in value)
+            and any(v in dict(BRACT_SHAPE_SUBCHOICES[1]).keys() for v in value)
+        ) or (BRACT_SHAPE_SUBCHOICES[2][0][0] in value and len(value) > 1):
             raise ValidationError(error_messages["invalid_choice"])
-        if choices[-1][0] in value and len(value) > 1:
-            raise ValidationError(error_messages["multiple_choice_not_allowed"])
 
         return value
 
     def save(self, commit=True):
-        # Clear blossom_num if option "Einzelblüte" is selected as inflorescence_type.
+        # Clear inflorescence_blossom_number if option "Einzelblüte" is selected as inflorescence_type.
         instance = super().save(commit=False)
 
         inflorescence_type = self.cleaned_data.get("inflorescence_type", "")
-        blossom_num = self.cleaned_data.get("blossom_num", "")
-        if inflorescence_type == "ein" and blossom_num:
-            instance.blossom_num = ""
+        inflorescence_blossom_number = self.cleaned_data.get(
+            "inflorescence_blossom_number", ""
+        )
+        if inflorescence_type == "ein" and inflorescence_blossom_number:
+            instance.inflorescence_blossom_number = ""
 
         if commit:
             instance.save()

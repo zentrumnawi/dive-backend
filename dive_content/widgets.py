@@ -67,8 +67,9 @@ class NumberRangeCharWidget(forms.MultiWidget):
 class NumberRangeTermCharWidget(forms.MultiWidget):
     template_name = "rangeterm.html"
 
-    def __init__(self, min, max, term, attrs=None):
+    def __init__(self, min, max, term, separator, attrs=None):
         self.term = None if isinstance(term, (tuple, list)) else term
+        self.separator = separator
 
         widgets = (NumberRangeCharWidget(min, max),)
         if self.term is None:
@@ -79,33 +80,15 @@ class NumberRangeTermCharWidget(forms.MultiWidget):
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
         context["widget"]["term"] = self.term
+        context["widget"]["separator"] = self.separator
 
         return context
 
     def decompress(self, value):
         if self.term is None:
-            data_list = value.split(" ", 1) if value else ["", ""]
+            data_list = value.split(self.separator, 1) if value else ["", ""]
         else:
-            data_list = [value.split(" ", 1)[0]] if value else [""]
-
-        return data_list
-
-
-class NumberRangeCharWidget_to_be_deleted(forms.MultiWidget):
-    def __init__(self, min, max, step=1, suffix=None, attrs=None):
-        self.max = max
-        if suffix == "cm":
-            self.template_name = "centimeter.html"
-        widgets = (
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-            forms.NumberInput(attrs={"min": min, "max": max, "step": step}),
-        )
-        super().__init__(widgets, attrs)
-
-    def decompress(self, value):
-        data_list = [None, None]
-        if value:
-            data_list = [self.max if v == "∞" else v for v in value.split("–", 1)]
+            data_list = [value.split(self.separator, 1)[0]] if value else [""]
 
         return data_list
 

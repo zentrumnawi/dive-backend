@@ -847,94 +847,95 @@ class StemRoot(models.Model):
         related_name="stemroot",
         verbose_name=_("Pflanze"),
     )
-    orientation = ArrayField(
+    # trunk_morphology -----------------------------------------------------------------
+    trunk_features = models.TextField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Stammmerkmale"),
+        help_text=_("Mit eigenständigem Satzbau ausformulieren."),
+    )
+    # stem_morphology ------------------------------------------------------------------
+    stem_growth_orientation = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=ORIENTATION_CHOICES,
-            verbose_name=_("Wuchsorientierung"),
+            max_length=3, choices=STEM_GROWTH_ORIENTATION_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Wuchsorientierung"),
     )
-    appearance = ArrayField(
-        base_field=models.CharField(
-            max_length=1, choices=APPEARANCE_CHOICES, verbose_name=_("Erscheinung"),
-        ),
+    stem_appearance = ArrayField(
+        base_field=models.CharField(max_length=1, choices=STEM_APPEARANCE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Erscheinung"),
     )
-    succulence = models.CharField(
+    stem_succulence = models.CharField(
         max_length=3,
-        choices=SUCCULENCE_CHOICES,
+        choices=SR_STEM_SUCCULENCE_CHOICES,
         blank=True,
         verbose_name=_("Dickfleischigkeit"),
     )
-    pith = models.CharField(
-        max_length=1, choices=PITH_CHOICES, blank=True, verbose_name=_("Mark")
+    stem_pith = models.CharField(
+        max_length=1, choices=SR_STEM_PITH_CHOICES, blank=True, verbose_name=_("Mark")
     )
-    cross_section = ArrayField(
+    stem_cross_section = ArrayField(
         base_field=models.CharField(
-            max_length=3,
-            choices=SR_CROSS_SECTION_CHOICES,
-            verbose_name=_("Querschnitt"),
+            max_length=3, choices=SR_STEM_CROSS_SECTION_CHOICES
         ),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Querschnitt"),
     )
-    surface = ArrayField(
-        base_field=models.CharField(
-            max_length=3, choices=SURFACE_CHOICES, verbose_name=_("Sprossoberfläche")
-        ),
+    stem_surface = ArrayField(
+        base_field=models.CharField(max_length=3, choices=SR_STEM_SURFACE_CHOICES),
         size=2,
         blank=True,
         default=list,
+        verbose_name=_("Oberfläche"),
     )
-    creep_lay_shoots = models.CharField(
-        max_length=3,
+    # outgrowths -----------------------------------------------------------------------
+    creep_lay_shoots = models.BooleanField(
         choices=CREEP_LAY_SHOOTS_CHOICES,
         blank=True,
+        null=True,
         verbose_name=_("Kriech- und Legetriebe"),
     )
-    runners = models.CharField(
-        max_length=3,
+    runners = models.BooleanField(
         choices=RUNNERS_CHOICES,
         blank=True,
+        null=True,
         verbose_name=_("Ausläufer (oberirdisch)"),
     )
-    bracts = models.CharField(
-        max_length=3,
-        choices=BRACTS_CHOICES,
-        blank=True,
-        verbose_name=_("Beblätterung"),
-    )
+    # milky_sap ------------------------------------------------------------------------
     milky_sap = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Milchsaft"),
-        help_text="Bsp. kein Milchsaft, gelber Milchsaft, etc.",
+        help_text=_('Als eigenständigen Satz ausformulieren. Bsp. "Gelber Milchsaft."'),
     )
-    organ_features = models.CharField(
+    # root_morphology ------------------------------------------------------------------
+    root_organ_features = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Besonderheiten"),
         help_text="Besondere Ausprägungen der unterirdischen Organe.",
     )
-    organs = models.CharField(
+    root_organs = models.CharField(
         max_length=3,
-        choices=ORGANS_CHOICES,
+        choices=ROOT_ORGANS_CHOICES,
         blank=True,
         verbose_name=_("Organe (unterirdisch)"),
     )
-    primary_root = models.CharField(
+    root_primary_root = models.CharField(
         max_length=3,
-        choices=PRIMARY_ROOT_CHOICES,
+        choices=ROOT_PRIMARY_ROOT_CHOICES,
         blank=True,
         verbose_name=_("Primärwurzel"),
     )
-
+    # ----------------------------------------------------------------------------------
     class Meta:
         verbose_name = _("Spross und Wurzel")
         verbose_name_plural = _("Sprosse und Wurzeln")

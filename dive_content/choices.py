@@ -378,37 +378,37 @@ EDGE_CHOICES = (
     ("rur", _("rückwärts rau")),
 )
 SURFACE_CHOICES = (
-    ("gla", _("glatt")),
-    ("run", _("runzelig")),
-    ("rau", _("rau")),
-    ("vra", _("vorwärts rau")),
+    ("ach", _("achselbärtig")),
+    ("bae", _("bärtig")),
     ("ber", _("bereift")),
     ("bes", _("bestäubt/bemehlt")),
+    ("dru", _("drüsenhaarig")),
+    ("fil", _("filzig")),
+    ("fla", _("flaumhaarig/weichhaarig")),
+    ("flo", _("flockig")),
+    ("gew", _("gewimpert")),
+    ("glz", _("glänzend")),
+    ("gla", _("glatt")),
+    ("kah", _("kahl")),
+    ("nac", _("nackt")),
     ("pap", _("papillös")),
     ("pun", _("punktiert")),
+    ("rau", _("rau")),
+    ("rah", _("rauhaarig")),
+    ("run", _("runzelig")),
+    ("sam", _("samthaarig")),
+    ("sdh", _("schildhaarig")),
+    ("sue", _("schülferig")),
+    ("sup", _("schuppenhaarig/schuppig")),
     ("swi", _("schwielig")),
-    ("kah", _("kahl")),
-    ("ver", _("verkahlend")),
-    ("fla", _("flaumhaarig/weichhaarig")),
     ("sei", _("seidenhaarig")),
     ("spi", _("spinnwebig")),
-    ("flo", _("flockig")),
-    ("sam", _("samthaarig")),
-    ("fil", _("filzig")),
+    ("ste", _("steifhaarig")),
+    ("stn", _("sternhaarig")),
+    ("ver", _("verkahlend")),
+    ("vra", _("vorwärts rau")),
     ("wol", _("wollig")),
     ("zot", _("zottig")),
-    ("rah", _("rauhaarig")),
-    ("ste", _("steifhaarig")),
-    ("gew", _("gewimpert")),
-    ("dru", _("drüsenhaarig")),
-    ("stn", _("sternhaarig")),
-    ("sdh", _("schildhaarig")),
-    ("sup", _("schuppenhaarig/schuppig")),
-    ("sue", _("schülferig")),
-    ("bae", _("bärtig")),
-    ("ach", _("achselbärtig")),
-    ("nac", _("nackt")),
-    ("glz", _("glänzend")),
 )
 STIPULE_EDGE_CHOICES = EDGE_CHOICES
 BASE_CHOICES = (
@@ -833,66 +833,59 @@ OVULE_POSITION_CHOICES = (
 
 
 # StemRoot choices ---------------------------------------------------------------------
-ORIENTATION_CHOICES = (
+# stem_morphology ----------------------------------------------------------------------
+STEM_GROWTH_ORIENTATION_CHOICES = (
+    ("abs", _("abstehend")),
     ("auf", _("aufrecht")),
     ("aua", _("aufrecht-abstehend")),
-    ("abs", _("abstehend")),
-    ("spa", _("sparrig")),
-    ("zur", _("zurückgeschlagen")),
-    ("lie", _("liegend")),
-    ("kri", _("kriechend")),
     ("aus", _("aufsteigend/aufstrebend")),
-    ("gek", _("gekniet")),
-    ("ueb", _("übergebogen")),
-    ("nic", _("nickend")),
-    ("hae", _("hängend")),
     ("flu", _("flutend")),
+    ("gek", _("gekniet")),
+    ("hae", _("hängend")),
     ("hor", _("horstig")),
+    ("kri", _("kriechend")),
+    ("lie", _("liegend")),
     ("loc", _("lockerrasig")),
+    ("nic", _("nickend")),
     ("ran", _("rankenpflanzen")),
-    ("win", _("windepflanzen")),
+    ("spa", _("sparrig")),
     ("spr", _("spreizklimmig")),
+    ("ueb", _("übergebogen")),
+    ("win", _("windepflanzen")),
     ("wur", _("wurzelkletternd")),
+    ("zur", _("zurückgeschlagen")),
 )
-APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
-# SUCCULENCE_CHOICES  =>  Leaf choices
-PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
-SR_CROSS_SECTION_CHOICES = (
-    ("sti", _("stielrund")),
+STEM_APPEARANCE_CHOICES = (("k", _("krautig")), ("h", _("holzig")))
+SR_STEM_SUCCULENCE_CHOICES = SUCCULENCE_CHOICES
+SR_STEM_PITH_CHOICES = (("h", _("hohl")), ("m", _("markig")))
+SR_STEM_CROSS_SECTION_CHOICES = (
+    ("gfl", _("geflügelt")),
+    ("gef", _("gefurcht")),
+    ("ger", _("gerieft/gerillt")),
+    ("gri", _("gerippt")),
     ("hal", _("halbstielrund")),
+    ("kan", _("kantig")),
+    ("kgs", _("kantig gefurcht/scharfkantig")),
+    ("kno", _("knotig")),
+    ("sti", _("stielrund")),
+    ("stu", _("stumpfkantig")),
     ("zus", _("zusammengedrückt")),
     ("zwe", _("zweischneidig")),
-    ("kan", _("kantig")),
-    ("stu", _("stumpfkantig")),
-    ("ger", _("gerieft/gerillt")),
-    ("gef", _("gefurcht")),
-    ("kgs", _("kantig gefurcht/scharfkantig")),
-    ("gri", _("gerippt")),
-    ("gfl", _("geflügelt")),
-    ("kno", _("knotig")),
 )
-# SURFACE_CHOICES  =>  Leaf choices
-CREEP_LAY_SHOOTS_CHOICES = (
-    ("bil", _("bildet Kriech- und Legetriebe")),
-    ("kei", _("keine Angabe")),
-)
-RUNNERS_CHOICES = (
-    ("bil", _("bildet oberirdische Ausläufer")),
-    ("kei", _("keine Angabe")),
-)
-BRACTS_CHOICES = (
-    ("nur", _("nur am Grund")),
-    ("auc", _("auch über dem Grund")),
-)
-ORGANS_CHOICES = (
-    ("Rhi", _("Rhizom")),
-    ("Zwi", _("Zwiebel")),
-    ("Aus", _("unterirdische Ausläufer")),
+SR_STEM_SURFACE_CHOICES = SURFACE_CHOICES
+# outgrowths ---------------------------------------------------------------------------
+CREEP_LAY_SHOOTS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
+RUNNERS_CHOICES = ((None, _("None")), (True, _("Ja")), (False, _("Nein")))
+# root_morphology ----------------------------------------------------------------------
+ROOT_ORGANS_CHOICES = (
     ("Inn", _("Innovations-Wurzelknolle")),
-    ("Wuk", _("Wurzelknollen")),
+    ("Rhi", _("Rhizom")),
+    ("Aus", _("unterirdische Ausläufer")),
     ("Wur", _("Wurzeln")),
+    ("Wuk", _("Wurzelknollen")),
+    ("Zwi", _("Zwiebel")),
 )
-PRIMARY_ROOT_CHOICES = (
+ROOT_PRIMARY_ROOT_CHOICES = (
     ("erh", _("erhalten")),
     ("ers", _("durch sprossbürtige Wurzeln ersetzt")),
 )

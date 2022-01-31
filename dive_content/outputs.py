@@ -865,6 +865,89 @@ class FruitOutput:
         return text
 
 
+class StemRootOutput:
+    def generate_stem_morphology(obj):
+        # Generate output "Sprossmorphologie" according pattern:
+        # "[stem_growth_orientation]er, [stem_appearance]er, [stem_succulence]er, [stem
+        # _pith]er Spross; [stem_cross_section]er Querschnitt mit [stem_surface]er
+        # Oberfläche."
+        fields = [
+            obj.stem_growth_orientation,
+            obj.stem_appearance,
+            obj.get_stem_succulence_display(),
+            obj.get_stem_pith_display(),
+            obj.stem_cross_section,
+            obj.stem_surface,
+        ]
+        fields[0] = format_ArrayField(
+            fields[0], STEM_GROWTH_ORIENTATION_CHOICES, "er", "/"
+        )
+        fields[1] = format_ArrayField(fields[1], STEM_APPEARANCE_CHOICES, "er")
+        fields[2] = add_suffix(fields[2], "er")
+        fields[3] = add_suffix(fields[3], "er")
+        fields[4] = format_ArrayField(
+            fields[4], SR_STEM_CROSS_SECTION_CHOICES, "er", "/"
+        )
+        fields[5] = format_ArrayField(
+            fields[5], SR_STEM_SURFACE_CHOICES, "er" if fields[4] else "e", "/"
+        )
+
+        joined_fields = ", ".join(filter(None, fields[0:4]))
+
+        text_parts = [
+            f"{fields[4]} Querschnitt" if fields[4] else "",
+            f"{fields[5]} Oberfläche" if fields[5] else "",
+        ]
+
+        joined_text_parts = " mit ".join(filter(None, text_parts))
+
+        text = f"{joined_fields} Spross" if joined_fields else ""
+        text = "; ".join(filter(None, (text, joined_text_parts)))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_outgrowths(obj):
+        # Generate output "Auswüchse" according pattern:
+        # "Bildet Kriech- und Legetriebe; bildet oberirdische Ausläufer."
+        fields = [
+            obj.creep_lay_shoots,
+            obj.runners,
+        ]
+
+        text_parts = [
+            f"bildet{' ' if fields[0] else ' keine '}Kriech- und Legetriebe"
+            if fields[0] != None
+            else "",
+            f"bildet {'oberirdische' if fields[1] else 'keine oberirdischen'} Ausläufer"
+            if fields[1] != None
+            else "",
+        ]
+
+        text = "; ".join(filter(None, text_parts))
+        text = format_sentence(text)
+
+        return text
+
+    def generate_root_morphology(obj):
+        # Generate output "Wurzelmorphologie" according pattern:
+        # "[root_organ_features] [root_organs]; Primärwurzel [root_primary_root]."
+        fields = [
+            obj.root_organ_features,
+            obj.get_root_organs_display(),
+            obj.get_root_primary_root_display(),
+        ]
+
+        joined_fields = " ".join(filter(None, fields[0:2]))
+
+        text_part = f"Primärwurzel {fields[2]}" if fields[2] else ""
+
+        text = "; ".join(filter(None, (joined_fields, text_part)))
+        text = format_sentence(text)
+
+        return text
+
+
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):
         # Generate output "Wuchsform" according pattern:

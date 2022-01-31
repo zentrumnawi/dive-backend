@@ -272,34 +272,40 @@ fruit_radio_fields = {"ovule_position": admin.HORIZONTAL}
 stemroot_fieldsets = (
     (None, {"fields": ("plant",)}),
     (
-        "Sprossmerkmale",
+        None,
         {
             "fields": (
-                "orientation",
-                "appearance",
-                "succulence",
-                "pith",
-                "cross_section",
-                "surface",
+                "subsection_title_trunk_morphology",
+                "trunk_features",
+                "subsection_title_stem_morphology",
+                (
+                    "stem_growth_orientation",
+                    "stem_appearance",
+                    "stem_succulence",
+                    "stem_pith",
+                ),
+                ("stem_cross_section", "stem_surface"),
+                "output_stem_morphology",
+                "subsection_title_outgrowths",
                 "creep_lay_shoots",
                 "runners",
-                "bracts",
+                "output_outgrowths",
+                "subsection_title_milky_sap",
                 "milky_sap",
+                "subsection_title_root_morphology",
+                ("root_organ_features", "root_organs"),
+                "root_primary_root",
+                "output_root_morphology",
             )
         },
     ),
-    (
-        "Wurzeln und unterirdische Planzenorgane",
-        {"fields": ("organ_features", "organs", "primary_root")},
-    ),
 )
 stemroot_radio_fields = {
-    "succulence": admin.HORIZONTAL,
-    "pith": admin.HORIZONTAL,
+    "stem_succulence": admin.VERTICAL,
+    "stem_pith": admin.VERTICAL,
     "creep_lay_shoots": admin.HORIZONTAL,
     "runners": admin.HORIZONTAL,
-    "bracts": admin.HORIZONTAL,
-    "primary_root": admin.HORIZONTAL,
+    "root_primary_root": admin.HORIZONTAL,
 }
 
 stemrhizomepoales_fieldsets = (

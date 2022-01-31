@@ -253,15 +253,21 @@ fruit_fieldsets = (
         None,
         {
             "fields": (
-                ("fruit_form", "fruit_type"),
-                "ovule_pos",
-                ("seed_num", "seed_color_form"),
-                ("winging", "winging_feature"),
+                "subsection_title_fruit",
+                ("fruit_color_shape", "fruit_type"),
+                "output_fruit",
+                "subsection_title_ovule",
+                "ovule_position",
+                "output_ovule",
+                "subsection_title_seed",
+                ("seed_number", "seed_color_shape"),
+                "winging",
+                "output_seed",
             )
         },
     ),
 )
-fruit_radio_fields = {"ovule_pos": admin.HORIZONTAL}
+fruit_radio_fields = {"ovule_position": admin.HORIZONTAL}
 
 stemroot_fieldsets = (
     (None, {"fields": ("plant",)}),

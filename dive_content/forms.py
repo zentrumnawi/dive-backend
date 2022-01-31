@@ -31,6 +31,7 @@ from .models import (
 from .outputs import (
     BlossomOutput,
     BlossomPoalesOutput,
+    FruitOutput,
     InterestingFactsOutput,
     LeafPoalesOutput,
     PlantOutput,
@@ -39,6 +40,7 @@ from .outputs import (
 from .widgets import TrivialNamesWidget
 
 
+HELP_TEXT = _("Anfängliches Satzzeichen setzen.")
 TEXTAREA_ATTRS_60_4 = {"cols": 60, "rows": 4, "class": False}
 TEXTAREA_ATTRS_80_7 = {"cols": 80, "rows": 7, "class": False}
 TEXTINPUT_ATTRS_60 = {"size": 60, "class": False}
@@ -295,7 +297,6 @@ class BlossomAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         obj = self.instance
-        help_text = _("Anfängliches Satzzeichen setzen.")
 
         self.fields["season"].label = obj._meta.get_field("season").verbose_name
         self.fields["inflorescence_number"].label = get_label(
@@ -305,7 +306,7 @@ class BlossomAdminForm(forms.ModelForm):
             obj, "inflorescence_blossom_number"
         )
         self.fields["blossom_sex_distribution_addition"].strip = False
-        self.fields["blossom_sex_distribution_addition"].help_text = help_text
+        self.fields["blossom_sex_distribution_addition"].help_text = HELP_TEXT
         self.fields["diameter"].label = get_label(obj, "diameter")
         self.fields["sepal_number"].label = get_label(obj, "sepal_number")
         self.fields["petal_number"].label = get_label(obj, "petal_number")
@@ -314,7 +315,7 @@ class BlossomAdminForm(forms.ModelForm):
         self.fields["stamen_number"].label = get_label(obj, "stamen_number")
         self.fields["stamen_length"].label = get_label(obj, "stamen_length")
         self.fields["stamen_connation_type_addition"].strip = False
-        self.fields["stamen_connation_type_addition"].help_text = help_text
+        self.fields["stamen_connation_type_addition"].help_text = HELP_TEXT
         self.fields["carpel_number"].label = get_label(obj, "carpel_number")
         self.fields["ovary_number"].label = get_label(obj, "ovary_number")
         self.fields["pistil_number"].label = get_label(obj, "pistil_number")
@@ -445,9 +446,35 @@ class BlossomPoalesAdminForm(forms.ModelForm):
 
 
 class FruitAdminForm(forms.ModelForm):
-    seed_num = IntegerRangeCharField(
-        1, 100, {100: "∞"}, label=get_label(Fruit, "seed_num")
-    )
+    subsection_title_fruit = SubsectionTitleField("Frucht")
+    subsection_title_ovule = SubsectionTitleField("Samenanlage")
+    subsection_title_seed = SubsectionTitleField("Samen")
+
+    seed_number = IntegerRangeCharField(1, 100, {100: "∞"})
+
+    output_fruit = OutputField()
+    output_ovule = OutputField()
+    output_seed = OutputField()
+
+    class Meta:
+        model = Fruit
+        fields = []
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        obj = self.instance
+
+        self.fields["seed_number"].label = get_label(obj, "seed_number")
+        self.fields["winging"].strip = False
+        self.fields["winging"].help_text = HELP_TEXT
+
+        self.initial.update(
+            {
+                "output_fruit": FruitOutput.generate_fruit(obj),
+                "output_ovule": FruitOutput.generate_ovule(obj),
+                "output_seed": FruitOutput.generate_seed(obj),
+            }
+        )
 
 
 class StemRootAdminForm(forms.ModelForm):

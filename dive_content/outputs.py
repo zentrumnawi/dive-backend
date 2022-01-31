@@ -821,6 +821,50 @@ class BlossomPoalesOutput:
         return joined_texts
 
 
+class FruitOutput:
+    def generate_fruit(obj):
+        # Generate output "Frucht" according pattern:
+        # "[fruit_color_shape] [fruit_type]."
+        fields = [
+            obj.fruit_color_shape,
+            obj.get_fruit_type_display(),
+        ]
+
+        joined_fields = " ".join(filter(None, fields))
+
+        text = format_sentence(joined_fields)
+
+        return text
+
+    def generate_ovule(obj):
+        # Generate output "Samenanlage" according pattern:
+        # "Samenanlage in [ovule_position]."
+        field = obj.get_ovule_position_display()
+
+        text = f"Samenanlage in {field}" if field else ""
+        text = format_sentence(text)
+
+        return text
+
+    def generate_seed(obj):
+        # Generate output "Samen" according pattern:
+        # "[seed_number] [seed_color_shape] Samen[winging]."
+        fields = [
+            obj.seed_number,
+            obj.seed_color_shape,
+            obj.winging,
+        ]
+
+        joined_fields = " ".join(filter(None, fields[0:2]))
+
+        text_part = f"{joined_fields} Samen" if joined_fields else ""
+
+        text = "".join(filter(None, (text_part, fields[2])))
+        text = format_sentence(text)
+
+        return text
+
+
 class StemRhizomePoalesOutput:
     def generate_growth_form(obj):
         # Generate output "Wuchsform" according pattern:

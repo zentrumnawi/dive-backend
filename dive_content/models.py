@@ -805,42 +805,35 @@ class Fruit(models.Model):
     plant = models.OneToOneField(
         Plant, on_delete=models.CASCADE, related_name="fruit", verbose_name=_("Pflanze")
     )
-    fruit_form = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Fruchtform")
+    # fruit ----------------------------------------------------------------------------
+    fruit_color_shape = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     fruit_type = models.CharField(
-        max_length=3,
-        choices=FRUIT_TYPE_CHOICES,
-        blank=True,
-        verbose_name=_("Fruchttyp"),
+        max_length=3, choices=FRUIT_TYPE_CHOICES, blank=True, verbose_name=_("Typ")
     )
-    ovule_pos = models.CharField(
+    # ovule ----------------------------------------------------------------------------
+    ovule_position = models.CharField(
         max_length=2,
-        choices=OVULE_POS_CHOICES,
+        choices=OVULE_POSITION_CHOICES,
         blank=True,
-        verbose_name=_("Samenanlage (Lage)"),
+        verbose_name=_("Lage"),
     )
-    seed_num = models.CharField(
-        max_length=10, blank=True, verbose_name=_("Samenanzahl")
-    )
-    seed_color_form = models.CharField(
+    # seed -----------------------------------------------------------------------------
+    seed_number = models.CharField(max_length=10, blank=True, verbose_name=_("Anzahl"))
+    seed_color_shape = models.CharField(
         max_length=100,
         blank=True,
-        verbose_name=_("Farbe/Form (Samen)"),
-        help_text="Alles ausschreiben.",
+        verbose_name=_("Farbe/Gestalt"),
+        help_text=_("Grammatikalisch anpassen."),
     )
     winging = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Beflügelung"),
-        help_text="Alles ausschreiben.",
+        max_length=100, blank=True, verbose_name=_("Beflügelung")
     )
-    winging_feature = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Besonderheit (Beflügelung)"),
-        help_text="Alles ausschreiben.",
-    )
+    # ----------------------------------------------------------------------------------
 
     class Meta:
         verbose_name = _("Frucht")

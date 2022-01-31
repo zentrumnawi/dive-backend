@@ -416,7 +416,7 @@ class BlossomPoalesSerializer(ExcludeEmptyFieldsModelSerializer):
         return BlossomPoalesOutput.generate_husks(obj)
 
 
-class FruitSerializer(DisplayNameModelSerializer):
+class FruitSerializer(ExcludeEmptyFieldsModelSerializer):
     fruit = serializers.SerializerMethodField(label="Frucht")
     ovule = serializers.SerializerMethodField(label="Samenanlage")
     seed = serializers.SerializerMethodField(label="Samen")
@@ -427,44 +427,13 @@ class FruitSerializer(DisplayNameModelSerializer):
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}
 
     def get_fruit(self, obj):
-        # Generate sentence "Frucht" according pattern:
-        # "[fruit_form] [fruit_type]."
-        fields = [
-            obj.fruit_form,
-            obj.get_fruit_type_display(),
-        ]
-
-        text = " ".join(filter(None, fields))
-
-        return format_sentence(text)
+        return FruitOutput.generate_fruit(obj)
 
     def get_ovule(self, obj):
-        # Generate sentence "Samenanlage" according pattern:
-        # "Samenanlage in [ovule_pos]."
-        fields = obj.get_ovule_pos_display()
-
-        text = f"Samenanlage in {fields}" if fields else ""
-
-        return format_sentence(text)
+        return FruitOutput.generate_ovule(obj)
 
     def get_seed(self, obj):
-        # Generate sentence "Samen" according pattern:
-        # "[seed_num] [seed_color_form] Samen, [winging] [winging_feature]."
-        fields = [
-            obj.seed_num,
-            obj.seed_color_form,
-            obj.winging,
-            obj.winging_feature,
-        ]
-
-        text = [
-            " ".join(filter(None, fields[:2])),
-            " ".join(filter(None, fields[2:])),
-        ]
-        text[0] = f"{text[0]} Samen" if text[0] else ""
-        text = ", ".join(filter(None, text))
-
-        return format_sentence(text)
+        return FruitOutput.generate_seed(obj)
 
 
 class StemRootSerializer(DisplayNameModelSerializer):

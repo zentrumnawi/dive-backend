@@ -158,6 +158,21 @@ class IntegerRangeTermCharField(forms.MultiValueField):
 
         return value
 
+    def has_changed(self, initial, data):
+        if self.disabled:
+            return False
+
+        initial_value = "" if initial is None else initial
+        data_value = (
+            ""
+            if data[0] == ["", ""]
+            else f"{'–'.join(filter(None, data[0]))}"
+            + f"{self.separator}"
+            + (f"{data[1]}" if self.term is None else f"{self.term}")
+        )
+
+        return initial_value != data_value
+
 
 class FloatRangeTermCharField(IntegerRangeTermCharField):
     field = FloatRangeCharField

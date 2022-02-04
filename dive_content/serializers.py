@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from solid_backend.photograph.serializers import PhotographSerializer
+from solid_backend.media_object.serializers import MediaObjectSerializer
 
 from .models import (
     Blossom,
@@ -404,7 +405,7 @@ class PlantSerializer(DisplayNameModelSerializer):
     stemrhizomepoales = StemRhizomePoalesSerializer(required=False)
     indicators = IndicatorsSerializer(required=False)
     interestingfacts = InterestingFactsSerializer(required=False)
-    photographs = PhotographSerializer(many=True, required=False)
+    media_objects = MediaObjectSerializer(many=True)
 
     class Meta:
         model = Plant
@@ -425,7 +426,7 @@ class PlantSerializer(DisplayNameModelSerializer):
             "stemrhizomepoales",
             "indicators",
             "interestingfacts",
-            "photographs",
+            "media_objects",
         )
         depth = 1
         swagger_schema_fields = {"title": str(model._meta.verbose_name)}

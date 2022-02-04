@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-from solid_backend.content.models import BaseProfile
+from solid_backend.content.models import BaseProfile, SolidBaseProfile
 
 from .choices import *
 
@@ -12,7 +12,7 @@ from .choices import *
 # the profiles.
 
 
-class Plant(BaseProfile):
+class Plant(BaseProfile, SolidBaseProfile):
     BaseProfile._meta.get_field("tree_node").verbose_name = _("Steckbrief-Ebene")
     short_description = models.TextField(
         default="",

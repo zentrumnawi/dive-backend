@@ -26,5 +26,6 @@ urlpatterns = [
         name="api_docs",
     ),
     url(r"^{}".format(settings.URI_PREFIX), include("solid_backend.urls")),
+    url(r"^{}".format(settings.URI_PREFIX), include("solid_backend.media_object.urls")),
     url(r"^{}admin/".format(settings.URI_PREFIX), admin.site.urls),
 ]

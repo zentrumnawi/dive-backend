@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "mptt",
     "stdimage",
     "corsheaders",
+    "taggit",
     "dive_content.apps.DiveContentConfig",
     "solid_backend.content",
     "solid_backend.contact",
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     "solid_backend.slideshow",
     "solid_backend.quiz",
     "solid_backend.photograph",
+    "solid_backend.media_object",
     "django_cleanup.apps.CleanupConfig",  # Should be placed last!
 ]
 
@@ -115,6 +117,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Project Name
+PROJECT_NAME = env("PROJECT_NAME", default="")
+
+# Locale
 LANGUAGES = [("de", _("German")), ("en", _("English"))]
 
 LOCALE_PATHS = [str(ROOT_DIR("locale"))]

@@ -22,13 +22,17 @@ def migrate_Photograph_to_MediaObject(apps, schema_editor):
             audio_file = None
             if photo.audio:
                 audio_file = photo.audio
-                audio_file.name = audio_file.name.split("/")[-1]
+
+            _dzi_file = None
+            if photo.dzi_option:
+                _dzi_file = photo.dzi_file
 
             MediaObject.objects.create(
                 profile_position=photo.profile_position,
                 media_format="image",
                 file=_file,
                 dzi_option=photo.dzi_option,
+                dzi_file=_dzi_file,
                 img_original_width=photo.img_original_width,
                 img_original_height=photo.img_original_height,
                 img_original_scale=photo.img_original_scale,
@@ -46,14 +50,13 @@ def migrate_Photograph_to_MediaObject(apps, schema_editor):
 def migrate_MediaObject_to_Photograph(apps, schema_editor):
 
     Photograph = apps.get_model("photograph", "Photograph")
-    Plant = apps.get_model("dive_content", "Plant")
+    MediaObject = apps.get_model("media_object", "MediaObject")
 
     # we need too loop over all MediaObjects which are images
     # since there is no filterable backwards relation for `profile`
-    for profile in Plant.objects.all():
-        media_obj = profile.media_objects.all()
-        if media_obj.profile:
-            _file = media_obj.img.file
+    for media_obj in MediaObject.objects.filter(media_format="image"):
+        if media_obj.object_id:
+            _file = media_obj.file.file
             # get the original file name without path remnants
             _file.name = _file.name.split("/")[-1]
             audio_file = None
@@ -63,9 +66,7 @@ def migrate_MediaObject_to_Photograph(apps, schema_editor):
 
             Photograph.objects.create(
                 profile_position=media_obj.profile_position,
-                media_format="image",
-                file=_file,
-                dzi_option=media_obj.dzi_option,
+                img=_file,
                 img_original_width=media_obj.img_original_width,
                 img_original_height=media_obj.img_original_height,
                 img_original_scale=media_obj.img_original_scale,
@@ -75,6 +76,8 @@ def migrate_MediaObject_to_Photograph(apps, schema_editor):
                 date=media_obj.date,
                 author=media_obj.author,
                 license=media_obj.license,
+                content_type=media_obj.content_type,
+                object_id=media_obj.object_id,
             )
 
 

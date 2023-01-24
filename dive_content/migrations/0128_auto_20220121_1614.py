@@ -84,9 +84,9 @@ def migrate_MediaObject_to_Photograph(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dive_content', '0127_bulk_add_leaf'),
+        ("dive_content", "0127_bulk_add_leaf"),
         ("photograph", "0006_add_profile_position_field"),
-        ("media_object", "0002_audiovideomediaobject_imagemediaobject")
+        ("media_object", "0002_audiovideomediaobject_imagemediaobject"),
     ]
 
     operations = [

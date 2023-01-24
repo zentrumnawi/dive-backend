@@ -13,11 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     url(r'^admin/', admin.site.urls),
 ]"""
-
+from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.conf import settings
-
 
 urlpatterns = [
     url(

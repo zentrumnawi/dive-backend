@@ -1,7 +1,7 @@
 .PHONY: init ci analyze build rebuild migrate lang-make lang-compile
 
 init:
-	curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+	curl -sSL https://install.python-poetry.org  | python3 -
 	poetry install
 ci:
 	pytest --cov=./

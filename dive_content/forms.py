@@ -37,11 +37,10 @@ from .outputs import (
     LeafOutput,
     LeafPoalesOutput,
     PlantOutput,
-    StemRootOutput,
     StemRhizomePoalesOutput,
+    StemRootOutput,
 )
 from .widgets import TrivialNamesWidget
-
 
 HELP_TEXT = _("Inklusive Satzzeichen angeben.")
 TEXTAREA_ATTRS_60_4 = {"cols": 60, "rows": 4, "class": False}

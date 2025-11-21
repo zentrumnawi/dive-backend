@@ -269,6 +269,17 @@ python-versions = ">=3.5"
 six = ">=1.2"
 
 [[package]]
+name = "django-filter"
+version = "21.1"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "django-js-asset"
 version = "1.2.2"
 description = "script tag with additional attributes for django.forms.Media"
@@ -875,7 +886,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "solid-backend"
-version = "0.1.25"
+version = "0.2.1"
 description = "Clean Django app for e-learning application with..."
 category = "main"
 optional = false
@@ -884,6 +895,7 @@ python-versions = ">=3.7,<4.0"
 [package.dependencies]
 django = ">=3.0.7,<3.1.0"
 django-cleanup = "4.0.0"
+django-filter = ">=21.1,<22.0"
 django-mptt = "0.11.0"
 django-stdimage = ">=5.1.1,<6.0.0"
 django-taggit = ">=1.5.1,<2.0.0"
@@ -1007,7 +1019,7 @@ testing = ["func-timeout", "jaraco.itertools"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "dfa11d8e2d536d211728da39474773a75d81ec6f70831d1003b78b141d2baade"
+content-hash = "c9e3269e2d88c0fd7fbac25aa25f42caf75fa83b7c83e3aa1fd89dee57526439"
 
 [metadata.files]
 appdirs = [
@@ -1164,6 +1176,10 @@ django-environ = [
 django-extensions = [
     {file = "django-extensions-3.0.2.tar.gz", hash = "sha256:c4e8cff39a26bfb72438cd52ab37d760a2aa146b715b6cd27fa8b862ac29fdc5"},
     {file = "django_extensions-3.0.2-py2.py3-none-any.whl", hash = "sha256:2b96bb937329b4038809d0fa79c55f6c1e941bce5057ca9ff5f3207aadffcbb9"},
+]
+django-filter = [
+    {file = "django-filter-21.1.tar.gz", hash = "sha256:632a251fa8f1aadb4b8cceff932bb52fe2f826dd7dfe7f3eac40e5c463d6836e"},
+    {file = "django_filter-21.1-py3-none-any.whl", hash = "sha256:f4a6737a30104c98d2e2a5fb93043f36dd7978e0c7ddc92f5998e85433ea5063"},
 ]
 django-js-asset = [
     {file = "django-js-asset-1.2.2.tar.gz", hash = "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"},
@@ -1539,8 +1555,8 @@ six = [
     {file = "six-1.15.0.tar.gz", hash = "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"},
 ]
 solid-backend = [
-    {file = "solid-backend-0.1.25.tar.gz", hash = "sha256:0acc7c3ef39d8971e8fb914834e8ff02a912e54489d01c5e20adc2a7585d3456"},
-    {file = "solid_backend-0.1.25-py3-none-any.whl", hash = "sha256:f4c8a08e48bd5d9d07c845bcdbe526d96408dd750500a21780bd1e4eea51693e"},
+    {file = "solid_backend-0.2.1-py3-none-any.whl", hash = "sha256:882ceffffe70fe41ff13effd2b65c6c2e49a1b60518d23fec761efeac8449dc8"},
+    {file = "solid_backend-0.2.1.tar.gz", hash = "sha256:ffa9be9d832b9c14cbee16b392506a3475fcba552b236c2e2900e08104b028b2"},
 ]
 sqlparse = [
     {file = "sqlparse-0.3.1-py2.py3-none-any.whl", hash = "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e"},

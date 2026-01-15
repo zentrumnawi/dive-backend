@@ -19,10 +19,10 @@ gunicorn = "*"
 markupsafe = "==1.1.1"
 pillow = "*"
 psycopg2-binary = "*"
-raven = "*"
 solid-backend = "^0.2.1"
 whitenoise = "*"
 django-anymail = "^8.2"
+sentry-sdk = {extras = ["django"], version = "^2.47.0"}
 
 [tool.poetry.dev-dependencies]
 black = "19.10b0"
